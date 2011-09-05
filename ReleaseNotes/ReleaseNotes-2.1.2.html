@@ -1,0 +1,1867 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.2.2" />
+<style type="text/css">
+/* Debug borders */
+p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 {
+/*
+  border: 1px solid red;
+*/
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+}
+
+tt {
+  color: navy;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  font-family: sans-serif;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  border-bottom: 2px solid silver;
+  padding-top: 0.5em;
+}
+
+div.sectionbody {
+  font-family: serif;
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+pre {
+  padding: 0;
+  margin: 0;
+}
+
+span#author {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+span#email {
+}
+span#revision {
+  font-family: sans-serif;
+}
+
+div#footer {
+  font-family: sans-serif;
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+div#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+div#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+div#preamble,
+div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-right: 10%;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+
+div.listingblock {
+  margin-right: 0%;
+}
+div.listingblock > div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock > div.content {
+  padding-left: 2.0em;
+}
+
+div.attribution {
+  text-align: right;
+}
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 2px solid silver;
+}
+
+div.exampleblock > div.content {
+  border-left: 2px solid silver;
+  padding: 0.5em;
+}
+
+div.verseblock div.content {
+  white-space: pre;
+}
+
+div.imageblock div.content { padding-left: 0; }
+div.imageblock img { border: 1px solid silver; }
+span.image img { border-style: none; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: italic;
+}
+dd > *:first-child {
+  margin-top: 0;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.olist2 {
+  list-style-type: lower-alpha;
+}
+
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead {
+  font-family: sans-serif;
+  font-weight: bold;
+}
+tfoot {
+  font-weight: bold;
+}
+
+div.hlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hlist td {
+  padding-bottom: 5px;
+}
+td.hlist1 {
+  vertical-align: top;
+  font-style: italic;
+  padding-right: 0.8em;
+}
+td.hlist2 {
+  vertical-align: top;
+}
+
+@media print {
+  div#footer-badges { display: none; }
+}
+
+div#toctitle {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+/* Workarounds for IE6's broken and incomplete CSS2. */
+
+div.sidebar-content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+div.sidebar-title, div.image-title {
+  font-family: sans-serif;
+  font-weight: bold;
+  margin-top: 0.0em;
+  margin-bottom: 0.5em;
+}
+
+div.listingblock div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock-content {
+  padding-left: 2.0em;
+}
+
+div.exampleblock-content {
+  border-left: 2px solid silver;
+  padding-left: 0.5em;
+}
+
+/* IE6 sets dynamically generated links as visited. */
+div#toc a:visited { color: blue; }
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function(){generateToc(2)}
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4.sp
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, October 2006. License: GPL */
+ /* modified by Shawn Pearce, August 2009. License: GPL */
+
+function getText(el) {
+  var text = "";
+  for (var i = el.firstChild; i != null; i = i.nextSibling) {
+    if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+      text += i.data;
+    else if (i.firstChild != null)
+      text += getText(i);
+  }
+  return text;
+}
+
+function TocEntry(el, text, toclevel) {
+  this.element = el;
+  this.text = text;
+  this.toclevel = toclevel;
+  this.assigned = false;
+
+  if (el.id != '') {
+    this.id = el.id;
+
+  } else {
+    var a = el.firstChild;
+    if ((a.tagName == "a" || a.tagName == "A") && a.id != "") {
+      this.id = a.id;
+    } else {
+      this.id = '';
+    }
+  }
+}
+
+function tocEntries(el, toclevels) {
+  var result = new Array;
+  var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+  // Function that scans the DOM tree for header elements (the DOM2
+  // nodeIterator API would be a better technique but not supported by all
+  // browsers).
+  var iterate = function (el) {
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+        var mo = re.exec(i.tagName)
+        if (mo)
+          result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+        iterate(i);
+      }
+    }
+  }
+  iterate(el);
+  return result;
+}
+
+// This function does the work. toclevels = 1..4.
+function generateToc(toclevels) {
+  var simple_re = new RegExp('^[a-zA-Z._ -]{1,}$');
+  var entries = tocEntries(document.getElementsByTagName("body")[0], toclevels);
+  var usedIds = new Array();
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id != "")
+      usedIds[entry.id] = entry;
+  }
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id != "" || !simple_re.exec(entry.text))
+      continue;
+
+    var n = entry.text.replace(/ /g, '_').toLowerCase();
+    var e = usedIds[n];
+    if (e) {
+      if (e.assigned)
+        e.id = '';
+      continue;
+    }
+
+    entry.assigned = true;
+    entry.id = n;
+    entry.element.id = entry.id;
+    usedIds[n] = entry;
+  }
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id == '') {
+      entry.id = "toc" + i;
+      entry.element.id = entry.id;
+    }
+  }
+
+  var toc = document.getElementById("toc");
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    var a = document.createElement("a");
+    a.href = "#" + entry.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+}
+/*]]>*/
+</script>
+<title>Release notes for Gerrit 2.1.2</title>
+</head>
+<body>
+<div id="header">
+<h1>Release notes for Gerrit 2.1.2</h1>
+<span id="revision">version 2.1.2 (from v2.1.2-rc3-1-g2b4eef5)</span>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<p>Gerrit 2.1.2 is now available in the usual location:</p>
+<p><a href="http://code.google.com/p/gerrit/downloads/list">http://code.google.com/p/gerrit/downloads/list</a></p>
+</div>
+</div>
+<h2>Schema Change</h2>
+<div class="sectionbody">
+<p><strong>WARNING</strong> This release contains multiple schema changes.  To upgrade:</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  java -jar gerrit.war init -d site_path</tt></pre>
+</div></div>
+</div>
+<h2>Breakages</h2>
+<div class="sectionbody">
+<ul>
+<li>
+<p>
+issue 421 Force validation of the author and committer lines
+</p>
+<p>The author line must now match the authenticated user when uploading a
+change, and both author and committer must match when pushing directly
+into a branch with the Push Branch permission.  This is a new
+restriction that did not exist in prior versions and was necessary to
+close a hole that permitted users to completely forge commits if they
+had Push Branch +1 granted.</p>
+<p>Project owners may grant the new Forge Identity permission to permit a
+user group to forge the author and/or committer lines in commit
+objects they are pushing for review, or directly into a branch.  To
+match prior behavior grant Forge Identity +1 where Read +2 (Upload)
+exists, and Forge Identity +2 where Push Branch &gt;= +1 exists.</p>
+</li>
+</ul>
+</div>
+<h2>New Features</h2>
+<div class="sectionbody">
+<h3>UI - Diff Viewer</h3>
+<ul>
+<li>
+<p>
+issue 169 Highlight line-level (aka word) differences in files
+</p>
+<p>Differences within a replaced line are now highlighted with a
+brighter red or green background color.  Some heuristics are
+applied to identify and highlight reindented blocks in popular
+C/C++/Java/C#-like and Python-like languages.  The highlighting
+algorithm is still simple and could benefit from more fine-tuning,
+as its largely driven by a simple Myers O(ND) character difference
+over the replaced lines.</p>
+<p>The configuration variable cache.diff.intraline can be used to
+disable this feature site-wide, if it causes problems.</p>
+</li>
+<li>
+<p>
+Improve side-by-side viewer look-and-feel
+</p>
+<p>The look-and-feel of the side-by-side viewer (and also of the unified
+viewer) has been significantly improved in this release.  Coloring of
+regions is more consistently applied, reducing reader distraction.
+Comment boxes use a cleaner display, and take up less space per line.</p>
+</li>
+<li>
+<p>
+Adjustable patch display settings
+</p>
+<p>Users can now set the tab size or number of columns when displaying a
+patch.  Toggles are also available to enable or disable syntax
+coloring, intraline differences, whitespace errors, and visible tabs.</p>
+</li>
+<li>
+<p>
+issue 416 Add download links to side-by-side viewer
+</p>
+<p>The side-by-side viewer now offers links to download the complete file
+of either the left or right side.  To protect the users from malicious
+cross-site scripting attacks, the download links force the content to
+be wrapped inside of a ZIP archive with a randomized file name.
+Server administrators may use the mimetype.safe configuration setting
+to avoid this wrapping if they trust users to only upload safe file
+content.</p>
+</li>
+<li>
+<p>
+Improve performance of <em>Show Full Files</em>
+</p>
+<p>The <em>Show Full File</em> checkbox in the file viewers no longer requires
+an RPC if the file is sufficiently small enough and syntax coloring
+was enabled.  The browser can update the UI using the cached data it
+already has on hand.</p>
+</li>
+<li>
+<p>
+Show old file paths on renamed/copied files
+</p>
+<p>If a file was renamed or copied, the side-by-side viewer now shows the
+old file path in the column header instead of the generic header text
+<em>Old Version</em>.</p>
+</li>
+<li>
+<p>
+Improved character set detection
+</p>
+<p>Gerrit now uses the Mozilla character set detection algorithm when
+trying to determine what charset was used to write a text file.
+For UTF-8 or ISO-8859-1/ASCII users, there should be no difference
+over prior releases.  With this change, the server can now also
+automatically recognize source files encoded in:</p>
+<ol class="olist2">
+<li>
+<p>
+Chinese (ISO-2022-CN, BIG5, EUC-TW, GB18030, HZ-GB-23121)
+</p>
+</li>
+<li>
+<p>
+Cyrillic (ISO-8859-5, KOI8-R, WINDOWS-1251, MACCYRILLIC, IBM866, IBM855)
+</p>
+</li>
+<li>
+<p>
+Greek (ISO-8859-7, WINDOWS-1253)
+</p>
+</li>
+<li>
+<p>
+Hebrew (ISO-8859-8, WINDOWS-1255)
+</p>
+</li>
+<li>
+<p>
+Japanese (ISO-2022-JP, SHIFT_JIS, EUC-JP)
+</p>
+</li>
+<li>
+<p>
+Korean (ISO-2022-KR, EUC-KR)
+</p>
+</li>
+<li>
+<p>
+Unicode (UTF-8, UTF-16BE / UTF-16LE, UTF-32BE / UTF-32LE / X-ISO-10646-UCS-4-34121 / X-ISO-10646-UCS-4-21431)
+</p>
+</li>
+<li>
+<p>
+WINDOWS-1252
+</p>
+</li>
+</ol>
+</li>
+<li>
+<p>
+issue 405 Add canned per-line comment reply of <em>Done</em>
+</p>
+</li>
+<li>
+<p>
+issue 380 Use N/P to jump to next/previous comments
+</p>
+</li>
+<li>
+<p>
+Use RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK for tabs
+</p>
+</li>
+<li>
+<p>
+Use a tooltip to explain whitespace errors
+</p>
+</li>
+</ul>
+<h3>UI - Other</h3>
+<ul>
+<li>
+<p>
+issue 408 Show summary of code review, verified on all open changes
+</p>
+<p>The open changes views now show the status summary columns, just like
+a user dashboard shows.  This requires an extra RPC per page display,
+but can save user time when trying to identify which reviews should be
+examined.</p>
+</li>
+<li>
+<p>
+Only enable <em>Delete</em> button when there are selections
+</p>
+<p>In Settings panels the delete button is enabled only if at least one
+row has been selected to be removed.</p>
+</li>
+<li>
+<p>
+SSH commands stop option parsing on --
+</p>
+<p>Like most POSIX commands, <tt>--</tt> now signifies the end of options for
+any command accessible over SSH.</p>
+</li>
+<li>
+<p>
+Include formatted HTML documentation in WAR
+</p>
+<p>Official release WARs now contain the formatted HTML documentation,
+and a <em>Documentation</em> menu will display in the main UI (alongside
+<em>All</em>, <em>My</em>, <em>Admin</em>) to help users access the local copy rather
+than jumping to the remote Google Code project site.</p>
+</li>
+<li>
+<p>
+Enhanced patch set download commands
+</p>
+<p>Download commands for patch sets are now offered as a tabbed panel,
+allowing the user to select between <em>repo download</em>, <em>git pull</em>,
+or <em>git fetch &#8230; &amp;&amp; git cherry-pick</em> or <em>git fetch &#8230; &amp;&amp; git
+format-patch</em> styles, as well as to select the transport protocol
+used, including anonymous Git or HTTP, or authenticated SSH or HTTP.
+The current selections are remembered for signed-in users, permitting
+end-users to quickly reuse their preferred method of grabbing a
+patch set.</p>
+</li>
+<li>
+<p>
+Theme the web UI with different skin colors
+</p>
+<p>Site administrators can now theme the UI with local site colors
+by setting theme variables in gerrit.config.</p>
+</li>
+</ul>
+<h3>Permissions</h3>
+<ul>
+<li>
+<p>
+issue 60 Change permissions to be branch based
+</p>
+<p>Almost all permissions are now per-branch within each project.  This
+includes Code Review, Verified, Submit, Push Branch, and even Owner.
+Permissions can be set on a specific branch, or on a wildcard that
+matches all branches that start with that prefix.  Read permission is
+still handled at the project level, but future versions should support
+per-branch read access as well.</p>
+</li>
+<li>
+<p>
+MaxNoBlock category for advisory review levels
+</p>
+<p>The new MaxNoBlock category function can be used in a custom approval
+category for reviews that are performed by automated lint tools.
+See <a href="http://gerrit.googlecode.com/svn/documentation/2.1.2/access-control.html#function_MaxNoBlock">access control</a>
+for more details on this function.</p>
+</li>
+</ul>
+<h3>Remote Access</h3>
+<ul>
+<li>
+<p>
+Enable smart HTTP under /p/ URLs
+</p>
+<p>Git 1.6.6 and later support a more efficient HTTP protocol for both
+fetch/clone and push, by relying upon Git specific server side logic.
+Gerrit Code Review now includes the necessary server side support when
+accessing repositories using URLs of the form
+<tt>http://review.example.com/p/<em>$projectname</em>.git</tt>.
+Authentication over smart HTTP URLs is performed using standard HTTP
+digest authentication, with the username matching the SSH username,
+but the password coming from a field that is generated by Gerrit and
+accessible to the user on their Settings &gt; SSH Keys tab.
+Smart HTTP requests enter the same resource queue as SSH requests,
+using the embedded Jetty server to suspend the request and later
+resume it when processing resources are available.  This ensures HTTP
+repository requests don't overtax the server when made concurrently
+with SSH requests.</p>
+</li>
+<li>
+<p>
+issue 392 Make hooks/commit-msg available over HTTP
+</p>
+<p>The scp filesystem holding client side tools and hooks is now
+avaliable over <tt>http://review.example.com/tools/<em>$name</em></tt>.  User
+documentation is updated with example URLs.</p>
+</li>
+<li>
+<p>
+issue 470 Allow /r/I&#8230; URLs
+</p>
+<p>Change-Ids can now be searched for by accessing the URL
+<tt>http://example.com/r/<em>Ichangeid</em></tt>, similar to how commits
+can be searched by <tt>http://example.com/r/<em>commitsha1</em></tt>.</p>
+</li>
+<li>
+<p>
+gerrit-sshd: Allow double quoted strings
+</p>
+<p>SSH command arguments may now be quoted with double quotes, in
+addition to single quotes.  This can make it easier to intermix
+quoting styles with the shell that is calling the SSH client .</p>
+</li>
+</ul>
+<h3>Server Administration</h3>
+<ul>
+<li>
+<p>
+issue 383 Add event hook support
+</p>
+<p>Site administrator managed hook scripts can now be invoked at various
+points in processing.  Currently these scripts are informational only
+and cannot influence the outcome of an event.  For more details see
+<a href="http://gerrit.googlecode.com/svn/documentation/2.1.2/config-hooks.html">hooks</a>.</p>
+</li>
+<li>
+<p>
+Add stream-events command
+</p>
+<p>The new <em>gerrit stream-events</em> command can be used over SSH by an
+end-user to watch a live stream of any visible patch set creation,
+comments and change submissions.  For more details see
+<a href="http://gerrit.googlecode.com/svn/documentation/2.1.2/cmd-stream-events.html">gerrit stream-events</a>.</p>
+</li>
+<li>
+<p>
+Log HTTP activity to $site_path/logs/httpd_log
+</p>
+<p>When httpd.listenUrl is http:// or https://, requests are
+logged into <tt><em>$site_path</em>/logs/httpd_log</tt>.  This mirrors the
+behavior of the SSH daemon, which also logs requests into the
+same directory.  For proxy URLs HTTP requests aren't logged,
+since the front-end server is expected to be performing the
+logging.  Logging can be forced on, or forced off by setting
+<a href="http://gerrit.googlecode.com/svn/documentation/2.1.2/config-gerrit.html#httpd.requestLog">httpd.requestLog</a>.</p>
+</li>
+<li>
+<p>
+Allow the daemon's host key to authenticate to itself
+</p>
+<p>The SSH daemon's host key can now be used to authenticate as the
+magic user <tt>Gerrit Code Review</tt>.  This user identity is blessed as
+even more powerful than a user in the Administrators group, as using
+it requires access to the private half of the host key.  For example:</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  ssh -p 29418 -i site_path/etc/ssh_host_rsa_key 'Gerrit Code Review'@localhost gerrit flush-caches --all</tt></pre>
+</div></div>
+</li>
+<li>
+<p>
+Allow $site_path/etc/peer_keys to authenticate peer daemons
+</p>
+<p>Additional public keys for the magical <em>Gerrit Code Review</em> user may
+be specified in an OpenSSH authorized_keys style file and are
+functionally equivilent to authenticating with the daemon's host key.
+The keys are primarily intended to be other daemons, most likely
+slaves, that share the same set of repositories and database.</p>
+</li>
+<li>
+<p>
+Allow suexec to run any command as any user
+</p>
+<p>The new SSH based suexec command can only be invoked by the magic user
+<tt>Gerrit Code Review</tt> and permits executing any other command as any
+other registered user account.  This forms the foundation of allowing
+a slave daemon process to transparently proxy any write request from a
+client forward to the current master.</p>
+<p>The transparent proxy support is not yet implemented in the slave.</p>
+</li>
+<li>
+<p>
+Support automation of gsql by JSON, -c option
+</p>
+<p>The gsql command now supports JSON as an output format, making
+software driven queries over SSH easier.  The -c option accepts
+one query, executes it, and returns.</p>
+</li>
+</ul>
+<h3>Other</h3>
+<ul>
+<li>
+<p>
+Warn when a commit message isn't wrapped
+</p>
+<p>During receive Gerrit warns the user if their commit messages appears
+to be incorrectly formatted, by having lines that aren't hard-wrapped
+or that has an extremely long subject line.</p>
+</li>
+<li>
+<p>
+During merge use existing author identity values
+</p>
+<p>When Gerrit creates a merge commit in order to submit a change, the
+author information of the merge commit is taken from the submitter.
+If all of the commits being submitted were written by the submitter,
+the authorship of the merge commit is copied from one of those commits
+rather than from the user's preferred account information.</p>
+</li>
+</ul>
+</div>
+<h2>Bug Fixes</h2>
+<div class="sectionbody">
+<h3>UI</h3>
+<ul>
+<li>
+<p>
+Change "Publish Comments" to "Review"
+</p>
+<p>The term "Publish Comments" was used on two different buttons that
+performed two different actions.  The first usage was to open the
+screen which shows the scoring buttons, provides the cover letter
+editor, and shows the in-line comments for final review before
+publication.  The button that opens that review screen has been
+renamed "Review".  The second usage of the button was to actually send
+out the notification emails, and expose the comments to others.  This
+button is still called "Publish Comments".</p>
+</li>
+<li>
+<p>
+issue 448 Disable syntax highlighting on unified views
+</p>
+<p>Syntax highlighting in the unified patch view isn't useful if it hides
+the added and removed lines red/green text color.  Disable it entirely
+so the add/remove coloring shows up instead.</p>
+</li>
+<li>
+<p>
+Disable <em>Syntax Highlighting</em> and <em>Show Full File</em> on big files
+</p>
+<p>If the file is really big (over 9000 lines), <em>Show Full File</em> is
+actually disabled on the server side, to prevent the client from
+being overrun with data.  The UI now reflects this by disabling
+the checkbox for the user, and adds a tooltip to indicate why its
+greyed out.</p>
+</li>
+<li>
+<p>
+Don't try to syntax highlight plain text
+</p>
+<p>Plain text files can't benefit from syntax highlighting, its actually
+more confusing than it is useful.  Skip highlighting on them.</p>
+</li>
+<li>
+<p>
+issue 251 Fix bad syntax highlighting
+</p>
+<p>Prior versions performed syntax highlighting on a per-line basis,
+resulting in confusing or bogus results in multi-line contexts like
+C/Java's "/* &#8230; */" style comment.  Fixed by performing
+highlighting on the entire file contents, even if only some lines are
+displayed to meet the user's context setting.</p>
+</li>
+<li>
+<p>
+Ensure vertical tabs are visible
+</p>
+<p>Vertical tab markers are red, which means they can be hidden against a
+whitespace error, or deleted region marker.  Tabs are now shown as
+black against these cases.</p>
+</li>
+<li>
+<p>
+Handle bare CR in the middle of a line
+</p>
+<p>If a CR ("\r") appears in the middle of a line rather than nestled
+against an LF as a CRLF pair, its now displayed as a whitespace
+error, and the line isn't broken at the CR.  This fixes an issue
+where a mostly CRLF file with a single malformed line ending caused
+the side-by-side display to render incorrectly (or not at all).</p>
+</li>
+<li>
+<p>
+issue 438 Skip gitlink modes as we can't get a content difference
+</p>
+<p>The special gitlink mode inside of a tree points to a commit in the
+submodule project.  We can't show the content of it inside of the
+supermodule.</p>
+</li>
+<li>
+<p>
+issue 456 Support enter to submit on most forms
+</p>
+<p>Enter key on a lot of forms did not activate the reasonable default
+action, e.g. add a reviewer to an existing review.  Fixed.</p>
+</li>
+<li>
+<p>
+issue 347 Improve handling of files renamed between patch sets
+</p>
+<p>Comment counts in the "history" section of a file viewer were not
+displayed when the file was renamed between two different patch sets
+of the same change.  Fixed.</p>
+</li>
+<li>
+<p>
+Fix the style of the Reviewed column header
+</p>
+<p>The reviewed column header wasn't displaying with the same style as
+its siblings.  Fixed.</p>
+</li>
+<li>
+<p>
+Fix duplicate "Needed By" pointers between changes
+</p>
+<p>If a change's current patch set was used as the parent for multiple
+patch sets of another change, that dependent change showed up more
+than once in the "Needed By" list.  Fixed.</p>
+</li>
+<li>
+<p>
+Expand group names to be 255 characters
+</p>
+</li>
+<li>
+<p>
+Update URL for GitHub's SSH key guide
+</p>
+</li>
+<li>
+<p>
+issue 314 Hide group type choice if LDAP is not enabled
+</p>
+</li>
+</ul>
+<h3>Email</h3>
+<ul>
+<li>
+<p>
+Send missing dependencies to owners if they are the only reviewer
+</p>
+<p>If the owner of the change is the only reviewer and the change can't
+be submitted due to a missing dependency, Gerrit failed to send out an
+email notification.  Fixed.</p>
+</li>
+<li>
+<p>
+issue 387 Use quoted printable strings in outgoing email
+</p>
+<p>Names or subjects with non-ASCII characters were not quoted properly
+in the email notification headers.  Fixed.</p>
+</li>
+<li>
+<p>
+issue 475 Include the name/email in email body if not in envelope
+</p>
+<p>When the email address from line is a generic server identity,
+there is no way to know who wrote a comment or voted on a change.
+An additional from line is now injected at the start of the email
+body to indicate the actual user.</p>
+</li>
+</ul>
+<h3>Remote Access</h3>
+<ul>
+<li>
+<p>
+issue 385 Delete session cookie when session is expired
+</p>
+<p>If the session expires and the user clicks "Close" in the session
+expired popup dialog box, delete the cookie so the user can continue
+to use the website as an anonymous user.</p>
+</li>
+<li>
+<p>
+Dequote saved OpenID URLs
+</p>
+<p>Certain OpenID URLs were getting double quotes thrown around them
+after being saved in the last identity cookie on the client.  The
+quotes were loading back into the dialog on a subsequent sign-in
+attempt, resulting in an error as double quotes aren't valid in an
+HTTP URL.  Fixed by dropping the quotes if present.</p>
+</li>
+<li>
+<p>
+Fix NoShell to flush the error before exiting
+</p>
+<p>Sometimes users missed the standard error message that indicated no
+shell was available, due to a thread race condition not always
+flushing the outgoing buffer.  Fixed.</p>
+</li>
+<li>
+<p>
+issue 488 Allow gerrit approve to post comments on closed changes
+</p>
+<p>The <em>gerrit approve</em> command previously refused to work on a closed
+change, but the web UI permitted comments to be added anyway.
+Fixed by allowing the command line tool to also post comments to
+closed changes.</p>
+</li>
+<li>
+<p>
+issue 466 Reject pushing to invalid reference names
+</p>
+<p>Gerrit allowed the invalid <tt>HEAD:/refs/for/master</tt> push refspec
+to actaully create the branch <tt>refs/heads/refs/for/master</tt>, which
+confused any other client trying to push.  Fixed.</p>
+</li>
+<li>
+<p>
+issue 485 Trim the username before requesting authentication
+</p>
+<p>LDAP usernames no longer are permitted to start with or end with
+whitespace, removing a common source of typos that lead to users
+being automatically assigned more than one Gerrit user account.</p>
+</li>
+</ul>
+<h3>Server Administration</h3>
+<ul>
+<li>
+<p>
+daemon: Really allow httpd.listenUrl to end with /
+</p>
+<p>If httpd.listenUrl ended with / the configuration got botched during
+init and the site didn't work as expected.  Fixed by correctly
+handling an optional trailing / in this variable.</p>
+</li>
+<li>
+<p>
+issue 478 Catch daemon startup failures in error_log
+</p>
+<p>Startup errors often went to /dev/null, leaving the admin wondering
+why the server didn't launch as expected.  Fixed.</p>
+</li>
+<li>
+<p>
+issue 483 Ensure uncaught exceptions are logged
+</p>
+<p>Some exceptions were reaching the top of the stack frame without
+being caught and logged, causing the JRE to print the exception to
+stderr and then terminate the thread.  Since stderr was redirected
+to /dev/null by gerrit.sh, we usually lost these messages.  Exception
+handlers are now installed to trap and log any uncaught errors.</p>
+</li>
+<li>
+<p>
+issue 451 gerrit.sh: Wait until the daemon is serving requests
+</p>
+<p>The gerrit.sh script now waits until the deamon is actually running
+and able to serve requests before returning to the caller with a
+successful exit status code.  This makes it easier to then start up
+dependent tasks that need the server to be ready before they can run.</p>
+</li>
+<li>
+<p>
+gerrit.sh: Don't use let, dash doesn't support it
+</p>
+<p>/bin/sh on Debian/Ubuntu systems is dash, not bash.  The dash
+shell does not support the let command.</p>
+</li>
+<li>
+<p>
+gerrit.sh: Correct JAVA_HOME behavior
+</p>
+<p>JAVA_HOME now can be overridden by container.javaHome, as the
+documentation states.</p>
+</li>
+<li>
+<p>
+init: Only suggest downloading BouncyCastle on new installs
+</p>
+<p>Upgrades of an existing installation which has not installed the
+BouncyCastle library shouldn't be encouraged to download and install
+the library again.  The administrator has already chosen not to use
+it, we shouldn't nag them about it.</p>
+</li>
+<li>
+<p>
+issue 389 Catch bad commentlink patterns and report them
+</p>
+<p>A bad commentlink.match pattern could cause the change screen to
+simply not load, with no errors in the server log, and nothing
+immediately visible on the client.  Most bad patterns are now caught
+during server startup and are reported in the server error_log.
+Certain failures are caught on the client side, and sent to the server
+error log over RPC.  Bad patterns are simply skipped when logged.</p>
+</li>
+<li>
+<p>
+issue 419 MySQL: Fix account_group_members_audit removed_on
+</p>
+<p>MySQL has a "feature" which prevented the removed_on column from being
+NULL when we meant for it to be NULL.  Fixed by using the MySQL
+suggested work around, which is non-standard SQL.</p>
+</li>
+<li>
+<p>
+issue 424 WAR truncated during init
+</p>
+<p>init sometimes truncated the WAR file to 0 bytes if it was running
+from the destination WAR.  Fixed by using JGit's LockFile class which
+writes to a temporary file and does an atomic rename to finish.</p>
+</li>
+<li>
+<p>
+issue 423 Bind to LDAP using only the end-user identity
+</p>
+<p>Microsoft Active Directory doesn't support anonymous binds, and some
+installations might not be able to create a generic role account for
+Gerrit Code Review.  The new auth.type LDAP_BIND permits Gerrit to
+authenticate using only the end-user's credentials, avoiding the need
+for an anonymous or role account bind.</p>
+</li>
+<li>
+<p>
+issue 423 Defer LDAP server type discovery until first authentication
+</p>
+<p>Microsoft Active Directory wasn't being detected, because the
+anonymous bind during server startup failed.  Instead the server
+type is detected during the first user authentication, where we
+have a valid directory context to query over.</p>
+</li>
+<li>
+<p>
+issue 486 Reload UI if code split fails to download
+</p>
+<p>If the server gets upgraded and the user hasn't reloaded their
+browser tab since the upgrade, opening a new section of the UI
+sometimes failed.  Fixed by executing an implicit reload in these
+cases, reducing the number of times a user sees a failure.</p>
+</li>
+</ul>
+<h3>Development</h3>
+<ul>
+<li>
+<p>
+issue 427 Adjust SocketUtilTest to be more likely to pass
+</p>
+<p>Some DNS environments, especially those based on OpenDNS, were failing
+this test case during a build because the upstream resolver was
+returning back a bogus record for an invalid domain name.  The test
+was adjusted to use a name that is less likely to be resolved by a
+broken upstream resolver.</p>
+</li>
+<li>
+<p>
+Fix /become?user_name=&#8230; under GWT debugger
+</p>
+<p>The /become URL now accepts ?user_name=who to authenticate, making
+it easier to setup a launch configuration to debug a particular
+user account in development.</p>
+</li>
+<li>
+<p>
+Show localhost based SSH URLs
+</p>
+<p>SSH URLs using localhost as the hostname are now visible in the
+web UI, making it easier to copy and paste SSH URLs when debugging
+fetching of changes.</p>
+</li>
+<li>
+<p>
+issue 490 Try Titlecase class name first when launching programs
+</p>
+<p>Launching daemon or init from the classes directory on a case
+insensitive filesystem like Mac OS X HFS+ or Windows NTFS failed.
+Fixed.</p>
+</li>
+<li>
+<p>
+Misc. license issues
+</p>
+<p>The CDDL javax.servlet package was replaced by an Apache License 2.0
+implementation from the Apache Foundation.  The unnecessary OpenXRI
+package, which was never even included in the distribution, was
+removed from the license file.</p>
+</li>
+</ul>
+</div>
+<h2>Schema Changes in Detail</h2>
+<div class="sectionbody">
+<ul>
+<li>
+<p>
+Remove Project.Id and use only Project.NameKey
+</p>
+<p>The project_id column was dropped from the projects table, and all
+associated subtables, and only the name is now used to link records
+in the database.  This simplifies the schema for eventual changes
+onto less-traditional storage systems.</p>
+</li>
+<li>
+<p>
+Move sshUserName from Account to AccountExternalId
+</p>
+<p>The ssh_user_name column in accounts was moved to an additional row
+in account_external_ids, using external_id prefix <tt>username:</tt>.
+This removes the non-primary key unique index from the table, making
+it easier to move to less traditional storage systems.</p>
+</li>
+<li>
+<p>
+Replace all transactions with single row updates
+</p>
+<p>Schema update operations have been reworked to not require multi-row
+transaction support in the database.  This makes it easier to port
+onto a distributed storage system where multi-row atomic updates
+aren't possible, or to run on MySQL MyISAM tables.</p>
+</li>
+</ul>
+</div>
+<h2>Other Changes</h2>
+<div class="sectionbody">
+<ul>
+<li>
+<p>
+Update gwtorm to 1.1.4-SNAPSHOT
+</p>
+</li>
+<li>
+<p>
+Add unique column ids to every column
+</p>
+</li>
+<li>
+<p>
+Remove unused byName @SecondaryKey from ApprovalCategory
+</p>
+</li>
+<li>
+<p>
+Remove @SecondaryKey from AccountGroup
+</p>
+</li>
+<li>
+<p>
+documentation: Remove mention of mysql_nextval.sql script
+</p>
+</li>
+<li>
+<p>
+Drop MySQL function nextval_project_id
+</p>
+</li>
+<li>
+<p>
+documentation: Remove project_id from manual insert
+</p>
+</li>
+<li>
+<p>
+Update JGit to 0.5.1.106-g10a3391
+</p>
+</li>
+<li>
+<p>
+Split the core receive logic out of the SSH code
+</p>
+</li>
+<li>
+<p>
+Move toProject into PageLinks for reuse
+</p>
+</li>
+<li>
+<p>
+Correct SSH Username to be just Username
+</p>
+</li>
+<li>
+<p>
+Don't display the magic username identity on the identities tab
+</p>
+</li>
+<li>
+<p>
+Show Status column header on the SSH key table
+</p>
+</li>
+<li>
+<p>
+Queue smart HTTP requests alongside SSH requests
+</p>
+</li>
+<li>
+<p>
+Add a password field to the account identities
+</p>
+</li>
+<li>
+<p>
+Authenticate /p/ HTTP and SSH access by password
+</p>
+</li>
+<li>
+<p>
+Advertise the smart HTTP URLs to references
+</p>
+</li>
+<li>
+<p>
+Refactor the SSH session state
+</p>
+</li>
+<li>
+<p>
+Fixing Eclipse settings file
+</p>
+</li>
+<li>
+<p>
+Add &#8212;commit to comment-added as there was previously no way to kno&#8230;
+</p>
+</li>
+<li>
+<p>
+Fix imports inside of PatchScreen.java
+</p>
+</li>
+<li>
+<p>
+Fix crash while loading project Access tab
+</p>
+</li>
+<li>
+<p>
+Replace our own @Nullable with javax.annotation.Nullable.
+</p>
+</li>
+<li>
+<p>
+Correctly hide delete button on inherited permissions
+</p>
+</li>
+<li>
+<p>
+Allow per-branch OWN +1 to delegate branch ownership
+</p>
+</li>
+<li>
+<p>
+Block inheritance by default on per-branch permissions.
+</p>
+</li>
+<li>
+<p>
+Simplify FunctionState as discussed previously
+</p>
+</li>
+<li>
+<p>
+Restore delete right checkboxes in wild card project
+</p>
+</li>
+<li>
+<p>
+issue 393 Require branch deletion permission for pushes over HTTP
+</p>
+</li>
+<li>
+<p>
+issue 399 Update JGit to 0.5.1.140-g660fd39
+</p>
+</li>
+<li>
+<p>
+Add standard eclipse generated files to .gitignore
+</p>
+</li>
+<li>
+<p>
+Don't reformat the source if the files are identical
+</p>
+</li>
+<li>
+<p>
+Fix schema 27 upgrade for H2
+</p>
+</li>
+<li>
+<p>
+Update JGit to 0.5.1.141-g3eee606
+</p>
+</li>
+<li>
+<p>
+Manage database connections directly in PatchScriptFactory
+</p>
+</li>
+<li>
+<p>
+issue 425 Update user documentation to explain branch access control
+</p>
+</li>
+<li>
+<p>
+Update to gwtjsonrpc 1.2.2-SNAPSHOT
+</p>
+</li>
+<li>
+<p>
+Allow refs/* pattern on new reference rights
+</p>
+</li>
+<li>
+<p>
+Trim reference name from user when adding access right
+</p>
+</li>
+<li>
+<p>
+Execute Git commands with AccessPath.GIT
+</p>
+</li>
+<li>
+<p>
+Update to GWT 2.0.1
+</p>
+</li>
+<li>
+<p>
+Update to Ehcache 1.7.2
+</p>
+</li>
+<li>
+<p>
+Update to mime-util 2.1.3
+</p>
+</li>
+<li>
+<p>
+Update to H2 1.2.128
+</p>
+</li>
+<li>
+<p>
+issue 442 Fix IncorrectObjectTypeException on initial commit
+</p>
+</li>
+<li>
+<p>
+Compute allowed approval categories separately.
+</p>
+</li>
+<li>
+<p>
+Move new change display to PostReceiveHook
+</p>
+</li>
+<li>
+<p>
+Drop unused formatLanguage property from patch table
+</p>
+</li>
+<li>
+<p>
+issue 447 documentation: Improve Apache mod_proxy configuration
+</p>
+</li>
+<li>
+<p>
+issue 445 Fix whitespace errors with word diff enabled
+</p>
+</li>
+<li>
+<p>
+issue 439 Move syntax highlighting back to client
+</p>
+</li>
+<li>
+<p>
+Remove Mozilla Rhino from our build
+</p>
+</li>
+<li>
+<p>
+Add missing step to add gwtui_dbg configuration
+</p>
+</li>
+<li>
+<p>
+Remove useless imports from Schema_28
+</p>
+</li>
+<li>
+<p>
+Fix upgrading H2 from schema 20 to current
+</p>
+</li>
+<li>
+<p>
+Move release notes into the repository
+</p>
+</li>
+<li>
+<p>
+issue 454 documentation: Improve bugzilla link example to include #
+</p>
+</li>
+<li>
+<p>
+Drop unused err PrintWriter in Receive
+</p>
+</li>
+<li>
+<p>
+documentation: Describe how to do case insensitive commentlink
+</p>
+</li>
+<li>
+<p>
+Add patch releases to release notes
+</p>
+</li>
+<li>
+<p>
+Update to gwtorm 1.1.4, gwtjsonrpc 1.2.2, gwtexpui 1.2.1
+</p>
+</li>
+<li>
+<p>
+Update to GWT 2.0.2
+</p>
+</li>
+<li>
+<p>
+documentation: Remove stupid ReleaseNotes build rules
+</p>
+</li>
+<li>
+<p>
+documentation: Use a per-version directory
+</p>
+</li>
+<li>
+<p>
+Draft 2.1.2 release notes
+</p>
+</li>
+<li>
+<p>
+documentation: Fix version number to only consider x.y.z format
+</p>
+</li>
+<li>
+<p>
+Drop XRI related support from our notices list
+</p>
+</li>
+<li>
+<p>
+documentation: Correct sorting error in notices
+</p>
+</li>
+<li>
+<p>
+documentation: Add JSR 305 and AOP Alliance to licenses
+</p>
+</li>
+<li>
+<p>
+documentation: Correct links to the MPL 1.1 license
+</p>
+</li>
+<li>
+<p>
+Replace CDDL javax.servlet with APLv2 implementation
+</p>
+</li>
+<li>
+<p>
+documentation: Document database.pool* variables
+</p>
+</li>
+<li>
+<p>
+Update 2.1.2 release notes to mention juniversalchardet
+</p>
+</li>
+<li>
+<p>
+Fix whitespace ignore feature
+</p>
+</li>
+<li>
+<p>
+Fix database connection leak in git-receive-pack
+</p>
+</li>
+<li>
+<p>
+Delay marking a file reviewed until its displaying
+</p>
+</li>
+<li>
+<p>
+Simplify patch display to a single RPC
+</p>
+</li>
+<li>
+<p>
+Fix missing right side border of history, dependency tables
+</p>
+</li>
+<li>
+<p>
+Cleanup useless leftmost/rightmost CSS classes
+</p>
+</li>
+<li>
+<p>
+Don't RPC to load the full file if we already have it
+</p>
+</li>
+<li>
+<p>
+Add Forge Identity +3 to permit pushing filtered history
+</p>
+</li>
+<li>
+<p>
+Fix source code formatting in RefControl
+</p>
+</li>
+<li>
+<p>
+Fix combined diffs on merge commits
+</p>
+</li>
+<li>
+<p>
+Fix SparseFileContent for delete-only patches
+</p>
+</li>
+<li>
+<p>
+Simplify some CSS rules for side-by-side viewer
+</p>
+</li>
+<li>
+<p>
+Color entire replace block same background shade
+</p>
+</li>
+<li>
+<p>
+Cleanup CSS for side-by-side view when there are character differen&#8230;
+</p>
+</li>
+<li>
+<p>
+documentation: Fix typo on the word database
+</p>
+</li>
+<li>
+<p>
+Always use class wdc on replace line common sections
+</p>
+</li>
+<li>
+<p>
+Fix side-by-side table header CSS glitch
+</p>
+</li>
+<li>
+<p>
+Fix file line padding in side-by-side viewer
+</p>
+</li>
+<li>
+<p>
+Improve the way inline comments are shown
+</p>
+</li>
+<li>
+<p>
+Fix side by side view column headers to use normal font
+</p>
+</li>
+<li>
+<p>
+Tweak the intraline difference heuristics
+</p>
+</li>
+<li>
+<p>
+Refactor and add to streaming events schema
+</p>
+</li>
+<li>
+<p>
+Documentation schema for stream-events command
+</p>
+</li>
+<li>
+<p>
+Fix source code formatting errors in MergeOp
+</p>
+</li>
+<li>
+<p>
+Cleanup display of branches panel when gitweb isn't configured
+</p>
+</li>
+<li>
+<p>
+Fix "Show Tabs" checkbox
+</p>
+</li>
+<li>
+<p>
+Update 2.1.2 release notes
+</p>
+</li>
+<li>
+<p>
+Reorganize 2.1.2 release notes into categories
+</p>
+</li>
+<li>
+<p>
+Hide syntax highlighting checkbox in unified view
+</p>
+</li>
+<li>
+<p>
+Change default tab width to 8
+</p>
+</li>
+<li>
+<p>
+Ensure drafts redisplay when refreshing the page
+</p>
+</li>
+<li>
+<p>
+Fix tab marker RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
+</p>
+</li>
+<li>
+<p>
+issue 473 Don't aggressively coalesce across lines
+</p>
+</li>
+<li>
+<p>
+Fix intraline difference off-by-one when LF is added
+</p>
+</li>
+<li>
+<p>
+Mark add or delete regions with darker colors
+</p>
+</li>
+<li>
+<p>
+Invalidate the diff cache
+</p>
+</li>
+<li>
+<p>
+Fix build breakage due to missing constants
+</p>
+</li>
+<li>
+<p>
+Fix editable username when authType is LDAP or HTTP_LDAP
+</p>
+</li>
+<li>
+<p>
+issue 481 Fix enter with completion in add reviewer box
+</p>
+</li>
+<li>
+<p>
+Make intraline differences easier to debug
+</p>
+</li>
+<li>
+<p>
+Avoid "es" replaced by "es = Address"
+</p>
+</li>
+<li>
+<p>
+Cleanup line insertions joined against indentation change
+</p>
+</li>
+<li>
+<p>
+Change become to use user_name field
+</p>
+</li>
+<li>
+<p>
+Stop leaking patch controls CSS to other widgets
+</p>
+</li>
+<li>
+<p>
+Fix coloring of tab markers in syntax highlighting
+</p>
+</li>
+<li>
+<p>
+Fix toggling syntax highlighting on partial file
+</p>
+</li>
+<li>
+<p>
+Permit use of syntax highlighting in unified view
+</p>
+</li>
+<li>
+<p>
+Use hunk background colors on unified views with syntax highlighting
+</p>
+</li>
+<li>
+<p>
+Fix source code formatting in ApproveCommand.java
+</p>
+</li>
+<li>
+<p>
+issue 483 Log the type of a non-task after it executes
+</p>
+</li>
+<li>
+<p>
+Update to GWT 2.0.3
+</p>
+</li>
+<li>
+<p>
+issue 489 Drop host name resolution failure test
+</p>
+</li>
+<li>
+<p>
+issue 483 Remove reliance on afterExecute from WorkQueue
+</p>
+</li>
+</ul>
+<p>71b04c00b174b056ed2579683e2c1546d156b75a</p>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 2.1.2 (from v2.1.2-rc3-1-g2b4eef5)<br />
+Last updated 06-Dec-2010 16:46:49 PDT
+</div>
+</div>
+</body>
+</html>

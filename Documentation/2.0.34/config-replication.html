@@ -1,0 +1,666 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.2.2" />
+<style type="text/css">
+/* Debug borders */
+p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 {
+/*
+  border: 1px solid red;
+*/
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+}
+
+tt {
+  color: navy;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  font-family: sans-serif;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  border-bottom: 2px solid silver;
+  padding-top: 0.5em;
+}
+
+div.sectionbody {
+  font-family: serif;
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+pre {
+  padding: 0;
+  margin: 0;
+}
+
+span#author {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+span#email {
+}
+span#revision {
+  font-family: sans-serif;
+}
+
+div#footer {
+  font-family: sans-serif;
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+div#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+div#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+div#preamble,
+div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-right: 10%;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+
+div.listingblock {
+  margin-right: 0%;
+}
+div.listingblock > div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock > div.content {
+  padding-left: 2.0em;
+}
+
+div.attribution {
+  text-align: right;
+}
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 2px solid silver;
+}
+
+div.exampleblock > div.content {
+  border-left: 2px solid silver;
+  padding: 0.5em;
+}
+
+div.verseblock div.content {
+  white-space: pre;
+}
+
+div.imageblock div.content { padding-left: 0; }
+div.imageblock img { border: 1px solid silver; }
+span.image img { border-style: none; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: italic;
+}
+dd > *:first-child {
+  margin-top: 0;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.olist2 {
+  list-style-type: lower-alpha;
+}
+
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead {
+  font-family: sans-serif;
+  font-weight: bold;
+}
+tfoot {
+  font-weight: bold;
+}
+
+div.hlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hlist td {
+  padding-bottom: 5px;
+}
+td.hlist1 {
+  vertical-align: top;
+  font-style: italic;
+  padding-right: 0.8em;
+}
+td.hlist2 {
+  vertical-align: top;
+}
+
+@media print {
+  div#footer-badges { display: none; }
+}
+
+div#toctitle {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+/* Workarounds for IE6's broken and incomplete CSS2. */
+
+div.sidebar-content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+div.sidebar-title, div.image-title {
+  font-family: sans-serif;
+  font-weight: bold;
+  margin-top: 0.0em;
+  margin-bottom: 0.5em;
+}
+
+div.listingblock div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock-content {
+  padding-left: 2.0em;
+}
+
+div.exampleblock-content {
+  border-left: 2px solid silver;
+  padding-left: 0.5em;
+}
+
+/* IE6 sets dynamically generated links as visited. */
+div#toc a:visited { color: blue; }
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function(){generateToc(2)}
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4.sp
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, October 2006. License: GPL */
+ /* modified by Shawn Pearce, August 2009. License: GPL */
+
+function getText(el) {
+  var text = "";
+  for (var i = el.firstChild; i != null; i = i.nextSibling) {
+    if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+      text += i.data;
+    else if (i.firstChild != null)
+      text += getText(i);
+  }
+  return text;
+}
+
+function TocEntry(el, text, toclevel) {
+  this.element = el;
+  this.text = text;
+  this.toclevel = toclevel;
+  this.assigned = false;
+
+  if (el.id != '') {
+    this.id = el.id;
+
+  } else {
+    var a = el.firstChild;
+    if ((a.tagName == "a" || a.tagName == "A") && a.id != "") {
+      this.id = a.id;
+    } else {
+      this.id = '';
+    }
+  }
+}
+
+function tocEntries(el, toclevels) {
+  var result = new Array;
+  var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+  // Function that scans the DOM tree for header elements (the DOM2
+  // nodeIterator API would be a better technique but not supported by all
+  // browsers).
+  var iterate = function (el) {
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+        var mo = re.exec(i.tagName)
+        if (mo)
+          result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+        iterate(i);
+      }
+    }
+  }
+  iterate(el);
+  return result;
+}
+
+// This function does the work. toclevels = 1..4.
+function generateToc(toclevels) {
+  var simple_re = new RegExp('^[a-zA-Z._ -]{1,}$');
+  var entries = tocEntries(document.getElementsByTagName("body")[0], toclevels);
+  var usedIds = new Array();
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id != "")
+      usedIds[entry.id] = entry;
+  }
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id != "" || !simple_re.exec(entry.text))
+      continue;
+
+    var n = entry.text.replace(/ /g, '_').toLowerCase();
+    var e = usedIds[n];
+    if (e) {
+      if (e.assigned)
+        e.id = '';
+      continue;
+    }
+
+    entry.assigned = true;
+    entry.id = n;
+    entry.element.id = entry.id;
+    usedIds[n] = entry;
+  }
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id == '') {
+      entry.id = "toc" + i;
+      entry.element.id = entry.id;
+    }
+  }
+
+  var toc = document.getElementById("toc");
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    var a = document.createElement("a");
+    a.href = "#" + entry.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+}
+/*]]>*/
+</script>
+<title>Gerrit2 Git Replication</title>
+</head>
+<body>
+<div id="header">
+<h1>Gerrit2 Git Replication</h1>
+<span id="revision">version v2.0.24</span>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<p>Gerrit can automatically push any changes it makes to its managed Git
+repositories to another system.  Usually this would be configured to
+provide mirroring of changes, for warm-standby backups, or a
+load-balanced public mirror farm.</p>
+<p>The replication runs on a short delay.  This gives Gerrit a small
+time window to batch updates going to the same project, such as
+when a user uploads multiple changes at once.</p>
+<p>Typically replication should be done over SSH, with a passwordless
+public/private key pair.  On a trusted network it is also possible to
+use replication over the insecure (but much faster) git:// protocol,
+by enabling the <tt>receive-pack</tt> service on the receiving system, but
+this configuration is not recommended.</p>
+</div>
+</div>
+<h2>Enabling Replication</h2>
+<div class="sectionbody">
+<p>If replicating over SSH (recommended), ensure the host key of the
+remote system(s) is already in the Gerrit user's <tt>~/.ssh/known_hosts</tt>
+file.  The easiest way to add the host key is to connect once by hand
+with the command line:</p>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>sudo su -c 'ssh mirror1.us.some.org echo' gerrit2</tt></pre>
+</div></div>
+</div></div>
+<p>Next, create <tt><em>$site_path</em>/replication.config</tt> as a Git-style config
+file, and restart Gerrit.</p>
+<p>Example <tt>replication.config</tt> to replicate in parallel to four
+different hosts:</p>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>[remote "host-one"]
+  url = gerrit2@host-one.example.com:/some/path/${name}.git</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>[remote "pubmirror"]
+  url = mirror1.us.some.org:/pub/git/${name}.git
+  url = mirror2.us.some.org:/pub/git/${name}.git
+  url = mirror3.us.some.org:/pub/git/${name}.git
+  push = +refs/heads/*
+  push = +refs/tags/*
+  threads = 3</tt></pre>
+</div></div>
+</div></div>
+<p>To manually trigger replication at runtime, see
+<a href="cmd-replicate.html">gerrit replicate</a>.</p>
+</div>
+<h2><a id="replication_config"></a>File <tt>replication.config</tt></h2>
+<div class="sectionbody">
+<p>The optional file <tt><em>$site_path</em>/replication.config</tt> is a Git-style
+config file that controls the replication settings for Gerrit.</p>
+<p>The file is composed of one or more <tt>remote</tt> sections, each remote
+section provides common configuration settings for one or more
+destination URLs.</p>
+<p>Each remote section uses its own thread pool.  If pushing to
+multiple remotes, over differing types of network connections
+(e.g. LAN and also public Internet), its a good idea to put them
+into different remote sections, so that replication to the slower
+connection does not starve out the faster local one.  The example
+file above does this.</p>
+<h3><a id="remote"></a>Section remote</h3>
+<p>In the keys below, the &lt;name&gt; portion is unused by Gerrit, but must be
+unique to distinguish the different sections if more than one remote
+section appears in the file.</p>
+<dl>
+<dt>
+<a id="remote.name.url"></a>remote.&lt;name&gt;.url
+</dt>
+<dd>
+<p>Address of the remote server to push to.  Multiple URLs may
+be specified within a single remote block, listing different
+destinations which share the same settings.  Assuming sufficient
+threads in the thread pool, Gerrit pushes to all URLs in parallel,
+using one thread per URL.</p>
+<p>Within each URL value the magic placeholder <tt>${name}</tt> is replaced
+with the Gerrit project name.  This is a Gerrit specific extension
+to the otherwise standard Git URL syntax.</p>
+<p>See <a href="http://www.kernel.org/pub/software/scm/git/docs/git-push.html#URLS">GIT URLS</a>
+for details on Git URL syntax.</p>
+</dd>
+<dt>
+<a id="remote.name.receivepack"></a>remote.&lt;name&gt;.receivepack
+</dt>
+<dd>
+<p>Path of the <tt>git-receive-pack</tt> executable on the remote system, if
+using the SSH transport.</p>
+<p>Defaults to <tt>git-receive-pack</tt>.</p>
+</dd>
+<dt>
+<a id="remote.name.uploadpack"></a>remote.&lt;name&gt;.uploadpack
+</dt>
+<dd>
+<p>Path of the <tt>git-upload-pack</tt> executable on the remote system, if
+using the SSH transport.</p>
+<p>Defaults to <tt>git-upload-pack</tt>.</p>
+</dd>
+<dt>
+<a id="remote.name.push"></a>remote.&lt;name&gt;.push
+</dt>
+<dd>
+<p>Standard Git refspec denoting what should be replicated.  Setting this
+to <tt>+refs/heads/*:refs/heads/*</tt> would mirror only the active
+branches, but not the change refs under <tt>refs/changes/</tt>, or the tags
+under <tt>refs/tags/</tt>.</p>
+<p>Multiple push keys can be supplied, to specify multiple patterns
+to match against.  In the example file above, remote "pubmirror"
+uses two push keys to match both <tt>refs/heads/*</tt> and <tt>refs/tags/*</tt>,
+but excludes all others, including <tt>refs/changes/*</tt>.</p>
+<p>Defaults to <tt>+refs/*:refs/*</tt> (all refs) if not specified.</p>
+</dd>
+<dt>
+<a id="remote.name.timeout"></a>remote.&lt;name&gt;.timeout
+</dt>
+<dd>
+<p>Number of seconds to wait for a network read or write to complete
+before giving up and declaring the remote side is not responding.
+If 0, there is no timeout, and the push client waits indefinitely.</p>
+<p>A timeout should be large enough to mostly transfer the objects to
+the other side.  1 second may be too small for larger projects,
+especially over a WAN link, while 10-30 seconds is a much more
+reasonable timeout value.</p>
+<p>Defaults to 0 seconds, wait indefinitely.</p>
+</dd>
+<dt>
+<a id="remote.name.replicationDelay"></a>remote.&lt;name&gt;.replicationDelay
+</dt>
+<dd>
+<p>Number of seconds to wait before scheduling a remote push operation.
+Setting the delay to 0 effectively disables the delay, causing the
+push to start as soon as possible.</p>
+<p>This is a Gerrit specific extension to the Git remote block.</p>
+<p>By default, 15 seconds.</p>
+</dd>
+<dt>
+<a id="remote.name.threads"></a>remote.&lt;name&gt;.threads
+</dt>
+<dd>
+<p>Number of worker threads to dedicate to pushing to the repositories
+described by this remote.  Each thread can push one project at a
+time, to one destination URL.  Scheduling within the thread pool
+is done on a per-project basis.  If a remote block describes 4
+URLs, allocating 4 threads in the pool will permit some level of
+parallel pushing.</p>
+<p>By default, 1 thread.</p>
+</dd>
+</dl>
+</div>
+<h2><a id="ssh_config"></a>File <tt>~/.ssh/config</tt></h2>
+<div class="sectionbody">
+<p>If present, Gerrit reads and caches <tt>~/.ssh/config</tt> at startup, and
+supports most SSH configuration options.  For example:</p>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>Host host-one.example.com:
+  IdentityFile ~/.ssh/id_hostone
+  PreferredAuthentications publickey</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>Host mirror*.us.some.org:
+  User mirror-updater
+  IdentityFile ~/.ssh/id_pubmirror
+  PreferredAuthentications publickey</tt></pre>
+</div></div>
+</div></div>
+<p>Supported options:</p>
+<ul>
+<li>
+<p>
+Host
+</p>
+</li>
+<li>
+<p>
+Hostname
+</p>
+</li>
+<li>
+<p>
+User
+</p>
+</li>
+<li>
+<p>
+Port
+</p>
+</li>
+<li>
+<p>
+IdentityFile
+</p>
+</li>
+<li>
+<p>
+PreferredAuthentications
+</p>
+</li>
+<li>
+<p>
+StrictHostKeyChecking
+</p>
+</li>
+</ul>
+<p>SSH authentication must be by passwordless public key, as there is
+no facility to read passphases on startup or passwords during the
+SSH connection setup, and SSH agents are not supported from Java.</p>
+<p>Host keys for any destination SSH servers must appear in the user's
+<tt>~/.ssh/known_hosts</tt> file, and must be added in advance, before
+Gerrit starts.  If a host key is not listed, Gerrit will be unable to
+connect to that destination, and replication to that URL will fail.</p>
+</div>
+<hr style="
+  height: 2px;
+  color: silver;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+">
+<p>Part of <a href="index.html">Gerrit Code Review</a></p>
+<div id="footer">
+<div id="footer-text">
+Version v2.0.24<br />
+Last updated 02-Nov-2009 16:31:14 PDT
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,921 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.2.2" />
+<style type="text/css">
+/* Debug borders */
+p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 {
+/*
+  border: 1px solid red;
+*/
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+}
+
+tt {
+  color: navy;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  font-family: sans-serif;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  border-bottom: 2px solid silver;
+  padding-top: 0.5em;
+}
+
+div.sectionbody {
+  font-family: serif;
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+pre {
+  padding: 0;
+  margin: 0;
+}
+
+span#author {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+span#email {
+}
+span#revision {
+  font-family: sans-serif;
+}
+
+div#footer {
+  font-family: sans-serif;
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+div#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+div#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+div#preamble,
+div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-right: 10%;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+
+div.listingblock {
+  margin-right: 0%;
+}
+div.listingblock > div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock > div.content {
+  padding-left: 2.0em;
+}
+
+div.attribution {
+  text-align: right;
+}
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 2px solid silver;
+}
+
+div.exampleblock > div.content {
+  border-left: 2px solid silver;
+  padding: 0.5em;
+}
+
+div.verseblock div.content {
+  white-space: pre;
+}
+
+div.imageblock div.content { padding-left: 0; }
+div.imageblock img { border: 1px solid silver; }
+span.image img { border-style: none; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: italic;
+}
+dd > *:first-child {
+  margin-top: 0;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.olist2 {
+  list-style-type: lower-alpha;
+}
+
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead {
+  font-family: sans-serif;
+  font-weight: bold;
+}
+tfoot {
+  font-weight: bold;
+}
+
+div.hlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hlist td {
+  padding-bottom: 5px;
+}
+td.hlist1 {
+  vertical-align: top;
+  font-style: italic;
+  padding-right: 0.8em;
+}
+td.hlist2 {
+  vertical-align: top;
+}
+
+@media print {
+  div#footer-badges { display: none; }
+}
+
+div#toctitle {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+/* Workarounds for IE6's broken and incomplete CSS2. */
+
+div.sidebar-content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+div.sidebar-title, div.image-title {
+  font-family: sans-serif;
+  font-weight: bold;
+  margin-top: 0.0em;
+  margin-bottom: 0.5em;
+}
+
+div.listingblock div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock-content {
+  padding-left: 2.0em;
+}
+
+div.exampleblock-content {
+  border-left: 2px solid silver;
+  padding-left: 0.5em;
+}
+
+/* IE6 sets dynamically generated links as visited. */
+div#toc a:visited { color: blue; }
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function(){generateToc(2)}
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4.sp
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, October 2006. License: GPL */
+ /* modified by Shawn Pearce, August 2009. License: GPL */
+
+function getText(el) {
+  var text = "";
+  for (var i = el.firstChild; i != null; i = i.nextSibling) {
+    if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+      text += i.data;
+    else if (i.firstChild != null)
+      text += getText(i);
+  }
+  return text;
+}
+
+function TocEntry(el, text, toclevel) {
+  this.element = el;
+  this.text = text;
+  this.toclevel = toclevel;
+  this.assigned = false;
+
+  if (el.id != '') {
+    this.id = el.id;
+
+  } else {
+    var a = el.firstChild;
+    if ((a.tagName == "a" || a.tagName == "A") && a.id != "") {
+      this.id = a.id;
+    } else {
+      this.id = '';
+    }
+  }
+}
+
+function tocEntries(el, toclevels) {
+  var result = new Array;
+  var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+  // Function that scans the DOM tree for header elements (the DOM2
+  // nodeIterator API would be a better technique but not supported by all
+  // browsers).
+  var iterate = function (el) {
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+        var mo = re.exec(i.tagName)
+        if (mo)
+          result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+        iterate(i);
+      }
+    }
+  }
+  iterate(el);
+  return result;
+}
+
+// This function does the work. toclevels = 1..4.
+function generateToc(toclevels) {
+  var simple_re = new RegExp('^[a-zA-Z._ -]{1,}$');
+  var entries = tocEntries(document.getElementsByTagName("body")[0], toclevels);
+  var usedIds = new Array();
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id != "")
+      usedIds[entry.id] = entry;
+  }
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id != "" || !simple_re.exec(entry.text))
+      continue;
+
+    var n = entry.text.replace(/ /g, '_').toLowerCase();
+    var e = usedIds[n];
+    if (e) {
+      if (e.assigned)
+        e.id = '';
+      continue;
+    }
+
+    entry.assigned = true;
+    entry.id = n;
+    entry.element.id = entry.id;
+    usedIds[n] = entry;
+  }
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id == '') {
+      entry.id = "toc" + i;
+      entry.element.id = entry.id;
+    }
+  }
+
+  var toc = document.getElementById("toc");
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    var a = document.createElement("a");
+    a.href = "#" + entry.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+}
+/*]]>*/
+</script>
+<title>Release notes for Gerrit 2.1.6</title>
+</head>
+<body>
+<div id="header">
+<h1>Release notes for Gerrit 2.1.6</h1>
+<span id="revision">version 2.1.6 (from v2.1.6-rc2)</span>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<p>Gerrit 2.1.6 is now available:</p>
+<p><a href="http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.1.6.war">http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.1.6.war</a></p>
+</div>
+</div>
+<h2>Schema Change</h2>
+<div class="sectionbody">
+<p><strong>WARNING</strong> This release contains multiple schema changes.  To upgrade:</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  java -jar gerrit.war init -d site_path</tt></pre>
+</div></div>
+</div>
+<h2>New Features</h2>
+<div class="sectionbody">
+<h3>Web UI</h3>
+<ul>
+<li>
+<p>
+issue 312 Abandoned changes can now be restored.
+</p>
+</li>
+<li>
+<p>
+issue 698 Make date and time fields customizable
+</p>
+</li>
+<li>
+<p>
+issue 556 Preference to display patch sets in reverse order
+</p>
+</li>
+<li>
+<p>
+issue 584 Allow deleted and/or uncommented files to be skipped
+</p>
+</li>
+<li>
+<p>
+Use HistogramDiff for content differences
+</p>
+<p>HistogramDiff is an adaptation of Bram Cohen's Patience Difference
+algorithm, and was recently included in the upstream JGit project.
+Patience Difference tends to produce more readable differences for
+source code files, and JGit's HistogramDiff implementation tends to
+run several times faster than the prior Myers O(ND) algorithm.</p>
+</li>
+<li>
+<p>
+Automatic merge file content during submit
+</p>
+<p>Project owners can now enable file-level content merge during submit,
+allowing Gerrit to automatically resolve many path conflict cases.
+This is built upon experimental merge code inherited from JGit,
+and is therefore still experimental in Gerrit.</p>
+</li>
+</ul>
+<h3>Change Query</h3>
+<ul>
+<li>
+<p>
+issue 688 Match branch, topic, project, ref by regular expressions
+</p>
+<p>Similar to other features in Gerrit Code Review, starting any of these
+expressions with ^ will now treat the argument as a regular
+expression instead of an exact string match.</p>
+</li>
+<li>
+<p>
+Search changes by commit messages with <tt>message:</tt> operator.
+</p>
+</li>
+<li>
+<p>
+issue 729 query: Add a --all-approvals option to queries
+</p>
+<p>The new flag includes approval information for all patch sets in the
+resulting query output.</p>
+</li>
+</ul>
+<h3>Notifications</h3>
+<ul>
+<li>
+<p>
+Customize email notification templates
+</p>
+<p>Email notifications are now driven by the Velocity template engine,
+and may be modified by the site administrator by editing a template
+file under <tt><em>$site_path</em>/etc/mail</tt>.</p>
+</li>
+<li>
+<p>
+issue 311 Clarify email texts/subject
+</p>
+<p>The default email notification formatting was changed to make the
+subject lines and message bodies more consistent, and easier to
+understand.</p>
+</li>
+<li>
+<p>
+issue 204 Add project list popup under Settings &gt; Watched Projects
+</p>
+<p>The project list panel makes it easier for users to browse all
+projects they have at least READ +1 access to, and add them to their
+watched project set so notifications can be configured.</p>
+</li>
+<li>
+<p>
+stream-event support for all ref-update events
+</p>
+<p>Whenever a ref is updated via either a direct push to a branch or a
+Gerrit change submission, Gerrit will now send a new "ref-updated"
+event to the event stream.</p>
+</li>
+</ul>
+<h3>User Management</h3>
+<ul>
+<li>
+<p>
+SSO via client SSL certificates
+</p>
+<p>A new auth.type of CLIENT_SSL_CERT_LDAP supports authenticating users
+using client SSL certificates.  This feature requires using the
+embedded Jetty web server with SSL enabled, and an LDAP directory to
+lookup individual account information.</p>
+</li>
+<li>
+<p>
+issue 503 Inactive acounts may be disabled.
+</p>
+<p>Administrators can manually update the accounts table, setting
+inactive = <tt>Y</tt> to mark user accounts inactive.  Inactive accounts
+cannot sign-in, cannot be added as a reviewer, and cannot be added
+to a group.</p>
+</li>
+<li>
+<p>
+Improve the no-interactive-shell error message over SSH
+</p>
+<p>Instead of giving a short <em>no shell available</em> error, Gerrit Code
+Review now prints a banner letting the user know they have
+authenticated successfully, interactive shells are disabled, and how
+to clone a hosted project:</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>$ ssh -p 29418 review.example.com
+
+  ****    Welcome to Gerrit Code Review    ****
+
+  Hi A. U. Thor, you have successfully connected over SSH.
+
+  Unfortunately, interactive shells are disabled.
+  To clone a hosted Git repository, use:
+
+  git clone ssh://author@review.example.com:29418/REPOSITORY_NAME.git
+
+Connection to review.example.com closed.</tt></pre>
+</div></div>
+</li>
+<li>
+<p>
+Configure SSHD maxAuthTries, loginGraceTime, maxConnectionsPerUser
+</p>
+<p>The internal SSH daemon now supports additional configuration
+settings to reduce the risk of abuse.</p>
+</li>
+</ul>
+<h3>Administration</h3>
+<ul>
+<li>
+<p>
+issue 558 Allow Access rights to be edited by clicking on them.
+</p>
+</li>
+<li>
+<p>
+New <em>Project Owner</em> system group to define default rights
+</p>
+<p>The new system group <em>Project Owners</em> can be used in access
+rights to mean any user that is a member of any group that
+has the <em>Owner</em> access category granted within that project.
+This system group is primarily useful in higher level projects
+such as <em>-- All Projects --</em> to define standard access rights
+for all project owners.</p>
+</li>
+<li>
+<p>
+issue 557 Allow rejection of changes without Change-Id line.
+</p>
+<p>Project owners can set a flag to require all commits to include
+the Gerrit specific <em>Change-Id: I&#8230;</em> line during initial upload,
+reducing the risk of confusion when amends need to occur to
+incorporate reviewer feedback.</p>
+</li>
+<li>
+<p>
+issue 613 create-project: Add &#8212;permissions-only option
+</p>
+<p>The new flag skips creating the associated Git repository, making the
+new project suitable for use as a parent to inherit permissions from.</p>
+</li>
+<li>
+<p>
+create-project: Optionally create empty initial commit
+</p>
+<p>The <tt>repo</tt> tool used by Android doesn't like to clone an empty Git
+repository, making it difficult to setup a review for the initial file
+contents.  create-project can now optionally create an empty initial
+commit, permitting repo to sync the empty project.</p>
+</li>
+<li>
+<p>
+Block off commands on a server for certain user groups.
+</p>
+<p>The upload.allowGroup and receive.allowGroup settings in gerrit.config
+can be used to restrict which users can perform git clone/fetch or git
+push on this server.  This can be useful if clone/fetch should be
+limited to only site administrators, while normal users are supposed
+to use to less expensive mirror servers.</p>
+</li>
+<li>
+<p>
+issue 685 Define gerrit.replicateOnStartup to control replication
+</p>
+<p>The automatic replicate every project action that occurs during server
+startup can now be disabled by setting replicateOnStartup = false.
+This is primarily useful for sites with extremely large numbers of
+projects and replication targets, but runs the risk of having a target
+be out of date relative to the master server.</p>
+</li>
+<li>
+<p>
+New non-blocking function category "NoBlock"
+</p>
+<p>Site defined approval categories may now use the function "NoBlock"
+to permit scoring without blocking submission.  This is mostly
+useful for automated tools to provide optional feedback on a change.</p>
+</li>
+<li>
+<p>
+Ability to reject commits from entering repository
+</p>
+<p>The Git-note style branch <tt>refs/meta/reject-commits</tt> can be created
+by the project owner or site administrator to define a list of
+commits that must not be pushed into the repository.  This can be
+useful after performing a project-wide filter-branch operation to
+prevent the older (pre-filter-branch) history from being reintroduced
+into the repository.</p>
+</li>
+</ul>
+</div>
+<h2>Bug Fixes</h2>
+<div class="sectionbody">
+<h3>Web UI</h3>
+<ul>
+<li>
+<p>
+issue 498 Enable Keyboard navigation after change submit
+</p>
+</li>
+<li>
+<p>
+issue 691 Make <em>]</em> on last file go up to change
+</p>
+</li>
+<li>
+<p>
+issue 741 Make ENTER work for <em>Create Group</em>
+</p>
+</li>
+<li>
+<p>
+issue 622 Denote a symbolic link in side-by-side viewer
+</p>
+</li>
+<li>
+<p>
+issue 612 Display empty branch list when project has no repository
+</p>
+</li>
+<li>
+<p>
+issue 672 Fix deleting exclusive branch level rights
+</p>
+</li>
+<li>
+<p>
+issue 645 Display <em>No difference</em> between unchanged patchsets
+</p>
+</li>
+<li>
+<p>
+Display groups as links to group information
+</p>
+</li>
+<li>
+<p>
+Remove ctrl-d keybinding to discard comment, honor browser default
+</p>
+</li>
+<li>
+<p>
+Do not auto enable save buttons, wait for changes to be made
+</p>
+</li>
+<li>
+<p>
+Disable <em>Create Group</em> button if group name not entered
+</p>
+</li>
+<li>
+<p>
+Show commit message in PatchScreen if old patch sets are compared
+</p>
+</li>
+<li>
+<p>
+Fixed a number of focus and shortcut bugs in Firefox, Chrome
+</p>
+</li>
+<li>
+<p>
+issue 487 Work around buggy MyersDiff by killing threads
+</p>
+<p>MyersDiff sometimes locked up in an infinite loop when computing
+the intraline difference information for a file.  These threads
+are now killed after an administrator specified timeout
+(cache.diff_intraline.timeout, default is 5 seconds).  If the
+timeout is reached the file content is displayed without intraline
+differences.  This offers reduced functionality to the end-user, but
+prevents the "path of death" which usually took down a Gerrit server.</p>
+</li>
+<li>
+<p>
+Hide access rights not visible to user
+</p>
+<p>Users were able to view access rights for branches they didn't
+actually have READ +1 permission on.  This may have leaked
+information about branches and/or groups to users that shouldn't
+know about code names contained within either string.  Users that
+are not project owners may now only view access rights for branches
+they have at least READ +1 permission on.</p>
+</li>
+</ul>
+<h3>Change Query</h3>
+<ul>
+<li>
+<p>
+issue 689 Fix age:4days to parse correctly
+</p>
+</li>
+<li>
+<p>
+Make branch: operator slightly less ambiguous
+</p>
+</li>
+</ul>
+<h3>Push Support</h3>
+<ul>
+<li>
+<p>
+issue 695 Permit changing only the author of a commit
+</p>
+<p>Correcting only the author of a change failed to upload the new patch
+set onto the existing change, as neither the message nor the files
+were modified.  Fixed.</p>
+</li>
+<li>
+<p>
+issue 576 Allow Push Branch +3 to force replace a tag
+</p>
+<p>Previously it was not possible to replace a tag object, even if
+<tt>git push --force</tt> was used.  Fixed.</p>
+</li>
+<li>
+<p>
+issue 690 Refuse to run receive-pack if refs/for/branch exists
+</p>
+<p>If a server repository was corrupted by an administrator manually
+creating a reference within the magical refs/for/ namespace, Gerrit
+became confused when changes were uploaded for review.  If this case
+occurs push now aborts very early, with a clear error message
+indicating the problem.  To recover an administrator must clear the
+refs/for/ namespace manually.</p>
+</li>
+<li>
+<p>
+Allow receive-pack without Read +2 but with Push Head +1
+</p>
+<p>Users who had direct branch push permission but lacked the ability to
+create changes for review were unable to push to a project.  Fixed.
+This (finally) makes Gerrit a replacement for Gitosis or Gitolite.</p>
+</li>
+</ul>
+<h3>Replication</h3>
+<ul>
+<li>
+<p>
+issue 683 Don't assume authGroup = "Registered Users" in replication
+</p>
+<p>Previously a misconfigured authGroup in replication.config may have
+caused the server to assume "Registered Users" instead of the group(s)
+admin actually wanted.  This may have caused the replication to see
+(or not see) the correct set of projects.</p>
+</li>
+<li>
+<p>
+issue 482 Upon replication fail, automatically retry later
+</p>
+<p>If replication fails (for example due to temporary network
+connectivity problems), other pending replication events to the
+same server are deferred and retried later until successful.</p>
+</li>
+<li>
+<p>
+Replicate all refs received from push
+</p>
+<p>Replication now replicates all references, not just those that
+appear under <tt>refs/heads</tt>, <tt>refs/tags</tt>, or <tt>refs/changes</tt>.  This
+fix may be relevant if the server supports user-private sandboxes
+such as <tt>refs/dev/<em>${username}</em>/*</tt>.</p>
+</li>
+<li>
+<p>
+issue 658 Allow refspec shortcuts (push = master) for replication
+</p>
+</li>
+</ul>
+<h3>User Management</h3>
+<ul>
+<li>
+<p>
+Ensure proper escaping of LDAP group names
+</p>
+<p>Some special characters may appear in LDAP group names, these must be
+escape when looking up the group information from JNDI, otherwise the
+lookup fails.  Fixed by applying the necessary escape sequences.</p>
+</li>
+<li>
+<p>
+Let login fail if user name cannot be set
+</p>
+<p>If the user name for a new account is supposed to import from LDAP
+but cannot because it is already in use by another user on this
+server, the new account won't be created.</p>
+</li>
+</ul>
+<h3>Administration</h3>
+<ul>
+<li>
+<p>
+gerrit.sh: actually verify running processes
+</p>
+<p>Previously <tt>gerrit.sh check</tt> claimed a server was running if the
+pid file was present, even if the process itself was dead.  It now
+checks <tt>ps</tt> for the process before claiming it is running.</p>
+</li>
+<li>
+<p>
+Don't allow exclusive branch rights to block Owner inheritance
+</p>
+<p>Exclusive branch level rights prevented the a higher level branch
+owner from managing the branch rights, unless they had an additional
+access right for the exclusive rights.  Now Owner inheritance cannot
+be blocked, ensuring that the higher level owner can manage their
+entire namespace.</p>
+</li>
+<li>
+<p>
+Allow overriding permissions from parent project
+</p>
+<p>Permissions in the parent project could not be overridden in the
+child project.  Permissions can now be overidden if the category,
+group name and reference name all match.</p>
+</li>
+</ul>
+</div>
+<h2>Version</h2>
+<div class="sectionbody">
+<p>ef16a1816f293d00c33de9f90470021e2468a709</p>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 2.1.6 (from v2.1.6-rc2)<br />
+Last updated 15-Dec-2010 12:10:04 PDT
+</div>
+</div>
+</body>
+</html>

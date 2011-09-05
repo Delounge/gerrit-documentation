@@ -1,0 +1,972 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.2.2" />
+<style type="text/css">
+/* Debug borders */
+p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 {
+/*
+  border: 1px solid red;
+*/
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+}
+
+tt {
+  color: navy;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  font-family: sans-serif;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  border-bottom: 2px solid silver;
+  padding-top: 0.5em;
+}
+
+div.sectionbody {
+  font-family: serif;
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+pre {
+  padding: 0;
+  margin: 0;
+}
+
+span#author {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+span#email {
+}
+span#revision {
+  font-family: sans-serif;
+}
+
+div#footer {
+  font-family: sans-serif;
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+div#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+div#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+div#preamble,
+div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-right: 10%;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+
+div.listingblock {
+  margin-right: 0%;
+}
+div.listingblock > div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock > div.content {
+  padding-left: 2.0em;
+}
+
+div.attribution {
+  text-align: right;
+}
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 2px solid silver;
+}
+
+div.exampleblock > div.content {
+  border-left: 2px solid silver;
+  padding: 0.5em;
+}
+
+div.verseblock div.content {
+  white-space: pre;
+}
+
+div.imageblock div.content { padding-left: 0; }
+div.imageblock img { border: 1px solid silver; }
+span.image img { border-style: none; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: italic;
+}
+dd > *:first-child {
+  margin-top: 0;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.olist2 {
+  list-style-type: lower-alpha;
+}
+
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead {
+  font-family: sans-serif;
+  font-weight: bold;
+}
+tfoot {
+  font-weight: bold;
+}
+
+div.hlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hlist td {
+  padding-bottom: 5px;
+}
+td.hlist1 {
+  vertical-align: top;
+  font-style: italic;
+  padding-right: 0.8em;
+}
+td.hlist2 {
+  vertical-align: top;
+}
+
+@media print {
+  div#footer-badges { display: none; }
+}
+
+div#toctitle {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+/* Workarounds for IE6's broken and incomplete CSS2. */
+
+div.sidebar-content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+div.sidebar-title, div.image-title {
+  font-family: sans-serif;
+  font-weight: bold;
+  margin-top: 0.0em;
+  margin-bottom: 0.5em;
+}
+
+div.listingblock div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock-content {
+  padding-left: 2.0em;
+}
+
+div.exampleblock-content {
+  border-left: 2px solid silver;
+  padding-left: 0.5em;
+}
+
+/* IE6 sets dynamically generated links as visited. */
+div#toc a:visited { color: blue; }
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function(){generateToc(2)}
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4.sp
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, October 2006. License: GPL */
+ /* modified by Shawn Pearce, August 2009. License: GPL */
+
+function getText(el) {
+  var text = "";
+  for (var i = el.firstChild; i != null; i = i.nextSibling) {
+    if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+      text += i.data;
+    else if (i.firstChild != null)
+      text += getText(i);
+  }
+  return text;
+}
+
+function TocEntry(el, text, toclevel) {
+  this.element = el;
+  this.text = text;
+  this.toclevel = toclevel;
+  this.assigned = false;
+
+  if (el.id != '') {
+    this.id = el.id;
+
+  } else {
+    var a = el.firstChild;
+    if ((a.tagName == "a" || a.tagName == "A") && a.id != "") {
+      this.id = a.id;
+    } else {
+      this.id = '';
+    }
+  }
+}
+
+function tocEntries(el, toclevels) {
+  var result = new Array;
+  var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+  // Function that scans the DOM tree for header elements (the DOM2
+  // nodeIterator API would be a better technique but not supported by all
+  // browsers).
+  var iterate = function (el) {
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+        var mo = re.exec(i.tagName)
+        if (mo)
+          result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+        iterate(i);
+      }
+    }
+  }
+  iterate(el);
+  return result;
+}
+
+// This function does the work. toclevels = 1..4.
+function generateToc(toclevels) {
+  var simple_re = new RegExp('^[a-zA-Z._ -]{1,}$');
+  var entries = tocEntries(document.getElementsByTagName("body")[0], toclevels);
+  var usedIds = new Array();
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id != "")
+      usedIds[entry.id] = entry;
+  }
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id != "" || !simple_re.exec(entry.text))
+      continue;
+
+    var n = entry.text.replace(/ /g, '_').toLowerCase();
+    var e = usedIds[n];
+    if (e) {
+      if (e.assigned)
+        e.id = '';
+      continue;
+    }
+
+    entry.assigned = true;
+    entry.id = n;
+    entry.element.id = entry.id;
+    usedIds[n] = entry;
+  }
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id == '') {
+      entry.id = "toc" + i;
+      entry.element.id = entry.id;
+    }
+  }
+
+  var toc = document.getElementById("toc");
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    var a = document.createElement("a");
+    a.href = "#" + entry.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+}
+/*]]>*/
+</script>
+<title>Gerrit2 - Installation Guide</title>
+</head>
+<body>
+<div id="header">
+<h1>Gerrit2 - Installation Guide</h1>
+<span id="revision">version v2.0.24</span>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<p>You need a SQL database to house the Gerrit2 metadata.  Currently
+H2, MySQL and PostgreSQL are the only supported databases.</p>
+</div>
+</div>
+<h2>Important Links</h2>
+<div class="sectionbody">
+<p>PostgreSQL:</p>
+<ul>
+<li>
+<p>
+<a href="http://www.postgresql.org/docs/">Documentation</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://jdbc.postgresql.org/download.html">JDBC Driver</a>
+</p>
+</li>
+</ul>
+<p>MySQL:</p>
+<ul>
+<li>
+<p>
+<a href="http://dev.mysql.com/doc/">Documentation</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://dev.mysql.com/downloads/connector/j/5.0.html">JDBC Driver</a>
+</p>
+</li>
+</ul>
+<p>Optional Libraries:</p>
+<ul>
+<li>
+<p>
+<a href="http://commons.apache.org/pool/download_pool.cgi">Commons Pool</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://commons.apache.org/dbcp/download_dbcp.cgi">Commons DBCP</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.bouncycastle.org/java.html">Bouncy Castle Crypto API</a>
+</p>
+</li>
+</ul>
+</div>
+<h2>Downloading Gerrit</h2>
+<div class="sectionbody">
+<p>Current and past binary releases of Gerrit can be obtained from
+the downloads page at the project site:</p>
+<ul>
+<li>
+<p>
+<a href="http://code.google.com/p/gerrit/downloads/list">Gerrit Downloads</a>
+</p>
+</li>
+</ul>
+<p>Download any current <tt>*.war</tt> package. The war will be referred to as
+<tt>gerrit.war</tt> from this point forward, so you may find it easier to
+rename the downloaded file.</p>
+</div>
+<h2>Building Gerrit From Source</h2>
+<div class="sectionbody">
+<p>Alternatively, you can build the application distribution using
+Maven from a source download obtained directly from Git:</p>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>git clone git://android.git.kernel.org/tools/gerrit.git
+cd gerrit
+mvn clean package
+cp target/gerrit-*.war ...YOUR.DEST.../gerrit.war</tt></pre>
+</div></div>
+</div></div>
+<p>The first build may take a while as dependencies are searched
+for and downloaded from Maven distribution repositories.</p>
+<p>Apache Maven:</p>
+<ul>
+<li>
+<p>
+<a href="http://maven.apache.org/download.html">Download</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://maven.apache.org/run-maven/index.html">Running Maven</a>
+</p>
+</li>
+</ul>
+</div>
+<h2>Setting up the Database</h2>
+<div class="sectionbody">
+<h3>PostgreSQL</h3>
+<p>Create a Gerrit specific user as a normal user (no superuser access)
+and assign it an encrypted password:</p>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>createuser -A -D -P -E gerrit2</tt></pre>
+</div></div>
+</div></div>
+<p>Create the database to store the Gerrit metadata, and set the user
+you just created as the owner of that database:</p>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>createdb -E UTF-8 -O gerrit2 reviewdb</tt></pre>
+</div></div>
+</div></div>
+<h3>MySQL</h3>
+<p>Create a Gerrit specific user within the database and assign it a
+password, create a database, and give the user full rights:</p>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>CREATE USER 'gerrit2'@'localhost' IDENTIFIED BY 'secret';
+CREATE DATABASE reviewdb;
+ALTER DATABASE reviewdb charset=latin1;
+GRANT ALL ON reviewdb.* TO 'gerrit2'@'localhost';
+FLUSH PRIVILEGES;</tt></pre>
+</div></div>
+</div></div>
+</div>
+<h2>Initialize the Schema</h2>
+<div class="sectionbody">
+<h3>Create the Gerrit 2 Tables</h3>
+<p>Either run CreateSchema from the command line:</p>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>java -jar gerrit.war --cat extra/GerritServer.properties_example &gt;GerritServer.properties
+edit GerritServer.properties</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>java -jar gerrit.war CreateSchema</tt></pre>
+</div></div>
+</div></div>
+<p>Or, run the application once in a container to force it to initialize
+the database schema before accessing it.  (See below for deployment
+setup documentation.)  If you use this approach, it is recommended
+that you stop the application before continuing with the setup.</p>
+<h3>Add Indexes</h3>
+<p>A script should be run to create the query indexes, so Gerrit
+can avoid table scans when looking up information.  Run the
+index script through your database's query tool.</p>
+<p>PostgreSQL:</p>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>java -jar gerrit.war --cat sql/index_postgres.sql | psql reviewdb -U gerrit2 -W</tt></pre>
+</div></div>
+</div></div>
+<p>MySQL:</p>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>java -jar gerrit.war --cat sql/index_generic.sql | mysql reviewdb -u gerrit2 -p
+java -jar gerrit.war --cat sql/mysql_nextval.sql | mysql reviewdb -u gerrit2 -p</tt></pre>
+</div></div>
+</div></div>
+<h3>Configure site_path</h3>
+<p>This directory holds server-specific configuration files and
+assets used to customize the deployment.  Gerrit needs read
+access (but not write access) to the directory.  The path
+is stored in <tt>system_config.site_path</tt>, so you will need to
+update the database with this value.</p>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>mkdir /home/gerrit2/cfg
+cd /home/gerrit2/cfg</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>UPDATE system_config SET site_path='/home/gerrit2/cfg'</tt></pre>
+</div></div>
+</div></div>
+<p>When <em>$site_path</em> is referenced below, it refers to the path set in the SQL above.</p>
+<h3>SSH Host Keys</h3>
+<p>If you choose to install the Bouncy Castle Crypto APIs (see below)
+you must create an RSA, DSA, or both, host keys for the daemon:</p>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>ssh-keygen -t rsa -P '' -f ssh_host_rsa_key
+ssh-keygen -t dsa -P '' -f ssh_host_dsa_key</tt></pre>
+</div></div>
+</div></div>
+<p>These keys are used as the host keys for the internal SSH daemon
+run by Gerrit.  You may wish to backup these key files to ensure
+they can be restored in the event of a disaster.</p>
+<p>The private key files (<tt>ssh_host_rsa_key</tt>, <tt>ssh_host_dsa_key</tt>) should
+be readable <strong>only</strong> by the account that is executing Gerrit2's web
+application container.  It is a security risk to make these files
+readable by anyone else.</p>
+<p>If you don't install Bouncy Castle, Gerrit will automatically
+create a host key and save a copy to <tt><em>$site_path</em>/ssh_host_key</tt>
+during first startup.  For this to work correctly, Gerrit will
+require write access to the directory.</p>
+<h3>Create Git Repository Base</h3>
+<p>This directory holds the Git repositories that Gerrit knows about
+and can service.  Gerrit needs write access to this directory and
+any Git repository stored within it.</p>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>mkdir /srv/git
+git config --file '$site_path'/gerrit.config gerrit.basePath /srv/git</tt></pre>
+</div></div>
+</div></div>
+<p>You may wish to consider also exporting this directory over the
+anonymous git:// protocol, as it is more efficient than Gerrit's
+internal ssh daemon.  See the <tt>git-daemon</tt> documentation for details
+on how to configure this if anonymous access is desired.</p>
+<ul>
+<li>
+<p>
+<a href="http://www.kernel.org/pub/software/scm/git/docs/git-daemon.html">man git-daemon</a>
+</p>
+</li>
+</ul>
+<h3>Futher Configuration</h3>
+<p>Gerrit2 supports some site-specific customizations.  These are
+optional and are not required to run a server, but may be desired.</p>
+<ul>
+<li>
+<p>
+<a href="config-sso.html">Single Sign-On Systems</a>
+</p>
+</li>
+<li>
+<p>
+<a href="config-replication.html">Git Replication/Mirroring</a>
+</p>
+</li>
+<li>
+<p>
+<a href="config-headerfooter.html">Site Header/Footer</a>
+</p>
+</li>
+<li>
+<p>
+<a href="config-gitweb.html">Gitweb Integration</a>
+</p>
+</li>
+<li>
+<p>
+<a href="config-gerrit.html">Other System Settings</a>
+</p>
+</li>
+</ul>
+</div>
+<h2>Application Deployment</h2>
+<div class="sectionbody">
+<h3>Jetty</h3>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">The instructions listed here were tested with Jetty 6.1.14 or later.
+These are known to not work on much older versions, such as 6.1.3.</td>
+</tr></table>
+</div>
+<p>These directions will configure Gerrit as the default web
+application, allowing URLs like <tt>http://example.com/4543</tt> to
+jump directly to change 4543.</p>
+<p>Download and unzip a release version of Jetty.  From here on we
+call the unpacked directory <tt>$JETTY_HOME</tt>.</p>
+<ul>
+<li>
+<p>
+<a href="http://www.eclipse.org/jetty/downloads.php">Jetty Downloads</a>
+</p>
+</li>
+</ul>
+<p>Install the required JDBC drivers by copying them into the
+<tt><em>$JETTY_HOME</em>/lib/ext</tt> directory.  Drivers can be obtained from
+their source projects:</p>
+<ul>
+<li>
+<p>
+<a href="http://jdbc.postgresql.org/download.html">PostgreSQL JDBC Driver</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://commons.apache.org/pool/download_pool.cgi">Commons Pool</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://commons.apache.org/dbcp/download_dbcp.cgi">Commons DBCP</a>
+</p>
+</li>
+</ul>
+<p>Consider installing Bouncy Castle Cypto APIs into the
+<tt><em>$JETTY_HOME</em>/lib/ext</tt> directory.  Some of the Bouncy Castle
+implementations are faster than then ones that come in the JRE,
+and they may support additional encryption algorithms:</p>
+<ul>
+<li>
+<p>
+<a href="http://www.bouncycastle.org/java.html">Bouncy Castle Crypto API</a>
+</p>
+</li>
+</ul>
+<p>Copy Gerrit into the deployment:</p>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>cd $JETTY_HOME
+cp ~/gerrit.war webapps/gerrit.war
+java -jar webapps/gerrit.war --cat extra/jetty7/gerrit.xml &gt;contexts/gerrit.xml
+rm -f contexts/test.xml</tt></pre>
+</div></div>
+</div></div>
+<p>Edit <tt><em>$JETTY_HOME</em>/contexts/gerrit.xml</tt> to correctly configure
+the database and outgoing SMTP connections, especially the user
+and password fields.</p>
+<p>If OpenID authentication (or certain enterprise single-sign-on
+solutions) is being used, you may need to increase the
+header buffer size parameter, due to very long header lines.
+Add the following to <tt><em>$JETTY_HOME</em>/etc/jetty.xml</tt> under
+<tt>org.eclipse.jetty.server.nio.SelectChannelConnector</tt>:</p>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>&lt;Set name="headerBufferSize"&gt;16384&lt;/Set&gt;</tt></pre>
+</div></div>
+</div></div>
+<p>To start automatically when the system boots, create a start
+script and modify it for your configuration:</p>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>java -jar gerrit.war --cat extra/jetty7/gerrit-jetty.sh &gt;/etc/init.d/gerrit-jetty.sh
+vi /etc/init.d/gerrit-jetty.sh</tt></pre>
+</div></div>
+</div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">Under Jetty, restarting the web application (e.g. after modifying
+<tt>system_config</tt>) is as simple as touching the context config file:
+<tt><em>$JETTY_HOME</em>/contexts/gerrit.xml</tt></td>
+</tr></table>
+</div>
+<h4>Port 80</h4>
+<p>To deploy on port 80, you should configure Jetty to listen on another
+port, such as 127.0.0.1:8081 (like the start script above does)
+and then follow the <a href="#apache2">reverse proxy</a> section below.</p>
+<h4>Port 443 (HTTPS / SSL)</h4>
+<p>To deploy on port 443 with SSL enabled, unpack the SSL proxy handling
+rule into <tt><em>$JETTY_HOME</em>/etc</tt>:</p>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>cd $JETTY_HOME
+java -jar webapps/gerrit.war --cat extra/jetty7/jetty_sslproxy.xml &gt;etc/jetty_sslproxy.xml</tt></pre>
+</div></div>
+</div></div>
+<p>Create a start script like the one above, configuring Jetty to
+listen on another port, such as 127.0.0.1:8081.</p>
+<p>Set <tt>gerrit.canonicalWebUrl</tt> in <tt><em>$site_path</em>/gerrit.config</tt>
+to an <tt>https://</tt> style URL for your application, so that non-SSL
+connections are automatically upgraded to SSL by issuing a redirect.
+Gerrit does not currently support a dual http/https usage on the
+same site as it doesn't know when to upgrade a non-secure connection
+to a secure one if data needs to be protected.</p>
+<p>Follow the <a href="#apache2">reverse proxy</a> section below to setup an
+Apache2 server to handle SSL for Jetty.</p>
+<h3><a id="other_containers"></a>Other Servlet Containers</h3>
+<p>Deploy the <tt>gerrit-*.war</tt> file to your application server as
+<tt>gerrit.war</tt>.</p>
+<p>Configure the JNDI DataSource <tt>jdbc/ReviewDb</tt> for the Gerrit web
+application context to point to the database you just created.
+Don't forget to ensure your JNDI configuration can load the
+necessary JDBC drivers.</p>
+<p>(<em>Optional</em>) Add Bouncy Castle Crypto API to the web application's
+classpath.  Usually its best to load this library from the servlet
+container's extensions directory, but gerrit.war could also be
+manually repacked to include it.</p>
+<h3><a id="apache2"></a>Apache2 Reverse Proxy</h3>
+<p>Enable the necessary Apache2 modules:</p>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>a2enmod proxy_http
+a2enmod disk_cache   ; # optional, but helps performance</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>a2enmod ssl          ; # optional, needed for HTTPS / SSL
+a2enmod headers      ; # optional, needed for HTTPS / SSL</tt></pre>
+</div></div>
+</div></div>
+<p>then setup a VirtualHost to proxy to Gerrit's servlet container,
+setting the <tt>ProxyPass</tt> line to use the port number you configured
+in your servlet container's configuration:</p>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>&lt;VirtualHost *&gt;
+  ServerName review.example.com
+#
+  ProxyRequests Off
+  ProxyVia Off
+  ProxyPreserveHost On
+#
+  &lt;Proxy *&gt;
+        Order deny,allow
+        Allow from all
+  &lt;/Proxy&gt;
+  ProxyPass / http://127.0.0.1:8081/
+#
+  &lt;IfModule mod_disk_cache.c&gt;
+        CacheEnable disk /
+        CacheIgnoreHeaders Set-Cookie
+  &lt;/IfModule&gt;
+&lt;/VirtualHost&gt;</tt></pre>
+</div></div>
+</div></div>
+<p>if you are using SSL with a Jetty container:</p>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>&lt;VirtualHost *:443&gt;
+  ServerName review.example.com
+#
+  SSLEngine on
+  SSLCertificateFile    conf/server.crt
+  SSLCertificateKeyFile conf/server.key
+#
+  ProxyRequests Off
+  ProxyVia Off
+  ProxyPreserveHost On
+  ProxyPass / http://127.0.0.1:8081/
+  RequestHeader set X-Forwarded-Scheme https
+#
+  &lt;IfModule mod_disk_cache.c&gt;
+        CacheEnable disk /
+        CacheIgnoreHeaders Set-Cookie
+  &lt;/IfModule&gt;
+&lt;/VirtualHost&gt;</tt></pre>
+</div></div>
+</div></div>
+<p>See the Apache <tt>mod_ssl</tt> documentation for more details on how to
+configure SSL within the server, like controlling how strong of an
+encryption algorithm is required.</p>
+<p>For Gerrit, the only difference between plain HTTP and HTTPS is
+adding the "<tt>RequestHeader set X-Forwarded-Scheme https</tt>" line
+within the SSL enabled virtual host.</p>
+</div>
+<h2>Administrator Setup</h2>
+<div class="sectionbody">
+<p>Login to Gerrit through the web interface, so that a user account
+is initialized for you.</p>
+<p>Add your newly created account to the "Administrators" group,
+so that you can manage the site through the web interface:</p>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>INSERT INTO account_group_members
+  (account_id, group_id)
+VALUES (
+  (SELECT account_id FROM accounts
+   WHERE preferred_email='you@example.com'),
+  (SELECT admin_group_id FROM system_config)
+);</tt></pre>
+</div></div>
+</div></div>
+<p>You can also get your <tt>account_id</tt> from the web UI, under Settings,
+if you don't want to use a SELECT subquery above, or your email
+address wasn't prefilled automatically.</p>
+<p>Group memberships are cached, so you need to either restart Gerrit,
+or try flushing the caches over SSH.</p>
+<p>Since SSH cache flushing requires being in the "Administrators"
+group you may run into a chicken-and-egg problem, where you cannot
+flush the cache to make yourself an administrator because you are
+not yet an administrator.  Therefore, restarting the application
+is the recommended bootstrap technique.</p>
+<p>To flush the server's caches over SSH, ensure you have an SSH key
+(you can add one through the web UI under Settings, SSH Keys),
+and then run:</p>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>ssh -p 29418 you@example.com gerrit flush-caches</tt></pre>
+</div></div>
+</div></div>
+</div>
+<h2>Project Setup</h2>
+<div class="sectionbody">
+<p>See <a href="project-setup.html">Project Setup</a> for further details on
+how to register a project with Gerrit.</p>
+</div>
+<hr style="
+  height: 2px;
+  color: silver;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+">
+<p>Part of <a href="index.html">Gerrit Code Review</a></p>
+<div id="footer">
+<div id="footer-text">
+Version v2.0.24<br />
+Last updated 02-Nov-2009 16:31:17 PDT
+</div>
+</div>
+</body>
+</html>

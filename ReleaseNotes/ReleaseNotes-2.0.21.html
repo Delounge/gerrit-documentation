@@ -1,0 +1,1114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.2.2" />
+<style type="text/css">
+/* Debug borders */
+p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 {
+/*
+  border: 1px solid red;
+*/
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+}
+
+tt {
+  color: navy;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  font-family: sans-serif;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  border-bottom: 2px solid silver;
+  padding-top: 0.5em;
+}
+
+div.sectionbody {
+  font-family: serif;
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+pre {
+  padding: 0;
+  margin: 0;
+}
+
+span#author {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+span#email {
+}
+span#revision {
+  font-family: sans-serif;
+}
+
+div#footer {
+  font-family: sans-serif;
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+div#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+div#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+div#preamble,
+div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-right: 10%;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+
+div.listingblock {
+  margin-right: 0%;
+}
+div.listingblock > div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock > div.content {
+  padding-left: 2.0em;
+}
+
+div.attribution {
+  text-align: right;
+}
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 2px solid silver;
+}
+
+div.exampleblock > div.content {
+  border-left: 2px solid silver;
+  padding: 0.5em;
+}
+
+div.verseblock div.content {
+  white-space: pre;
+}
+
+div.imageblock div.content { padding-left: 0; }
+div.imageblock img { border: 1px solid silver; }
+span.image img { border-style: none; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: italic;
+}
+dd > *:first-child {
+  margin-top: 0;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.olist2 {
+  list-style-type: lower-alpha;
+}
+
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead {
+  font-family: sans-serif;
+  font-weight: bold;
+}
+tfoot {
+  font-weight: bold;
+}
+
+div.hlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hlist td {
+  padding-bottom: 5px;
+}
+td.hlist1 {
+  vertical-align: top;
+  font-style: italic;
+  padding-right: 0.8em;
+}
+td.hlist2 {
+  vertical-align: top;
+}
+
+@media print {
+  div#footer-badges { display: none; }
+}
+
+div#toctitle {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+/* Workarounds for IE6's broken and incomplete CSS2. */
+
+div.sidebar-content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+div.sidebar-title, div.image-title {
+  font-family: sans-serif;
+  font-weight: bold;
+  margin-top: 0.0em;
+  margin-bottom: 0.5em;
+}
+
+div.listingblock div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock-content {
+  padding-left: 2.0em;
+}
+
+div.exampleblock-content {
+  border-left: 2px solid silver;
+  padding-left: 0.5em;
+}
+
+/* IE6 sets dynamically generated links as visited. */
+div#toc a:visited { color: blue; }
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function(){generateToc(2)}
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4.sp
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, October 2006. License: GPL */
+ /* modified by Shawn Pearce, August 2009. License: GPL */
+
+function getText(el) {
+  var text = "";
+  for (var i = el.firstChild; i != null; i = i.nextSibling) {
+    if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+      text += i.data;
+    else if (i.firstChild != null)
+      text += getText(i);
+  }
+  return text;
+}
+
+function TocEntry(el, text, toclevel) {
+  this.element = el;
+  this.text = text;
+  this.toclevel = toclevel;
+  this.assigned = false;
+
+  if (el.id != '') {
+    this.id = el.id;
+
+  } else {
+    var a = el.firstChild;
+    if ((a.tagName == "a" || a.tagName == "A") && a.id != "") {
+      this.id = a.id;
+    } else {
+      this.id = '';
+    }
+  }
+}
+
+function tocEntries(el, toclevels) {
+  var result = new Array;
+  var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+  // Function that scans the DOM tree for header elements (the DOM2
+  // nodeIterator API would be a better technique but not supported by all
+  // browsers).
+  var iterate = function (el) {
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+        var mo = re.exec(i.tagName)
+        if (mo)
+          result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+        iterate(i);
+      }
+    }
+  }
+  iterate(el);
+  return result;
+}
+
+// This function does the work. toclevels = 1..4.
+function generateToc(toclevels) {
+  var simple_re = new RegExp('^[a-zA-Z._ -]{1,}$');
+  var entries = tocEntries(document.getElementsByTagName("body")[0], toclevels);
+  var usedIds = new Array();
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id != "")
+      usedIds[entry.id] = entry;
+  }
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id != "" || !simple_re.exec(entry.text))
+      continue;
+
+    var n = entry.text.replace(/ /g, '_').toLowerCase();
+    var e = usedIds[n];
+    if (e) {
+      if (e.assigned)
+        e.id = '';
+      continue;
+    }
+
+    entry.assigned = true;
+    entry.id = n;
+    entry.element.id = entry.id;
+    usedIds[n] = entry;
+  }
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id == '') {
+      entry.id = "toc" + i;
+      entry.element.id = entry.id;
+    }
+  }
+
+  var toc = document.getElementById("toc");
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    var a = document.createElement("a");
+    a.href = "#" + entry.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+}
+/*]]>*/
+</script>
+<title>Release notes for Gerrit 2.0.21</title>
+</head>
+<body>
+<div id="header">
+<h1>Release notes for Gerrit 2.0.21</h1>
+<span id="revision">version 2.0.21 (from v2.1.1.1-104-gc20e283)</span>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<p>Gerrit 2.0.21 is now available in the usual location:</p>
+<p><a href="http://code.google.com/p/gerrit/downloads/list">http://code.google.com/p/gerrit/downloads/list</a></p>
+</div>
+</div>
+<h2>Schema Change</h2>
+<div class="sectionbody">
+<p><strong>WARNING: This version contains a schema change</strong> (since 2.0.19)</p>
+<ul>
+<li>
+<p>
+The schema change may be difficult to undo once applied.
+</p>
+<p>Downgrading could be very difficult once the upgrade has been
+started.  Going back to 2.0.20 may not be possible.</p>
+</li>
+<li>
+<p>
+Do not run the schema change while the server is running.
+</p>
+<p>This upgrade changes the primary key of a table, an operation
+which shouldn't occur while end-users are able to make
+modifications to the database.  I <em>strongly</em> suggest a full
+shutdown, schema upgrade, then startup approach for this release.</p>
+</li>
+<li>
+<p>
+There may be some duplicate keys
+</p>
+<p>This upgrade removes a column from the primary key of a table,
+which may result in duplicates being found.  You can search
+for these duplicates before updating:
+{{{
+SELECT account_id,external_id FROM account_external_ids e
+WHERE e.external_id IN (SELECT external_id
+FROM account_external_ids
+GROUP BY external_id
+HAVING COUNT(*) &gt; 1);
+}}}
+Resolving duplicates is left up to the administrator, in
+general though you will probably want to remove one of the
+duplicate records.  E.g. in one case I had 3 users with the
+same mailing list email address registered.  I just deleted
+those and sent private email asking the users to use their
+personal/work address instead of a mailing list.
+Apply the database specific schema script:</p>
+</li>
+</ul>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  java -jar gerrit.war --cat sql/upgrade017_018_postgres.sql | psql reviewdb
+  java -jar gerrit.war --cat sql/upgrade017_018_mysql.sql    | mysql reviewdb</tt></pre>
+</div></div>
+</div>
+<h2>Important Notices</h2>
+<div class="sectionbody">
+<ul>
+<li>
+<p>
+Prior User Sessions
+</p>
+<p>The cookie used to identify a signed-in user has been changed.
+Again.  All users will be automatically signed-out during
+this upgrade, and will need to sign-in again after the upgrade
+is complete.  The new schema has more room for extensions, so
+this might be the last time we will need to invalidate sessions.</p>
+</li>
+<li>
+<p>
+Harmless error on first startup
+</p>
+<p>Starting 2.0.21 on an instance which previously had the diff
+cache stored on disk will result in the following non-fatal error
+in the server logs during the first launch of .21 on that system:</p>
+</li>
+</ul>
+<div class="listingblock">
+<div class="content">
+<pre><tt>2009-09-02 18:50:07,446::INFO : com.google.gerrit.server.cache.CachePool  - Enabling disk cache /home/gerrit2/android_codereview/disk_cache
+Sep 2, 2009 6:50:07 PM net.sf.ehcache.store.DiskStore readIndex
+SEVERE: Class loading problem reading index. Creating new index. Initial cause was com.google.gerrit.server.patch.DiffCacheKey
+java.lang.ClassNotFoundException: com.google.gerrit.server.patch.DiffCacheKey
+    at java.net.URLClassLoader$1.run(URLClassLoader.java:200)
+    at java.security.AccessController.doPrivileged(Native Method)
+    at java.net.URLClassLoader.findClass(URLClassLoader.java:188)
+...</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>This error can be safely ignored.  It is caused by a change
+in the diff cache's on disk schema, invalidating all existing
+cache entries.</tt></pre>
+</div></div>
+<ul>
+<li>
+<p>
+Significantly larger "diff" cache
+</p>
+<p>The diff cache schema change noted above changed the element
+stored in the cache from per-file to per-patchset.  That is,
+a patch set which modifies 500 files will now occupy only 1
+element in the diff cache, rather than 500 distinct elements.
+Accordingly, the default <tt>cache.diff.memoryLimit</tt> setting has
+been reduced to 128.</p>
+</li>
+<li>
+<p>
+Removed configuration settings
+</p>
+<p>The following configuration settings are no longer honored:
+<tt>cache.maxAge</tt>, <tt>cache.memoryLimit</tt>, <tt>cache.diskLimit</tt>, and
+<tt>cache.diskBuffer</tt>.  These settings may now only be set on a
+per-cache basis (e.g. <tt>cache.diff.maxAge</tt>).</p>
+</li>
+<li>
+<p>
+Connection pool recommendation: Apache Commons DBCP
+</p>
+<p>All of the servers I run now use Apache Commons DBCP instead
+of c3p0 for their connection pools, and the setup guide and
+sample jetty_gerrit.xml reference DBCP now.
+We've run into problems with c3p0 under high loads, or when
+the connection pool is completely exhausted.  DBCP seems to
+fail more gracefully, and seems to give us less trouble.
+Changing pool implementations is not required, c3p0 is still
+a supported provider.  I just want to make it clear that I no
+longer recommend it in production.</p>
+</li>
+</ul>
+</div>
+<h2>New Features</h2>
+<div class="sectionbody">
+<ul>
+<li>
+<p>
+GERRIT-189  Show approval status in account dashboards
+</p>
+<p>Account dashboards now show a summary of the approval status on
+each change.  Unreviewed changes are now highlighted to bring
+the reviewer's attention to them.  Tooltips when hovering over
+a cell will bring up slightly more detailed information.</p>
+</li>
+<li>
+<p>
+GERRIT-276  Allow users to see what groups they are members of
+</p>
+<p>Under Settings &gt; Groups a user can now view what groups Gerrit
+has placed them into.  This may help administrators to debug
+a user's access problems, as they can ask the user to verify
+Gerrit is seeing what they expect.</p>
+</li>
+<li>
+<p>
+GERRIT-276  Show simple properties of an LDAP group
+</p>
+<p>If auth.type is HTTP_LDAP, groups which are marked as automatic
+membership now show non-repeating LDAP attributes below their
+description under Admin &gt; Groups.  This display should help an
+administrator to verify that Gerrit has mapped an LDAP group
+correctly.</p>
+</li>
+<li>
+<p>
+Move Patch entity out of database and store in cache
+</p>
+<p>The <tt>patches</tt> database table has been deleted, Gerrit now makes
+the list of affected files on the fly and stores it within the
+diff cache.  This change is part of a long-running series to
+remove redundant information from the database before we switch
+to a pure Git backed data storage system.</p>
+</li>
+<li>
+<p>
+Only copy blocking negative votes to replacement patch
+</p>
+<p>Previously Gerrit copied any negative vote in any approval
+category whenever a replacement patch set was uploaded to
+a change.  Now Gerrit only copies "Code Review -2".
+This change should make it easier for reviewers (and scripts
+scanning <tt>patch_set_approvals</tt>) to identify updated changes
+which might require a new review.
+Adminstrators who have created their own categories and want to
+copy the blocking negative vote should set <tt>copy_min_score = <em>Y</em></tt>
+in the corresponding approval_categories records.</p>
+</li>
+<li>
+<p>
+show-caches: Make output more concise
+</p>
+<p>Instead of showing ~12 lines of output per cache, each cache is
+displayed as one line of a table.</p>
+</li>
+<li>
+<p>
+Handle multiple accountBase and groupBase
+</p>
+<p>ldap.accountBase and ldap.groupBase may now be specified multiple
+times in gerrit.config, to search more than one subtree within
+the directory.</p>
+</li>
+<li>
+<p>
+Summarize collapsed comments
+</p>
+<p>Collapsed comments (both inline on a file and on the change
+itself) now show a short summary of the comment message, making
+it faster to locate the relevant comment to expand for more
+detailed reading.</p>
+</li>
+<li>
+<p>
+Edit inline drafts on Publish Comments screen
+</p>
+<p>Inline comment drafts may now be directly edited on the Publish
+Comments screen, which can be useful for fixing up a minor typo
+prior to publication.</p>
+</li>
+<li>
+<p>
+Less toggly thingies on change screen
+</p>
+<p>The change description and the approvals are no longer nested
+inside of a foldy block.  Most users never collapse these, but
+instead just scroll the page to locate the information they are
+looking for.</p>
+</li>
+<li>
+<p>
+Restore Enter/o to toggle collapse state of comments
+</p>
+<p>Enter and <em>o</em> now expand or collapse an inline comment on the
+the current row of a file.</p>
+</li>
+<li>
+<p>
+Display abbreviated hexy Change-Id in screen titles
+</p>
+</li>
+<li>
+<p>
+Use hexy Change-Id in emails sent from Gerrit
+</p>
+<p>Change-Id abbreviations are now used throught more of the UI,
+including emails sent by Gerrit and window/page titles.  This
+change breaks email threading for any existing review emails.
+That is comments on a change created before the upgrade will
+not appear under the original change notification thread.</p>
+</li>
+<li>
+<p>
+Add sendemail.from to control setting From header
+</p>
+<p>Gerrit no longer forges the From header in notification emails.
+To enable the prior forging behavior, set <tt>sendemail.from</tt>
+to <tt>USER</tt> in gerrit.config.  For more details see
+[http://gerrit.googlecode.com/svn/documentation/2.0/config-gerrit.html#sendemail.from sendemail.from]</p>
+</li>
+</ul>
+</div>
+<h2>Bug Fixes</h2>
+<div class="sectionbody">
+<ul>
+<li>
+<p>
+Fix ReviewDb to actually be per-request scoped
+</p>
+<p>When we switched to Guice a misconfiguration allowed Guice to
+give out multiple database connections per web or SSH request.
+This could exhaust the connection pool faster than expected.</p>
+</li>
+<li>
+<p>
+Send no-cache headers during HTTP login
+</p>
+<p>An oversight in the HTTP login code path may have allowed a proxy
+server between the user's browser and the Gerrit server to cache
+a user's session cookie.  Fixed by sending the correct no-cache
+headers, disallowing any caching of the authentication response.</p>
+</li>
+<li>
+<p>
+Fix project owner permissions
+</p>
+<p>Folks reported on repo-discuss that a project owner also had to
+have READ permission to use the Branches tab of their project.
+This was a regression introduced when we refactored some of the
+code when adding Guice to the project.  Fixed.</p>
+</li>
+<li>
+<p>
+GERRIT-277  Fix hyperlinks in messages
+</p>
+<p>Hyperlinks in commit messages such as "&lt;http://foo&gt;" were
+including the trailing &gt; in the URL, making the link broken.
+The trailing &gt; is now properly not included in the URL.</p>
+</li>
+<li>
+<p>
+GERRIT-266  Fix web session cookie refresh time
+</p>
+<p>In 2.0.19 we introduced web sessions stored in Ehcache, but the
+logic was causing sessions to expire roughly half-way through the
+<tt>cache.web_sessions.maxAge</tt> time.  At the default setting, active
+sessions were expiring after 6 hours.  The cache management has
+been refactored to make this a lot less likely.</p>
+</li>
+<li>
+<p>
+Cleanup not signed in error to be more user friendly
+</p>
+<p>The error message which comes up when your session is expired
+is now much more useful.  From the dialog you can restart your
+session by clicking the "Sign-In" button, and return to the
+screen you are currently on.</p>
+</li>
+<li>
+<p>
+Fix commit-msg hook to work with commit -v option
+</p>
+<p>The commit-msg hook was buggy and did not handle <tt>git commit -v</tt>
+correctly.  It also did some bad insertions, placing the magic
+<tt>Change-Id: I&#8230;</tt> line at the wrong position in the commit
+message.  The updated hook resolves most of these problems,
+but must be recopied to individual Git repositories by end-users.</p>
+</li>
+<li>
+<p>
+Identify PGP configuration errors during startup
+</p>
+<p>If the encrypted contact store is enabled, the required encryption
+algorithms are checked at startup to ensure they are enabled
+in the underlying JVM.  This is necessary in case the JVM is
+updated and the administrator forgot to install the unlimited
+strength policy file in the new runtime directory.  Recently
+review.source.android.com was bitten by just such an upgrade.</p>
+</li>
+<li>
+<p>
+GERRIT-278  Fix missing reply comments on old patch set
+</p>
+<p>Some comments were not visible because they were replies made
+to a comment on say patch set 1 while looking at the difference
+between patch set 1 and patch set 2 of a change.  Fixed.</p>
+</li>
+<li>
+<p>
+Make external_id primary key of account_external_ids
+</p>
+<p>The database schema incorrectly allowed two user accounts to have
+the same email address, or to have the same OpenID auth token.
+Fixed by asserting a unique constraint on the column.</p>
+</li>
+</ul>
+</div>
+<h2>Other Changes</h2>
+<div class="sectionbody">
+<ul>
+<li>
+<p>
+Start 2.0.21 development
+</p>
+</li>
+<li>
+<p>
+Support cleaning up a Commons DBCP connection pool
+</p>
+</li>
+<li>
+<p>
+Clarify which Factory we are importing in ApproveComma&#8230;
+</p>
+</li>
+<li>
+<p>
+Avoid loading Patch object in /cat/ servlet
+</p>
+</li>
+<li>
+<p>
+Remove unnecessary reference of patch key in save draft
+</p>
+</li>
+<li>
+<p>
+GERRIT-266  Tweak cache defaults to be more reasonable
+</p>
+</li>
+<li>
+<p>
+Merge change I131e6c4c
+</p>
+</li>
+<li>
+<p>
+Bring back the "No Differences" message when files are&#8230;
+</p>
+</li>
+<li>
+<p>
+Pick up gwtorm 1.1.2-SNAPSHOT
+</p>
+</li>
+<li>
+<p>
+Refactor GroupListScreen's inner table for reuse
+</p>
+</li>
+<li>
+<p>
+Do not normalize approval scores on closed changes in &#8230;
+</p>
+</li>
+<li>
+<p>
+Don't obtain 0 approvals or submit approvals in dashbo&#8230;
+</p>
+</li>
+<li>
+<p>
+Update JGit to 0.5.0-93-g5b89a2c
+</p>
+</li>
+<li>
+<p>
+Add tests for Change-Id generating commit-msg hook
+</p>
+</li>
+<li>
+<p>
+Add test for commit-msg with commit -v
+</p>
+</li>
+<li>
+<p>
+Fix formatting error in ApprovalCategory
+</p>
+</li>
+<li>
+<p>
+Fix typo in change table column header "Last Update"
+</p>
+</li>
+<li>
+<p>
+Fix reference to the All Projects broken when we remov&#8230;
+</p>
+</li>
+<li>
+<p>
+Use category abbreviations in the dashboard approval c&#8230;
+</p>
+</li>
+<li>
+<p>
+Format approvals columns in change tables with minimal&#8230;
+</p>
+</li>
+<li>
+<p>
+Shrink the Last Updated column in dashboards and chang&#8230;
+</p>
+</li>
+<li>
+<p>
+Highlight changes which need to be reviewed by this us&#8230;
+</p>
+</li>
+<li>
+<p>
+Fix typo in ChangeTable comment
+</p>
+</li>
+<li>
+<p>
+Reduce the window used for "Mon dd" vs. "Mon dd yyyy" &#8230;
+</p>
+</li>
+<li>
+<p>
+Don't assume "Anonymous Users" and "Registered Users" &#8230;
+</p>
+</li>
+<li>
+<p>
+Log encrypted contact store failures
+</p>
+</li>
+<li>
+<p>
+Identify PGP configuration errors during startup
+</p>
+</li>
+<li>
+<p>
+Take the change description block out of the disclosure&#8230;
+</p>
+</li>
+<li>
+<p>
+Move the approval table out of a disclosure panel
+</p>
+</li>
+<li>
+<p>
+Explicitly show what value is needed to submit
+</p>
+</li>
+<li>
+<p>
+Modernize the display of comments on a change
+</p>
+</li>
+<li>
+<p>
+Modernize the display of inline comments on a file
+</p>
+</li>
+<li>
+<p>
+Fix "Publish Comments" when there are no inline drafts
+</p>
+</li>
+<li>
+<p>
+Merge change 11666
+</p>
+</li>
+<li>
+<p>
+Fix display of "Gerrit Code Review" authored comments
+</p>
+</li>
+<li>
+<p>
+Fix source code formatting error in FormatUtil
+</p>
+</li>
+<li>
+<p>
+Remove unnecessary fake author on inline comments
+</p>
+</li>
+<li>
+<p>
+Auto expand all drafts on publish comments screen
+</p>
+</li>
+<li>
+<p>
+Remove unused local variable in PublishCommentsScreen
+</p>
+</li>
+<li>
+<p>
+Remove unused import from PublishCommentsScreen
+</p>
+</li>
+<li>
+<p>
+Use gwtorm, gwtexpui release versions
+</p>
+</li>
+<li>
+<p>
+Add javadoc for Change.getKey
+</p>
+</li>
+<li>
+<p>
+Updated documentation for eclipse development.
+</p>
+</li>
+<li>
+<p>
+Merge change 11698
+</p>
+</li>
+<li>
+<p>
+Merge change 11699
+</p>
+</li>
+<li>
+<p>
+Merge change 11700
+</p>
+</li>
+<li>
+<p>
+Merge change 11703
+</p>
+</li>
+<li>
+<p>
+Merge change 11705
+</p>
+</li>
+<li>
+<p>
+Moved creation of GerritPersonIdent to a separate provi&#8230;
+</p>
+</li>
+<li>
+<p>
+Remove unused dependency on GerritServer.
+</p>
+</li>
+<li>
+<p>
+Renamed GerritServert to GitRepositoryManager and moved&#8230;
+</p>
+</li>
+<li>
+<p>
+Remove declaration of OrmException that is never thrown.
+</p>
+</li>
+<li>
+<p>
+Increase margin space between buttons of comment editors
+</p>
+</li>
+<li>
+<p>
+Simplify GerritCallback error handling
+</p>
+</li>
+<li>
+<p>
+Correct comment documenting SignInDialog
+</p>
+</li>
+<li>
+<p>
+Remove unused CSS class gerrit-ErrorDialog-ErrorMessage
+</p>
+</li>
+<li>
+<p>
+Clarify become any account servlet errors
+</p>
+</li>
+<li>
+<p>
+Fix anchor in sshd.reuseAddress documentation
+</p>
+</li>
+<li>
+<p>
+Extract parametrized string formatting out of LdapQuery
+</p>
+</li>
+<li>
+<p>
+Make cache APIs interfaces for mocking
+</p>
+</li>
+<li>
+<p>
+Add easymock 2.5.1 to our test dependencies
+</p>
+</li>
+<li>
+<p>
+Add sendemail.from to control setting From header
+</p>
+</li>
+<li>
+<p>
+gerrit 2.0.21
+</p>
+</li>
+</ul>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 2.0.21 (from v2.1.1.1-104-gc20e283)<br />
+Last updated 06-Dec-2010 16:46:43 PDT
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,1345 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.2.2" />
+<style type="text/css">
+/* Debug borders */
+p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 {
+/*
+  border: 1px solid red;
+*/
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+}
+
+tt {
+  color: navy;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  font-family: sans-serif;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  border-bottom: 2px solid silver;
+  padding-top: 0.5em;
+}
+
+div.sectionbody {
+  font-family: serif;
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+pre {
+  padding: 0;
+  margin: 0;
+}
+
+span#author {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+span#email {
+}
+span#revision {
+  font-family: sans-serif;
+}
+
+div#footer {
+  font-family: sans-serif;
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+div#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+div#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+div#preamble,
+div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-right: 10%;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+
+div.listingblock {
+  margin-right: 0%;
+}
+div.listingblock > div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock > div.content {
+  padding-left: 2.0em;
+}
+
+div.attribution {
+  text-align: right;
+}
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 2px solid silver;
+}
+
+div.exampleblock > div.content {
+  border-left: 2px solid silver;
+  padding: 0.5em;
+}
+
+div.verseblock div.content {
+  white-space: pre;
+}
+
+div.imageblock div.content { padding-left: 0; }
+div.imageblock img { border: 1px solid silver; }
+span.image img { border-style: none; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: italic;
+}
+dd > *:first-child {
+  margin-top: 0;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.olist2 {
+  list-style-type: lower-alpha;
+}
+
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead {
+  font-family: sans-serif;
+  font-weight: bold;
+}
+tfoot {
+  font-weight: bold;
+}
+
+div.hlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hlist td {
+  padding-bottom: 5px;
+}
+td.hlist1 {
+  vertical-align: top;
+  font-style: italic;
+  padding-right: 0.8em;
+}
+td.hlist2 {
+  vertical-align: top;
+}
+
+@media print {
+  div#footer-badges { display: none; }
+}
+
+div#toctitle {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+/* Workarounds for IE6's broken and incomplete CSS2. */
+
+div.sidebar-content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+div.sidebar-title, div.image-title {
+  font-family: sans-serif;
+  font-weight: bold;
+  margin-top: 0.0em;
+  margin-bottom: 0.5em;
+}
+
+div.listingblock div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock-content {
+  padding-left: 2.0em;
+}
+
+div.exampleblock-content {
+  border-left: 2px solid silver;
+  padding-left: 0.5em;
+}
+
+/* IE6 sets dynamically generated links as visited. */
+div#toc a:visited { color: blue; }
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function(){generateToc(2)}
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4.sp
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, October 2006. License: GPL */
+ /* modified by Shawn Pearce, August 2009. License: GPL */
+
+function getText(el) {
+  var text = "";
+  for (var i = el.firstChild; i != null; i = i.nextSibling) {
+    if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+      text += i.data;
+    else if (i.firstChild != null)
+      text += getText(i);
+  }
+  return text;
+}
+
+function TocEntry(el, text, toclevel) {
+  this.element = el;
+  this.text = text;
+  this.toclevel = toclevel;
+  this.assigned = false;
+
+  if (el.id != '') {
+    this.id = el.id;
+
+  } else {
+    var a = el.firstChild;
+    if ((a.tagName == "a" || a.tagName == "A") && a.id != "") {
+      this.id = a.id;
+    } else {
+      this.id = '';
+    }
+  }
+}
+
+function tocEntries(el, toclevels) {
+  var result = new Array;
+  var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+  // Function that scans the DOM tree for header elements (the DOM2
+  // nodeIterator API would be a better technique but not supported by all
+  // browsers).
+  var iterate = function (el) {
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+        var mo = re.exec(i.tagName)
+        if (mo)
+          result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+        iterate(i);
+      }
+    }
+  }
+  iterate(el);
+  return result;
+}
+
+// This function does the work. toclevels = 1..4.
+function generateToc(toclevels) {
+  var simple_re = new RegExp('^[a-zA-Z._ -]{1,}$');
+  var entries = tocEntries(document.getElementsByTagName("body")[0], toclevels);
+  var usedIds = new Array();
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id != "")
+      usedIds[entry.id] = entry;
+  }
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id != "" || !simple_re.exec(entry.text))
+      continue;
+
+    var n = entry.text.replace(/ /g, '_').toLowerCase();
+    var e = usedIds[n];
+    if (e) {
+      if (e.assigned)
+        e.id = '';
+      continue;
+    }
+
+    entry.assigned = true;
+    entry.id = n;
+    entry.element.id = entry.id;
+    usedIds[n] = entry;
+  }
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id == '') {
+      entry.id = "toc" + i;
+      entry.element.id = entry.id;
+    }
+  }
+
+  var toc = document.getElementById("toc");
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    var a = document.createElement("a");
+    a.href = "#" + entry.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+}
+/*]]>*/
+</script>
+<title>Release notes for Gerrit 2.1</title>
+</head>
+<body>
+<div id="header">
+<h1>Release notes for Gerrit 2.1</h1>
+<span id="revision">version 2.1 (from v2.1.1.1-104-gc20e283)</span>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<p>Gerrit 2.1 is now available in the usual location:</p>
+<p><a href="http://code.google.com/p/gerrit/downloads/list">http://code.google.com/p/gerrit/downloads/list</a></p>
+</div>
+</div>
+<h2>New site_path Layout</h2>
+<div class="sectionbody">
+<p>The layout of the <tt>$site_path</tt> directory has been changed in 2.1.
+Configuration files are now stored within the <tt>etc/</tt> subdirectory
+and will be automatically moved there by the init subcommand.</p>
+</div>
+<h2>Upgrading From 2.0.x</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre><tt>If the server is running a version older than 2.0.24, upgrade the
+database schema to the current schema version of 19.  Download
+'schema-upgrades003_019.zip' from the download area and run the
+scripts by hand as listed in README until the server is caught up.</tt></pre>
+</div></div>
+<p>Run init to convert the layout of $site_path:</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  java -jar gerrit.war init -d $site_path</tt></pre>
+</div></div>
+<p>If there is a GerritServer.properties file handy, ensure it is in the
+current working directory or inside of $site_path when running init.
+If present, init will reuse this information rather than prompting
+for it.  If the file is not found, init will prompt for database
+connection information.</p>
+<p>While moving the server's configuration files into the new
+etc/ subdirectory, init will also move secret settings such as
+sendemail.smtpPass and ldap.password out of gerrit.config into a
+read-protected secure.config file.</p>
+</div>
+<h2>New Daemon Mode</h2>
+<div class="sectionbody">
+<p>Gerrit 2.1 and later embeds the Jetty servlet container, and
+runs it automatically as part of <tt>java -jar gerrit.war daemon</tt>.
+This is the preferred method of running Gerrit Code Review, and is
+how sites like review.source.android.com are operating.</p>
+<p>To simplify management on UNIX systems an rc.d style startup script
+is created in <tt>$site_path/bin/gerrit.sh</tt>.  This script can be used
+to start and stop the background daemon process.  When started
+from this script the daemon calls itself <tt>GerritCodeReview</tt> in ps,
+but may still show up in top as <tt>java</tt>.</p>
+<p>Configuration of the daemon is handled by gerrit.config.  For more
+information see the 2.1 documentation.</p>
+<p><a href="http://gerrit.googlecode.com/svn/documentation/2.1/index.html">http://gerrit.googlecode.com/svn/documentation/2.1/index.html</a></p>
+</div>
+<h2>New Features</h2>
+<div class="sectionbody">
+<ul>
+<li>
+<p>
+issue 19     Link to issue tracker systems from commits
+</p>
+<p>Hyperlinks from commit messages and any inline comments to
+bug tracking systems can be enabled by configuring one or
+more commentlink regular expressions in gerrit.config.</p>
+</li>
+<li>
+<p>
+Git replication security
+</p>
+<p>Git replication can now be controlled on the sending side by
+configuring one or more authGroups for a remote and granting
+READ +1 access to only certain projects.</p>
+</li>
+<li>
+<p>
+Better repo upload/git push throughput
+</p>
+<p>MINA SSHD was misconfiguring the host's TCP/IP stack, this
+limited throughput of git push to under 16 KiB/s.  Fixed.
+Its such a huge improvement that its an important feature,
+rather than a bug fix.  :-)</p>
+</li>
+<li>
+<p>
+issue 320    Queue SSH commands and ensure consistent throughput
+</p>
+<p>SSH commands are entered into a queue and executed in FIFO order
+as processor capacity becomes available.  The queue enables
+the server to work on a finite number of commands at once and
+ensures running commands complete in a timely fashion, no matter
+how many concurrent connections are being established.
+The queue allows sites to maintain consistent throughput without
+thrashing, even as the number of requests increase beyond server
+capacity.  The change was made in anticipation of <tt>repo sync</tt>
+learning how to fetch all projects at once, inducing a load of
+over 200 concurrent commands per user/Android checkout.
+Server administrative commands such as kill or gsql (below) bypass
+the queue and are allowed to execute as soon as they are received.</p>
+</li>
+<li>
+<p>
+kill: Support killing any queued task
+</p>
+<p>A new administrative kill command was introduced to terminate
+any queued or running tasks.  Unlike UNIX kill, a killed task
+will continue until its next safe interruption point, which is
+usually at the next network read or write.</p>
+</li>
+<li>
+<p>
+issue 327    gsql: query tool on command line and SSH
+</p>
+<p>Gerrit supports an interactive SQL query tool for administrators.
+The query tool is available over SSH as <tt>gerrit gsql</tt>, or locally
+as <tt>java -jar gerrit.war gsql</tt>.  The query tool is primarily
+useful with H2 databases, where the database is only accessible
+to the running Java process.</p>
+</li>
+<li>
+<p>
+issue 202    Self contained daemon mode
+</p>
+</li>
+<li>
+<p>
+issue 328    daemon: Automatically log into $site_path/logs
+</p>
+</li>
+<li>
+<p>
+daemon: Automatically compress our log files
+</p>
+<p>As noted above, Jetty 7.0.1.v20091125 is now bundled, making new
+site installation easier.  Logs from daemon mode are written
+out to the site's logs/ subdirectory.  Logs are rotated and
+compressed daily.</p>
+</li>
+<li>
+<p>
+issue 330    init: Create a command to setup a new site
+</p>
+</li>
+<li>
+<p>
+issue 343    init: Create database indexes during schema creation
+</p>
+</li>
+<li>
+<p>
+Remove CreateSchema command
+</p>
+<p>The init command can be used to initialize a new site, or
+as noted above, to upgrade an existing site to the current
+software version.  Since init now does the work of CreateSchema,
+and everything else that used to be listed out as individual
+steps in the installation guide, CreateSchema was deleted.</p>
+</li>
+<li>
+<p>
+issue 325    Allow secure.config to overlay gerrit.config
+</p>
+</li>
+<li>
+<p>
+Configure database from gerrit.config
+</p>
+<p>Database connectivity is now configured out of gerrit.config
+and secure.config, rather than GerritServer.properties.</p>
+</li>
+<li>
+<p>
+Bundle PostgreSQL, H2, DBCP, MySQL, Bouncy Castle
+</p>
+<p>JDBC drivers for PostgreSQL, H2, and the Apache Commons DBCP
+connection pool implementation are now bundled, reducing the
+number of external dependencies that must be obtained before
+getting a working installation.
+The MySQL driver is automatically downloaded and verified by
+init if required, as is the Bouncy Castle Crypto provider.
+These JARs are not packaged in the standard distribution due to
+export and/or license restrictions.</p>
+</li>
+<li>
+<p>
+issue 183    Support invoking gitweb from within Gerrit
+</p>
+<p>The standard gitweb.cgi can now be automatically configured and
+executed through Gerrit's servlet container, making it easier to
+publish a repository for browsing on the web.
+Project level access controls are honored when browsing through
+this gitweb interface.</p>
+</li>
+<li>
+<p>
+issue 105    Support OpenID when behind an HTTP proxy
+</p>
+</li>
+<li>
+<p>
+issue 323    Use JGit's http_proxy based initialization
+</p>
+<p>HTTP proxies are now supported for OpenID authentication, as
+well as for init's optional external library download.</p>
+</li>
+<li>
+<p>
+Add a Register link when using LDAP authentication
+</p>
+<p>When auth.type is LDAP the Register link in the top right corner
+can point to an administrator defined URL.  This external URL
+might be as simple as a <em>mailto:&#8230;</em> link, to help the user
+request a new LDAP account from the directory administrators.</p>
+</li>
+<li>
+<p>
+Switch remote JSON services to use JSON-RPC 2.0
+</p>
+<p>The JSON-RPC interface now speaks the JSON-RPC 2.0 draft
+specification, in addition to the prior JSON-RPC 1.1
+specification previously used.</p>
+</li>
+<li>
+<p>
+issue 336    Update MINA SSHD to SVN 891122
+</p>
+</li>
+<li>
+<p>
+issue 324    Update JGit to 0.5.1.51-g96b2e76
+</p>
+</li>
+<li>
+<p>
+Update JUnit to 3.8.2
+</p>
+</li>
+<li>
+<p>
+Update args4j to 2.0.16
+</p>
+</li>
+<li>
+<p>
+Update slf4j-log4j12 to 1.5.8
+</p>
+</li>
+<li>
+<p>
+Update Ehcache to 1.7.1
+</p>
+</li>
+<li>
+<p>
+Update commons-pool to 1.5.4
+</p>
+</li>
+<li>
+<p>
+Update H2 to 1.2.125
+</p>
+</li>
+<li>
+<p>
+Update to gwtjsonrpc 1.2.0, gwtexpui 1.1.4
+</p>
+<p>Most dependencies were updated to their current stable versions.</p>
+</li>
+</ul>
+</div>
+<h2>Bug Fixes</h2>
+<div class="sectionbody">
+<ul>
+<li>
+<p>
+issue 259    Improve search hint to include owner:email
+</p>
+<p>The hint text in the search box in the upper right corner has
+been improved to suggest owner:email and reviewer:email, as
+these tags were not discoverable.</p>
+</li>
+<li>
+<p>
+issue 335    daemon: Refuse to launch unless gerrit.config exists
+</p>
+<p>Gerrit now refuses to launch until the site path has been
+properly initialized with init.  This is true both in daemon
+mode and also when deployed inside of any servlet container.</p>
+</li>
+<li>
+<p>
+issue 152    Allow adding users who are missing a preferred email
+</p>
+<p>The user suggestion boxes now permit adding a user that has not
+yet selected a preferred email address on their contact panel.</p>
+</li>
+<li>
+<p>
+issue 319    Automatically set preferred email to first configured
+</p>
+<p>If a user has no email addresses, the first address they register
+through the next OpenID login, LDAP login, or <em>Register New Email</em>
+feature will be automatically set as the preferred email address
+for their account.</p>
+</li>
+<li>
+<p>
+issue 356    Fix committer identity on cherry-pick
+</p>
+<p>The committer identity created when cherry-picking a change was
+formatted incorrectly, it used the internal account identity.
+Fixed to use the submitter's preferred email address only.</p>
+</li>
+<li>
+<p>
+issue 345    Make "call11" readable in file content
+</p>
+<p>The prior font made the string "call11" (c-a-ell-ell-one-one)
+impossible to read because the ell and one looked the same.
+Fixed by changing to different fonts for the fixed width file
+content display.</p>
+</li>
+<li>
+<p>
+Automatically make first user account administrator
+</p>
+<p>To simplify installation, the first user to login to a brand
+new site is added to the <em>Administrators</em> group.  This avoids
+the need to update the database manually via SQL and restart
+the daemon to have it be picked up.</p>
+</li>
+<li>
+<p>
+Always trim Change-Id lines to handle whitespace
+</p>
+<p>Some users were adding trailing whitespace on a Change-Id line
+by accident, causing Gerrit to not always honor it when uploading
+a replacement patch.  Fixed.</p>
+</li>
+<li>
+<p>
+Fix duplicate branches in the branches panel
+</p>
+<p>The Branches tab under a project displayed the HEAD branch twice,
+but every other branch once.  Fixed.</p>
+</li>
+<li>
+<p>
+Enforce all HTTP requests through SSL
+</p>
+<p>JSON-RPC requests are now required to be over SSL if the site
+prefers to use SSL for communication.
+Prior to 2.1 the JSON-RPC requests from the web UI were performed
+over https:// if the web UI loaded over https://, but JSON-RPC
+requests from other tools (e.g. a command line script) were
+still allowed over plain text HTTP.</p>
+</li>
+<li>
+<p>
+Work around NPE when patch list fails to compute
+</p>
+<p>Rather than return NullPointerException to the browser return
+a "not found" error, as the source of the null pointer is the
+underlying diff operation returned no results.</p>
+</li>
+<li>
+<p>
+Fix stuck "Loading Gerrit Code Review &#8230;"
+</p>
+<p>Many users have noticed that after about a week of server uptime
+Gerrit no longer loads in their browser, until the server is
+restarted.  This was usually caused by Jetty unpacking the WAR
+file contents to /tmp, and the system having a cron task that
+deleted files more than a week old from /tmp.
+Under the daemon command the WAR file contents are unpacked into
+<tt>$HOME/.gerritcodereview/tmp</tt>, which should be isolated from
+the host system's /tmp cleaner.</p>
+</li>
+</ul>
+</div>
+<h2>Other=</h2>
+<div class="sectionbody">
+<ul>
+<li>
+<p>
+Pick up gwtexpui 1.1.4-SNAPSHOT
+</p>
+</li>
+<li>
+<p>
+Merge change Ia64286d3
+</p>
+</li>
+<li>
+<p>
+Merge branch <em>maint-2.0.24.1</em>
+</p>
+</li>
+<li>
+<p>
+Merge change Ic6f00304
+</p>
+</li>
+<li>
+<p>
+Merge branch <em>maint-2.0.24.2</em>
+</p>
+</li>
+<li>
+<p>
+Add H2 database as a test dependency
+</p>
+</li>
+<li>
+<p>
+Update Ehcache to 1.7.0
+</p>
+</li>
+<li>
+<p>
+Fix formatting
+</p>
+</li>
+<li>
+<p>
+Rewrite our build as modular maven components
+</p>
+</li>
+<li>
+<p>
+Forbid use of anonymous servlets on any container
+</p>
+</li>
+<li>
+<p>
+Use listeners to manage server startup/shutdown
+</p>
+</li>
+<li>
+<p>
+Load additional JARs from $site_path/lib
+</p>
+</li>
+<li>
+<p>
+Fix PostgreSQL/H2 access under gwtdebug sessions
+</p>
+</li>
+<li>
+<p>
+Fix Become link in hosted mode debugging sessions
+</p>
+</li>
+<li>
+<p>
+Fix ssh:// URLs on change pages
+</p>
+</li>
+<li>
+<p>
+daemon: Update help for &#8212;slave option
+</p>
+</li>
+<li>
+<p>
+daemon: Remove -DGerritServer from documentation
+</p>
+</li>
+<li>
+<p>
+Launcher: Clarify the purpose of the daemon command
+</p>
+</li>
+<li>
+<p>
+daemon: Fix &#8212;site-path documentation
+</p>
+</li>
+<li>
+<p>
+Remove unused imports from pgm.DataSourceProvider
+</p>
+</li>
+<li>
+<p>
+launcher: Don't print stack trace with reflection frames
+</p>
+</li>
+<li>
+<p>
+Move H2 database down into $site_path/db
+</p>
+</li>
+<li>
+<p>
+Remove dead code identified by Eclipse 3.5.1
+</p>
+</li>
+<li>
+<p>
+Add missing default serialVersionUID
+</p>
+</li>
+<li>
+<p>
+pgm_daemon: Remove unnecessary -DGerritServer flag
+</p>
+</li>
+<li>
+<p>
+Move configuration files under $site_path/etc
+</p>
+</li>
+<li>
+<p>
+Update documentation to point to etc subdirectory
+</p>
+</li>
+<li>
+<p>
+Display the full stack trace if requested
+</p>
+</li>
+<li>
+<p>
+init: Don't delete site path on database creation fail
+</p>
+</li>
+<li>
+<p>
+Simplify errors reported by command line database fail
+</p>
+</li>
+<li>
+<p>
+init: Correct defaults for httpd.listenUrl in &#8212;batch
+</p>
+</li>
+<li>
+<p>
+issue 341    gsql: Fix \d on H2
+</p>
+</li>
+<li>
+<p>
+gsql: Improve formatting of column types and indexes
+</p>
+</li>
+<li>
+<p>
+pgm: Move non commands into a util package
+</p>
+</li>
+<li>
+<p>
+issue 342    gsql: Reduce connections used to only 1
+</p>
+</li>
+<li>
+<p>
+WorkQueue: Drop the word "-thread" from thread names
+</p>
+</li>
+<li>
+<p>
+documentation: Correct links in dev-design
+</p>
+</li>
+<li>
+<p>
+Fix port number in ssh pull lines in emails
+</p>
+</li>
+<li>
+<p>
+Update MINA SSHD to 0.3.0
+</p>
+</li>
+<li>
+<p>
+Update Jetty to 7.0.1.v20091125
+</p>
+</li>
+<li>
+<p>
+launcher: Refactor how we return the status code
+</p>
+</li>
+<li>
+<p>
+cat, ls: move inside our main program package
+</p>
+</li>
+<li>
+<p>
+Default temporary directory to $HOME/.gerritcodereview
+</p>
+</li>
+<li>
+<p>
+Clean up stale empty temporary directories
+</p>
+</li>
+<li>
+<p>
+daemon: Unpack the WAR contents to a local directory
+</p>
+</li>
+<li>
+<p>
+daemon: Run correctly under Eclipse debugger
+</p>
+</li>
+<li>
+<p>
+Create a rc.d style start/stop script for our daemon
+</p>
+</li>
+<li>
+<p>
+Remove unused ADMIN_PEOPLE link
+</p>
+</li>
+<li>
+<p>
+Ignore unsupported ulimit -x errors
+</p>
+</li>
+<li>
+<p>
+Use more portable printf instead of echo -n
+</p>
+</li>
+<li>
+<p>
+Support starting as current user without start-stop-daemon
+</p>
+</li>
+<li>
+<p>
+Make startup output universally the same
+</p>
+</li>
+<li>
+<p>
+Get the canonical path to our temporary directory
+</p>
+</li>
+<li>
+<p>
+init: Start daemon and open web browser when done
+</p>
+</li>
+<li>
+<p>
+documentation: Clean up references to <em>Gerrit2</em>
+</p>
+</li>
+<li>
+<p>
+Cleanup the reflog identity generation
+</p>
+</li>
+<li>
+<p>
+Update to gwtjsonrpc 1.2.0-SNAPSHOT
+</p>
+</li>
+<li>
+<p>
+init: Configure gerrit.canonicalWebUrl if reverse proxy
+</p>
+</li>
+<li>
+<p>
+tools/version.sh: Quick hack to edit our Maven version
+</p>
+</li>
+<li>
+<p>
+Call the next version 2.1
+</p>
+</li>
+<li>
+<p>
+documentation: Rewrite installation guide
+</p>
+</li>
+<li>
+<p>
+Fix gerrit.sh to run properly on SuSE systems
+</p>
+</li>
+<li>
+<p>
+documentation: Fix formatting of remote.name.authGroup
+</p>
+</li>
+<li>
+<p>
+Fix missing @Override warning in IoUtil
+</p>
+</li>
+<li>
+<p>
+Don't enable replication if replication.config is empty
+</p>
+</li>
+<li>
+<p>
+Give H2 a canonical file path
+</p>
+</li>
+<li>
+<p>
+init: Add &#8212;no-auto-start to prevent starting the daemon
+</p>
+</li>
+<li>
+<p>
+init: Support updating an existing site configuration
+</p>
+</li>
+<li>
+<p>
+init: Open browser to gerrit.canonicalWebUrl
+</p>
+</li>
+<li>
+<p>
+daemon: Allow httpd.listenUrl to end with /
+</p>
+</li>
+<li>
+<p>
+issue 358    init: Don't abort on empty directory
+</p>
+</li>
+<li>
+<p>
+init: Initialize system_config.site_path
+</p>
+</li>
+<li>
+<p>
+Remove dead class MessagePanel
+</p>
+</li>
+<li>
+<p>
+issue 331    documentation: Update developer docs
+</p>
+</li>
+<li>
+<p>
+documentation: Link to apache2 reverse proxy setup
+</p>
+</li>
+<li>
+<p>
+init: Fix LDAP prompts to store to ldap section
+</p>
+</li>
+<li>
+<p>
+init: Store httpd.sslKeyPasword in secure.config
+</p>
+</li>
+<li>
+<p>
+init: Fix a minor source code formatting error
+</p>
+</li>
+<li>
+<p>
+commentlink: Support raw HTML replacements
+</p>
+</li>
+<li>
+<p>
+documentation: Cleanup formatting in gerrit-config
+</p>
+</li>
+<li>
+<p>
+Delete legacy schema upgrade scripts
+</p>
+</li>
+<li>
+<p>
+Remove legacy tools/to_jetty.sh
+</p>
+</li>
+<li>
+<p>
+Remove standalone Jetty 6.x support scripts
+</p>
+</li>
+<li>
+<p>
+Move all resource files into src/main/resources
+</p>
+</li>
+<li>
+<p>
+init: Move optional library download configuration
+</p>
+</li>
+<li>
+<p>
+init: Refactor init to be small parts created
+</p>
+</li>
+<li>
+<p>
+Test SitePaths class
+</p>
+</li>
+<li>
+<p>
+Test SocketUtil class
+</p>
+</li>
+<li>
+<p>
+Test init's Libraries class
+</p>
+</li>
+<li>
+<p>
+Test init's upgrade from 2.0.x layout to 2.1 layout
+</p>
+</li>
+<li>
+<p>
+pgm_daemon launch: Run ../test_site like docs suggest&#8230;
+</p>
+</li>
+<li>
+<p>
+tools/version.sh: Don't mangle the git describe output
+</p>
+</li>
+<li>
+<p>
+Use SitePaths to locate the logs directory
+</p>
+</li>
+<li>
+<p>
+Resolve out any symlinks before starting logging
+</p>
+</li>
+<li>
+<p>
+Mark compressed log files read-only
+</p>
+</li>
+<li>
+<p>
+tools/release.sh: Simplify our release build process
+</p>
+</li>
+<li>
+<p>
+Teach Main to check the Java runtime version
+</p>
+</li>
+<li>
+<p>
+documentation: Mention Google Code Prettify in licens&#8230;
+</p>
+</li>
+<li>
+<p>
+Refactor GitRepositoryManager to be an interface
+</p>
+</li>
+<li>
+<p>
+issue 346    Fix duplicate branches showing in the Branches tab
+</p>
+</li>
+<li>
+<p>
+Completely remove GerritServer.properties
+</p>
+</li>
+<li>
+<p>
+Clean up the DWIMery for database.* configuration set&#8230;
+</p>
+</li>
+<li>
+<p>
+Never compress a pid file under $site_path/logs
+</p>
+</li>
+<li>
+<p>
+Fix reading the $site_path/etc/ssh_host_key in serial&#8230;
+</p>
+</li>
+<li>
+<p>
+gerrit 2.1
+</p>
+</li>
+</ul>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 2.1 (from v2.1.1.1-104-gc20e283)<br />
+Last updated 06-Dec-2010 16:46:52 PDT
+</div>
+</div>
+</body>
+</html>
