@@ -1,0 +1,581 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.2.2" />
+<style type="text/css">
+/* Debug borders */
+p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 {
+/*
+  border: 1px solid red;
+*/
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+}
+
+tt {
+  color: navy;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  font-family: sans-serif;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  border-bottom: 2px solid silver;
+  padding-top: 0.5em;
+}
+
+div.sectionbody {
+  font-family: serif;
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+pre {
+  padding: 0;
+  margin: 0;
+}
+
+span#author {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+span#email {
+}
+span#revision {
+  font-family: sans-serif;
+}
+
+div#footer {
+  font-family: sans-serif;
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+div#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+div#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+div#preamble,
+div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-right: 10%;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+
+div.listingblock {
+  margin-right: 0%;
+}
+div.listingblock > div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock > div.content {
+  padding-left: 2.0em;
+}
+
+div.attribution {
+  text-align: right;
+}
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 2px solid silver;
+}
+
+div.exampleblock > div.content {
+  border-left: 2px solid silver;
+  padding: 0.5em;
+}
+
+div.verseblock div.content {
+  white-space: pre;
+}
+
+div.imageblock div.content { padding-left: 0; }
+div.imageblock img { border: 1px solid silver; }
+span.image img { border-style: none; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: italic;
+}
+dd > *:first-child {
+  margin-top: 0;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.olist2 {
+  list-style-type: lower-alpha;
+}
+
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead {
+  font-family: sans-serif;
+  font-weight: bold;
+}
+tfoot {
+  font-weight: bold;
+}
+
+div.hlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hlist td {
+  padding-bottom: 5px;
+}
+td.hlist1 {
+  vertical-align: top;
+  font-style: italic;
+  padding-right: 0.8em;
+}
+td.hlist2 {
+  vertical-align: top;
+}
+
+@media print {
+  div#footer-badges { display: none; }
+}
+
+div#toctitle {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+/* Workarounds for IE6's broken and incomplete CSS2. */
+
+div.sidebar-content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+div.sidebar-title, div.image-title {
+  font-family: sans-serif;
+  font-weight: bold;
+  margin-top: 0.0em;
+  margin-bottom: 0.5em;
+}
+
+div.listingblock div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock-content {
+  padding-left: 2.0em;
+}
+
+div.exampleblock-content {
+  border-left: 2px solid silver;
+  padding-left: 0.5em;
+}
+
+/* IE6 sets dynamically generated links as visited. */
+div#toc a:visited { color: blue; }
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function(){generateToc(2)}
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4.sp
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, October 2006. License: GPL */
+ /* modified by Shawn Pearce, August 2009. License: GPL */
+
+function getText(el) {
+  var text = "";
+  for (var i = el.firstChild; i != null; i = i.nextSibling) {
+    if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+      text += i.data;
+    else if (i.firstChild != null)
+      text += getText(i);
+  }
+  return text;
+}
+
+function TocEntry(el, text, toclevel) {
+  this.element = el;
+  this.text = text;
+  this.toclevel = toclevel;
+  this.assigned = false;
+
+  if (el.id != '') {
+    this.id = el.id;
+
+  } else {
+    var a = el.firstChild;
+    if ((a.tagName == "a" || a.tagName == "A") && a.id != "") {
+      this.id = a.id;
+    } else {
+      this.id = '';
+    }
+  }
+}
+
+function tocEntries(el, toclevels) {
+  var result = new Array;
+  var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+  // Function that scans the DOM tree for header elements (the DOM2
+  // nodeIterator API would be a better technique but not supported by all
+  // browsers).
+  var iterate = function (el) {
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+        var mo = re.exec(i.tagName)
+        if (mo)
+          result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+        iterate(i);
+      }
+    }
+  }
+  iterate(el);
+  return result;
+}
+
+// This function does the work. toclevels = 1..4.
+function generateToc(toclevels) {
+  var simple_re = new RegExp('^[a-zA-Z._ -]{1,}$');
+  var entries = tocEntries(document.getElementsByTagName("body")[0], toclevels);
+  var usedIds = new Array();
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id != "")
+      usedIds[entry.id] = entry;
+  }
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id != "" || !simple_re.exec(entry.text))
+      continue;
+
+    var n = entry.text.replace(/ /g, '_').toLowerCase();
+    var e = usedIds[n];
+    if (e) {
+      if (e.assigned)
+        e.id = '';
+      continue;
+    }
+
+    entry.assigned = true;
+    entry.id = n;
+    entry.element.id = entry.id;
+    usedIds[n] = entry;
+  }
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id == '') {
+      entry.id = "toc" + i;
+      entry.element.id = entry.id;
+    }
+  }
+
+  var toc = document.getElementById("toc");
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    var a = document.createElement("a");
+    a.href = "#" + entry.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+}
+/*]]>*/
+</script>
+<title>Gerrit Code Review - Change-Ids</title>
+</head>
+<body>
+<div id="header">
+<h1>Gerrit Code Review - Change-Ids</h1>
+<span id="revision">version 2.1.2.4</span>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<h2>Description</h2>
+<div class="sectionbody">
+<p>Gerrit Code Review sometimes relies upon Change-Id lines in the
+bottom of a commit message to uniquely identify a change across all
+drafts of it.  By including a unique Change-Id in the commit message,
+Gerrit can automatically associate a new version of a change back
+to its original review, even across cherry-picks and rebases.</p>
+<p>To be picked up by Gerrit, a Change-Id line must be in the bottom
+portion (last paragraph) of a commit message, and may be mixed
+together with the Signed-off-by, Acked-by, or other such footers.
+For example:</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  $ git log -1
+  commit 29a6bb1a059aef021ac39d342499191278518d1d
+  Author: A. U. Thor &lt;author@example.com&gt;
+  Date: Thu Aug 20 12:46:50 2009 -0700
+
+      Improve foo widget by attaching a bar.
+
+      We want a bar, because it improves the foo by providing more
+      wizbangery to the dowhatimeanery.
+
+      Bug: #42
+      Change-Id: Ic8aaa0728a43936cd4c6e1ed590e01ba8f0fbf5b
+      Signed-off-by: A. U. Thor &lt;author@example.com&gt;
+      CC: R. E. Viewer &lt;reviewer@example.com&gt;</tt></pre>
+</div></div>
+<p>In the above example, <tt>Ic8aaa0728a43936cd4c6e1ed590e01ba8f0fbf5b</tt>
+is the unique identity assigned to this change.  It does not match
+the commit name, <tt>29a6&#8230;</tt>, as the change may have been amended or
+rebased to address reviewer comments since its initial inception.</p>
+<p>To avoid confusion with commit names, Change-Ids typically are with
+an uppercase <tt>I</tt>.</p>
+</div>
+<h2>Creation</h2>
+<div class="sectionbody">
+<p>Gerrit Code Review provides a standard <em>commit-msg</em> hook which
+can be installed in the local Git repository to automatically
+create and insert a unique Change-Id line during <tt>git commit</tt>.
+To install the hook, copy it from Gerrit's daemon:</p>
+<div class="literalblock">
+<div class="content">
+<pre><tt>$ scp -p -P 29418 review.example.com:hooks/commit-msg .git/hooks/</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>$ curl http://review.example.com/tools/hooks/commit-msg</tt></pre>
+</div></div>
+<p>For more details, see <a href="cmd-hook-commit-msg.html">commit-msg</a>.</p>
+</div>
+<h2>Change Upload</h2>
+<div class="sectionbody">
+<p>During upload by pushing to a <tt>refs/for/*</tt> or <tt>refs/heads/*</tt>
+branch, Gerrit will use the Change-Id line to:</p>
+<ul>
+<li>
+<p>
+Create a new change
+</p>
+<p>If this is the first time it has seen the Change-Id mentioned in
+the commit message, Gerrit will create a new change for review.</p>
+</li>
+<li>
+<p>
+Update an existing change
+</p>
+<p>If Gerrit has seen this Change-Id before, but has not yet seen this
+new commit object, Gerrit will add the new commit as a new patch
+set on the existing change.</p>
+</li>
+<li>
+<p>
+Close an existing change
+</p>
+<p>If Gerrit has seen this Change-Id before, and the commit is being
+pushed directly into a branch, the existing change is updated with
+the new commit, and the change is closed and marked as merged.</p>
+</li>
+</ul>
+<p>If a Change-Id line is not present in the commit message, Gerrit will
+automatically generate its own Change-Id and display it on the web.
+This line can be manually copied and inserted into an updated commit
+message if additional revisions to a change are required.</p>
+<p>For more details on using git push to upload changes to Gerrit,
+see <a href="user-upload.html#push_create">creating changes by git push</a>.</p>
+</div>
+<h2>Git Tasks</h2>
+<div class="sectionbody">
+<h3><a id="new"></a>Creating a new commit</h3>
+<p>When creating a new commit, ensure the <em>commit-msg</em> hook has been
+installed in your repository (see above), and don't put a Change-Id
+line in the commit message.  When you exit the editor, git will call
+the hook, which will automatically generate and insert a unique
+Change-Id line.  You can inspect the modified message after the
+commit is complete by executing <tt>git show</tt>.</p>
+<h3><a id="amend"></a>Amending a commit</h3>
+<p>When amending a commit with <tt>git commit --amend</tt>, leave the
+Change-Id line unmodified in the commit message.  This will allow
+Gerrit to automatically update the change with the amended commit.</p>
+<h3><a id="rebase"></a>Rebasing a commit</h3>
+<p>When rebasing a commit, leave the Change-Id line unmodified in the
+commit message.  This will allow Gerrit to automatically update
+the change with the rebased commit.</p>
+<h3><a id="squash"></a>Squashing commits</h3>
+<p>When squashing several commits together, try to preserve only one
+Change-Id line, and remove the others from the commit message.
+When faced with multiple lines, try to preserve a line which was
+already uploaded to Gerrit Code Review, and thus has a corresponding
+change that reviewers have already examined and left comments on.
+If you aren't sure which lines Gerrit knows about, try copying and
+pasting the lines into the search box in the top-right.</p>
+<p>If Gerrit already knows about more than one Change-Id, pick one
+to keep in the squashed commit message, and manually abandon the
+other changes through the web interface.</p>
+<h3><a id="cherry-pick"></a>Cherry-picking a commit</h3>
+<p>When cherry-picking a commit, leave the Change-Id line alone to
+have Gerrit treat the cherry-picked commit as a replacement for
+the existing change.  This can be very useful if the project has
+a fast-forward-only merge policy, and the submitter is downloading
+and cherry-picking individual changes prior to submission, such as
+by <a href="cmd-cherry-pick.html">gerrit-cherry-pick</a>.</p>
+<p>Or, you may wish to delete the Change-Id line and force a new
+Change-Id to be generated automatically, thus creating an entirely
+new change record for review.  This may be useful when backporting
+a change from the current development branch to a maintenance
+release branch.</p>
+<h3><a id="update-old"></a>Updating an old commit</h3>
+<p>If a commit was created before the availability of Change-Id support,
+or was created in a Git repository that was missing the <em>commit-msg</em>
+hook, simply copy the "<tt>Change-Id: I&#8230;</tt>" line from the first line
+of the Description section of the change and amend it to the bottom
+of the commit message.  Any subsequent uploads of the commit will
+be automatically associated with the prior change.</p>
+</div>
+<hr style="
+  height: 2px;
+  color: silver;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+">
+<p>Part of <a href="index.html">Gerrit Code Review</a></p>
+<div id="footer">
+<div id="footer-text">
+Version 2.1.2.4<br />
+Last updated 04-May-2010 17:56:23 PDT
+</div>
+</div>
+</body>
+</html>

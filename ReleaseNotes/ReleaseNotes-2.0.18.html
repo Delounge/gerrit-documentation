@@ -1,0 +1,1508 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.2.2" />
+<style type="text/css">
+/* Debug borders */
+p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 {
+/*
+  border: 1px solid red;
+*/
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+}
+
+tt {
+  color: navy;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  font-family: sans-serif;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  border-bottom: 2px solid silver;
+  padding-top: 0.5em;
+}
+
+div.sectionbody {
+  font-family: serif;
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+pre {
+  padding: 0;
+  margin: 0;
+}
+
+span#author {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+span#email {
+}
+span#revision {
+  font-family: sans-serif;
+}
+
+div#footer {
+  font-family: sans-serif;
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+div#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+div#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+div#preamble,
+div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-right: 10%;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+
+div.listingblock {
+  margin-right: 0%;
+}
+div.listingblock > div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock > div.content {
+  padding-left: 2.0em;
+}
+
+div.attribution {
+  text-align: right;
+}
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 2px solid silver;
+}
+
+div.exampleblock > div.content {
+  border-left: 2px solid silver;
+  padding: 0.5em;
+}
+
+div.verseblock div.content {
+  white-space: pre;
+}
+
+div.imageblock div.content { padding-left: 0; }
+div.imageblock img { border: 1px solid silver; }
+span.image img { border-style: none; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: italic;
+}
+dd > *:first-child {
+  margin-top: 0;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.olist2 {
+  list-style-type: lower-alpha;
+}
+
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead {
+  font-family: sans-serif;
+  font-weight: bold;
+}
+tfoot {
+  font-weight: bold;
+}
+
+div.hlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hlist td {
+  padding-bottom: 5px;
+}
+td.hlist1 {
+  vertical-align: top;
+  font-style: italic;
+  padding-right: 0.8em;
+}
+td.hlist2 {
+  vertical-align: top;
+}
+
+@media print {
+  div#footer-badges { display: none; }
+}
+
+div#toctitle {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+/* Workarounds for IE6's broken and incomplete CSS2. */
+
+div.sidebar-content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+div.sidebar-title, div.image-title {
+  font-family: sans-serif;
+  font-weight: bold;
+  margin-top: 0.0em;
+  margin-bottom: 0.5em;
+}
+
+div.listingblock div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock-content {
+  padding-left: 2.0em;
+}
+
+div.exampleblock-content {
+  border-left: 2px solid silver;
+  padding-left: 0.5em;
+}
+
+/* IE6 sets dynamically generated links as visited. */
+div#toc a:visited { color: blue; }
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function(){generateToc(2)}
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4.sp
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, October 2006. License: GPL */
+ /* modified by Shawn Pearce, August 2009. License: GPL */
+
+function getText(el) {
+  var text = "";
+  for (var i = el.firstChild; i != null; i = i.nextSibling) {
+    if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+      text += i.data;
+    else if (i.firstChild != null)
+      text += getText(i);
+  }
+  return text;
+}
+
+function TocEntry(el, text, toclevel) {
+  this.element = el;
+  this.text = text;
+  this.toclevel = toclevel;
+  this.assigned = false;
+
+  if (el.id != '') {
+    this.id = el.id;
+
+  } else {
+    var a = el.firstChild;
+    if ((a.tagName == "a" || a.tagName == "A") && a.id != "") {
+      this.id = a.id;
+    } else {
+      this.id = '';
+    }
+  }
+}
+
+function tocEntries(el, toclevels) {
+  var result = new Array;
+  var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+  // Function that scans the DOM tree for header elements (the DOM2
+  // nodeIterator API would be a better technique but not supported by all
+  // browsers).
+  var iterate = function (el) {
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+        var mo = re.exec(i.tagName)
+        if (mo)
+          result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+        iterate(i);
+      }
+    }
+  }
+  iterate(el);
+  return result;
+}
+
+// This function does the work. toclevels = 1..4.
+function generateToc(toclevels) {
+  var simple_re = new RegExp('^[a-zA-Z._ -]{1,}$');
+  var entries = tocEntries(document.getElementsByTagName("body")[0], toclevels);
+  var usedIds = new Array();
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id != "")
+      usedIds[entry.id] = entry;
+  }
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id != "" || !simple_re.exec(entry.text))
+      continue;
+
+    var n = entry.text.replace(/ /g, '_').toLowerCase();
+    var e = usedIds[n];
+    if (e) {
+      if (e.assigned)
+        e.id = '';
+      continue;
+    }
+
+    entry.assigned = true;
+    entry.id = n;
+    entry.element.id = entry.id;
+    usedIds[n] = entry;
+  }
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id == '') {
+      entry.id = "toc" + i;
+      entry.element.id = entry.id;
+    }
+  }
+
+  var toc = document.getElementById("toc");
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    var a = document.createElement("a");
+    a.href = "#" + entry.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+}
+/*]]>*/
+</script>
+<title>Release notes for Gerrit 2.0.18</title>
+</head>
+<body>
+<div id="header">
+<h1>Release notes for Gerrit 2.0.18</h1>
+<span id="revision">version 2.0.18 (from v2.1.1.1-104-gc20e283)</span>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<p>Gerrit 2.0.18 is now available in the usual location:</p>
+<p><a href="http://code.google.com/p/gerrit/downloads/list">http://code.google.com/p/gerrit/downloads/list</a></p>
+</div>
+</div>
+<h2>Important Notices</h2>
+<div class="sectionbody">
+<p>Please ensure you read the following important notices about this release; .18 is a much larger release than usual.</p>
+<ul>
+<li>
+<p>
+OpenID Configuration
+</p>
+<p>If you use OpenID authentication, the <tt>trusted_external_ids</tt>
+table has moved from the database to the local gerrit.config
+file.  Please ensure you copy any critical patterns to the
+<tt>auth.trustedOpenID</tt> setting in gerrit.config before upgrading
+your server.  Failure to set a pattern will allow Gerrit
+to trust any OpenID provider.  Refer to <tt>auth.trustedOpenID</tt> in
+[http://gerrit.googlecode.com/svn/documentation/2.0/config-gerrit.html Configuration] for more details.</p>
+</li>
+<li>
+<p>
+Caches
+</p>
+<p>The groups that a user is a member of is no longer stored in the
+<tt>groups</tt> cache; it is now part of the <tt>accounts</tt> cache.  If you
+use a cron script to update the <tt>account_groups</tt> database table
+based upon an external data source (such as LDAP), you will need
+to adjust your script to flush the <tt>accounts</tt> cache.
+The <tt>diff</tt> cache is no longer written to disk by default.
+To enable the disk store again, administrators must explicitly
+set <tt>cache.directory</tt> in the gerrit.config file prior to starting
+Gerrit.</p>
+</li>
+<li>
+<p>
+SSH Usernames
+</p>
+<p>SSH usernames are no longer automatically assigned to the
+local part of the user's email address.  With 2.0.18, usernames
+must also be unique within the database.  These changes were
+implemented to resolve a minor potential security issue with
+the SSH authentication system.  More details can be found in the
+[http://android.git.kernel.org/?p=tools/gerrit.git;a=commit;h=080b40f7bbe00ac5fc6f2b10a861b63ce63e8add commit message].</p>
+</li>
+</ul>
+</div>
+<h2>Schema Change</h2>
+<div class="sectionbody">
+<p><strong>WARNING: This version contains a schema change</strong> (since 2.0.17)</p>
+<p>Important notes about this schema change:</p>
+<ul>
+<li>
+<p>
+The schema change may be difficult to undo once applied.
+</p>
+<p>Downgrading could be very difficult once the upgrade has been started.
+Going back to 2.0.17 may not be possible.</p>
+</li>
+<li>
+<p>
+Do not run the schema change while the server is running.
+</p>
+<p>This upgrade changes the primary keys of several tables, an operation
+which shouldn't occur while end-users are able to make modifications to
+the database.  I <em>strongly</em> suggest a full shutdown, schema upgrade,
+then startup approach for this release.
+Apply the database specific schema script:</p>
+</li>
+</ul>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  java -jar gerrit.war --cat sql/upgrade015_016_part1_postgres.sql | psql reviewdb
+  java -jar gerrit.war --cat sql/upgrade015_016_part1_mysql.sql    | mysql reviewdb</tt></pre>
+</div></div>
+<p>After the upgrade is successful, apply the final script to drop dead tables:</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  java -jar gerrit.war --cat sql/upgrade015_016_part2.sql | psql reviewdb
+  java -jar gerrit.war --cat sql/upgrade015_016_part2.sql | mysql reviewdb</tt></pre>
+</div></div>
+</div>
+<h2>New Bugs</h2>
+<div class="sectionbody">
+<ul>
+<li>
+<p>
+Memory leaks during warm restarts
+</p>
+</li>
+</ul>
+<p>2.0.18 includes [http://code.google.com/p/google-guice/ Google Guice], which leaves a finalizer thread dangling when the Gerrit web application is halted by the servlet container.  As this thread does not terminate, the web context stays loaded in memory indefinitely, creating a memory leak.  Cold restarting the container in order to restart Gerrit is highly recommended.</p>
+</div>
+<h2>New Features</h2>
+<div class="sectionbody">
+<ul>
+<li>
+<p>
+GERRIT-104  Allow end-users to select their own SSH username
+</p>
+<p>End users may now select their own SSH username through the web interface.  The username must be unique within a Gerrit server installation.  During upgrades from 2.0.17 duplicate users are resolved by giving the username to the user who most recently logged in under it; other users will need to login through the web interface and select a unique username.  This change was necessary to fix a very minor security bug (see above).</p>
+</li>
+<li>
+<p>
+Display supported commands when subcommand is not prov&#8230;
+</p>
+<p>Running <tt>ssh -p 29418 gerrit.example.com gerrit</tt> now lists the complete set of subcommands recognized by the gerrit top level command.  This (slightly) improves discoverability of the remote command execution facilities.</p>
+</li>
+<li>
+<p>
+Add a Register link in the menu bar when not signed in
+</p>
+<p>The Register link in the top right shows up on OpenID based sites when the user is not yet signed in.  This should help discoverability of signing into a Gerrit server to establish your account identity.</p>
+</li>
+<li>
+<p>
+Combine all initial page data into a single object
+</p>
+</li>
+<li>
+<p>
+Avoid XSRF initialization requests by using one token &#8230;
+</p>
+<p>An initial XSRF token is now sent as part of the initial HTTP request, and used for all subsequent RPCs from that browser.  This reduces the initial page load time by cutting out a few round trips that previously were used to bootstrap that XSRF token.</p>
+</li>
+<li>
+<p>
+Redirect /Gerrit#foo to /#foo on the client side
+</p>
+<p>Gerrit now favors "/#mine" rather than "/Gerrit#mine" for URLs.  Older style URLs will be redirected to the newer style automatically, for the foreseeable future.</p>
+</li>
+<li>
+<p>
+Sort permissions in project access tab
+</p>
+</li>
+<li>
+<p>
+Get branches directly from Git rather than database
+</p>
+</li>
+<li>
+<p>
+Style tab panel headers like our menu bar header
+</p>
+</li>
+<li>
+<p>
+Narrow tables that don't have to be 100% width
+</p>
+</li>
+<li>
+<p>
+Cleanup display of external ids in the user settings
+</p>
+<p>A few minor UI nits in the Settings and Admin panels.  The new UI is a bit more consistent with the theme, and formats data in a bit more sane way.  Nothing earth shattering.</p>
+</li>
+<li>
+<p>
+Make disk cache completely optional
+</p>
+<p>As noted above in the section about cache changes, the disk cache is now completely optional.</p>
+</li>
+</ul>
+</div>
+<h2>Bug Fixes</h2>
+<div class="sectionbody">
+<ul>
+<li>
+<p>
+GERRIT-5    Remove PatchSetInfo from database and get it always fr&#8230;
+</p>
+<p>A very, very old bug.  We no longer mirror the commit data into the SQL database, but instead pull it directly from Git when needed.  Removing duplicated data simplifies the data store model, something that is important as we shift from a SQL database to a Git backed database.</p>
+</li>
+<li>
+<p>
+GERRIT-220  Fix infinite loop in PatchScriptBuilder
+</p>
+<p>Under somewhat rare conditions web request threads locked up in an infinite loop while obtaining the data necessary to show a side-by-side or unified patch view to a browser.  The loop doesn't allocate any memory, or perform any database requests, but it still ties up a database connection and a servlet container request processing thread indefinitely.  We found the bug internally at Google when our Gerrit server load average spiked to 32&#8230; and we had no more connections in our database connection pool, which was also sized at a max of 32 handles.</p>
+</li>
+<li>
+<p>
+Fix Reviewed-On lines to only include the server URL o&#8230;
+</p>
+<p>The Reviewed-On lines in cherry-picked commits were duplicating the server URL.</p>
+</li>
+<li>
+<p>
+Set outgoing email header Content-Transfer-Encoding: 8&#8230;
+</p>
+<p>Emails are sent in UTF-8, which may have the high bit set.  Thus the transfer encoding must always be set as 8bit, to prevent gateways from potentially discarding the high bits and corrupting the UTF-8 message payload.</p>
+</li>
+<li>
+<p>
+Ensure OpenID related responses aren't cached by proxi&#8230;
+</p>
+<p>Some OpenID related login responses may have sent HTTP headers which were confusing to proxies, potentially allowing a proxy to cache something it should not have cached.  The headers were clarified to better denote no caching is permitted.</p>
+</li>
+<li>
+<p>
+Move ChangeApproval to be a child of PatchSet
+</p>
+<p>The database schema changed, adding <tt>patch_set_id</tt> to the approval object, and renaming the approval table to <tt>patch_set_approvals</tt>.  If you have external code writing to this table, uh, sorry, its broken with this release, you'll have to update that code first.  :-</p>
+</li>
+</ul>
+</div>
+<h2>Other Changes</h2>
+<div class="sectionbody">
+<p>This release is really massive because the internal code moved from some really ugly static data variables to doing almost everything through Guice injection.  Nothing user visible, but code cleanup that needed to occur before we started making additional changes to the system.</p>
+<ul>
+<li>
+<p>
+Start 2.0.18 development
+</p>
+</li>
+<li>
+<p>
+Remove bad import of HostPageServlet
+</p>
+</li>
+<li>
+<p>
+Upgrade GWT to 1.7.0
+</p>
+</li>
+<li>
+<p>
+Update gwt-maven-plugin to 1.1 release
+</p>
+</li>
+<li>
+<p>
+Remove dead gwt-maven repository
+</p>
+</li>
+<li>
+<p>
+Stop including gwt-dev JARs in project classpath
+</p>
+</li>
+<li>
+<p>
+Remove ConvertSystemConfig utility
+</p>
+</li>
+<li>
+<p>
+Update SSHD to 1.0-r798139
+</p>
+</li>
+<li>
+<p>
+Update JGit to 0.5.0-57-g4c5eb17
+</p>
+</li>
+<li>
+<p>
+Replace our RepositoryCache with JGit's RepositoryCache
+</p>
+</li>
+<li>
+<p>
+Make missing project descriptions an empty file
+</p>
+</li>
+<li>
+<p>
+Remove unused imports.
+</p>
+</li>
+<li>
+<p>
+Move all service implementations into server side code
+</p>
+</li>
+<li>
+<p>
+Move RpcConstants out of Common class
+</p>
+</li>
+<li>
+<p>
+Move the CurrentAccountImpl accessor to Gerrit onModul&#8230;
+</p>
+</li>
+<li>
+<p>
+Move workflow function access to CategoryFunction class
+</p>
+</li>
+<li>
+<p>
+Move ChangeDetail.load to strictly server side code
+</p>
+</li>
+<li>
+<p>
+Move the workflow package to be strictly server side
+</p>
+</li>
+<li>
+<p>
+Add Guice 2.0 to our dependencies
+</p>
+</li>
+<li>
+<p>
+Switch web.xml to Guice based injection
+</p>
+</li>
+<li>
+<p>
+Use Guice injection to pass GerritServer to HttpServle&#8230;
+</p>
+</li>
+<li>
+<p>
+Use Guice to inject GerritServer into RPC backends
+</p>
+</li>
+<li>
+<p>
+Move calls to Common.getSchemaFactory to GerritServer&#8230;.
+</p>
+</li>
+<li>
+<p>
+Create the EncyptedContactStore during servlet startup
+</p>
+</li>
+<li>
+<p>
+Move OpenID implementation setup to Guice
+</p>
+</li>
+<li>
+<p>
+Remove more Common.getSchemaFactory invocations to dir&#8230;
+</p>
+</li>
+<li>
+<p>
+Pass GerritServer down through SSH command factory
+</p>
+</li>
+<li>
+<p>
+Pass GerritServer instance down through the push queue
+</p>
+</li>
+<li>
+<p>
+Use Guice to setup the FileTypeRegistery singleton
+</p>
+</li>
+<li>
+<p>
+Delete unnecessary GerritCacheControlFilter
+</p>
+</li>
+<li>
+<p>
+Remove pointless Srv subclasses of GerritJsonServlet
+</p>
+</li>
+<li>
+<p>
+Refactor FileTypeRegsitery to be an interface
+</p>
+</li>
+<li>
+<p>
+Let Guice inject the ContactStore implementation
+</p>
+</li>
+<li>
+<p>
+Remove dependency on gwtexpui, gwtjsonrpc and gwtorm p&#8230;
+</p>
+</li>
+<li>
+<p>
+Use Guice to bring up the SSH daemon and its configura&#8230;
+</p>
+</li>
+<li>
+<p>
+Remove unnecessary GerritServer field in Receive comma&#8230;
+</p>
+</li>
+<li>
+<p>
+Move PushQueue and ReplicationQueue to singletons mana&#8230;
+</p>
+</li>
+<li>
+<p>
+Get rid of the GerritServer static singleton
+</p>
+</li>
+<li>
+<p>
+Provide SchemFactory ReviewDb by Guice and not Gerrit&#8230;
+</p>
+</li>
+<li>
+<p>
+Get the SystemConfig from Guice rather than GerritServ&#8230;
+</p>
+</li>
+<li>
+<p>
+Merge change 10823
+</p>
+</li>
+<li>
+<p>
+Inject the site path configuration setting directly
+</p>
+</li>
+<li>
+<p>
+Use FileBasedConfig Config rather than RepositoryConfig
+</p>
+</li>
+<li>
+<p>
+Correct copyright dates in SitePath support to be 2009
+</p>
+</li>
+<li>
+<p>
+Load gerrit.config through Guice injection
+</p>
+</li>
+<li>
+<p>
+Refactor outgoing email to be constructed by Guice
+</p>
+</li>
+<li>
+<p>
+Move contact store configuration off GerritServer
+</p>
+</li>
+<li>
+<p>
+Configure Eclipse projects to cleanup trailing whitesp&#8230;
+</p>
+</li>
+<li>
+<p>
+Move PatchSetPublishDetail.load() to server side and i&#8230;
+</p>
+</li>
+<li>
+<p>
+Hide GerritServer.getGerritConfig and use Guice outsid&#8230;
+</p>
+</li>
+<li>
+<p>
+Use Guice to create the per-request GerritCall object
+</p>
+</li>
+<li>
+<p>
+RegisterNewEmailSender is managed by Guice through Ass&#8230;
+</p>
+</li>
+<li>
+<p>
+AddReviewerSender class is managed by Guice through As&#8230;
+</p>
+</li>
+<li>
+<p>
+Merge change 10856
+</p>
+</li>
+<li>
+<p>
+Merge change 10858
+</p>
+</li>
+<li>
+<p>
+FilebasedConfig requires File pointing at config file &#8230;
+</p>
+</li>
+<li>
+<p>
+CreateChangeSender class is managed by Guice through A&#8230;
+</p>
+</li>
+<li>
+<p>
+AbandonedSender is managed by Guice now.
+</p>
+</li>
+<li>
+<p>
+Move RegisterNewEmailSender to servlet module
+</p>
+</li>
+<li>
+<p>
+Move authentication bits out of GerritServer
+</p>
+</li>
+<li>
+<p>
+Update Ehcache to 1.6.1
+</p>
+</li>
+<li>
+<p>
+Move Ehcache construction out of GerritServer to Guice
+</p>
+</li>
+<li>
+<p>
+CommentSender is managed by Guice now.
+</p>
+</li>
+<li>
+<p>
+MergedSender class is managed by Guice now.
+</p>
+</li>
+<li>
+<p>
+MergeFailSender is managed by Guice now.
+</p>
+</li>
+<li>
+<p>
+Make ReplacePatchSetSender managed by Guice.
+</p>
+</li>
+<li>
+<p>
+Refactor MergeOp to use assisted injection
+</p>
+</li>
+<li>
+<p>
+Inject the canonicalweburl rather than using GerritSer&#8230;
+</p>
+</li>
+<li>
+<p>
+Use JGit's cached hostname when URL can't give us the &#8230;
+</p>
+</li>
+<li>
+<p>
+Remove use of PatchSetInfoAccess interface in PatchDet&#8230;
+</p>
+</li>
+<li>
+<p>
+Merge change 10839
+</p>
+</li>
+<li>
+<p>
+Use member injection for OutgoingEmail related depende&#8230;
+</p>
+</li>
+<li>
+<p>
+Fix CanonicalWebUrl when it is null
+</p>
+</li>
+<li>
+<p>
+Inject the Provider GerritCall rather than looking it&#8230;
+</p>
+</li>
+<li>
+<p>
+Use assisted injection to create the PushOp instances
+</p>
+</li>
+<li>
+<p>
+Use PatchSetInfoFactory in OutgoingEmail class.
+</p>
+</li>
+<li>
+<p>
+Simplify the setup of assisted injection factories
+</p>
+</li>
+<li>
+<p>
+Inject the WorkQueue via Guice
+</p>
+</li>
+<li>
+<p>
+Fix ProvisionException catch blocks in GerritServletCo&#8230;
+</p>
+</li>
+<li>
+<p>
+Move system configuration related code to the server.c&#8230;
+</p>
+</li>
+<li>
+<p>
+Move servlets related to UI RPCs into the server.rpc p&#8230;
+</p>
+</li>
+<li>
+<p>
+Reduce CreateSchema dependencies to avoid cache
+</p>
+</li>
+<li>
+<p>
+Start injectors in production mode
+</p>
+</li>
+<li>
+<p>
+Isolate SSHD module from web module
+</p>
+</li>
+<li>
+<p>
+Use ServletContext injection to load files from context
+</p>
+</li>
+<li>
+<p>
+Refactor SSH commands into their own package
+</p>
+</li>
+<li>
+<p>
+Support Guice request and session scopes in SSHD
+</p>
+</li>
+<li>
+<p>
+Cleanup CommandFactory to be session aware
+</p>
+</li>
+<li>
+<p>
+Refactor CurrentUser to always be request scoped
+</p>
+</li>
+<li>
+<p>
+Cleanup names of SSH daemon related classes
+</p>
+</li>
+<li>
+<p>
+Refactor command handling to support subcommands in Gu&#8230;
+</p>
+</li>
+<li>
+<p>
+Refactor command thread creation logic into BaseCommand
+</p>
+</li>
+<li>
+<p>
+Move command line parsing to BaseCommand
+</p>
+</li>
+<li>
+<p>
+Avoid duplicate singletons
+</p>
+</li>
+<li>
+<p>
+Don't inject fields in providers
+</p>
+</li>
+<li>
+<p>
+Run Gerrit servlet container in PRODUCTION mode
+</p>
+</li>
+<li>
+<p>
+Make database error reporting more predictable from th&#8230;
+</p>
+</li>
+<li>
+<p>
+Fix duplicate definition of ReviewDb injection
+</p>
+</li>
+<li>
+<p>
+Cleanup unused imports in client code
+</p>
+</li>
+<li>
+<p>
+Remove unnecessary references to HttpServletRequest
+</p>
+</li>
+<li>
+<p>
+Get HttpServletRequest via injection rather than JsonS&#8230;
+</p>
+</li>
+<li>
+<p>
+Get the remote peer address via the @RemotePeer annota&#8230;
+</p>
+</li>
+<li>
+<p>
+Move HTTP related classes to an HTTP specific package
+</p>
+</li>
+<li>
+<p>
+Drop ServletName in favor a unique annotation object
+</p>
+</li>
+<li>
+<p>
+Move all URL lookup to the CanonicalUrlProvider
+</p>
+</li>
+<li>
+<p>
+Only load the OpenID servlets if we are using OpenID a&#8230;
+</p>
+</li>
+<li>
+<p>
+Make the magic "Become" mode for development a normal &#8230;
+</p>
+</li>
+<li>
+<p>
+Present new users with a registion welcome screen
+</p>
+</li>
+<li>
+<p>
+Fix SSH daemon in web mode to actually have commands
+</p>
+</li>
+<li>
+<p>
+Explicitly bind RemoteJsonService implementations to t&#8230;
+</p>
+</li>
+<li>
+<p>
+Use Anchor for become rather than location assignment
+</p>
+</li>
+<li>
+<p>
+Move the become any account form to a real HTML file
+</p>
+</li>
+<li>
+<p>
+Document the DEVELOPMENT_BECOME_ANY_ACCOUNT auth.type &#8230;
+</p>
+</li>
+<li>
+<p>
+Fix upgrade014_015_part1_mysql syntax errors
+</p>
+</li>
+<li>
+<p>
+Merge change 10972
+</p>
+</li>
+<li>
+<p>
+Inject most server references to GerritConfig
+</p>
+</li>
+<li>
+<p>
+Cleanup CacheManagerProvider's construction of the con&#8230;
+</p>
+</li>
+<li>
+<p>
+Make DiffCacheEntryFactory package private
+</p>
+</li>
+<li>
+<p>
+Cache account ids by email address key in Ehcache
+</p>
+</li>
+<li>
+<p>
+Rename ReviewDbProvider to ReviewDbDatabaseProvider
+</p>
+</li>
+<li>
+<p>
+Perform per-request cleanup actions at the end of a re&#8230;
+</p>
+</li>
+<li>
+<p>
+Refactor ChangeDetailService to use injected database &#8230;
+</p>
+</li>
+<li>
+<p>
+Move ChangeDetailService code to its own package
+</p>
+</li>
+<li>
+<p>
+Refactor ChangeManageService to use the new Handler st&#8230;
+</p>
+</li>
+<li>
+<p>
+Refactor SSH commands to use request scoped database h&#8230;
+</p>
+</li>
+<li>
+<p>
+Fix docs in BaseCommand
+</p>
+</li>
+<li>
+<p>
+Mark all of BaseServiceImplementation deprecated
+</p>
+</li>
+<li>
+<p>
+Refactor SSH command permission checks to use CurrentU&#8230;
+</p>
+</li>
+<li>
+<p>
+Move ProjectCache to server side and rewrite entire pe&#8230;
+</p>
+</li>
+<li>
+<p>
+Make existing BaseServiceImplementation use per-reques&#8230;
+</p>
+</li>
+<li>
+<p>
+Use Project.NameKey in admin panels rather than Projec&#8230;
+</p>
+</li>
+<li>
+<p>
+Change project to use Project.NameKey as the primary k&#8230;
+</p>
+</li>
+<li>
+<p>
+Fix sshdAddress in GerritConfig object sent to clients
+</p>
+</li>
+<li>
+<p>
+Rename ProjectCache.invalidate to evict
+</p>
+</li>
+<li>
+<p>
+Rename ChangeDetailModule to ChangeModule
+</p>
+</li>
+<li>
+<p>
+Move account related RPCs to the account package
+</p>
+</li>
+<li>
+<p>
+Move patch RPC stuff to the rpc.patch package
+</p>
+</li>
+<li>
+<p>
+Remove unnecessary injected dependencies from CatServl&#8230;
+</p>
+</li>
+<li>
+<p>
+Document why we abuse the GerritCall in HostPageServlet
+</p>
+</li>
+<li>
+<p>
+Create a dummy account if the user account no longer e&#8230;
+</p>
+</li>
+<li>
+<p>
+Construct the AgreementInfo only from server code
+</p>
+</li>
+<li>
+<p>
+Merge change 11021
+</p>
+</li>
+<li>
+<p>
+Convert GroupCache to be injected by Guice and stored &#8230;
+</p>
+</li>
+<li>
+<p>
+Remove Common.getAccountId and use Guice injection only
+</p>
+</li>
+<li>
+<p>
+Remove Common.getSchemaFactory
+</p>
+</li>
+<li>
+<p>
+Remove Common.getAccountCache
+</p>
+</li>
+<li>
+<p>
+Consolidate account lookups to the AccountResolver
+</p>
+</li>
+<li>
+<p>
+Rename GerritServerModule to GerritGlobalModule
+</p>
+</li>
+<li>
+<p>
+Rename SshDaemonModule to SshModule
+</p>
+</li>
+<li>
+<p>
+Update documentation on the named caches
+</p>
+</li>
+<li>
+<p>
+Move trusted_external_ids to auth.trustedOpenID
+</p>
+</li>
+<li>
+<p>
+Paper bag fix OutgoingEmail initialization
+</p>
+</li>
+<li>
+<p>
+Paper bag fix submit action
+</p>
+</li>
+<li>
+<p>
+Fix server error <em>Array index out of range</em> on some pa&#8230;
+</p>
+</li>
+<li>
+<p>
+Merge branch <em>maint</em>
+</p>
+</li>
+<li>
+<p>
+Move ChangeApproval to be a child of PatchSet
+</p>
+</li>
+<li>
+<p>
+Make #register alone go to the registration form
+</p>
+</li>
+<li>
+<p>
+Enable register new email after saving contact informa&#8230;
+</p>
+</li>
+<li>
+<p>
+Bind ApprovalTypes without using GerritConfig
+</p>
+</li>
+<li>
+<p>
+Remove Common class entirely
+</p>
+</li>
+<li>
+<p>
+Catch missing BouncyCastle PGP during contact store cr&#8230;
+</p>
+</li>
+<li>
+<p>
+Correct Owner project_rights min_values during upgrade
+</p>
+</li>
+<li>
+<p>
+Unset use_contributor_agreements if agreements are dis&#8230;
+</p>
+</li>
+<li>
+<p>
+Sort permissions in project access tab
+</p>
+</li>
+<li>
+<p>
+Get branches directly from Git rather than database
+</p>
+</li>
+<li>
+<p>
+Style tab panel headers like our menu bar header
+</p>
+</li>
+<li>
+<p>
+Narrow tables that don't have to be 100% width
+</p>
+</li>
+<li>
+<p>
+Cleanup display of external ids in the user settings
+</p>
+</li>
+<li>
+<p>
+Preserve negative approvals when replacing patch sets
+</p>
+</li>
+<li>
+<p>
+Use gwtjsonrpc 1.1.1
+</p>
+</li>
+<li>
+<p>
+gerrit 2.0.18
+</p>
+</li>
+</ul>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 2.0.18 (from v2.1.1.1-104-gc20e283)<br />
+Last updated 06-Dec-2010 16:46:42 PDT
+</div>
+</div>
+</body>
+</html>

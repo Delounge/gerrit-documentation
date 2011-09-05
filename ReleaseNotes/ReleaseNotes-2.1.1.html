@@ -1,0 +1,912 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.2.2" />
+<style type="text/css">
+/* Debug borders */
+p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 {
+/*
+  border: 1px solid red;
+*/
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+}
+
+tt {
+  color: navy;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  font-family: sans-serif;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  border-bottom: 2px solid silver;
+  padding-top: 0.5em;
+}
+
+div.sectionbody {
+  font-family: serif;
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+pre {
+  padding: 0;
+  margin: 0;
+}
+
+span#author {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+span#email {
+}
+span#revision {
+  font-family: sans-serif;
+}
+
+div#footer {
+  font-family: sans-serif;
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+div#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+div#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+div#preamble,
+div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-right: 10%;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+
+div.listingblock {
+  margin-right: 0%;
+}
+div.listingblock > div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock > div.content {
+  padding-left: 2.0em;
+}
+
+div.attribution {
+  text-align: right;
+}
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 2px solid silver;
+}
+
+div.exampleblock > div.content {
+  border-left: 2px solid silver;
+  padding: 0.5em;
+}
+
+div.verseblock div.content {
+  white-space: pre;
+}
+
+div.imageblock div.content { padding-left: 0; }
+div.imageblock img { border: 1px solid silver; }
+span.image img { border-style: none; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: italic;
+}
+dd > *:first-child {
+  margin-top: 0;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.olist2 {
+  list-style-type: lower-alpha;
+}
+
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead {
+  font-family: sans-serif;
+  font-weight: bold;
+}
+tfoot {
+  font-weight: bold;
+}
+
+div.hlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hlist td {
+  padding-bottom: 5px;
+}
+td.hlist1 {
+  vertical-align: top;
+  font-style: italic;
+  padding-right: 0.8em;
+}
+td.hlist2 {
+  vertical-align: top;
+}
+
+@media print {
+  div#footer-badges { display: none; }
+}
+
+div#toctitle {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+/* Workarounds for IE6's broken and incomplete CSS2. */
+
+div.sidebar-content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+div.sidebar-title, div.image-title {
+  font-family: sans-serif;
+  font-weight: bold;
+  margin-top: 0.0em;
+  margin-bottom: 0.5em;
+}
+
+div.listingblock div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock-content {
+  padding-left: 2.0em;
+}
+
+div.exampleblock-content {
+  border-left: 2px solid silver;
+  padding-left: 0.5em;
+}
+
+/* IE6 sets dynamically generated links as visited. */
+div#toc a:visited { color: blue; }
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function(){generateToc(2)}
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4.sp
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, October 2006. License: GPL */
+ /* modified by Shawn Pearce, August 2009. License: GPL */
+
+function getText(el) {
+  var text = "";
+  for (var i = el.firstChild; i != null; i = i.nextSibling) {
+    if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+      text += i.data;
+    else if (i.firstChild != null)
+      text += getText(i);
+  }
+  return text;
+}
+
+function TocEntry(el, text, toclevel) {
+  this.element = el;
+  this.text = text;
+  this.toclevel = toclevel;
+  this.assigned = false;
+
+  if (el.id != '') {
+    this.id = el.id;
+
+  } else {
+    var a = el.firstChild;
+    if ((a.tagName == "a" || a.tagName == "A") && a.id != "") {
+      this.id = a.id;
+    } else {
+      this.id = '';
+    }
+  }
+}
+
+function tocEntries(el, toclevels) {
+  var result = new Array;
+  var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+  // Function that scans the DOM tree for header elements (the DOM2
+  // nodeIterator API would be a better technique but not supported by all
+  // browsers).
+  var iterate = function (el) {
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+        var mo = re.exec(i.tagName)
+        if (mo)
+          result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+        iterate(i);
+      }
+    }
+  }
+  iterate(el);
+  return result;
+}
+
+// This function does the work. toclevels = 1..4.
+function generateToc(toclevels) {
+  var simple_re = new RegExp('^[a-zA-Z._ -]{1,}$');
+  var entries = tocEntries(document.getElementsByTagName("body")[0], toclevels);
+  var usedIds = new Array();
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id != "")
+      usedIds[entry.id] = entry;
+  }
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id != "" || !simple_re.exec(entry.text))
+      continue;
+
+    var n = entry.text.replace(/ /g, '_').toLowerCase();
+    var e = usedIds[n];
+    if (e) {
+      if (e.assigned)
+        e.id = '';
+      continue;
+    }
+
+    entry.assigned = true;
+    entry.id = n;
+    entry.element.id = entry.id;
+    usedIds[n] = entry;
+  }
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id == '') {
+      entry.id = "toc" + i;
+      entry.element.id = entry.id;
+    }
+  }
+
+  var toc = document.getElementById("toc");
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    var a = document.createElement("a");
+    a.href = "#" + entry.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+}
+/*]]>*/
+</script>
+<title>Release notes for Gerrit 2.1.1, 2.1.1.1</title>
+</head>
+<body>
+<div id="header">
+<h1>Release notes for Gerrit 2.1.1, 2.1.1.1</h1>
+<span id="revision">version 2.1.1 (from v2.1.1.1-104-gc20e283)</span>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<p>Gerrit 2.1.1.1 is now available in the usual location:</p>
+<p><a href="http://code.google.com/p/gerrit/downloads/list">http://code.google.com/p/gerrit/downloads/list</a></p>
+</div>
+</div>
+<h2>Schema Change</h2>
+<div class="sectionbody">
+<p><strong>WARNING</strong> This release contains a schema change.  To upgrade:</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  java -jar gerrit.war init -d site_path</tt></pre>
+</div></div>
+</div>
+<h2>Patch 2.1.1.1</h2>
+<div class="sectionbody">
+<ul>
+<li>
+<p>
+Update MINA SSHD to SVN 897374
+</p>
+<p>A deadlock was recently discovered in the SSHD, causing an
+IoProcessor thread to freeze and stop servicing clients.  This
+manifests itself as spotty SSH service; sometimes a connection
+works, sometimes it hangs and never executes the command.  Fixed.</p>
+</li>
+<li>
+<p>
+issue 376    Fix deletion of comments on publish comments screen
+</p>
+<p>Discarding a comment from the publish comments screen caused
+a ConcurrentModificationException.  Fixed.</p>
+</li>
+</ul>
+</div>
+<h2>New Features</h2>
+<div class="sectionbody">
+<ul>
+<li>
+<p>
+issue 322    Update to GWT 2.0.0
+</p>
+<p>JavaScript code generation is now based upon GWT 2.0, which
+is the latest stable release available.  One benefit of this
+is the initial JavaScript download is smaller, by omitting
+less-frequently used sections of the UI like the admin screens
+or user preferences.</p>
+</li>
+<li>
+<p>
+Support creating new users in <tt>DEVELOPMENT_BECOME_ANY_</tt>&#8230;
+</p>
+<p>Developers can now create new users (to facilitate testing
+scenarios) through the /become URL, rather than manually
+inserting account records or switching over to OpenID/LDAP.</p>
+</li>
+<li>
+<p>
+issue 371    Make gitweb url links customizable, add support for c&#8230;
+</p>
+<p>The linkage to gitweb is now more configurable, and we also
+support linking to cgit, a popular C based alternative to the
+Perl based gitweb.cgi.</p>
+</li>
+<li>
+<p>
+Log SSH activity to $site_path/logs/sshd_log
+</p>
+<p>SSH authentication failures and commands are now logged, including
+execution times, so administrators can monitor server activity.
+The log file is local to the server running the daemon process,
+and came about to help replace the lastUsedOn columns which were
+dropped from the database (see below).</p>
+</li>
+<li>
+<p>
+Drop the lastUsedOn from AccountSshKeys, AccountExternalIds
+</p>
+</li>
+<li>
+<p>
+Implement automatic schema upgrading
+</p>
+<p>The lastUsedOn column is no longer updated in the database,
+and was actually removed by a schema upgrade in this release.</p>
+</li>
+<li>
+<p>
+issue 162    Record submitters as the author of a merge commit
+</p>
+<p>Merge commits created by Gerrit during change submission now
+use the submitter's identity as the author identity, and generic
+Gerrit user identity as the committer identity.</p>
+</li>
+<li>
+<p>
+issue 162    Summarize single change merges with short description
+</p>
+<p>The short description of a merge commit including exactly
+one change into the branch now includes that change's short
+description, making the log easier to read.</p>
+</li>
+<li>
+<p>
+Reload GerritSiteHeader, GerritSiteFooter, GerritSite&#8230;
+</p>
+<p>The site header/footer files are reloaded on the fly if they are
+modified, allowing the administrator to abuse the header for a
+"message of the day" feature, if desired.</p>
+</li>
+<li>
+<p>
+Reduce the size (and cost) of the host page
+</p>
+</li>
+<li>
+<p>
+Use server side permutation selection
+</p>
+</li>
+<li>
+<p>
+Allow ?s=0 to disable server side permutation
+</p>
+<p>The host page was compacted slightly, and the CPU time used on
+the server to send it to a client was reduced by reusing as much
+work as possible between sessions.
+Additionally, the host page now selects the correct JavaScript
+based on the User-Agent HTTP header, removing one HTTP round
+trip during initial page load, and saving ~5 KiB of transfer.</p>
+</li>
+<li>
+<p>
+Make hyperlinks update URL when screen is visible
+</p>
+<p>The address bar now only updates when the corresponding content
+is actually visible.  This matches the behavior used within
+other AJAX applications like Gmail.</p>
+</li>
+<li>
+<p>
+Use a glass pane behind our dialogs, make most modal
+</p>
+<p>Error dialogs are now more noticable, and less easily dismissed
+by an accidential click.  This is especially useful when there
+is a merge error during submit.</p>
+</li>
+</ul>
+</div>
+<h2>Bug Fixes</h2>
+<div class="sectionbody">
+<ul>
+<li>
+<p>
+issue 359    Allow updates of commits where only the parent changes
+</p>
+<p>Commit replacements were sometimes rejected when the only thing
+that changed as the parent pointer, e.g. rebasing a change because
+the parent's commit message was modified to correct a typo.
+We now allow these replacements, with a warning to the console.</p>
+</li>
+<li>
+<p>
+gsql: Fix \d table missing first column
+</p>
+<p>The gsql tool skipped the first column of any table, e.g. when
+showing "\d accounts" the registered_on column wasn't displayed.</p>
+</li>
+<li>
+<p>
+Default to the en locale
+</p>
+</li>
+<li>
+<p>
+Limit permutations to only the en locale
+</p>
+<p>The WAR file shrank because we deleted a large chunk of JavaScript
+which was never used.  GWT created this code in case the browser
+didn't get forced into the <em>en</em> locale, but we always force it to
+use the <em>en</em> locale because the top of our HTML page demands it.</p>
+</li>
+<li>
+<p>
+issue 364    Fix SchemaCreatorTest to work when localized errors a&#8230;
+</p>
+<p>This test failed when the JVM's default locale wasn't en_US, as it
+was testing a translated string against an English expected value.</p>
+</li>
+<li>
+<p>
+issue 365    Skip CommitMsgHookTest on Win32
+</p>
+<p>This test failed on Windows platforms, where there is no shell
+or perl available from a native Win32 application like the JVM.
+For now, we skip the test.</p>
+</li>
+<li>
+<p>
+issue 369    Add missing repositories to build search path
+</p>
+<p>The out-of-the-box build of Gerrit's own source code didn't work,
+due to missing Maven repository URLs in our pom.xml.  I never
+noticed the failure because my local repository already had the
+required JARs present.</p>
+</li>
+<li>
+<p>
+Fix MSIE 8 compatibility
+</p>
+<p>Releases between 2.0.18 and 2.1.1 have not supported MSIE 8,
+due to a broken GWT upgrade.  Fixed.</p>
+</li>
+<li>
+<p>
+Ensure gitweb.cgi pipes are closed
+</p>
+<p>Exceptions may have allowed our internal gitweb CGI invocations
+to leak file descriptors, as pipes to the external CGI were not
+always closed.  Fixed.</p>
+</li>
+</ul>
+</div>
+<h2>Other</h2>
+<div class="sectionbody">
+<ul>
+<li>
+<p>
+Switch to ClientBundle
+</p>
+</li>
+<li>
+<p>
+Update to gwtexpui-1.2.0-SNAPSHOT
+</p>
+</li>
+<li>
+<p>
+Merge branch <em>master</em> into gwt-2.0
+</p>
+</li>
+<li>
+<p>
+Use gwt-maven's -Dgwt.style rather than our own
+</p>
+</li>
+<li>
+<p>
+Don't build the "Story of Your Compile" report by def&#8230;
+</p>
+</li>
+<li>
+<p>
+Drop the com.google.gerrit.httpd.auth.become system p&#8230;
+</p>
+</li>
+<li>
+<p>
+Move all of our CSS rules into our CssResource
+</p>
+</li>
+<li>
+<p>
+Start splitting our code to reduce initial download
+</p>
+</li>
+<li>
+<p>
+Defer our large JavaScript parsing until later
+</p>
+</li>
+<li>
+<p>
+Move prettify to be loaded as part of our patch split&#8230;
+</p>
+</li>
+<li>
+<p>
+issue 363    Update Google Code Prettify to 3-Dec-2009
+</p>
+</li>
+<li>
+<p>
+Start next release development
+</p>
+</li>
+<li>
+<p>
+Merge branch <em>gwt-2.0</em>
+</p>
+</li>
+<li>
+<p>
+documentation: Remove Eclipse user library
+</p>
+</li>
+<li>
+<p>
+Fix disclosure panel CSS
+</p>
+</li>
+<li>
+<p>
+Simplify pretty printer loading
+</p>
+</li>
+<li>
+<p>
+Fix formatting of whitespace errors
+</p>
+</li>
+<li>
+<p>
+Correct URL to apache license in CSS headers
+</p>
+</li>
+<li>
+<p>
+Restore the CSS linker for GWT's stylesheet
+</p>
+</li>
+<li>
+<p>
+documentation: Correct calculation of QPS
+</p>
+</li>
+<li>
+<p>
+Consolidate windows platform tests to a single class
+</p>
+</li>
+<li>
+<p>
+documentation: Correct other calculations of QPS
+</p>
+</li>
+<li>
+<p>
+issue 370    Revert "Defer our large JavaScript parsing until late&#8230;
+</p>
+</li>
+<li>
+<p>
+Merge change If238e2bd
+</p>
+</li>
+<li>
+<p>
+Remove unnecessary /login/<tt>*</tt> URLs when auth.type = LDAP
+</p>
+</li>
+<li>
+<p>
+Stop using AccountExternalId lastUsedOn for most rece&#8230;
+</p>
+</li>
+<li>
+<p>
+Revert "Remove unnecessary /login/* URLs when auth.ty&#8230;
+</p>
+</li>
+<li>
+<p>
+Document why LoginRedirectServlet is required
+</p>
+</li>
+<li>
+<p>
+Cleanup Maven build by pushing component dependencies&#8230;
+</p>
+</li>
+<li>
+<p>
+Cleanup Maven build by using common plugin management
+</p>
+</li>
+<li>
+<p>
+Fix package-before-copyright in GerritLauncher
+</p>
+</li>
+<li>
+<p>
+Fix unified patch view
+</p>
+</li>
+<li>
+<p>
+Fix background of RPC loading status message
+</p>
+</li>
+<li>
+<p>
+Use @def for common CSS definitions
+</p>
+</li>
+<li>
+<p>
+Correct comment panel border styles
+</p>
+</li>
+<li>
+<p>
+Improve keyapplet referencing
+</p>
+</li>
+<li>
+<p>
+Remove the duplicate Version class
+</p>
+</li>
+<li>
+<p>
+Be specific about the Maven plugin groupId
+</p>
+</li>
+<li>
+<p>
+Fix automatic formatting in SshPanel
+</p>
+</li>
+<li>
+<p>
+Remove unnecessary compile scope tags
+</p>
+</li>
+<li>
+<p>
+Disable unnecessary class operations
+</p>
+</li>
+<li>
+<p>
+Use the full name <em>Gerrit Code Review</em> in sign-in dia&#8230;
+</p>
+</li>
+<li>
+<p>
+init: Defer all prune executions until upgrade cycle &#8230;
+</p>
+</li>
+<li>
+<p>
+Fix automatic formatting in LdapRealm
+</p>
+</li>
+<li>
+<p>
+Update gwtorm, gwtjsonrpc, gwtexpui
+</p>
+</li>
+<li>
+<p>
+Push Command.destroy down through DispatchCommand red&#8230;
+</p>
+</li>
+<li>
+<p>
+Quote usernames in the sshd_log if necessary
+</p>
+</li>
+<li>
+<p>
+Document why ReplicationUser doesn't use registered g&#8230;
+</p>
+</li>
+<li>
+<p>
+Configure the gwtorm KeyUtil.Encoder during module lo&#8230;
+</p>
+</li>
+</ul>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 2.1.1 (from v2.1.1.1-104-gc20e283)<br />
+Last updated 06-Dec-2010 16:46:47 PDT
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,629 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.2.2" />
+<style type="text/css">
+/* Debug borders */
+p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 {
+/*
+  border: 1px solid red;
+*/
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+}
+
+tt {
+  color: navy;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  font-family: sans-serif;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  border-bottom: 2px solid silver;
+  padding-top: 0.5em;
+}
+
+div.sectionbody {
+  font-family: serif;
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+pre {
+  padding: 0;
+  margin: 0;
+}
+
+span#author {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+span#email {
+}
+span#revision {
+  font-family: sans-serif;
+}
+
+div#footer {
+  font-family: sans-serif;
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+div#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+div#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+div#preamble,
+div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-right: 10%;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+
+div.listingblock {
+  margin-right: 0%;
+}
+div.listingblock > div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock > div.content {
+  padding-left: 2.0em;
+}
+
+div.attribution {
+  text-align: right;
+}
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 2px solid silver;
+}
+
+div.exampleblock > div.content {
+  border-left: 2px solid silver;
+  padding: 0.5em;
+}
+
+div.verseblock div.content {
+  white-space: pre;
+}
+
+div.imageblock div.content { padding-left: 0; }
+div.imageblock img { border: 1px solid silver; }
+span.image img { border-style: none; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: italic;
+}
+dd > *:first-child {
+  margin-top: 0;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.olist2 {
+  list-style-type: lower-alpha;
+}
+
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead {
+  font-family: sans-serif;
+  font-weight: bold;
+}
+tfoot {
+  font-weight: bold;
+}
+
+div.hlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hlist td {
+  padding-bottom: 5px;
+}
+td.hlist1 {
+  vertical-align: top;
+  font-style: italic;
+  padding-right: 0.8em;
+}
+td.hlist2 {
+  vertical-align: top;
+}
+
+@media print {
+  div#footer-badges { display: none; }
+}
+
+div#toctitle {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+/* Workarounds for IE6's broken and incomplete CSS2. */
+
+div.sidebar-content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+div.sidebar-title, div.image-title {
+  font-family: sans-serif;
+  font-weight: bold;
+  margin-top: 0.0em;
+  margin-bottom: 0.5em;
+}
+
+div.listingblock div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock-content {
+  padding-left: 2.0em;
+}
+
+div.exampleblock-content {
+  border-left: 2px solid silver;
+  padding-left: 0.5em;
+}
+
+/* IE6 sets dynamically generated links as visited. */
+div#toc a:visited { color: blue; }
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function(){generateToc(2)}
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4.sp
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, October 2006. License: GPL */
+ /* modified by Shawn Pearce, August 2009. License: GPL */
+
+function getText(el) {
+  var text = "";
+  for (var i = el.firstChild; i != null; i = i.nextSibling) {
+    if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+      text += i.data;
+    else if (i.firstChild != null)
+      text += getText(i);
+  }
+  return text;
+}
+
+function TocEntry(el, text, toclevel) {
+  this.element = el;
+  this.text = text;
+  this.toclevel = toclevel;
+  this.assigned = false;
+
+  if (el.id != '') {
+    this.id = el.id;
+
+  } else {
+    var a = el.firstChild;
+    if ((a.tagName == "a" || a.tagName == "A") && a.id != "") {
+      this.id = a.id;
+    } else {
+      this.id = '';
+    }
+  }
+}
+
+function tocEntries(el, toclevels) {
+  var result = new Array;
+  var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+  // Function that scans the DOM tree for header elements (the DOM2
+  // nodeIterator API would be a better technique but not supported by all
+  // browsers).
+  var iterate = function (el) {
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+        var mo = re.exec(i.tagName)
+        if (mo)
+          result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+        iterate(i);
+      }
+    }
+  }
+  iterate(el);
+  return result;
+}
+
+// This function does the work. toclevels = 1..4.
+function generateToc(toclevels) {
+  var simple_re = new RegExp('^[a-zA-Z._ -]{1,}$');
+  var entries = tocEntries(document.getElementsByTagName("body")[0], toclevels);
+  var usedIds = new Array();
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id != "")
+      usedIds[entry.id] = entry;
+  }
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id != "" || !simple_re.exec(entry.text))
+      continue;
+
+    var n = entry.text.replace(/ /g, '_').toLowerCase();
+    var e = usedIds[n];
+    if (e) {
+      if (e.assigned)
+        e.id = '';
+      continue;
+    }
+
+    entry.assigned = true;
+    entry.id = n;
+    entry.element.id = entry.id;
+    usedIds[n] = entry;
+  }
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id == '') {
+      entry.id = "toc" + i;
+      entry.element.id = entry.id;
+    }
+  }
+
+  var toc = document.getElementById("toc");
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    var a = document.createElement("a");
+    a.href = "#" + entry.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+}
+/*]]>*/
+</script>
+<title>Gerrit Code Review - Developer Setup</title>
+</head>
+<body>
+<div id="header">
+<h1>Gerrit Code Review - Developer Setup</h1>
+<span id="revision">version 2.1.2.4</span>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<p>Apache Maven is needed to compile the code, and a SQL database
+to house the review metadata.  H2 is recommended for development
+databases, as it requires no external server process.</p>
+</div>
+</div>
+<h2>Get the Source</h2>
+<div class="sectionbody">
+<p>Create a new client workspace:</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  git clone git://android.git.kernel.org/tools/gerrit.git
+  cd gerrit</tt></pre>
+</div></div>
+</div>
+<h2>Configuring Eclipse</h2>
+<div class="sectionbody">
+<p>To use the Eclipse IDE for development, please see
+<a href="dev-eclipse.html">Eclipse Setup</a> for more details on how to
+configure the workspace with the Maven build scripts.</p>
+</div>
+<h2><a id="build"></a>Building</h2>
+<div class="sectionbody">
+<p>From the command line:</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  mvn package</tt></pre>
+</div></div>
+<p>Output executable WAR will be placed in:</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  gerrit-war/target/gerrit-*.war</tt></pre>
+</div></div>
+<h3>Mac OS X</h3>
+<p>On Mac OS X ensure "Java For Mac OS X 10.5 Upate 4" (or later) has
+been installed, and that <tt>JAVA_HOME</tt> is set to
+"/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Home".
+Check the installed version by running <tt>java -version</tt> and looking
+for <em>build 1.6.0_13-b03-211</em>.  Versions of Java 6 prior to this
+version crash during the build due to a bug in the JIT compiler.</p>
+</div>
+<h2><a id="init"></a>Site Initialization</h2>
+<div class="sectionbody">
+<p>After compiling (above), run Gerrit's <em>init</em> command to create a
+testing site for development use:</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  java -jar gerrit-war/target/gerrit-*.war init -d ../test_site</tt></pre>
+</div></div>
+<p>Accept defaults by pressing Enter until <em>init</em> completes, or add
+the <em>--batch</em> command line option to avoid them entirely.  It is
+recommended to change the listen addresses from <em>*</em> to <em>localhost</em> to
+prevent outside connections from contacting the development instance.</p>
+<p>The daemon will automatically start in the background and a web
+browser will launch to the start page, enabling login via OpenID.</p>
+<p>Shutdown the daemon after registering the administrator account
+through the web interface:</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  ../test_site/bin/gerrit.sh stop</tt></pre>
+</div></div>
+</div>
+<h2>Testing</h2>
+<div class="sectionbody">
+<h3>Running the Daemon</h3>
+<p>The daemon can be directly launched from the build area, without
+copying to the test site:</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  java -jar gerrit-war/target/gerrit-*.war daemon -d ../test_site</tt></pre>
+</div></div>
+<h3>Querying the Database</h3>
+<p>The embedded H2 database can be queried and updated from the
+command line.  If the daemon is not currently running:</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  java -jar gerrit-war/target/gerrit-*.war gsql -d ../test_site</tt></pre>
+</div></div>
+<p>Or, if it is running and the database is in use, connect over SSH
+using an administrator user account:</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  ssh -p 29418 user@localhost gerrit gsql</tt></pre>
+</div></div>
+<h3>Debugging JavaScript</h3>
+<p>When debugging browser specific issues use <tt>-Dgwt.style=DETAILED</tt>
+so the resulting JavaScript more closely matches the Java sources.
+This can be used to help narrow down what code line 30,400 in the
+JavaScript happens to be.</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  mvn package -Dgwt.style=DETAILED</tt></pre>
+</div></div>
+</div>
+<h2>Release Builds</h2>
+<div class="sectionbody">
+<p>To create a release build for a production server, or deployment
+through the download site:</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  ./tools/release.sh</tt></pre>
+</div></div>
+<p>If AsciiDoc isn't installed or is otherwise unavailable, the WAR
+can still be built without the embedded documentation by passing
+an additional flag:</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  ./tools/release.sh --without-documentation</tt></pre>
+</div></div>
+</div>
+<h2>Client-Server RPC</h2>
+<div class="sectionbody">
+<p>The client-server RPC implementation is gwtjsonrpc, not the stock RPC
+system that comes with GWT.  This buys us automatic XSRF protection.
+It also makes all of the messages readable and writable by any JSON
+implementation, facilitating "mashups" and 3rd party clients.</p>
+<p>The programming API is virtually identical, except service interfaces
+extend RemoteJsonService instead of RemoteService.</p>
+</div>
+<h2>Why GWT?</h2>
+<div class="sectionbody">
+<p>We like it.  Plus we can write Java code once and run it both in
+the browser and on the server side.</p>
+</div>
+<h2>External Links</h2>
+<div class="sectionbody">
+<p>Google Web Toolkit:</p>
+<ul>
+<li>
+<p>
+<a href="http://code.google.com/webtoolkit/download.html">Download</a>
+</p>
+</li>
+</ul>
+<p>Apache Maven:</p>
+<ul>
+<li>
+<p>
+<a href="http://maven.apache.org/download.html">Download</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://maven.apache.org/run-maven/index.html">Running</a>
+</p>
+</li>
+</ul>
+<p>Apache SSHD:</p>
+<ul>
+<li>
+<p>
+<a href="http://mina.apache.org/sshd/">SSHD</a>
+</p>
+</li>
+</ul>
+<p>H2:</p>
+<ul>
+<li>
+<p>
+<a href="http://www.h2database.com/">H2</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.h2database.com/html/grammar.html">SQL Reference</a>
+</p>
+</li>
+</ul>
+<p>PostgreSQL:</p>
+<ul>
+<li>
+<p>
+<a href="http://www.postgresql.org/download/">Download</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.postgresql.org/docs/">Documentation</a>
+</p>
+</li>
+</ul>
+</div>
+<hr style="
+  height: 2px;
+  color: silver;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+">
+<p>Part of <a href="index.html">Gerrit Code Review</a></p>
+<div id="footer">
+<div id="footer-text">
+Version 2.1.2.4<br />
+Last updated 04-May-2010 17:56:20 PDT
+</div>
+</div>
+</body>
+</html>

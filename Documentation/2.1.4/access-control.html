@@ -1,0 +1,1350 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.2.2" />
+<style type="text/css">
+/* Debug borders */
+p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 {
+/*
+  border: 1px solid red;
+*/
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+}
+
+tt {
+  color: navy;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  font-family: sans-serif;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  border-bottom: 2px solid silver;
+  padding-top: 0.5em;
+}
+
+div.sectionbody {
+  font-family: serif;
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+pre {
+  padding: 0;
+  margin: 0;
+}
+
+span#author {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+span#email {
+}
+span#revision {
+  font-family: sans-serif;
+}
+
+div#footer {
+  font-family: sans-serif;
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+div#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+div#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+div#preamble,
+div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-right: 10%;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+
+div.listingblock {
+  margin-right: 0%;
+}
+div.listingblock > div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock > div.content {
+  padding-left: 2.0em;
+}
+
+div.attribution {
+  text-align: right;
+}
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 2px solid silver;
+}
+
+div.exampleblock > div.content {
+  border-left: 2px solid silver;
+  padding: 0.5em;
+}
+
+div.verseblock div.content {
+  white-space: pre;
+}
+
+div.imageblock div.content { padding-left: 0; }
+div.imageblock img { border: 1px solid silver; }
+span.image img { border-style: none; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: italic;
+}
+dd > *:first-child {
+  margin-top: 0;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.olist2 {
+  list-style-type: lower-alpha;
+}
+
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead {
+  font-family: sans-serif;
+  font-weight: bold;
+}
+tfoot {
+  font-weight: bold;
+}
+
+div.hlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hlist td {
+  padding-bottom: 5px;
+}
+td.hlist1 {
+  vertical-align: top;
+  font-style: italic;
+  padding-right: 0.8em;
+}
+td.hlist2 {
+  vertical-align: top;
+}
+
+@media print {
+  div#footer-badges { display: none; }
+}
+
+div#toctitle {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+/* Workarounds for IE6's broken and incomplete CSS2. */
+
+div.sidebar-content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+div.sidebar-title, div.image-title {
+  font-family: sans-serif;
+  font-weight: bold;
+  margin-top: 0.0em;
+  margin-bottom: 0.5em;
+}
+
+div.listingblock div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock-content {
+  padding-left: 2.0em;
+}
+
+div.exampleblock-content {
+  border-left: 2px solid silver;
+  padding-left: 0.5em;
+}
+
+/* IE6 sets dynamically generated links as visited. */
+div#toc a:visited { color: blue; }
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function(){generateToc(2)}
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4.sp
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, October 2006. License: GPL */
+ /* modified by Shawn Pearce, August 2009. License: GPL */
+
+function getText(el) {
+  var text = "";
+  for (var i = el.firstChild; i != null; i = i.nextSibling) {
+    if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+      text += i.data;
+    else if (i.firstChild != null)
+      text += getText(i);
+  }
+  return text;
+}
+
+function TocEntry(el, text, toclevel) {
+  this.element = el;
+  this.text = text;
+  this.toclevel = toclevel;
+  this.assigned = false;
+
+  if (el.id != '') {
+    this.id = el.id;
+
+  } else {
+    var a = el.firstChild;
+    if ((a.tagName == "a" || a.tagName == "A") && a.id != "") {
+      this.id = a.id;
+    } else {
+      this.id = '';
+    }
+  }
+}
+
+function tocEntries(el, toclevels) {
+  var result = new Array;
+  var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+  // Function that scans the DOM tree for header elements (the DOM2
+  // nodeIterator API would be a better technique but not supported by all
+  // browsers).
+  var iterate = function (el) {
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+        var mo = re.exec(i.tagName)
+        if (mo)
+          result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+        iterate(i);
+      }
+    }
+  }
+  iterate(el);
+  return result;
+}
+
+// This function does the work. toclevels = 1..4.
+function generateToc(toclevels) {
+  var simple_re = new RegExp('^[a-zA-Z._ -]{1,}$');
+  var entries = tocEntries(document.getElementsByTagName("body")[0], toclevels);
+  var usedIds = new Array();
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id != "")
+      usedIds[entry.id] = entry;
+  }
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id != "" || !simple_re.exec(entry.text))
+      continue;
+
+    var n = entry.text.replace(/ /g, '_').toLowerCase();
+    var e = usedIds[n];
+    if (e) {
+      if (e.assigned)
+        e.id = '';
+      continue;
+    }
+
+    entry.assigned = true;
+    entry.id = n;
+    entry.element.id = entry.id;
+    usedIds[n] = entry;
+  }
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id == '') {
+      entry.id = "toc" + i;
+      entry.element.id = entry.id;
+    }
+  }
+
+  var toc = document.getElementById("toc");
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    var a = document.createElement("a");
+    a.href = "#" + entry.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+}
+/*]]>*/
+</script>
+<title>Gerrit Code Review - Access Controls</title>
+</head>
+<body>
+<div id="header">
+<h1>Gerrit Code Review - Access Controls</h1>
+<span id="revision">version 2.1.4</span>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<p>Access controls in Gerrit are group based.  Every user account is a
+member of one or more groups, and access and privileges are granted
+to those groups.  Groups cannot be nested, and access rights cannot
+be granted to individual users.</p>
+</div>
+</div>
+<h2>System Groups</h2>
+<div class="sectionbody">
+<p>Gerrit comes with 3 system groups, with special access privileges
+and membership management.  The identity of these groups is set
+in the <tt>system_config</tt> table within the database, so the groups
+can be renamed after installation if desired.</p>
+<h3>Administrators</h3>
+<p>This is the Gerrit "root" identity.</p>
+<p>Users in the <em>Administrators</em> group can perform any action under
+the Admin menu, to any group or project, without further validation
+of any other access controls.  In most installations only those
+users who have direct filesystem and database access would be
+placed into this group.</p>
+<p>Membership in the <em>Administrators</em> group does not imply any other
+access rights.  Administrators do not automatically get code review
+approval or submit rights in projects.  This is a feature designed
+to permit administrative users to otherwise access Gerrit as any
+other normal user would, without needing two different accounts.</p>
+<h3>Anonymous Users</h3>
+<p>All users are automatically a member of this group.  Users who are
+not signed in are a member of only this group, and no others.</p>
+<p>Any access rights assigned to this group are inherited by all users.</p>
+<p>Administrators and project owners can grant access rights to this
+group in order to permit anonymous users to view project changes,
+without requiring sign in first.  Currently it is only worthwhile
+to grant <tt>Read Access</tt> to this group as Gerrit requires an account
+identity for all other operations.</p>
+<h3>Registered Users</h3>
+<p>All signed-in users are automatically a member of this group (and
+also <em>Anonymous Users</em>, see above).</p>
+<p>Any access rights assigned to this group are inherited by all
+users as soon as they sign-in to Gerrit.  If OpenID authentication
+is being employed, moving from only <em>Anonymous Users</em> into this
+group is very easy.  Caution should be taken when assigning any
+permissions to this group.</p>
+<p>It is typical to assign <tt>Code Review -1..+1</tt> to this group,
+allowing signed-in users to vote on a change, but not actually
+cause it to become approved or rejected.</p>
+<p>Registered users are always permitted to make and publish comments
+on any change in any project they have <tt>Read Access</tt> to.</p>
+</div>
+<h2>Account Groups</h2>
+<div class="sectionbody">
+<p>Account groups contain a list of zero or more user account members,
+added individually by a group owner.  Any user account listed as
+a group member is given any access rights granted to the group.</p>
+<p>To keep the schema simple to manage, groups cannot be nested.
+Only individual user accounts can be added as a member.</p>
+<p>Every group has one other group designated as its owner.  Users who
+are members of the owner group can:</p>
+<ul>
+<li>
+<p>
+Add users to this group
+</p>
+</li>
+<li>
+<p>
+Remove users from this group
+</p>
+</li>
+<li>
+<p>
+Change the name of this group
+</p>
+</li>
+<li>
+<p>
+Change the description of this group
+</p>
+</li>
+<li>
+<p>
+Change the owner of this group, to another group
+</p>
+</li>
+</ul>
+<p>It is permissible for a group to own itself, allowing the group
+members to directly manage who their peers are.</p>
+<p>Newly created groups are automatically created as owning themselves,
+with the creating user as the only member.  This permits the group
+creator to add additional members, and change the owner to another
+group if desired.</p>
+<p>It is somewhat common to create two groups at the same time,
+for example <tt>Foo</tt> and <tt>Foo-admin</tt>, where the latter group
+<tt>Foo-admin</tt> owns both itself and also group <tt>Foo</tt>.  Users who
+are members of <tt>Foo-admin</tt> can thus control the membership of
+<tt>Foo</tt>, without actually having the access rights granted to <tt>Foo</tt>.
+This configuration can help prevent accidental submits when the
+members of <tt>Foo</tt> have submit rights on a project, and the members of
+<tt>Foo-admin</tt> typically do not need to have such rights.</p>
+</div>
+<h2>Project Access Control Lists</h2>
+<div class="sectionbody">
+<p>A system wide access control list affecting all projects is stored in
+project "<tt>-- All Projects --</tt>".  This inheritance can be configured
+through <a href="cmd-set-project-parent.html">gerrit set-project-parent</a>.</p>
+<p>Per-project access control lists are also supported.</p>
+<p>Users are permitted to use the maximum range granted to any of their
+groups in an approval category.  For example, a user is a member of
+<tt>Foo Leads</tt>, and the following ACLs are granted on a project:</p>
+<div class="tableblock">
+<table rules="all"
+frame="hsides"
+cellspacing="0" cellpadding="4">
+<col width="182" />
+<col width="182" />
+<col width="160" />
+<col width="91" />
+<thead>
+  <tr>
+    <th align="left">
+    Group
+    </th>
+    <th align="left">
+    Reference Name
+    </th>
+    <th align="left">
+    Category
+    </th>
+    <th align="left">
+    Range
+    </th>
+  </tr>
+</thead>
+<tbody valign="top">
+  <tr>
+    <td align="left">
+    Anonymous Users
+    </td>
+    <td align="left">
+    refs/heads/*
+    </td>
+    <td align="left">
+    Code Review
+    </td>
+    <td align="left">
+    -1..+1
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    Registered Users
+    </td>
+    <td align="left">
+    refs/heads/*
+    </td>
+    <td align="left">
+    Code Review
+    </td>
+    <td align="left">
+    -1..+2
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    Foo Leads
+    </td>
+    <td align="left">
+    refs/heads/*
+    </td>
+    <td align="left">
+    Code Review
+    </td>
+    <td align="left">
+    -2..0
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+<p>Then the effective range permitted to be used by the user is
+<tt>-2..+2</tt>, as the user is a member of all three groups (see above
+about the system groups) and the maximum range is chosen (so the
+lowest value granted to any group, and the highest value granted
+to any group).</p>
+<p>Reference-level access control is also possible.</p>
+<p>Permissions can be set on a single reference name to match one
+branch (e.g. <tt>refs/heads/master</tt>), or on a reference namespace
+(e.g. <tt>refs/heads/*</tt>) to match any branch starting with that
+prefix. So a permission with <tt>refs/heads/*</tt> will match
+<tt>refs/heads/master</tt> and <tt>refs/heads/experimental</tt>, etc.</p>
+<p>Reference names can also be described with a regular expression
+by prefixing the reference name with <tt>^</tt>.  For example
+<tt>^refs/heads/[a-z]{1,8}</tt> matches all lower case branch names
+between 1 and 8 characters long.  Within a regular expression <tt>.</tt>
+is a wildcard matching any character, but may be escaped as <tt>\.</tt>.</p>
+<p>References can have the current user name automatically included,
+creating dynamic access controls that change to match the currently
+logged in user.  For example to provide a personal sandbox space
+to all developers, <tt>refs/heads/sandbox/${username}/*</tt> allowing
+the user <em>joe</em> to use <em>refs/heads/sandbox/joe/foo</em>.</p>
+<p>When evaluating a reference-level access right, Gerrit will use
+the full set of access rights to determine if the user
+is allowed to perform a given action. For example, if a user is a
+member of <tt>Foo Leads</tt>, they are reviewing a change destined for
+the <tt>refs/heads/qa</tt> branch, and the following ACLs are granted
+on the project:</p>
+<div class="tableblock">
+<table rules="all"
+frame="hsides"
+cellspacing="0" cellpadding="4">
+<col width="182" />
+<col width="182" />
+<col width="160" />
+<col width="91" />
+<thead>
+  <tr>
+    <th align="left">
+    Group
+    </th>
+    <th align="left">
+    Reference Name
+    </th>
+    <th align="left">
+    Category
+    </th>
+    <th align="left">
+    Range
+    </th>
+  </tr>
+</thead>
+<tbody valign="top">
+  <tr>
+    <td align="left">
+    Registered Users
+    </td>
+    <td align="left">
+    refs/heads/*
+    </td>
+    <td align="left">
+    Code Review
+    </td>
+    <td align="left">
+    -1..+1
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    Foo Leads
+    </td>
+    <td align="left">
+    refs/heads/*
+    </td>
+    <td align="left">
+    Code Review
+    </td>
+    <td align="left">
+    -2..+2
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    QA Leads
+    </td>
+    <td align="left">
+    refs/heads/qa
+    </td>
+    <td align="left">
+    Code Review
+    </td>
+    <td align="left">
+    -2..+2
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+<p>Then the effective range permitted to be used by the user is
+<tt>-2..+2</tt>, as the user's membership of <tt>Foo Leads</tt> effectively grant
+them access to the entire reference space, thanks to the wildcard.</p>
+<p>Gerrit also supports exclusive reference-level access control.</p>
+<p>It is possible to configure Gerrit to grant an exclusive ref level
+access control so that only users of a specific group can perform
+an operation on a project/reference pair. This is done by prefixing
+the reference specified with a <tt><em>-</em></tt>.</p>
+<p>For example, if a user who is a member of <tt>Foo Leads</tt> tries to
+review a change destined for branch <tt>refs/heads/qa</tt> in a project,
+and the following ACLs are granted:</p>
+<div class="tableblock">
+<table rules="all"
+frame="hsides"
+cellspacing="0" cellpadding="4">
+<col width="182" />
+<col width="194" />
+<col width="171" />
+<col width="91" />
+<thead>
+  <tr>
+    <th align="left">
+    Group
+    </th>
+    <th align="left">
+    Reference Name
+    </th>
+    <th align="left">
+    Category
+    </th>
+    <th align="left">
+    Range
+    </th>
+  </tr>
+</thead>
+<tbody valign="top">
+  <tr>
+    <td align="left">
+    Registered Users
+    </td>
+    <td align="left">
+    refs/heads/*
+    </td>
+    <td align="left">
+    Code Review
+    </td>
+    <td align="left">
+    -1..+1
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    Foo Leads
+    </td>
+    <td align="left">
+    refs/heads/*
+    </td>
+    <td align="left">
+    Code Review
+    </td>
+    <td align="left">
+    -2..+2
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    QA Leads
+    </td>
+    <td align="left">
+    -refs/heads/qa
+    </td>
+    <td align="left">
+    Code Review
+    </td>
+    <td align="left">
+    -2..+2
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+<p>Then this user will not have <tt>Code Review</tt> rights on that change,
+since there is an exclusive access right in place for the
+<tt>refs/heads/qa</tt> branch. This allows locking down access for a
+particular branch to a limited set of users, bypassing inherited
+rights and wildcards.</p>
+<p>In order to grant the ability to <tt>Code Review</tt> to the members of
+<tt>Foo Leads</tt>, in <tt>refs/heads/qa</tt> then the following access rights
+would be needed:</p>
+<div class="tableblock">
+<table rules="all"
+frame="hsides"
+cellspacing="0" cellpadding="4">
+<col width="182" />
+<col width="194" />
+<col width="171" />
+<col width="91" />
+<thead>
+  <tr>
+    <th align="left">
+    Group
+    </th>
+    <th align="left">
+    Reference Name
+    </th>
+    <th align="left">
+    Category
+    </th>
+    <th align="left">
+    Range
+    </th>
+  </tr>
+</thead>
+<tbody valign="top">
+  <tr>
+    <td align="left">
+    Registered Users
+    </td>
+    <td align="left">
+    refs/heads/*
+    </td>
+    <td align="left">
+    Code Review
+    </td>
+    <td align="left">
+    -1..+1
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    Foo Leads
+    </td>
+    <td align="left">
+    refs/heads/*
+    </td>
+    <td align="left">
+    Code Review
+    </td>
+    <td align="left">
+    -2..+2
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    QA Leads
+    </td>
+    <td align="left">
+    -refs/heads/qa
+    </td>
+    <td align="left">
+    Code Review
+    </td>
+    <td align="left">
+    -2..+2
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    Foo Leads
+    </td>
+    <td align="left">
+    refs/heads/qa
+    </td>
+    <td align="left">
+    Code Review
+    </td>
+    <td align="left">
+    -2..+2
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+<h3>OpenID Authentication</h3>
+<p>If the Gerrit instance is configured to use OpenID authentication,
+an account's effective group membership will be restricted to only
+the <tt>Anonymous Users</tt> and <tt>Registered Users</tt> groups, unless <strong>all</strong>
+of its OpenID identities match one or more of the patterns listed
+in the <tt>auth.trustedOpenID</tt> list from <tt>gerrit.config</tt>.</p>
+<h3>All Projects</h3>
+<p>Any access right granted to a group within <tt>-- All Projects --</tt>
+is automatically inherited by every other project in the same
+Gerrit instance.  These rights can be seen, but not modified,
+in any other project's <tt>Access</tt> administration tab.</p>
+<p>Only members of the group <tt>Administrators</tt> may edit the access
+control list for <tt>-- All Projects --</tt>.</p>
+<p>Ownership of this project cannot be delegated to another group.
+This restriction is by design.  Granting ownership to another
+group gives nearly the same level of access as membership in
+<tt>Administrators</tt> does, as group members would be able to alter
+permissions for every managed project.</p>
+<h3>Per-Project</h3>
+<p>The per-project ACL is evaluated before the global
+<tt>-- All Projects --</tt> ACL, permitting some limited override
+capability to project owners.  This behavior is generally only
+useful on the <tt>Read Access</tt> category when granting <tt>-1 No Access</tt>
+within a specific project to deny access to a group.</p>
+</div>
+<h2>Categories</h2>
+<div class="sectionbody">
+<p>Gerrit comes pre-configured with several default categories that
+can be granted to groups within projects, enabling functionality
+for that group's members.</p>
+<h3><a id="category_OWN"></a>Owner</h3>
+<p>The <tt>Owner</tt> category controls which groups can modify the project's
+configuration.  Users who are members of an owner group can:</p>
+<ul>
+<li>
+<p>
+Change the project description
+</p>
+</li>
+<li>
+<p>
+Create/delete a branch through the web UI (not SSH)
+</p>
+</li>
+<li>
+<p>
+Grant/revoke any access rights, including <tt>Owner</tt>
+</p>
+</li>
+</ul>
+<p>Note that project owners implicitly have branch creation or deletion
+through the web UI, but not through SSH.  To get SSH branch access
+project owners must grant an access right to a group they are a
+member of, just like for any other user.</p>
+<p>Ownership over a particular branch subspace may be delegated by
+entering a branch pattern.  To delegate control over all branches
+that begin with <tt>qa/</tt> to the QA group, add <tt>Owner</tt> category
+for reference <tt>refs/heads/qa/*</tt>.  Members of the QA group can
+further refine access, but only for references that begin with
+<tt>refs/heads/qa/</tt>.</p>
+<h3><a id="category_READ"></a>Read Access</h3>
+<p>The <tt>Read Access</tt> category controls visibility to the project's
+changes, comments, code diffs, and Git access over SSH or HTTP.
+A user must have <tt>Read Access +1</tt> in order to see a project, its
+changes, or any of its data.</p>
+<p>This category has a special behavior, where the per-project ACL is
+evaluated before the global all projects ACL.  If the per-project
+ACL has granted <tt>Read Access -1</tt>, and does not otherwise grant
+<tt>Read Access +1</tt>, then a <tt>Read Access +1</tt> in the all projects ACL
+is ignored.  This behavior is useful to hide a handful of projects
+on an otherwise public server.</p>
+<p>For an open source, public Gerrit installation it is common to grant
+<tt>Read Access +1</tt> to <tt>Anonymous Users</tt> in the <tt>-- All Projects
+--</tt> ACL, enabling casual browsing of any project's changes,
+as well as fetching any project's repository over SSH or HTTP.
+New projects can be temporarily hidden from public view by granting
+<tt>Read Access -1</tt> to <tt>Anonymous Users</tt> and granting <tt>Read Access +1</tt>
+to the project owner's group within the per-project ACL.</p>
+<p>For a private Gerrit installation using a trusted HTTP authentication
+source, granting <tt>Read Access +1</tt> to <tt>Registered Users</tt> may be more
+typical, enabling read access only to those users who have been
+able to authenticate through the HTTP access controls.  This may
+be suitable in a corporate deployment if the HTTP access control
+is already restricted to the correct set of users.</p>
+<h3><a id="category_READ_2"></a>Upload Access</h3>
+<p>The <tt>Read Access +2</tt> permits the user to upload a commit to the
+project's <tt>refs/for/BRANCH</tt> namespace, creating a new change for
+code review.</p>
+<p>Rather than place this permission in its own category, its chained
+into the Read Access category as a higher level of access.  A user
+must be able to clone or fetch the project in order to create a new
+commit on their local system, so in practice they must also have
+Read Access +1 to even develop a change.  Therefore upload access
+implies read access by simply being a higher level of it.</p>
+<p>For an open source, public Gerrit installation, it is common to
+grant <tt>Read Access +1..+2</tt> to <tt>Registered Users</tt> in the <tt>-- All
+Projects --</tt> ACL.  For more private installations, its common to
+simply grant <tt>Read Access +1..+2</tt> to all users of a project.</p>
+<h3><a id="category_pTAG"></a>Push Tag</h3>
+<p>This category permits users to push an annotated tag object over
+SSH into the project's repository.  Typically this would be done
+with a command line such as:</p>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>git push ssh://USER@HOST:PORT/PROJECT tag v1.0</tt></pre>
+</div></div>
+</div></div>
+<p>Tags must be annotated (created with <tt>git tag -a</tt> or <tt>git tag -s</tt>),
+should exist in the <tt>refs/tags/</tt> namespace, and should be new.</p>
+<p>This category is intended to be used to publish tags when a project
+reaches a stable release point worth remembering in history.</p>
+<p>The range of values is:</p>
+<ul>
+<li>
+<p>
++1 Create Signed Tag
+</p>
+<p>A new signed tag may be created.  The tagger email address must be
+verified for the current user.</p>
+</li>
+<li>
+<p>
++2 Create Annotated Tag
+</p>
+<p>A new annotated (unsigned) tag may be created.  The tagger email
+address must be verified for the current user.</p>
+</li>
+</ul>
+<p>To push tags created by users other than the current user (such
+as tags mirrored from an upstream project), <tt>Forge Identity +2</tt>
+must be also granted in addition to <tt>Push Tag &gt;= +1</tt>.</p>
+<p>To push lightweight (non annotated) tags, grant <tt>Push Branch +2
+Create Branch</tt> for reference name <tt>refs/tags/*</tt>, as lightweight
+tags are implemented just like branches in Git.</p>
+<p>To delete or overwrite an existing tag, grant <tt>Push Branch +3
+Force Push Branch; Delete Branch</tt> for reference name <tt>refs/tags/*</tt>,
+as deleting a tag requires the same permission as deleting a branch.</p>
+<h3><a id="category_pHD"></a>Push Branch</h3>
+<p>This category permits users to push directly into a branch over SSH,
+bypassing any code review process that would otherwise be used.</p>
+<p>This category has several possible values:</p>
+<ul>
+<li>
+<p>
++1 Update Branch
+</p>
+<p>Any existing branch can be fast-forwarded to a new commit.
+Creation of new branches is rejected.  Deletion of existing branches
+is rejected.  This is the safest mode as commits cannot be discarded.</p>
+</li>
+<li>
+<p>
++2 Create Branch
+</p>
+<p>Implies <em>Update Branch</em>, but also allows the creation of a new branch
+if the name does not not already designate an existing branch name.
+Like update branch, existing commits cannot be discarded.</p>
+</li>
+<li>
+<p>
++3 Force Push Branch; Delete Branch
+</p>
+<p>Implies both <em>Update Branch</em> and <em>Create Branch</em>, but also allows an
+existing branch to be deleted. Since a force push is effectively a
+delete immediately followed by a create, but performed atomically on
+the server and logged, this level also permits forced push updates
+to branches.  This level may allow existing commits to be discarded
+from a project history.</p>
+</li>
+</ul>
+<p>This category is primarily useful for projects that only want to
+take advantage of Gerrit's access control features and do not need
+its code review functionality.  Projects that need to require code
+reviews should not grant this category.</p>
+<h3><a id="category_FORG"></a>Forge Identity</h3>
+<p>Normally Gerrit requires the author and the committer identity
+lines in a Git commit object (or tagger line in an annotated tag) to
+match one of the registered email addresses of the uploading user.
+This permission allows users to bypass that validation, which may
+be necessary when mirroring changes from an upstream project.</p>
+<ul>
+<li>
+<p>
++1 Forge Author Identity
+</p>
+<p>Permits the use of an unverified author line in commit objects.
+This can be useful when applying patches received by email from
+3rd parties, when cherry-picking changes written by others across
+branches, or when amending someone else's commit to fix up a minor
+problem before submitting.</p>
+<p>By default this is granted to <tt>Registered Users</tt> in all projects,
+but a site administrator may disable it if verified authorship
+is required.</p>
+</li>
+<li>
+<p>
++2 Forge Committer or Tagger Identity
+</p>
+<p>Implies <em>Forge Author Identity</em>, but also allows the use of an
+unverified committer line in commit objects, or an unverified tagger
+line in annotated tag objects.  Typically this is only required
+when mirroring commits from an upstream project repository.</p>
+</li>
+<li>
+<p>
++3 Forge Gerrit Code Review Server Identity
+</p>
+<p>Implies <em>Forge Committer or Tagger Identity</em> as well as <em>Forge
+Author Identity</em>, but additionally allows the use of the server's
+own name and email on the committer line of a new commit object.
+This should only be necessary when force pushing a commit history
+which has been rewritten by <em>git filter-branch</em> and that contains
+merge commits previously created by this Gerrit Code Review server.</p>
+</li>
+</ul>
+<h3><a id="category_VRIF"></a>Verified</h3>
+<p>The verified category can have any meaning the project desires.
+It was originally invented by the Android Open Source Project to
+mean <em>compiles, passes basic unit tests</em>.</p>
+<p>The range of values is:</p>
+<ul>
+<li>
+<p>
+-1 Fails
+</p>
+<p>Tried to compile, but got a compile error, or tried to run tests,
+but one or more tests did not pass.</p>
+<p><strong>Any -1 blocks submit.</strong></p>
+</li>
+<li>
+<p>
+0 No score
+</p>
+<p>Didn't try to perform the verification tasks.</p>
+</li>
+<li>
+<p>
++1 Verified
+</p>
+<p>Compiled (and ran tests) successfully.</p>
+<p><strong>Any +1 enables submit.</strong></p>
+</li>
+</ul>
+<p>In order to submit a change, the change must have a <tt>+1 Verified</tt> in
+this category from at least one authorized user, and no <tt>-1 Fails</tt>
+from an authorized user.  Thus, <tt>-1 Fails</tt> can block a submit,
+while <tt>+1 Verified</tt> enables a submit.</p>
+<p>If a Gerrit installation does not wish to use this category in any
+project, it can be deleted from the database:</p>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>DELETE FROM approval_categories      WHERE category_id = 'VRIF';
+DELETE FROM approval_category_values WHERE category_id = 'VRIF';</tt></pre>
+</div></div>
+</div></div>
+<p>If a Gerrit installation wants to modify the description text
+associated with these category values, the text can be updated
+in the <tt>name</tt> column of the <tt>category_id = 'VRIF'</tt> rows in the
+<tt>approval_category_values</tt> table.</p>
+<p>Additional values could also be added to this category, to allow it
+to behave more like <tt>Code Review</tt> (below).  Insert -2 and +2 value
+rows into the <tt>approval_category_values</tt> with <tt>category_id</tt> set to
+<tt>VRIF</tt> to get the same behavior.</p>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">A restart is required after making database changes.
+See <a href="#restart_changes">below</a>.</td>
+</tr></table>
+</div>
+<h3><a id="category_CVRW"></a>Code Review</h3>
+<p>The code review category can have any meaning the project desires.
+It was originally invented by the Android Open Source Project to
+mean <em>I read the code and it seems reasonably correct</em>.</p>
+<p>The range of values is:</p>
+<ul>
+<li>
+<p>
+-2 Do not submit
+</p>
+<p>The code is so horribly incorrect/buggy/broken that it must not be
+submitted to this project, or to this branch.</p>
+<p><strong>Any -2 blocks submit.</strong></p>
+</li>
+<li>
+<p>
+-1 I would prefer that you didn't submit this
+</p>
+<p>The code doesn't look right, or could be done differently, but
+the reviewer is willing to live with it as-is if another reviewer
+accepts it, perhaps because it is better than what is currently in
+the project.  Often this is also used by contributors who don't like
+the change, but also aren't responsible for the project long-term
+and thus don't have final say on change submission.</p>
+<p>Does not block submit.</p>
+</li>
+<li>
+<p>
+0 No score
+</p>
+<p>Didn't try to perform the code review task, or glanced over it but
+don't have an informed opinion yet.</p>
+</li>
+<li>
+<p>
++1 Looks good to me, but someone else must approve
+</p>
+<p>The code looks right to this reviewer, but the reviewer doesn't
+have access to the <tt>+2</tt> value for this category.  Often this is
+used by contributors to a project who were able to review the change
+and like what it is doing, but don't have final approval over what
+gets submitted.</p>
+</li>
+<li>
+<p>
++2 Looks good to me, approved
+</p>
+<p>Basically the same as <tt>+1</tt>, but for those who have final say over
+how the project will develop.</p>
+<p><strong>Any +2 enables submit.</strong></p>
+</li>
+</ul>
+<p>In order to submit a change, the change must have a <tt>+2 Looks good to
+me, approved</tt> in this category from at least one authorized user,
+and no <tt>-2 Do not submit</tt> from an authorized user.  Thus <tt>-2</tt>
+can block a submit, while <tt>+2</tt> can enable it.</p>
+<p>If a Gerrit installation does not wish to use this category in any
+project, it can be deleted from the database:</p>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>DELETE FROM approval_categories      WHERE category_id = 'CRVW';
+DELETE FROM approval_category_values WHERE category_id = 'CRVW';</tt></pre>
+</div></div>
+</div></div>
+<p>If a Gerrit installation wants to modify the description text
+associated with these category values, the text can be updated
+in the <tt>name</tt> column of the <tt>category_id = 'CRVW'</tt> rows in the
+<tt>approval_category_values</tt> table.</p>
+<p>Additional values could be inserted into <tt>approval_category_values</tt>
+to further extend the negative and positive range, but there is
+likely little value in doing so as this only expands the middle
+region.  This category is a <tt>MaxWithBlock</tt> type, which means that
+the lowest negative value if present blocks a submit, while the
+highest positive value is required to enable submit.</p>
+<p><a id="function_MaxNoBlock"></a>There is also a <tt>MaxNoBlock</tt> category which still requires the
+highest positive value to submit, but the lowest negative value will
+not block the change, and does not carry over between patch sets.
+This level is mostly useful for automated code-reviews that may
+have false-negatives that shouldn't block the change.</p>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">A restart is required after making database changes.
+See <a href="#restart_changes">below</a>.</td>
+</tr></table>
+</div>
+<h3><a id="category_SUBM"></a>Submit</h3>
+<p>This category permits users to push the <tt>Submit Patch Set n</tt> button
+on the web UI.</p>
+<p>Submitting a change causes it to be merged into the destination
+branch as soon as possible, making it a permanent part of the
+project's history.</p>
+<p>In order to submit, all approval categories (such as <tt>Verified</tt> and
+<tt>Code Review</tt>, above) must enable submit, and also must not block it.
+See above for details on each category.</p>
+<h3><a id="category_makeoneup"></a>Your Category Here</h3>
+<p>Gerrit administrators can also make up their own categories.</p>
+<p>See above for descriptions of how <tt>Verified</tt> and <tt>Code Review</tt> work,
+and insert your own category with <tt>function_name = 'MaxWithBlock'</tt>
+to get the same behavior over your own range of values, in any
+category you desire.</p>
+<p>Ensure <tt>category_id</tt> is unique within your <tt>approval_categories</tt>
+table.  The default values <tt>VRIF</tt> and <tt>CVRF</tt> used for the categories
+described above are simply that, defaults, and have no special
+meaning to Gerrit.  The other standard category_id values like
+<tt>OWN</tt>, <tt>READ</tt>, <tt>SUBM</tt>, <tt>pTAG</tt> and <tt>pHD</tt> have special meaning and
+should not be modified or reused.</p>
+<p>The <tt>position</tt> column of <tt>approval_categories</tt> controls which column
+of the <em>Approvals</em> table the category appears in, providing some
+layout control to the administrator.</p>
+<p>All <tt>MaxWithBlock</tt> categories must have at least one positive value
+in the <tt>approval_category_values</tt> table, or else submit will never
+be enabled.</p>
+<p>To permit blocking submits, ensure a negative value is defined for
+your new category.  If you do not wish to have a blocking submit
+level for your category, do not define values less than 0.</p>
+<p>Keep in mind that category definitions are currently global to
+the entire Gerrit instance, and affect all projects hosted on it.
+Any change to a category definition affects everyone.</p>
+<p>For example, to define a new 3-valued category that behaves exactly
+like <tt>Verified</tt>, but has different names/labels:</p>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>INSERT INTO approval_categories
+  (name
+  ,position
+  ,function_name
+  ,category_id)
+VALUES
+  ('Copyright Check'
+  ,3
+  'MaxWithBlock'
+  ,'copy');</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>INSERT INTO approval_category_values
+  (category_id,value,name)
+VALUES
+  ('copy', -1, 'Do not have copyright');</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>INSERT INTO approval_category_values
+  (category_id,value,name)
+VALUES
+  ('copy', 0, 'No score');</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>INSERT INTO approval_category_values
+  (category_id,value,name)
+VALUES
+  ('copy', 1, 'Copyright clear');</tt></pre>
+</div></div>
+</div></div>
+<p>The new column will appear at the end of the table (in position 3),
+and <tt>-1 Do not have copyright</tt> will block submit, while <tt>+1 Copyright
+clear</tt> is required to enable submit.</p>
+<div class="admonitionblock">
+<a id="restart_changes"></a>
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">Restart the Gerrit web application and reload all browsers after
+making any database changes to approval categories.  Browsers are
+sent the list of known categories when they first visit the site,
+and don't notice changes until the page is closed and opened again,
+or is reloaded.</td>
+</tr></table>
+</div>
+</div>
+<hr style="
+  height: 2px;
+  color: silver;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+">
+<p>Part of <a href="index.html">Gerrit Code Review</a></p>
+<div id="footer">
+<div id="footer-text">
+Version 2.1.4<br />
+Last updated 09-Aug-2010 08:00:19 PDT
+</div>
+</div>
+</body>
+</html>

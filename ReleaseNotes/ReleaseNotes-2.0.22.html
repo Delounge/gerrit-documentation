@@ -1,0 +1,711 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.2.2" />
+<style type="text/css">
+/* Debug borders */
+p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 {
+/*
+  border: 1px solid red;
+*/
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+}
+
+tt {
+  color: navy;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  font-family: sans-serif;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  border-bottom: 2px solid silver;
+  padding-top: 0.5em;
+}
+
+div.sectionbody {
+  font-family: serif;
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+pre {
+  padding: 0;
+  margin: 0;
+}
+
+span#author {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+span#email {
+}
+span#revision {
+  font-family: sans-serif;
+}
+
+div#footer {
+  font-family: sans-serif;
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+div#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+div#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+div#preamble,
+div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-right: 10%;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+
+div.listingblock {
+  margin-right: 0%;
+}
+div.listingblock > div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock > div.content {
+  padding-left: 2.0em;
+}
+
+div.attribution {
+  text-align: right;
+}
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 2px solid silver;
+}
+
+div.exampleblock > div.content {
+  border-left: 2px solid silver;
+  padding: 0.5em;
+}
+
+div.verseblock div.content {
+  white-space: pre;
+}
+
+div.imageblock div.content { padding-left: 0; }
+div.imageblock img { border: 1px solid silver; }
+span.image img { border-style: none; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: italic;
+}
+dd > *:first-child {
+  margin-top: 0;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.olist2 {
+  list-style-type: lower-alpha;
+}
+
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead {
+  font-family: sans-serif;
+  font-weight: bold;
+}
+tfoot {
+  font-weight: bold;
+}
+
+div.hlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hlist td {
+  padding-bottom: 5px;
+}
+td.hlist1 {
+  vertical-align: top;
+  font-style: italic;
+  padding-right: 0.8em;
+}
+td.hlist2 {
+  vertical-align: top;
+}
+
+@media print {
+  div#footer-badges { display: none; }
+}
+
+div#toctitle {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+/* Workarounds for IE6's broken and incomplete CSS2. */
+
+div.sidebar-content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+div.sidebar-title, div.image-title {
+  font-family: sans-serif;
+  font-weight: bold;
+  margin-top: 0.0em;
+  margin-bottom: 0.5em;
+}
+
+div.listingblock div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock-content {
+  padding-left: 2.0em;
+}
+
+div.exampleblock-content {
+  border-left: 2px solid silver;
+  padding-left: 0.5em;
+}
+
+/* IE6 sets dynamically generated links as visited. */
+div#toc a:visited { color: blue; }
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function(){generateToc(2)}
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4.sp
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, October 2006. License: GPL */
+ /* modified by Shawn Pearce, August 2009. License: GPL */
+
+function getText(el) {
+  var text = "";
+  for (var i = el.firstChild; i != null; i = i.nextSibling) {
+    if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+      text += i.data;
+    else if (i.firstChild != null)
+      text += getText(i);
+  }
+  return text;
+}
+
+function TocEntry(el, text, toclevel) {
+  this.element = el;
+  this.text = text;
+  this.toclevel = toclevel;
+  this.assigned = false;
+
+  if (el.id != '') {
+    this.id = el.id;
+
+  } else {
+    var a = el.firstChild;
+    if ((a.tagName == "a" || a.tagName == "A") && a.id != "") {
+      this.id = a.id;
+    } else {
+      this.id = '';
+    }
+  }
+}
+
+function tocEntries(el, toclevels) {
+  var result = new Array;
+  var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+  // Function that scans the DOM tree for header elements (the DOM2
+  // nodeIterator API would be a better technique but not supported by all
+  // browsers).
+  var iterate = function (el) {
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+        var mo = re.exec(i.tagName)
+        if (mo)
+          result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+        iterate(i);
+      }
+    }
+  }
+  iterate(el);
+  return result;
+}
+
+// This function does the work. toclevels = 1..4.
+function generateToc(toclevels) {
+  var simple_re = new RegExp('^[a-zA-Z._ -]{1,}$');
+  var entries = tocEntries(document.getElementsByTagName("body")[0], toclevels);
+  var usedIds = new Array();
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id != "")
+      usedIds[entry.id] = entry;
+  }
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id != "" || !simple_re.exec(entry.text))
+      continue;
+
+    var n = entry.text.replace(/ /g, '_').toLowerCase();
+    var e = usedIds[n];
+    if (e) {
+      if (e.assigned)
+        e.id = '';
+      continue;
+    }
+
+    entry.assigned = true;
+    entry.id = n;
+    entry.element.id = entry.id;
+    usedIds[n] = entry;
+  }
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id == '') {
+      entry.id = "toc" + i;
+      entry.element.id = entry.id;
+    }
+  }
+
+  var toc = document.getElementById("toc");
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    var a = document.createElement("a");
+    a.href = "#" + entry.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+}
+/*]]>*/
+</script>
+<title>Release notes for Gerrit 2.0.22</title>
+</head>
+<body>
+<div id="header">
+<h1>Release notes for Gerrit 2.0.22</h1>
+<span id="revision">version 2.0.22 (from v2.1.1.1-104-gc20e283)</span>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<p>Gerrit 2.0.22 is now available in the usual location:</p>
+<p><a href="http://code.google.com/p/gerrit/downloads/list">http://code.google.com/p/gerrit/downloads/list</a></p>
+</div>
+</div>
+<h2>Schema Change</h2>
+<div class="sectionbody">
+<p>There is no schema change in this release.</p>
+<ul>
+<li>
+<p>
+Restriction on SSH Username
+</p>
+<p>There is a new restriction placed on the SSH Username field
+within an account.  Users who are using invalid names should
+be asked to change their name to something more suitable.
+Administrators can identify these users with the following query:</p>
+</li>
+</ul>
+<div class="listingblock">
+<div class="content">
+<pre><tt>     -- PostgreSQL
+     SELECT account_id,preferred_email,ssh_user_name
+     FROM accounts
+     WHERE NOT (ssh_user_name ~ '^[a-zA-Z][a-zA-Z0-9._-]*[a-zA-Z0-9]$');
+
+     -- MySQL
+     SELECT account_id,preferred_email,ssh_user_name
+     FROM accounts
+     WHERE NOT (ssh_user_name REGEXP '^[a-zA-Z][a-zA-Z0-9._-]*[a-zA-Z0-9]$');</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>Administrators can force these users to select a new name by
+setting ssh_user_name to NULL; the user will not be able to
+login over SSH until they return and select a new name.</tt></pre>
+</div></div>
+</div>
+<h2>New Features</h2>
+<div class="sectionbody">
+<ul>
+<li>
+<p>
+GERRIT-280  create-project: Add &#8212;branch and cleanup arguments
+</p>
+<p>The &#8212;branch option to create-project can be used to setup the
+default initial branch to be a name other than <em>master</em>.
+Argument parsing also changed slightly, especially around the
+boolean options and submit type.  Please recheck the documentation
+and/or the output of &#8212;help.</p>
+</li>
+<li>
+<p>
+GERRIT-216  Add slave mode to ssh daemon
+</p>
+<p>The standalone SSH daemon can now be run in a read-only
+mode.  This allows use Gerrit's access control database for
+access decisions when serving a read-only copy of the project
+repositories.  Placing a read-only slave local to a remote office
+may reduce sync times for those closer to the slave server.</p>
+</li>
+<li>
+<p>
+Enable multi-line comment highlighting for Scala code
+</p>
+<p>Scala source code now highlights more like Java source code does,
+especially for multiline <tt>/<strong>* &#8230; </strong>/</tt> style comments.</p>
+</li>
+<li>
+<p>
+GERRIT-271  Enable forcing ldap.accountSshUserName to lowercase
+</p>
+<p>The following properties may now be configured from LDAP using
+more complex expressions: accountFullName, accountEmailAddress,
+accountSshUserName.  Property expressions permit forcing
+to a lowercase string, or performing string concentation.
+These features may help some environments to better integrate
+with their local LDAP server.</p>
+</li>
+<li>
+<p>
+Support username/password authentication by LDAP
+</p>
+<p>A new auth.type of LDAP was added to support Gerrit prompting
+the end-user for their username and password, and then doing a
+simple bind against the LDAP server to authenticate the user.
+This can simplify installation in environments which lack a
+web based single-sign-on solution, but which already have a
+centralized LDAP directory for user management.</p>
+</li>
+<li>
+<p>
+Inform submitter of merge failure by dialog box
+</p>
+<p>When a change submit fails, a dialog box is now displayed showing
+the merge failure message.  This saves the user from needing to
+scroll down to the end of the change page to determine if their
+submit was successful, or not.</p>
+</li>
+<li>
+<p>
+Better submit error messages
+</p>
+<p>Missing dependency submit errors are now much more descriptive
+of the problem, helping the user to troubleshoot the issue on
+their own.  Merge errors from projects using the cherry-pick
+and fast-forward submit types are also more descriptive of the
+real cause.  Unfortunately path conflict errors are not any more
+descriptive, but path conflict is now only reported when there
+is actually a path conflict.</p>
+</li>
+<li>
+<p>
+issue 285   Include pull command line in email notifications
+</p>
+<p>Sample git pull lines are now included in email notifications.</p>
+</li>
+</ul>
+</div>
+<h2>Bug Fixes</h2>
+<div class="sectionbody">
+<ul>
+<li>
+<p>
+create-project: Document needing to double quote descr&#8230;
+</p>
+<p>The &#8212;description flag to create-project require two levels
+of quoting if the new description string contains whitespace.
+The documentation has been updated to reflect that, and shows some
+examples .  Unfortunately this is not easily fixed in software,
+due to the way the SSH client passes the command line to the
+remote server.</p>
+</li>
+<li>
+<p>
+GERRIT-281  daemon: Remove unnecessary requirement of HttpServletR&#8230;
+</p>
+<p>The standalone SSH daemon now starts correctly, without needing
+to put the Java servlet API into the CLASSPATH.</p>
+</li>
+<li>
+<p>
+Enforce Account.sshUserName to match expression
+</p>
+</li>
+<li>
+<p>
+Restrict typeable characters in SSH username
+</p>
+</li>
+<li>
+<p>
+Disallow ., <tt>_</tt> and - in end of SSH Username
+</p>
+<p>SSH usernames were permitted to contain any character, including
+oddball characters like <em>\0</em> and <em>/</em>.  We really want them to
+be a restricted subset which won't cause errors when we try to
+map SSH usernames as file names in a Git repository as we try
+to move away from a SQL database.</p>
+</li>
+<li>
+<p>
+GERRIT-282  Fix reply to comment on left side
+</p>
+<p>Clicking <em>Reply</em> to a comment on the left hand side sometimes
+generated a server error due to a subtle bug in how the reply
+was being setup.  Fixed.</p>
+</li>
+<li>
+<p>
+issue 282   Fix NullPointerException if ldap.password is missing
+</p>
+<p>The server NPE'd when trying to open an LDAP connection if
+ldap.username was set, but ldap.password was missing.  We now
+assume an unset ldap.password is the same as an empty password.</p>
+</li>
+<li>
+<p>
+issue 284   Make cursor pointer when hovering over OpenID links
+</p>
+<p>The cursor was wrong in the OpenID sign-in dialog.  Fixed.</p>
+</li>
+<li>
+<p>
+Use abbreviated Change-Id in merge messages
+</p>
+<p>Merge commits created by Gerrit were still using the older style
+integer change number; changed to use the abbreviated Change-Id.</p>
+</li>
+</ul>
+</div>
+<h2>Other Changes</h2>
+<div class="sectionbody">
+<ul>
+<li>
+<p>
+Start 2.0.22 development
+</p>
+</li>
+<li>
+<p>
+Configure Maven to build with UTF-8 encoding
+</p>
+</li>
+<li>
+<p>
+Document minimum build requirement for Mac OS X
+</p>
+</li>
+<li>
+<p>
+Merge change 10296
+</p>
+</li>
+<li>
+<p>
+Remove trailing whitespace.
+</p>
+</li>
+<li>
+<p>
+Update issue tracking link in documentation
+</p>
+</li>
+<li>
+<p>
+Merge branch <em>doc-update</em>
+</p>
+</li>
+<li>
+<p>
+Move client.openid to auth.openid
+</p>
+</li>
+<li>
+<p>
+Fix minor errors in install documentation.
+</p>
+</li>
+<li>
+<p>
+Merge change 11961
+</p>
+</li>
+<li>
+<p>
+Cleanup merge op to better handle cherry-pick, error c&#8230;
+</p>
+</li>
+<li>
+<p>
+GERRIT-67   Wait for dependencies to submit before claiming merge &#8230;
+</p>
+</li>
+<li>
+<p>
+Move abandonChange to ChangeManageService
+</p>
+</li>
+<li>
+<p>
+Remove trailing whitespace in install.txt
+</p>
+</li>
+<li>
+<p>
+Gerrit 2.0.22
+</p>
+</li>
+</ul>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 2.0.22 (from v2.1.1.1-104-gc20e283)<br />
+Last updated 06-Dec-2010 16:46:44 PDT
+</div>
+</div>
+</body>
+</html>

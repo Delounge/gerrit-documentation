@@ -1,0 +1,644 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.2.2" />
+<style type="text/css">
+/* Debug borders */
+p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 {
+/*
+  border: 1px solid red;
+*/
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+}
+
+tt {
+  color: navy;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  font-family: sans-serif;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  border-bottom: 2px solid silver;
+  padding-top: 0.5em;
+}
+
+div.sectionbody {
+  font-family: serif;
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+pre {
+  padding: 0;
+  margin: 0;
+}
+
+span#author {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+span#email {
+}
+span#revision {
+  font-family: sans-serif;
+}
+
+div#footer {
+  font-family: sans-serif;
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+div#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+div#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+div#preamble,
+div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-right: 10%;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+
+div.listingblock {
+  margin-right: 0%;
+}
+div.listingblock > div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock > div.content {
+  padding-left: 2.0em;
+}
+
+div.attribution {
+  text-align: right;
+}
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 2px solid silver;
+}
+
+div.exampleblock > div.content {
+  border-left: 2px solid silver;
+  padding: 0.5em;
+}
+
+div.verseblock div.content {
+  white-space: pre;
+}
+
+div.imageblock div.content { padding-left: 0; }
+div.imageblock img { border: 1px solid silver; }
+span.image img { border-style: none; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: italic;
+}
+dd > *:first-child {
+  margin-top: 0;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.olist2 {
+  list-style-type: lower-alpha;
+}
+
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead {
+  font-family: sans-serif;
+  font-weight: bold;
+}
+tfoot {
+  font-weight: bold;
+}
+
+div.hlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hlist td {
+  padding-bottom: 5px;
+}
+td.hlist1 {
+  vertical-align: top;
+  font-style: italic;
+  padding-right: 0.8em;
+}
+td.hlist2 {
+  vertical-align: top;
+}
+
+@media print {
+  div#footer-badges { display: none; }
+}
+
+div#toctitle {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+/* Workarounds for IE6's broken and incomplete CSS2. */
+
+div.sidebar-content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+div.sidebar-title, div.image-title {
+  font-family: sans-serif;
+  font-weight: bold;
+  margin-top: 0.0em;
+  margin-bottom: 0.5em;
+}
+
+div.listingblock div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock-content {
+  padding-left: 2.0em;
+}
+
+div.exampleblock-content {
+  border-left: 2px solid silver;
+  padding-left: 0.5em;
+}
+
+/* IE6 sets dynamically generated links as visited. */
+div#toc a:visited { color: blue; }
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function(){generateToc(2)}
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4.sp
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, October 2006. License: GPL */
+ /* modified by Shawn Pearce, August 2009. License: GPL */
+
+function getText(el) {
+  var text = "";
+  for (var i = el.firstChild; i != null; i = i.nextSibling) {
+    if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+      text += i.data;
+    else if (i.firstChild != null)
+      text += getText(i);
+  }
+  return text;
+}
+
+function TocEntry(el, text, toclevel) {
+  this.element = el;
+  this.text = text;
+  this.toclevel = toclevel;
+  this.assigned = false;
+
+  if (el.id != '') {
+    this.id = el.id;
+
+  } else {
+    var a = el.firstChild;
+    if ((a.tagName == "a" || a.tagName == "A") && a.id != "") {
+      this.id = a.id;
+    } else {
+      this.id = '';
+    }
+  }
+}
+
+function tocEntries(el, toclevels) {
+  var result = new Array;
+  var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+  // Function that scans the DOM tree for header elements (the DOM2
+  // nodeIterator API would be a better technique but not supported by all
+  // browsers).
+  var iterate = function (el) {
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+        var mo = re.exec(i.tagName)
+        if (mo)
+          result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+        iterate(i);
+      }
+    }
+  }
+  iterate(el);
+  return result;
+}
+
+// This function does the work. toclevels = 1..4.
+function generateToc(toclevels) {
+  var simple_re = new RegExp('^[a-zA-Z._ -]{1,}$');
+  var entries = tocEntries(document.getElementsByTagName("body")[0], toclevels);
+  var usedIds = new Array();
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id != "")
+      usedIds[entry.id] = entry;
+  }
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id != "" || !simple_re.exec(entry.text))
+      continue;
+
+    var n = entry.text.replace(/ /g, '_').toLowerCase();
+    var e = usedIds[n];
+    if (e) {
+      if (e.assigned)
+        e.id = '';
+      continue;
+    }
+
+    entry.assigned = true;
+    entry.id = n;
+    entry.element.id = entry.id;
+    usedIds[n] = entry;
+  }
+
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.id == '') {
+      entry.id = "toc" + i;
+      entry.element.id = entry.id;
+    }
+  }
+
+  var toc = document.getElementById("toc");
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    var a = document.createElement("a");
+    a.href = "#" + entry.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+}
+/*]]>*/
+</script>
+<title>Release notes for Gerrit 2.0.20</title>
+</head>
+<body>
+<div id="header">
+<h1>Release notes for Gerrit 2.0.20</h1>
+<span id="revision">version 2.0.20 (from v2.1.1.1-104-gc20e283)</span>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<p>Gerrit 2.0.20 is now available in the usual location:</p>
+<p><a href="http://code.google.com/p/gerrit/downloads/list">http://code.google.com/p/gerrit/downloads/list</a></p>
+</div>
+</div>
+<h2>Schema Change</h2>
+<div class="sectionbody">
+<p>A prior bug (GERRIT-262) permitted some invalid data to enter into some databases.  Administrators should consider running the following update statement as part of their upgrade to .20 to make any comments which were created with this bug visible:</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  UPDATE patch_comments SET line_nbr = 1 WHERE line_nbr &lt; 1;</tt></pre>
+</div></div>
+<p>Unfortunately the correct position of the comment has been lost, and the statement above will simply position them on the first line of the file.  Fortunately the lost comments were only on the wrong side of an insertion or deletion, and are generally rare.  (On my servers only 0.33% of the comments were created like this.)</p>
+</div>
+<h2>New Features</h2>
+<div class="sectionbody">
+<ul>
+<li>
+<p>
+New ssh command approve
+</p>
+<p>Patch sets can now be approved remotely via SSH.  For more
+details on this new feature please see the user documentation:
+<a href="http://gerrit.googlecode.com/svn/documentation/2.0/cmd-approve.html">http://gerrit.googlecode.com/svn/documentation/2.0/cmd-approve.html</a></p>
+</li>
+<li>
+<p>
+Support changing Google Account identity strings
+</p>
+<p>For various reasons, including but not being limited to server
+host name changes, the Google Accounts OpenID provider service
+may change the identity string it returns to users.  By setting
+auth.allowGoogleAccountUpgrade = true in the configuration file
+administrators may permit automatically updating an existing
+account with a new identity by matching on the email address.</p>
+</li>
+</ul>
+</div>
+<h2>Bug Fixes</h2>
+<div class="sectionbody">
+<ul>
+<li>
+<p>
+GERRIT-262  Disallow creating comments on line 0
+</p>
+<p>Users were able to create comments in dead regions of a file.
+That is, if a region was deleted, and thus the left hand side
+showed red deletion of lines, and the right hand side showed a
+grey background of nothing, users were able to place a comment on
+the right hand side in the nothing area.  Since this line did not
+actually exist, the comment was positioned on line 0 of the file.
+Because line 0 does not exist (lines are numbered 1..n), these
+comments become hidden and could not be seen, but showed up in
+the "X comments" counter seen on the Patch History or in the
+listing of files in a patch set.
+The UI and RPC layer was fixed to prevent comments on line 0,
+but existing comments need to be manually moved to a real line.
+See above for the suggested SQL UPDATE command.</p>
+</li>
+<li>
+<p>
+Make ID column same font size as rest of table
+</p>
+<p>The font size of the ID column was too small, it is now the
+same size as the other columns in the table.</p>
+</li>
+<li>
+<p>
+Fix ALTER INDEX in upgrade015_016_part1_mysql
+</p>
+</li>
+<li>
+<p>
+GERRIT-269  Fix bad change_key creation in upgrade016_017_mysql
+</p>
+<p>MySQL schema upgrade scripts had a few bugs, fixed.</p>
+</li>
+</ul>
+</div>
+<h2>Other Changes</h2>
+<div class="sectionbody">
+<ul>
+<li>
+<p>
+Restart 2.0.20
+</p>
+</li>
+<li>
+<p>
+Update MINA SSHD to 0.2.0 release
+</p>
+</li>
+<li>
+<p>
+Update args4j to snapshot built from current CVS
+</p>
+</li>
+<li>
+<p>
+Cleanup newCmdLineParser method in BaseCommand
+</p>
+</li>
+<li>
+<p>
+Remove unnecessary throws IOException in ApproveCommand
+</p>
+</li>
+<li>
+<p>
+Cleanup formatting in ApproveCommand
+</p>
+</li>
+<li>
+<p>
+Cleanup assumption of Branch.NameKey parent is Project&#8230;
+</p>
+</li>
+<li>
+<p>
+Fix deprecated constructor warning in PatchSetIdHandler
+</p>
+</li>
+<li>
+<p>
+Don't log command line caused failures in flush-caches
+</p>
+</li>
+<li>
+<p>
+Use Guice to create custom arg4j OptionHandler instanc&#8230;
+</p>
+</li>
+<li>
+<p>
+gerrit approve: Allow &#8212;code-review=+2
+</p>
+</li>
+<li>
+<p>
+gerrit approve: Cleanup invalid patch set error handli&#8230;
+</p>
+</li>
+<li>
+<p>
+gerrit approve: Cleanup error reporting for missing ob&#8230;
+</p>
+</li>
+<li>
+<p>
+Parse project names through custom args4j OptionHandler
+</p>
+</li>
+<li>
+<p>
+git receive-pack: Use args4j to parse &#8212;reviewer and -&#8230;
+</p>
+</li>
+<li>
+<p>
+Move args4j handlers to their own package
+</p>
+</li>
+<li>
+<p>
+gerrit approve: Cleanup option parsing to reduce unnec&#8230;
+</p>
+</li>
+<li>
+<p>
+gerrit approve: accept commit SHA-1s for approval too
+</p>
+</li>
+<li>
+<p>
+gerrit approve: Allow approving multiple commits at on&#8230;
+</p>
+</li>
+<li>
+<p>
+gerrit approve: Add user documentation
+</p>
+</li>
+<li>
+<p>
+Remove unused imports from PatchSetDetailServiceImpl
+</p>
+</li>
+<li>
+<p>
+Only enable auth.allowGoogleAccountUpgrade when auth.t&#8230;
+</p>
+</li>
+<li>
+<p>
+Rename loginType to authType
+</p>
+</li>
+<li>
+<p>
+gerrit 2.0.20
+</p>
+</li>
+</ul>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 2.0.20 (from v2.1.1.1-104-gc20e283)<br />
+Last updated 06-Dec-2010 16:46:43 PDT
+</div>
+</div>
+</body>
+</html>
