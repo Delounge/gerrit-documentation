@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>gerrit replicate</h1>
-<span id="revnumber">version 2.2.1</span>
+<span id="revnumber">version 2.2.2-rc1</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -566,9 +566,9 @@ footnotes: function () {
 <h2 id="_synopsis">SYNOPSIS</h2>
 <div class="sectionbody">
 <div class="verseblock">
-<div class="verseblock-content"><em>ssh</em> -p &lt;port&gt; &lt;host&gt; <em>gerrit replicate</em> \
-[--url &lt;PATTERN&gt;] \
-{--all | &lt;PROJECT&gt; &#8230;}</div>
+<div class="verseblock-content"><em>ssh</em> -p &lt;port&gt; &lt;host&gt; <em>gerrit replicate</em>
+  [--url &lt;PATTERN&gt;]
+  {--all | &lt;PROJECT&gt; &#8230;}</div>
 <div class="verseblock-attribution">
 </div></div>
 </div>
@@ -595,12 +595,12 @@ After repacking locally, and using <tt>rsync</tt> to distribute the new
   pack files to the destinations.
 </p>
 <div class="paragraph"><p>If the local server is repacked, and then the resulting pack files
-are sent to remote peers using <tt>rsync -a \--delete-after</tt>, there
+are sent to remote peers using <tt>rsync -a --delete-after</tt>, there
 is a chance that the rsync missed a change that was added during
 the rsync data transfer, and the rsync will remove that changes&#8217;s
 data from the remote, even though the automatic replication pushed
 it there in parallel to the rsync.</p></div>
-<div class="paragraph"><p>Its a good idea to run replicate with <tt>\--all</tt> to ensure all
+<div class="paragraph"><p>Its a good idea to run replicate with <tt>--all</tt> to ensure all
 projects are consistent after the rsync is complete.</p></div>
 </li>
 <li>
@@ -618,7 +618,8 @@ just the affected project can update the mirrors.</p></div>
 </div>
 <h2 id="_access">ACCESS</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Caller must be a member of the privileged <em>Administrators</em> group.</p></div>
+<div class="paragraph"><p>Caller must be a member of the privileged <em>Administrators</em> group,
+or have been granted the <em>Start Replication</em> global capability.</p></div>
 </div>
 <h2 id="_scripting">SCRIPTING</h2>
 <div class="sectionbody">
@@ -636,7 +637,7 @@ just the affected project can update the mirrors.</p></div>
 </p>
 </dd>
 <dt class="hdlist1">
---url=&lt;PATTERN&gt;
+--url &lt;PATTERN&gt;
 </dt>
 <dd>
 <p>
@@ -663,7 +664,7 @@ just the affected project can update the mirrors.</p></div>
 <div class="exampleblock-content">
 <div class="literalblock">
 <div class="content">
-<pre><tt>$ ssh -p 29418 review.example.com gerrit replicate --url=srv2 --all</tt></pre>
+<pre><tt>$ ssh -p 29418 review.example.com gerrit replicate --url srv2 --all</tt></pre>
 </div></div>
 </div></div>
 <div class="paragraph"><p>Replicate only the <tt>tools/gerrit</tt> project, after deleting a ref
@@ -698,8 +699,8 @@ $ ssh -p 29418 review.example.com gerrit replicate tools/gerrit</tt></pre>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.1<br />
-Last updated 2009-12-19 20:47:23 PDT
+Version 2.2.2-rc1<br />
+Last updated 2011-12-29 16:28:23 MDT
 </div>
 </div>
 </body>

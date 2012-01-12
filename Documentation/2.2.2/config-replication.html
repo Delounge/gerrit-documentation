@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>Gerrit Code Review - Git Replication</h1>
-<span id="revnumber">version 2.2.1</span>
+<span id="revnumber">version 2.2.2-rc1</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -642,7 +642,7 @@ be specified within a single remote block, listing different
 destinations which share the same settings.  Assuming sufficient
 threads in the thread pool, Gerrit pushes to all URLs in parallel,
 using one thread per URL.</p></div>
-<div class="paragraph"><p>Within each URL value the magic placeholder <tt>$\{name}</tt> is replaced
+<div class="paragraph"><p>Within each URL value the magic placeholder <tt>${name}</tt> is replaced
 with the Gerrit project name.  This is a Gerrit specific extension
 to the otherwise standard Git URL syntax and it must be included
 in each URL so that Gerrit can figure out where each project needs
@@ -684,14 +684,14 @@ using the SSH transport.</p></div>
 </dt>
 <dd>
 <div class="paragraph"><p>Standard Git refspec denoting what should be replicated.  Setting this
-to <tt>+refs/heads/\*:refs/heads/\*</tt> would mirror only the active
+to <tt>+refs/heads/*:refs/heads/*</tt> would mirror only the active
 branches, but not the change refs under <tt>refs/changes/</tt>, or the tags
 under <tt>refs/tags/</tt>.</p></div>
 <div class="paragraph"><p>Multiple push keys can be supplied, to specify multiple patterns
 to match against.  In the example file above, remote "pubmirror"
-uses two push keys to match both <tt>refs/heads/\*</tt> and <tt>refs/tags/*</tt>,
+uses two push keys to match both <tt>refs/heads/*</tt> and <tt>refs/tags/*</tt>,
 but excludes all others, including <tt>refs/changes/*</tt>.</p></div>
-<div class="paragraph"><p>Defaults to <tt>+refs/\*:refs/*</tt> (all refs) if not specified.</p></div>
+<div class="paragraph"><p>Defaults to <tt>+refs/*:refs/*</tt> (all refs) if not specified.</p></div>
 </dd>
 <dt class="hdlist1">
 <a id="remote.name.timeout"></a>remote.&lt;name&gt;.timeout
@@ -752,6 +752,24 @@ this group to control if a project should be replicated or not to the
 remote.</p></div>
 <div class="paragraph"><p>By default, replicates without group control, i.e replicates
 everything to all remotes.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="remote.name.replicatePermissions"></a>remote.&lt;name&gt;.replicatePermissions
+</dt>
+<dd>
+<div class="paragraph"><p>If true, permissions-only projects and the refs/meta/config branch
+will also be replicated to the remote site.  These projects and
+branches may be needed to keep a backup or slave server current.</p></div>
+<div class="paragraph"><p>By default, true, replicating everything.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="remote.name.mirror"></a>remote.&lt;name&gt;.mirror
+</dt>
+<dd>
+<div class="paragraph"><p>If true, replication will remove remote branches that absent locally
+or invisible to the replication (i.e. read access denied via <em>authGroup</em>
+option).</p></div>
+<div class="paragraph"><p>By default, false, do not remove remote branches.</p></div>
 </dd>
 </dl></div>
 <div class="paragraph"><p><a id="secure_config"></a>File <tt>secure.config</tt></p></div>
@@ -849,8 +867,8 @@ connect to that destination, and replication to that URL will fail.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.1<br />
-Last updated 2011-05-15 13:42:28 PDT
+Version 2.2.2-rc1<br />
+Last updated 2012-01-11 16:35:59 MDT
 </div>
 </div>
 </body>

@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>Gerrit Code Review - Single Sign-On Security</h1>
-<span id="revnumber">version 2.2.1</span>
+<span id="revnumber">version 2.2.2-rc1</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -660,7 +660,7 @@ will be obtained from the HTTP authorization data.</p></div>
 (including <tt>Authorization</tt>) then Gerrit won&#8217;t correctly honor the
 standard <tt>Authorization</tt> HTTP header.</p></div>
 <div class="paragraph"><p>The auth.emailFormat field (<em>optional</em>) sets the preferred email
-address during first login.  Gerrit will replace <tt>\{0\}</tt> with the
+address during first login.  Gerrit will replace <tt>{0}</tt> with the
 username, as obtained from the Authorization header.  A format such
 as shown in the example would be typical, to add the domain name
 of the organization.</p></div>
@@ -718,7 +718,7 @@ product has stored the username.  Usually this is "SM_USER", but
 may differ in your environment.  Please refer to your organization&#8217;s
 single sign-on or security group to ensure the setting is correct.</p></div>
 <div class="paragraph"><p>The auth.emailFormat field (<em>optional</em>) sets the user&#8217;s preferred
-email address when they first login.  Gerrit will replace <tt>\{0\}</tt>
+email address when they first login.  Gerrit will replace <tt>{0}</tt>
 with the username, as supplied by Siteminder.  A format such as
 shown in the example would be typical, to add the domain name of
 the organization.</p></div>
@@ -751,8 +751,8 @@ then the external_id field would be populated with "gerrit:foo".</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.1<br />
-Last updated 2011-05-20 09:59:14 PDT
+Version 2.2.2-rc1<br />
+Last updated 2012-01-11 16:35:59 MDT
 </div>
 </div>
 </body>

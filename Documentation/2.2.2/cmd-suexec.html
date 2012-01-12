@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>suexec</h1>
-<span id="revnumber">version 2.2.1</span>
+<span id="revnumber">version 2.2.2-rc1</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -566,14 +566,22 @@ footnotes: function () {
 <h2 id="_synopsis">SYNOPSIS</h2>
 <div class="sectionbody">
 <div class="verseblock">
-<div class="verseblock-content"><em>ssh</em> -p &lt;port&gt; <em>Gerrit Code Review</em>@localhost -i &lt;private host key&gt; <em>suexec</em> --as &lt;EMAIL&gt; [--from HOST:PORT] [--] [COMMAND]</div>
+<div class="verseblock-content"><em>ssh</em> -p &lt;port&gt;
+  -i SITE_PATH/etc/ssh_host_rsa_key
+  <em>"Gerrit Code Review@localhost"</em>
+  <em>suexec</em>
+  --as &lt;EMAIL&gt;
+  [--from HOST:PORT]
+  [--]
+  [COMMAND]</div>
 <div class="verseblock-attribution">
 </div></div>
 </div>
 <h2 id="_description">DESCRIPTION</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>The suexec command can only be invoked by the magic user Gerrit Code Review
-and permits executing any other command as any other registered user account.</p></div>
+<div class="paragraph"><p>The suexec command can only be invoked by the magic user <tt>Gerrit
+Code Review</tt> and permits executing any other command as any other
+registered user account.</p></div>
 </div>
 <h2 id="_options">OPTIONS</h2>
 <div class="sectionbody">
@@ -591,8 +599,8 @@ and permits executing any other command as any other registered user account.</p
 </dt>
 <dd>
 <p>
-        Hostname and port of the machine you want to impersonate the command
-        coming from.
+        Hostname and port of the machine you want to impersonate
+        the command coming from.
 </p>
 </dd>
 <dt class="hdlist1">
@@ -607,8 +615,8 @@ COMMAND
 </div>
 <h2 id="_access">ACCESS</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Caller must be the magic user Gerrit Code Review using the SSH daemon&#8217;s host key
-or a key on this daemon&#8217;s peer host key ring.</p></div>
+<div class="paragraph"><p>Caller must be the magic user Gerrit Code Review using the SSH
+daemon&#8217;s host key or a key on this daemon&#8217;s peer host key ring.</p></div>
 </div>
 <h2 id="_scripting">SCRIPTING</h2>
 <div class="sectionbody">
@@ -621,9 +629,13 @@ or a key on this daemon&#8217;s peer host key ring.</p></div>
 <div class="exampleblock-content">
 <div class="literalblock">
 <div class="content">
-<pre><tt>$ sudo -u gerrit ssh -p 29418 -i site_path/etc/ssh_host_rsa_key \
-'Gerrit Code Review'@localhost suexec --as bob@example.com -- \
-gerrit approve --verified=+1 c0ff33</tt></pre>
+<pre><tt>$ sudo -u gerrit ssh -p 29418 \
+  -i site_path/etc/ssh_host_rsa_key \
+  "Gerrit Code Review@localhost" \
+  suexec \
+  --as bob@example.com \
+  -- \
+  gerrit approve --verified +1 c0ff33</tt></pre>
 </div></div>
 </div></div>
 </div>
@@ -638,8 +650,8 @@ gerrit approve --verified=+1 c0ff33</tt></pre>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.1<br />
-Last updated 2010-12-08 17:43:21 PDT
+Version 2.2.2-rc1<br />
+Last updated 2011-12-29 16:28:23 MDT
 </div>
 </div>
 </body>

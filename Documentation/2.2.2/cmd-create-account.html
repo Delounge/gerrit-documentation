@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>gerrit create-account</h1>
-<span id="revnumber">version 2.2.1</span>
+<span id="revnumber">version 2.2.2-rc1</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -566,12 +566,12 @@ footnotes: function () {
 <h2 id="_synopsis">SYNOPSIS</h2>
 <div class="sectionbody">
 <div class="verseblock">
-<div class="verseblock-content"><em>ssh</em> -p &lt;port&gt; &lt;host&gt; <em>gerrit create-account</em> \
-[--group &lt;GROUP&gt;] \
-[--full-name &lt;FULLNAME&gt;] \
-[--email &lt;EMAIL&gt;] \
-[--ssh-key -|&lt;KEY&gt;] \
-&lt;USERNAME&gt;</div>
+<div class="verseblock-content"><em>ssh</em> -p &lt;port&gt; &lt;host&gt; <em>gerrit create-account</em>
+  [--group &lt;GROUP&gt;]
+  [--full-name &lt;FULLNAME&gt;]
+  [--email &lt;EMAIL&gt;]
+  [--ssh-key - | &lt;KEY&gt;]
+  &lt;USERNAME&gt;</div>
 <div class="verseblock-attribution">
 </div></div>
 </div>
@@ -586,7 +586,8 @@ created in Gerrit that do not exist in the underlying LDAP directory.</p></div>
 </div>
 <h2 id="_access">ACCESS</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Caller must be a member of the privileged <em>Administrators</em> group.</p></div>
+<div class="paragraph"><p>Caller must be a member of the privileged <em>Administrators</em> group,
+or have been granted the <em>Create Account</em> global capability.</p></div>
 </div>
 <h2 id="_scripting">SCRIPTING</h2>
 <div class="sectionbody">
@@ -629,9 +630,9 @@ created in Gerrit that do not exist in the underlying LDAP directory.</p></div>
 <p>
         Display name of the user account.
 </p>
-<div class="paragraph"><p>Names containing spaces should be quoted in single quotes (\').
+<div class="paragraph"><p>Names containing spaces should be quoted in single quotes (').
 This most likely requires double quoting the value, for example
-<tt>\--full-name "\'A description string\'"</tt>.</p></div>
+<tt>--full-name "'A description string'"</tt>.</p></div>
 </dd>
 <dt class="hdlist1">
 --email
@@ -665,8 +666,8 @@ This most likely requires double quoting the value, for example
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.1<br />
-Last updated 2010-12-08 17:43:21 PDT
+Version 2.2.2-rc1<br />
+Last updated 2011-12-29 16:28:23 MDT
 </div>
 </div>
 </body>

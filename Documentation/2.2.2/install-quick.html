@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.5.2" />
-<title>Gerrit Code Review - Installation Guide</title>
+<title>Gerrit Code Review - Quick get started guide</title>
 <style type="text/css">
 /* Debug borders */
 p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 {
@@ -551,7 +551,7 @@ footnotes: function () {
 </head>
 <body>
 <div id="header">
-<h1>Gerrit Code Review - Installation Guide</h1>
+<h1>Gerrit Code Review - Quick get started guide</h1>
 <span id="revnumber">version 2.2.2-rc1</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
@@ -559,10 +559,36 @@ footnotes: function () {
 </div>
 </div>
 <div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="sidebar-content">
+<div class="paragraph"><p>This guide was made with the impatient in mind, ready to try out Gerrit on their
+own server but not prepared to make the full installation procedure yet.</p></div>
+<div class="paragraph"><p>Explanation is sparse and you should not use a server installed this way in a
+live setup, this is made with proof of concept activities in mind.</p></div>
+<div class="paragraph"><p>It is presumed you install it on a Unix based server such as any of the Linux
+flavors or BSD.</p></div>
+<div class="paragraph"><p>It&#8217;s also presumed that you have access to an OpenID enabled email address.
+Examples of OpenID enable email providers are gmail, yahoo and hotmail.
+It&#8217;s also possible to register a custom email address with OpenID, but that is
+outside the scope of this quick installation guide. For testing purposes one of
+the above providers should be fine. Please note that network access to the
+OpenID provider you choose is necessary for both you and your Gerrit instance.</p></div>
+</div></div>
+</div>
+</div>
 <h2 id="requirements">Requirements</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>To run the Gerrit service, the following requirements must be met on
-the host:</p></div>
+<div class="paragraph"><p>Most distributions come with Java today. Do you already have Java installed?</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  $ java -version
+  java version "1.6.0_26"
+  Java(TM) SE Runtime Environment (build 1.6.0_26-b03-384-10M3425)
+    Java HotSpot(TM) 64-Bit Server VM (build 20.1-b02-384, mixed mode)</tt></pre>
+</div></div>
+<div class="paragraph"><p>If Java isn&#8217;t installed, get it:</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
@@ -570,228 +596,262 @@ JDK, minimum version 1.6 <a href="http://www.oracle.com/technetwork/java/javase/
 </p>
 </li>
 </ul></div>
-<div class="paragraph"><p>You&#8217;ll also need a SQL database to house the review metadata. You have the
-choice of either using the embedded H2 or to host your own MySQL or PostgreSQL.</p></div>
 </div>
-<h2 id="download">Download Gerrit</h2>
+<h2 id="user">Create a user to host the Gerrit service</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Current and past binary releases of Gerrit can be obtained from
-the downloads page at the project site:</p></div>
-<div class="ulist"><ul>
-<li>
-<p>
-<a href="http://code.google.com/p/gerrit/downloads/list">Gerrit Downloads</a>
-</p>
-</li>
-</ul></div>
-<div class="paragraph"><p>Download any current <tt>*.war</tt> package. The war will be referred to as
-<tt>gerrit.war</tt> from this point forward, so you may find it easier to
-rename the downloaded file.</p></div>
-<div class="paragraph"><p>If you would prefer to build Gerrit directly from source, review
-the notes under <a href="dev-readme.html">developer setup</a>.</p></div>
-</div>
-<h2 id="createdb">Database Setup</h2>
-<div class="sectionbody">
-<h3 id="createdb_h2">H2</h3><div style="clear:left"></div>
-<div class="paragraph"><p>During the init phase of Gerrit you will need to specify which database to use.
-If you choose H2, Gerrit will automatically set up the embedded H2 database as
-backend so no set up in advance is necessary.  Also, no additional configuration is
-necessary.  Using the embedded H2 database is the easiest way to get a Gerrit
-site up and running, making it ideal for proof of concepts or small team
-servers.  On the flip side, H2 is not the recommended option for large
-corporate installations. This is because there is no easy way to interact
-with the database while Gerrit is offline, it&#8217;s not easy to backup the data,
-and it&#8217;s not possible to set up H2 in a load balanced/hotswap configuration.</p></div>
-<div class="paragraph"><p>If this option interests you, you might want to consider <a href="install-quick.html">the quick guide</a>.</p></div>
-<h3 id="createdb_postgres">PostgreSQL</h3><div style="clear:left"></div>
-<div class="paragraph"><p>This option is more complicated than the H2 option but is recommended
-for larger installations. It&#8217;s the database backend with the largest userbase
-in the Gerrit community.</p></div>
-<div class="paragraph"><p>Create a user for the web application within Postgres, assign it a
-password, create a database to store the metadata, and grant the user
-full rights on the newly created database:</p></div>
-<div class="listingblock">
-<div class="content">
-<pre><tt>  createuser -A -D -P -E gerrit2
-  createdb -E UTF-8 -O gerrit2 reviewdb</tt></pre>
-</div></div>
-<h3 id="createdb_mysql">MySQL</h3><div style="clear:left"></div>
-<div class="paragraph"><p>This option is also more complicated than the H2 option. Just as with
-PostgreSQL it&#8217;s also recommended for larger installations.</p></div>
-<div class="paragraph"><p>Create a user for the web application within the database, assign it a
-password, create a database, and give the newly created user full
-rights on it:</p></div>
-<div class="listingblock">
-<div class="content">
-<pre><tt>  mysql
-
-  CREATE USER 'gerrit2'@'localhost' IDENTIFIED BY 'secret';
-  CREATE DATABASE reviewdb;
-  ALTER DATABASE reviewdb charset=latin1;
-  GRANT ALL ON reviewdb.* TO 'gerrit2'@'localhost';
-  FLUSH PRIVILEGES;</tt></pre>
-</div></div>
-</div>
-<h2 id="init">Initialize the Site</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>Gerrit stores configuration files, the server&#8217;s SSH keys, and the
-managed Git repositories under a local directory, typically referred
-to as <tt>'$site_path'</tt>.  If the embedded H2 database is being used,
-its data files will also be stored under this directory.</p></div>
-<div class="paragraph"><p>You also have to decide where to store your server side git repositories. This
-can either be a relative path under <tt>'$site_path'</tt> or an absolute path
-anywhere on your server system. You have to choose a place before commencing
-your init phase.</p></div>
-<div class="paragraph"><p>Initialize a new site directory by running the init command, passing
-the path of the site directory to be created as an argument to the
-<em>-d</em> option.  Its recommended that Gerrit Code Review be given its
-own user account on the host system:</p></div>
+<div class="paragraph"><p>We will run the service as a non privileged user on your system.
+First create the user and then become the user:</p></div>
 <div class="listingblock">
 <div class="content">
 <pre><tt>  sudo adduser gerrit2
-  sudo su gerrit2
-
-  java -jar gerrit.war init -d /path/to/your/gerrit_application_directory</tt></pre>
+  sudo su gerrit2</tt></pre>
 </div></div>
-<div class="paragraph"><p><em>Please note:</em> If you choose a location where your new user doesn&#8217;t
-have any privileges, you may have to manually create the directory first and
-then give ownership of that location to the <tt>'gerrit2'</tt> user.</p></div>
-<div class="paragraph"><p>If run from an interactive terminal, the init command will prompt through a
-series of configuration questions, including gathering information
-about the database created above.  If the terminal is not interactive,
-running the init command will choose some reasonable default selections,
-and will use the embedded H2 database. Once the init phase is complete,
-you can review your settings in the file <tt>'$site_path/etc/gerrit.config'</tt>.</p></div>
-<div class="paragraph"><p>When running the init command, additional JARs might be downloaded to
-support optional selected functionality.  If a download fails a URL will
-be displayed and init will wait for the user to manually download the JAR
-and store it in the target location.</p></div>
-<div class="paragraph"><p>When the init phase is complete, the daemon will be automatically started
-in the background and your web browser will open to the site:</p></div>
+<div class="paragraph"><p>If you don&#8217;t have root privileges you could skip this step and run gerrit
+as your own user as well.</p></div>
+</div>
+<h2 id="download">Download Gerrit</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>It&#8217;s time to download the archive that contains the gerrit web and ssh service.</p></div>
+<div class="paragraph"><p>You can choose from different versions to download from here:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://code.google.com/p/gerrit/downloads/list">A list of releases available</a>
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>This tutorial is based on version 2.2.1, and you can download that from this link</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.2.1.war">Link to the 2.2.1 war archive</a>
+</p>
+</li>
+</ul></div>
+</div>
+<h2 id="initialization">Initialize the Site</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>It&#8217;s time to run the initialization, and with the batch switch enabled, we don&#8217;t have to answer any questions at all:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>  Initialized /home/gerrit2/review_site
-  Executing /home/gerrit2/review_site/bin/gerrit.sh start
-  Starting Gerrit Code Review: OK
-  Waiting for server to start ... OK
-  Opening browser ...</tt></pre>
+<pre><tt>gerrit2@host:~$ java -jar gerrit.war init --batch -d ~/gerrit_testsite
+Generating SSH host key ... rsa(simple)... done
+Initialized /home/gerrit2/gerrit_testsite
+Executing /home/gerrit2/gerrit_testsite/bin/gerrit.sh start
+Starting Gerrit Code Review: OK
+gerrit2@host:~$</tt></pre>
 </div></div>
-<div class="paragraph"><p>When the browser opens, sign in to Gerrit through the web interface.
+<div class="paragraph"><p>When the init is complete, you can review your settings in the
+file <tt>'$site_path/etc/gerrit.config'</tt>.</p></div>
+<div class="paragraph"><p>Installation is complete and you&#8217;re ready to start up Gerrit!</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>gerrit2@host:~$ $site_path/bin/gerrit.sh start
+Starting Gerrit Code Review: OK
+Waiting for server to start ... OK</tt></pre>
+</div></div>
+</div>
+<h2 id="usersetup">The first user</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>It&#8217;s time to exit the gerrit2 account as you now have Gerrit running on your
+host and setup your first workspace.</p></div>
+<div class="paragraph"><p>Start a shell with the credentials of the account you will perform
+development under.</p></div>
+<div class="paragraph"><p>Check whether there are any ssh keys already. You&#8217;re looking for two files,
+id_rsa and id_rsa.pub.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>user@host:~$ ls .ssh
+authorized_keys  config  id_rsa  id_rsa.pub  known_hosts</tt></pre>
+</div></div>
+<div class="paragraph"><p>If you have the files, you may skip the key generating step.</p></div>
+<div class="paragraph"><p>If you don&#8217;t see the files in your listing, your will have to generate rsa
+keys for your ssh sessions:</p></div>
+<h3 id="_ssh_key_generation">SSH key generation</h3><div style="clear:left"></div>
+<div class="paragraph"><p><strong>Please don&#8217;t generate new keys if you already have a valid keypair!</strong>
+<strong>They will be overwritten!</strong></p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>user@host:~$ ssh-keygen -t rsa
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/user/.ssh/id_rsa):
+Created directory '/home/user/.ssh'.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/user/.ssh/id_rsa.
+Your public key has been saved in /home/user/.ssh/id_rsa.pub.
+The key fingerprint is:
+00:11:22:00:11:22:00:11:44:00:11:22:00:11:22:99 user@host
+The key's randomart image is:
++--[ RSA 2048]----+
+|     ..+.*=+oo.*E|
+|      u.OoB.. . +|
+|       ..*.      |
+|       o         |
+|      . S ..     |
+|                 |
+|                 |
+|          ..     |
+|                 |
++-----------------+
+
+user@host:~$</tt></pre>
+</div></div>
+<h3 id="_registering_your_key_in_gerrit">Registering your key in Gerrit</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Open a browser and enter the canonical url you used above when initializing
+Gerrit.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>Canonical URL                  [http://localhost:8080/]:</tt></pre>
+</div></div>
+<div class="paragraph"><p>Register a new account in Gerrit through the web interface with the
+email address of your choice.
 The first user to sign-in and register an account will be
 automatically placed into the fully privileged Administrators group,
 permitting server management over the web and over SSH.  Subsequent
 users will be automatically registered as unprivileged users.</p></div>
-</div>
-<h2 id="_installation_complete">Installation Complete</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>Your base Gerrit server is now installed and running.  You&#8217;re now ready to
-either set up more projects or start working with the projects you&#8217;ve already
-imported.</p></div>
-</div>
-<h2 id="project_setup">Project Setup</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>See <a href="project-setup.html">Project Setup</a> for further details on
-how to register a new project with Gerrit.  This step is necessary
-if existing Git repositories were not imported during <em>init</em>.</p></div>
-</div>
-<h2 id="rc_d">Start/Stop Daemon</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>To control the Gerrit Code Review daemon that is running in the
-background, use the rc.d style start script created by <em>init</em>:</p></div>
-<div class="exampleblock">
-<div class="exampleblock-content">
-<div class="literalblock">
+<div class="paragraph"><p>Once signed in as your user, you find a little wizard to get you started.
+The wizard helps you fill out:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Real name (visible name in Gerrit)
+</p>
+</li>
+<li>
+<p>
+Register your email (it must be confirmed later)
+</p>
+</li>
+<li>
+<p>
+Select a username with which to communicate with Gerrit over ssh+git
+</p>
+</li>
+<li>
+<p>
+The server will ask you for an RSA public key.
+That&#8217;s the key we generated above, and it&#8217;s time to make sure that Gerrit knows
+about our new key and can identify us by it.
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
 <div class="content">
-<pre><tt>review_site/bin/gerrit.sh start
-review_site/bin/gerrit.sh stop
-review_site/bin/gerrit.sh restart</tt></pre>
+<pre><tt>user@host:~$ cat .ssh/id_rsa.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA5E785mWtMckorP5v40PyFeui9T50dKpaGYw67Mlv2J3aGBG3tS0qBQxKEpiV0J4+W0RgQHbWfNqdUYen9bC5VVH/GatYWkpL9TjjUcHzF1rX3Eyv7PHuHLAyd/8Zdv6R3saF+hNpp1JW0BSa7HXzK7iNCVA3kBuBthxeGh3OoFbaXHn1zwwVQw8I5+Lp9OOIY7sJEsM/kW699XDV6z2zlkByNVEp45j+g26x5rCnGS8GJM7A0uHsaWJddO6TiyR6/2SOBF1VtKw49XLTQcmDInFAZzUsAZSDKlfYloPkpA6YdqeG0eJqau+jtzuigydoVj4j9xidcJ9HtxZcJNuraw== user@host</tt></pre>
 </div></div>
-</div></div>
-<div class="paragraph"><p>(<em>Optional</em>) Link the gerrit.sh script into rc3.d so the daemon
-automatically starts and stops with the operating system:</p></div>
-<div class="exampleblock">
-<div class="exampleblock-content">
-<div class="literalblock">
+<div class="paragraph"><p>Copy the string starting with ssh-rsa to your clipboard and then paste it
+into the box for RSA keys. Make <strong>absolutely sure</strong> no extra spaces or line feeds
+are entered in the middle of the RSA string.</p></div>
+<div class="paragraph"><p>Verify that the ssh connection works for you.</p></div>
+<div class="listingblock">
 <div class="content">
-<pre><tt>sudo ln -snf `pwd`/review_site/bin/gerrit.sh /etc/init.d/gerrit.sh
-sudo ln -snf ../init.d/gerrit.sh /etc/rc3.d/S90gerrit</tt></pre>
+<pre><tt> user@host:~$ ssh user@localhost -p 29418
+ The authenticity of host '[localhost]:29418 ([127.0.0.1]:29418)' can't be established.
+ RSA key fingerprint is db:07:3d:c2:94:25:b5:8d:ac:bc:b5:9e:2f:95:5f:4a.
+ Are you sure you want to continue connecting (yes/no)? yes
+ Warning: Permanently added '[localhost]:29418' (RSA) to the list of known hosts.
+
+  ****    Welcome to Gerrit Code Review    ****
+
+  Hi user, you have successfully connected over SSH.
+
+  Unfortunately, interactive shells are disabled.
+    To clone a hosted Git repository, use:
+
+  git clone ssh://user@localhost:29418/REPOSITORY_NAME.git
+
+  user@host:~$</tt></pre>
 </div></div>
+</div>
+<h2 id="_project_creation">Project creation</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Your base Gerrit server is now running and you have a user that&#8217;s ready
+to interact with it.  You now have two options, either you create a new
+test project to work with or you already have a git with history that
+you would like to import into gerrit and try out code review on.</p></div>
+<h3 id="_new_project_from_scratch">New project from scratch</h3><div style="clear:left"></div>
+<div class="paragraph"><p>If you choose to create a new repository from scratch, it&#8217;s easier for
+you to create a project with an initial commit in it. That way first
+time setup between client and server is easier.</p></div>
+<div class="paragraph"><p>This is done via the SSH port:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  user@host:~$ ssh -p 29418 user@localhost gerrit create-project --empty-commit --name demo-project
+  user@host:~$</tt></pre>
 </div></div>
-<div class="paragraph"><p>To install Gerrit into an existing servlet container instead of using
-the embedded Jetty server, see
-<a href="install-j2ee.html">J2EE installation</a>.</p></div>
+<div class="paragraph"><p>This will create a test repository to work with.</p></div>
+<h3 id="_previous_project_exist">Previous project exist</h3><div style="clear:left"></div>
+<div class="paragraph"><p>The other alternative is if you already have a git project that you
+want to try out Gerrit on.
+First you have to create the project, this is done via the SSH port:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  user@host:~$ ssh -p 29418 user@localhost gerrit create-project --name demo-project
+  user@host:~$</tt></pre>
+</div></div>
+<div class="paragraph"><p>After that it&#8217;s time to upload the previous history to the server:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  user@host:~/my-project$ git push ssh://user@localhost:29418/demo-project *:*
+    Counting objects: 2011, done.
+    Writing objects: 100% (2011/2011), 456293 bytes, done.
+    Total 2011 (delta 0), reused 0 (delta 0)
+    * [new branch]      master -&gt; master</tt></pre>
+</div></div>
+<div class="paragraph"><p>This will create a test repository to work with.</p></div>
 </div>
-<h2 id="customize">Site Customization</h2>
+<h2 id="_my_first_change">My first change</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Gerrit Code Review supports some site-specific customization options.
-For more information, see the related topic in this manual:</p></div>
-<div class="ulist"><ul>
-<li>
-<p>
-<a href="config-reverseproxy.html">Reverse Proxy</a>
-</p>
-</li>
-<li>
-<p>
-<a href="config-sso.html">Single Sign-On Systems</a>
-</p>
-</li>
-<li>
-<p>
-<a href="config-replication.html">Git Replication/Mirroring</a>
-</p>
-</li>
-<li>
-<p>
-<a href="config-headerfooter.html">Site Header/Footer</a>
-</p>
-</li>
-<li>
-<p>
-<a href="config-gitweb.html">Gitweb Integration</a>
-</p>
-</li>
-<li>
-<p>
-<a href="config-gerrit.html">Other System Settings</a>
-</p>
-</li>
-</ul></div>
+<div class="paragraph"><p>Download a local clone of the repository</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  user@host:~$ git clone ssh://user@host:29418/demo-project
+  Cloning into demo-project...
+  remote: Counting objects: 2, done
+  remote: Finding sources: 100% (2/2)
+  remote: Total 2 (delta 0), reused 0 (delta 0)
+  user@host:~$</tt></pre>
+</div></div>
+<div class="paragraph"><p>Then make a change to it and upload it as a reviewable change in Gerrit.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  date &gt; testfile.txt
+  git add testfile.txt
+  git commit -m "My pretty test commit"
+    [master ff643a5] My pretty test commit
+    1 files changed, 1 insertions(+), 0 deletions(-)
+    create mode 100644 testfile.txt</tt></pre>
+</div></div>
+<div class="paragraph"><p>Usually when you push to a remote git, you push to the reference
+<tt>'/refs/heads/branch'</tt>, but when working with Gerrit you have to push to a
+virtual branch representing "code review before submittal to branch".
+This virtual name space is known as /refs/for/&lt;branch&gt;</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  git push origin HEAD:refs/for/master
+    Counting objects: 4, done.
+    Writing objects: 100% (3/3), 293 bytes, done.
+    Total 3 (delta 0), reused 0 (delta 0)
+    remote:
+    remote: New Changes:
+    remote:   http://localhost:8080/1
+    remote:
+    To ssh://user@localhost:29418/demo-project
+     * [new branch]      HEAD -&gt; refs/for/master</tt></pre>
+</div></div>
+<div class="paragraph"><p>You should now be able to access your change by browsing to the http URL
+suggested above, <a href="http://localhost:8080/1">http://localhost:8080/1</a></p></div>
 </div>
-<h2 id="anonymous_access">Anonymous Access</h2>
+<h2 id="_quick_installation_complete">Quick Installation Complete</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Exporting the Git repository directory
-(<a href="config-gerrit.html#gerrit.basePath">gerrit.basePath</a>) over the
-anonymous, unencrypted git:// protocol is more efficient than
-Gerrit&#8217;s internal SSH daemon.  See the <tt>git-daemon</tt> documentation
-for details on how to configure this if anonymous access is desired.</p></div>
-<div class="ulist"><ul>
-<li>
-<p>
-<a href="http://www.kernel.org/pub/software/scm/git/docs/git-daemon.html">man git-daemon</a>
-</p>
-</li>
-</ul></div>
-</div>
-<h2 id="_external_documentation_links">External Documentation Links</h2>
-<div class="sectionbody">
-<div class="ulist"><ul>
-<li>
-<p>
-<a href="http://www.postgresql.org/docs/">PostgreSQL Documentation</a>
-</p>
-</li>
-<li>
-<p>
-<a href="http://dev.mysql.com/doc/">MySQL Documentation</a>
-</p>
-</li>
-<li>
-<p>
-<a href="http://www.kernel.org/pub/software/scm/git/docs/git-daemon.html">git-daemon</a>
-</p>
-</li>
-</ul></div>
+<div class="paragraph"><p>This covers the scope of getting Gerrit started and your first change uploaded.
+It doesn&#8217;t give any clue as to how the review workflow works, please find
+<a href="http://source.android.com/submit-patches/workflow">Default Workflow</a> to
+learn more about the workflow of Gerrit.</p></div>
+<div class="paragraph"><p>To read more on the installation of Gerrit please read <a href="install.html">the detailed
+installation page</a>.</p></div>
 </div>
 <hr style="
   height: 2px;

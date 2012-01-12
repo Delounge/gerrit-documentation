@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>git-receive-pack</h1>
-<span id="revnumber">version 2.2.1</span>
+<span id="revnumber">version 2.2.2-rc1</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -566,7 +566,7 @@ footnotes: function () {
 <h2 id="_synopsis">SYNOPSIS</h2>
 <div class="sectionbody">
 <div class="verseblock">
-<div class="verseblock-content">git receive-pack [--reviewer &lt;address&gt;] [--cc &lt;address&gt;] &lt;project&gt;</div>
+<div class="verseblock-content"><em>git receive-pack</em> [--reviewer &lt;address&gt;] [--cc &lt;address&gt;] &lt;project&gt;</div>
 <div class="verseblock-attribution">
 </div></div>
 </div>
@@ -592,10 +592,10 @@ to <em>git push</em>, which will relay them automatically.</p></div>
 </p>
 </dd>
 <dt class="hdlist1">
---re &lt;address&gt;
+--reviewer &lt;address&gt;
 </dt>
 <dt class="hdlist1">
---reviewer &lt;address&gt;
+--re &lt;address&gt;
 </dt>
 <dd>
 <p>
@@ -666,15 +666,12 @@ git config remote.charlie.receivepack 'git receive-pack --reviewer charlie@examp
 </div></div>
 </div></div>
 <div class="paragraph"><p>afterwards <tt>.git/config</tt> contains the following:</p></div>
-<div class="exampleblock">
-<div class="exampleblock-content">
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
 <pre><tt>[remote "charlie"]
-        url = ssh://review.example.com:29418/project
-        push = HEAD:refs/for/master
-        receivepack = git receive-pack --reviewer charlie@example.com --cc alice@example.com --cc bob@example.com</tt></pre>
-</div></div>
+  url = ssh://review.example.com:29418/project
+  push = HEAD:refs/for/master
+  receivepack = git receive-pack --reviewer charlie@example.com --cc alice@example.com --cc bob@example.com</tt></pre>
 </div></div>
 <div class="paragraph"><p>and now sending a new change for review to charlie, CC&#8217;ing both
 alice and bob is much easier:</p></div>
@@ -707,8 +704,8 @@ alice and bob is much easier:</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.1<br />
-Last updated 2010-12-08 17:43:21 PDT
+Version 2.2.2-rc1<br />
+Last updated 2011-12-29 16:28:23 MDT
 </div>
 </div>
 </body>

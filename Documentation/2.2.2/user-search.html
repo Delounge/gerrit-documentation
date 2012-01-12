@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>Gerrit Code Review - Searching Changes</h1>
-<span id="revnumber">version 2.2.1</span>
+<span id="revnumber">version 2.2.2-rc1</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -831,11 +831,11 @@ library</a> is used for the evaluation of such patterns.</p></div>
 denotes a regular expression, but it also has the usual meaning of
 anchoring the match to the start of the string.  To match all Java
 files, use <tt>file:^.*\.java</tt>.</p></div>
-<div class="paragraph"><p>The entire regular expression pattern, including the <tt>\^</tt> character,
+<div class="paragraph"><p>The entire regular expression pattern, including the <tt>^</tt> character,
 should be double quoted when using more complex construction (like
 ones using a bracket expression). For example, to match all XML
 files named like <em>name1.xml</em>, <em>name2.xml</em>, and <em>name3.xml</em> use
-<tt>\file:"\^name[1-3].xml"</tt>.</p></div>
+<tt>file:"^name[1-3].xml"</tt>.</p></div>
 <div class="paragraph"><p>Currently this operator is only available on a watched project
 and may not be used in the search bar.</p></div>
 </dd>
@@ -997,7 +997,7 @@ The easiest way to explain these are by example.</p></div>
 </dt>
 <dd>
 <div class="paragraph"><p>Matches changes where there is at least one +2 score for Code Review.
-The \+ prefix is optional for positive score values.  If the + is used,
+The + prefix is optional for positive score values.  If the + is used,
 the = operator is optional.</p></div>
 </dd>
 <dt class="hdlist1">
@@ -1132,8 +1132,8 @@ unpredictable results.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.1<br />
-Last updated 2011-05-20 09:59:14 PDT
+Version 2.2.2-rc1<br />
+Last updated 2012-01-11 16:35:59 MDT
 </div>
 </div>
 </body>

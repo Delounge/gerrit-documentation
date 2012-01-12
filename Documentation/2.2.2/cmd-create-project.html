@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>gerrit create-project</h1>
-<span id="revnumber">version 2.2.1</span>
+<span id="revnumber">version 2.2.2-rc1</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -565,19 +565,21 @@ footnotes: function () {
 </div>
 <h2 id="_synopsis">SYNOPSIS</h2>
 <div class="sectionbody">
-<div class="literalblock">
-<div class="content">
-<pre><tt>'ssh' -p &lt;port&gt; &lt;host&gt; 'gerrit create-project' \
---name &lt;NAME&gt; \
-[--branch &lt;REF&gt;] \
-[\--owner &lt;GROUP&gt; ...] \
-[\--parent &lt;NAME&gt;] \
-[\--description &lt;DESC&gt;] \
-[\--submit-type &lt;TYPE&gt;] \
-[\--use-content-merge] \
-[\--use-contributor-agreements] \
-[\--use-signed-off-by] \
-[\--empty-commit]</tt></pre>
+<div class="verseblock">
+<div class="verseblock-content"><em>ssh</em> -p &lt;port&gt; &lt;host&gt; <em>gerrit create-project</em>
+  [--owner &lt;GROUP&gt; &#8230; | -o &lt;GROUP&gt; &#8230;]
+  [--parent &lt;NAME&gt; | -p &lt;NAME&gt; ]
+  [--permissions-only]
+  [--description &lt;DESC&gt; | -d &lt;DESC&gt;]
+  [--submit-type &lt;TYPE&gt; |  -t &lt;TYPE&gt;]
+  [--use-contributor-agreements | --ca]
+  [--use-signed-off-by | --so]
+  [--use-content-merge]
+  [--require-change-id | --id]
+  [--branch &lt;REF&gt; | -b &lt;REF&gt;]
+  [--empty-commit]
+  { &lt;NAME&gt; | --name &lt;NAME&gt; }</div>
+<div class="verseblock-attribution">
 </div></div>
 </div>
 <h2 id="_description">DESCRIPTION</h2>
@@ -593,10 +595,8 @@ on the remote system to create the empty repository.</p></div>
 </div>
 <h2 id="_access">ACCESS</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Caller must be a member of any of the groups defined by
-repository.*.createGroup in gerrit.config.</p></div>
-<div class="paragraph"><p>If there is no such declaration, caller is required to be a member
-of the privileged <em>Administrators</em> group.</p></div>
+<div class="paragraph"><p>Caller must be a member of the privileged <em>Administrators</em> group,
+or have been granted the <em>Create Project</em> global capability.</p></div>
 </div>
 <h2 id="_scripting">SCRIPTING</h2>
 <div class="sectionbody">
@@ -606,16 +606,31 @@ of the privileged <em>Administrators</em> group.</p></div>
 <div class="sectionbody">
 <div class="dlist"><dl>
 <dt class="hdlist1">
---name
+&lt;NAME&gt;
 </dt>
 <dd>
 <p>
-        Required; name of the project to create.  If name ends with
-        <tt>.git</tt> the suffix will be automatically removed.
+        Required; name of the new project to create.  If name ends
+        with <tt>.git</tt> the suffix will be automatically removed.
+</p>
+</dd>
+<dt class="hdlist1">
+--name
+</dt>
+<dt class="hdlist1">
+-n
+</dt>
+<dd>
+<p>
+        Deprecated alias for the &lt;NAME&gt; argument. This option may
+        be removed in a future release.
 </p>
 </dd>
 <dt class="hdlist1">
 --branch
+</dt>
+<dt class="hdlist1">
+-b
 </dt>
 <dd>
 <p>
@@ -626,29 +641,46 @@ of the privileged <em>Administrators</em> group.</p></div>
 <dt class="hdlist1">
 --owner
 </dt>
+<dt class="hdlist1">
+-o
+</dt>
 <dd>
 <p>
         Name of the group(s) which will initially own this repository.
         The specified group(s) must already be defined within Gerrit.
         Several groups can be specified on the command line.
 </p>
-<div class="paragraph"><p>Defaults to what is specified by repository.<strong>.ownerGroup
-in gerrit.config. If no such declaration(s) exist,
-repository.</strong>.createGroup will be used. If they don&#8217;t exist,
-<tt>Administrators</tt> will be used.</p></div>
+<div class="paragraph"><p>Defaults to what is specified by <tt>repository.*.ownerGroup</tt>
+in gerrit.config.</p></div>
 </dd>
 <dt class="hdlist1">
 --parent
+</dt>
+<dt class="hdlist1">
+-p
 </dt>
 <dd>
 <p>
         Name of the parent project to inherit access rights
         through. If not specified, the parent is set to the default
-        project <tt>\-- All Projects \--</tt>.
+        project <tt>All-Projects</tt>.
+</p>
+</dd>
+<dt class="hdlist1">
+--permissions-only
+</dt>
+<dd>
+<p>
+        Create the project only to serve as a parent for other
+        projects.  The new project&#8217;s Git repository will be
+        initialized to have <em>HEAD</em> point to <em>refs/meta/config</em>.
 </p>
 </dd>
 <dt class="hdlist1">
 --description
+</dt>
+<dt class="hdlist1">
+-d
 </dt>
 <dd>
 <p>
@@ -656,11 +688,14 @@ repository.</strong>.createGroup will be used. If they don&#8217;t exist,
         no description is stored.
 </p>
 <div class="paragraph"><p>Description values containing spaces should be quoted in single quotes
-(\').  This most likely requires double quoting the value, for example
-<tt>\--description "\'A description string\'"</tt>.</p></div>
+(').  This most likely requires double quoting the value, for example
+<tt>--description "'A description string'"</tt>.</p></div>
 </dd>
 <dt class="hdlist1">
 --submit-type
+</dt>
+<dt class="hdlist1">
+-t
 </dt>
 <dd>
 <p>
@@ -707,6 +742,9 @@ CHERRY_PICK: always cherry-pick the commit.
 <dt class="hdlist1">
 --use-contributor-agreements
 </dt>
+<dt class="hdlist1">
+--ca
+</dt>
 <dd>
 <p>
         If enabled, authors must complete a contributor agreement
@@ -719,15 +757,35 @@ CHERRY_PICK: always cherry-pick the commit.
 </dt>
 <dd>
 <p>
+--so:
         If enabled, each change must contain a Signed-off-by line
         from either the author or the uploader in the commit message.
         Disabled by default.
 </p>
 </dd>
-</dl></div>
-<div class="paragraph"><p>--empty-commit:
+<dt class="hdlist1">
+--require-change-id
+</dt>
+<dt class="hdlist1">
+--id
+</dt>
+<dd>
+<p>
+        Require a valid <a href="user-changeid.html">Change-Id</a> footer
+        in any commit uploaded for review. This does not apply to
+        commits pushed directly to a branch or tag.
+</p>
+</dd>
+<dt class="hdlist1">
+--empty-commit
+</dt>
+<dd>
+<p>
         Creates an initial empty commit for the Git repository of the
-        project that is newly created.</p></div>
+        project that is newly created.
+</p>
+</dd>
+</dl></div>
 </div>
 <h2 id="_examples">EXAMPLES</h2>
 <div class="sectionbody">
@@ -736,7 +794,7 @@ CHERRY_PICK: always cherry-pick the commit.
 <div class="exampleblock-content">
 <div class="literalblock">
 <div class="content">
-<pre><tt>$ ssh -p 29418 review.example.com gerrit create-project --name tools/gerrit.git</tt></pre>
+<pre><tt>$ ssh -p 29418 review.example.com gerrit create-project tools/gerrit.git</tt></pre>
 </div></div>
 </div></div>
 <div class="paragraph"><p>Create a new project with a description:</p></div>
@@ -744,7 +802,7 @@ CHERRY_PICK: always cherry-pick the commit.
 <div class="exampleblock-content">
 <div class="literalblock">
 <div class="content">
-<pre><tt>$ ssh -p 29418 review.example.com gerrit create-project --name tool.git --description "'Tools used by build system'"</tt></pre>
+<pre><tt>$ ssh -p 29418 review.example.com gerrit create-project tool.git --description "'Tools used by build system'"</tt></pre>
 </div></div>
 </div></div>
 <div class="paragraph"><p>Note that it is necessary to quote the description twice.  The local
@@ -793,8 +851,8 @@ by hand to establish a new empty repository.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.1<br />
-Last updated 2011-06-07 13:18:53 PDT
+Version 2.2.2-rc1<br />
+Last updated 2011-12-29 16:28:23 MDT
 </div>
 </div>
 </body>

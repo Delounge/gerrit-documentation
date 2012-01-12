@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>commit-msg Hook</h1>
-<span id="revnumber">version 2.2.1</span>
+<span id="revnumber">version 2.2.2-rc1</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -606,15 +606,32 @@ change viewed on the web.</p></div>
 </div>
 <h2 id="_obtaining">OBTAINING</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>To obtain the <em>commit-msg</em> script use scp, wget or curl to copy it
-to your local system:</p></div>
+<div class="paragraph"><p>To obtain the <em>commit-msg</em> script use scp, wget or curl to download it
+to your local system from your gerrit server.</p></div>
+<div class="paragraph"><p>You can use either of the below commands:</p></div>
+<div class="exampleblock">
+<div class="exampleblock-content">
 <div class="literalblock">
 <div class="content">
-<pre><tt>$ scp -p -P 29418 john.doe@review.example.com:hooks/commit-msg .git/hooks/</tt></pre>
+<pre><tt>$ scp -p -P 29418 &lt;your username&gt;@&lt;your Gerrit review server&gt;:hooks/commit-msg &lt;local path to your git&gt;/.git/hooks/</tt></pre>
 </div></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>$ curl http://review.example.com/tools/hooks/commit-msg</tt></pre>
+<pre><tt>$ curl -o &lt;local path to your git&gt;/.git/hooks/commit-msg &lt;your Gerrit http URL&gt;/tools/hooks/commit-msg</tt></pre>
+</div></div>
+</div></div>
+<div class="paragraph"><p>A specific example of this might look something like this:</p></div>
+<div class="exampleblock">
+<div class="title">Example 1: Example</div>
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>$ scp -p -P 29418 john.doe@review.example.com:hooks/commit-msg ~/duhproject/.git/hooks/</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>$ curl -o ~/duhproject/.git/hooks/commit-msg http://review.example.com/tools/hooks/commit-msg</tt></pre>
+</div></div>
 </div></div>
 </div>
 <h2 id="_see_also">SEE ALSO</h2>
@@ -685,8 +702,8 @@ Change-Id is sufficiently unique.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.1<br />
-Last updated 2011-04-21 17:06:02 PDT
+Version 2.2.2-rc1<br />
+Last updated 2012-01-11 16:35:59 MDT
 </div>
 </div>
 </body>

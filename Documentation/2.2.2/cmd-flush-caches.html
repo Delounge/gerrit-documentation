@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>gerrit flush-caches</h1>
-<span id="revnumber">version 2.2.1</span>
+<span id="revnumber">version 2.2.2-rc1</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -565,10 +565,11 @@ footnotes: function () {
 </div>
 <h2 id="_synopsis">SYNOPSIS</h2>
 <div class="sectionbody">
-<div class="literalblock">
-<div class="content">
-<pre><tt>'ssh' -p &lt;port&gt; &lt;host&gt; 'gerrit flush-caches' \
-[\--all | \--list | \--cache &lt;NAME&gt; ...]</tt></pre>
+<div class="verseblock">
+<div class="verseblock-content"><em>ssh</em> -p &lt;port&gt; &lt;host&gt; <em>gerrit flush-caches</em> --all
+<em>ssh</em> -p &lt;port&gt; &lt;host&gt; <em>gerrit flush-caches</em> --list
+<em>ssh</em> -p &lt;port&gt; &lt;host&gt; <em>gerrit flush-caches</em> --cache &lt;NAME&gt; &#8230;</div>
+<div class="verseblock-attribution">
 </div></div>
 </div>
 <h2 id="_description">DESCRIPTION</h2>
@@ -582,7 +583,8 @@ the Gerrit web interface.</p></div>
 </div>
 <h2 id="_access">ACCESS</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Caller must be a member of the privileged <em>Administrators</em> group.</p></div>
+<div class="paragraph"><p>Caller must be a member of the privileged <em>Administrators</em> group,
+or have granted the <em>Flush Caches</em> global capability.</p></div>
 </div>
 <h2 id="_scripting">SCRIPTING</h2>
 <div class="sectionbody">
@@ -598,11 +600,11 @@ the Gerrit web interface.</p></div>
 <p>
         Flush all known caches.  This is like applying a big hammer,
         it will force everything out, potentially more than was
-        necessary for the change made.  This option automatically
+        necessary for the change made. This option automatically
         skips flushing potentially dangerous caches such as
         "web_sessions".  To flush one of these caches, the caller
         must specifically name them on the command line, e.g. pass
-        <tt>\--cache=web_sessions</tt>.
+        <tt>--cache web_sessions</tt>.
 </p>
 </dd>
 <dt class="hdlist1">
@@ -614,7 +616,7 @@ the Gerrit web interface.</p></div>
 </p>
 </dd>
 <dt class="hdlist1">
---cache=&lt;NAME&gt;
+--cache &lt;NAME&gt;
 </dt>
 <dd>
 <p>
@@ -709,8 +711,8 @@ for a user:</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.1<br />
-Last updated 2011-04-21 17:06:02 PDT
+Version 2.2.2-rc1<br />
+Last updated 2011-12-29 16:28:23 MDT
 </div>
 </div>
 </body>

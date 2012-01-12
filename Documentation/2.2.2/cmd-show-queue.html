@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>gerrit show-queue</h1>
-<span id="revnumber">version 2.2.1</span>
+<span id="revnumber">version 2.2.2-rc1</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -566,8 +566,8 @@ footnotes: function () {
 <h2 id="_synopsis">SYNOPSIS</h2>
 <div class="sectionbody">
 <div class="verseblock">
-<div class="verseblock-content"><em>ssh</em> -p &lt;port&gt; &lt;host&gt; <em>ps</em>
-<em>ssh</em> -p &lt;port&gt; &lt;host&gt; <em>gerrit show-queue</em></div>
+<div class="verseblock-content"><em>ssh</em> -p &lt;port&gt; &lt;host&gt; <em>gerrit show-queue</em>
+<em>ssh</em> -p &lt;port&gt; &lt;host&gt; <em>ps</em></div>
 <div class="verseblock-attribution">
 </div></div>
 </div>
@@ -583,7 +583,11 @@ in these states.</p></div>
 </div>
 <h2 id="_access">ACCESS</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Caller must be a member of the privileged <em>Administrators</em> group.</p></div>
+<div class="paragraph"><p>End-users may see a task in the queue only if they can also see
+the project the task is associated with. Tasks operating on other
+projects, or that do not have a specific project are hidden.</p></div>
+<div class="paragraph"><p>Members of the group <em>Administrators</em>, or any group that has been
+granted the <em>View Queue</em> capability can see all queue entries.</p></div>
 </div>
 <h2 id="_scripting">SCRIPTING</h2>
 <div class="sectionbody">
@@ -599,7 +603,7 @@ Task
 <p>
         Unique task identifier on this server.  May be passed into
         <a href="cmd-kill.html">kill</a> to cancel or terminate the task.
-        Task identifiers have a period of 2\^32-1, and start from
+        Task identifiers have a period of 2^32-1, and start from
         a random value.
 </p>
 </dd>
@@ -659,8 +663,8 @@ Task     State                 Command
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.1<br />
-Last updated 2010-07-16 15:45:13 PDT
+Version 2.2.2-rc1<br />
+Last updated 2012-01-11 16:35:59 MDT
 </div>
 </div>
 </body>
