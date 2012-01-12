@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>gerrit query</h1>
-<span id="revnumber">version 2.2.1</span>
+<span id="revnumber">version 2.2.2-rc1</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -565,16 +565,17 @@ footnotes: function () {
 </div>
 <h2 id="_synopsis">SYNOPSIS</h2>
 <div class="sectionbody">
-<div class="literalblock">
-<div class="content">
-<pre><tt>'ssh' -p &lt;port&gt; &lt;host&gt; 'gerrit query' \
-[\--format {TEXT | JSON}] \
-[\--current-patch-set] \
-[\--patch-sets|--all-approvals] \
-[\--] \
-&lt;query&gt; \
-[limit:&lt;n&gt;] \
-[resume\_sortkey:&lt;sortKey&gt;]</tt></pre>
+<div class="verseblock">
+<div class="verseblock-content"><em>ssh</em> -p &lt;port&gt; &lt;host&gt; <em>gerrit query</em>
+  [--format {TEXT | JSON}]
+  [--current-patch-set]
+  [--patch-sets | --all-approvals]
+  [--comments]
+  [--]
+  &lt;query&gt;
+  [limit:&lt;n&gt;]
+  [resume_sortkey:&lt;sortKey&gt;]</div>
+<div class="verseblock-attribution">
 </div></div>
 </div>
 <h2 id="_description">DESCRIPTION</h2>
@@ -597,6 +598,16 @@ multiple levels of quoting required.</p></div>
 <h2 id="_options">OPTIONS</h2>
 <div class="sectionbody">
 <div class="dlist"><dl>
+<dt class="hdlist1">
+--format
+</dt>
+<dd>
+<p>
+        Formatting method for the results. TEXT is the default,
+        presenting a human readable display. JSON creates one line
+        per matching record, with embedded LFs escaped.
+</p>
+</dd>
 <dt class="hdlist1">
 --current-patch-set
 </dt>
@@ -627,6 +638,16 @@ multiple levels of quoting required.</p></div>
 </p>
 </dd>
 <dt class="hdlist1">
+--comments
+</dt>
+<dd>
+<p>
+        Include comments for all changes. If combined with the
+        --patch-sets flag then all in-line comments are included for
+        each patch set.
+</p>
+</dd>
+<dt class="hdlist1">
 limit:&lt;n&gt;
 </dt>
 <dd>
@@ -638,7 +659,7 @@ limit:&lt;n&gt;
 </p>
 </dd>
 <dt class="hdlist1">
-resume\_sortkey:&lt;sortKey&gt;
+resume_sortkey:&lt;sortKey&gt;
 </dt>
 <dd>
 <p>
@@ -661,20 +682,26 @@ resume\_sortkey:&lt;sortKey&gt;
 <h2 id="_examples">EXAMPLES</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>Find the 2 most recent open changes in the tools/gerrit project:</p></div>
-<div class="listingblock">
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
 <div class="content">
-<pre><tt>  $ ssh -p 29418 review.example.com gerrit query --format=JSON status:open project:tools/gerrit limit:2
-  {"project":"tools/gerrit", ...}
-  {"project":"tools/gerrit", ..., sortKey:"000e6aee00003e26", ...}
-  {"type":"stats","rowCount":2,"runningTimeMilliseconds:15}</tt></pre>
+<pre><tt>$ ssh -p 29418 review.example.com gerrit query --format=JSON status:open project:tools/gerrit limit:2
+{"project":"tools/gerrit", ...}
+{"project":"tools/gerrit", ..., sortKey:"000e6aee00003e26", ...}
+{"type":"stats","rowCount":2,"runningTimeMilliseconds:15}</tt></pre>
+</div></div>
 </div></div>
 <div class="paragraph"><p>Resume the same query and obtain the final results:</p></div>
-<div class="listingblock">
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
 <div class="content">
-<pre><tt>  $ ssh -p 29418 review.example.com gerrit query --format=JSON status:open project:tools/gerrit limit:2 resume_sortkey:000e6aee00003e26
-  {"project":"tools/gerrit", ...}
-  {"project":"tools/gerrit", ...}
-  {"type":"stats","rowCount":1,"runningTimeMilliseconds:15}</tt></pre>
+<pre><tt>$ ssh -p 29418 review.example.com gerrit query --format=JSON status:open project:tools/gerrit limit:2 resume_sortkey:000e6aee00003e26
+{"project":"tools/gerrit", ...}
+{"project":"tools/gerrit", ...}
+{"type":"stats","rowCount":1,"runningTimeMilliseconds:15}</tt></pre>
+</div></div>
 </div></div>
 </div>
 <h2 id="_schema">SCHEMA</h2>
@@ -718,8 +745,8 @@ of this JSON stream should deal with that appropriately.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.1<br />
-Last updated 2011-04-21 17:06:02 PDT
+Version 2.2.2-rc1<br />
+Last updated 2012-01-11 16:08:09 MDT
 </div>
 </div>
 </body>

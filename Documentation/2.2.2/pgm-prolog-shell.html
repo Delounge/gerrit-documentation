@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.5.2" />
-<title>gerrit ls-projects</title>
+<title>prolog-shell</title>
 <style type="text/css">
 /* Debug borders */
 p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 {
@@ -551,7 +551,7 @@ footnotes: function () {
 </head>
 <body>
 <div id="header">
-<h1>gerrit ls-projects</h1>
+<h1>prolog-shell</h1>
 <span id="revnumber">version 2.2.2-rc1</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
@@ -561,136 +561,79 @@ footnotes: function () {
 <div id="content">
 <h2 id="_name">NAME</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>gerrit ls-projects - List projects visible to caller</p></div>
+<div class="paragraph"><p>prolog-shell - Simple interactive Prolog interpreter</p></div>
 </div>
 <h2 id="_synopsis">SYNOPSIS</h2>
 <div class="sectionbody">
 <div class="verseblock">
-<div class="verseblock-content"><em>ssh</em> -p &lt;port&gt; &lt;host&gt; <em>gerrit ls-projects</em>
-  [--show-branch &lt;BRANCH&gt; &#8230;]
-  [--tree]
-  [--type {code | permissions | all}]</div>
+<div class="verseblock-content"><em>java</em> -jar gerrit.war <em>prolog-shell</em> [-s FILE.pl &#8230;]</div>
 <div class="verseblock-attribution">
 </div></div>
 </div>
 <h2 id="_description">DESCRIPTION</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Displays the list of project names, one per line, that the
-calling user account has been granted <em>READ</em> access to.</p></div>
-<div class="paragraph"><p>If the caller is a member of the privileged <em>Administrators</em>
-group, all projects are listed.</p></div>
-</div>
-<h2 id="_access">ACCESS</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>Any user who has configured an SSH key.</p></div>
-</div>
-<h2 id="_scripting">SCRIPTING</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>This command is intended to be used in scripts.</p></div>
+<div class="paragraph"><p>Provides a simple interactive Prolog interpreter for development
+and testing.</p></div>
 </div>
 <h2 id="_options">OPTIONS</h2>
 <div class="sectionbody">
 <div class="dlist"><dl>
 <dt class="hdlist1">
---show-branch
-</dt>
-<dt class="hdlist1">
--b
+-s
 </dt>
 <dd>
 <p>
-        Branch for which the command will display the sha of each project.
-        The command may have multiple --show-branch parameters, in this case
-        sha will be shown for each of the branches.
-        If the user does not have READ access to some branch or the branch does not
-        exist then stub (40 <tt>-</tt> symbols) is shown.
-        If the user does not have access to any branch in the project then the
-        whole project is not shown.
+        Dynamically load the Prolog source code at startup,
+        as though the user had entered <tt>['FILE.pl'].</tt> into
+        the interepter once it was running. This option may
+        be supplied more than once to load multiple files.
 </p>
-</dd>
-<dt class="hdlist1">
---tree
-</dt>
-<dt class="hdlist1">
--t
-</dt>
-<dd>
-<p>
-        Displays project inheritance in a tree-like format.
-        This option does not work together with the show-branch option.
-</p>
-</dd>
-<dt class="hdlist1">
---type
-</dt>
-<dd>
-<p>
-        Display only projects of the specified type.  If not
-        specified, defaults to <tt>code</tt>. Supported types:
-</p>
-<div class="dlist"><dl>
-<dt class="hdlist1">
-<tt>code</tt>
-</dt>
-<dd>
-<p>
-Any project likely to contain user files.
-</p>
-</dd>
-<dt class="hdlist1">
-<tt>permissions</tt>
-</dt>
-<dd>
-<p>
-Projects created with the <tt>--permissions-only</tt> flag.
-</p>
-</dd>
-<dt class="hdlist1">
-<tt>all</tt>
-</dt>
-<dd>
-<p>
-Any type of project.
-</p>
-</dd>
-</dl></div>
 </dd>
 </dl></div>
 </div>
 <h2 id="_examples">EXAMPLES</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>List visible projects:</p></div>
+<div class="paragraph"><p>Define a simple predicate and test it:</p></div>
 <div class="exampleblock">
 <div class="exampleblock-content">
 <div class="literalblock">
 <div class="content">
-<pre><tt>$ ssh -p 29418 review.example.com gerrit ls-projects
-tools/gerrit
-tools/gwtorm</tt></pre>
+<pre><tt>$ cat &gt;simple.pl
+food(apple).
+food(orange).
+^D</tt></pre>
 </div></div>
-</div></div>
-<div class="paragraph"><p>Clone any project visible to the user:</p></div>
-<div class="exampleblock">
-<div class="exampleblock-content">
 <div class="literalblock">
 <div class="content">
-<pre><tt>for p in `ssh -p 29418 review.example.com gerrit ls-projects`
-do
-  mkdir -p `dirname "$p"`
-  git clone --bare "ssh://review.example.com:29418/$p.git" "$p.git"
-done</tt></pre>
+<pre><tt>$ java -jar gerrit.war prolog-shell -s simple.pl
+Gerrit Code Review 2.2.1-84-ge9c3992 - Interactive Prolog Shell
+based on Prolog Cafe 1.2.5 (mantis)
+         Copyright(C) 1997-2009 M.Banbara and N.Tamura
+(type Ctrl-D or "halt." to exit, "['path/to/file.pl']." to load a file)</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>{consulting /usr/local/google/users/sop/gerrit2/gerrit/simple.pl ...}
+{/usr/local/google/users/sop/gerrit2/gerrit/simple.pl consulted 99 msec}</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>| ?- food(Type).</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>Type = apple ? ;</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>Type = orange ? ;</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>no
+| ?-</tt></pre>
 </div></div>
 </div></div>
-</div>
-<h2 id="_see_also">SEE ALSO</h2>
-<div class="sectionbody">
-<div class="ulist"><ul>
-<li>
-<p>
-<a href="access-control.html">Access Controls</a>
-</p>
-</li>
-</ul></div>
 </div>
 <hr style="
   height: 2px;
@@ -704,7 +647,7 @@ done</tt></pre>
 <div id="footer">
 <div id="footer-text">
 Version 2.2.2-rc1<br />
-Last updated 2012-01-11 16:08:09 MDT
+Last updated 2011-12-29 16:28:23 MDT
 </div>
 </div>
 </body>

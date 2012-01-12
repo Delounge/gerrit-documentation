@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>Gerrit Code Review - Configuration</h1>
-<span id="revnumber">version 2.2.1</span>
+<span id="revnumber">version 2.2.2-rc1</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -566,10 +566,11 @@ config file that controls many host specific settings for Gerrit.</p></div>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
-<div class="title">Note</div>
+<img alt="Note" src="data:image/png;base64,
+" />
 </td>
 <td class="content">The contents of the <tt>etc/gerrit.config</tt> file are cached at startup
-by Gerrit.  If you modify any propeties in this file, Gerrit needs
+by Gerrit.  If you modify any properties in this file, Gerrit needs
 to be restarted before it will use the new values.</td>
 </tr></table>
 </div>
@@ -585,6 +586,32 @@ to be restarted before it will use the new values.</td>
 [cache "diff"]
   diskbuffer = 10 m</tt></pre>
 </div></div>
+<h3 id="_a_id_addreviewer_a_section_addreviewer"><a id="addreviewer"></a>Section addreviewer</h3><div style="clear:left"></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<a id="addreviewer.maxWithoutConfirmation"></a>addreviewer.maxWithoutConfirmation
+</dt>
+<dd>
+<div class="paragraph"><p>The maximum number of reviewers a user can add at once by adding a
+group as reviewer without being asked to confirm the operation.</p></div>
+<div class="paragraph"><p>If set to 0, the user will never be asked to confirm adding a group
+as reviewer.</p></div>
+<div class="paragraph"><p>Default is 10.</p></div>
+<div class="paragraph"><p>This setting only applies for adding reviewers in the Gerrit WebUI,
+but is ignored when adding reviewers with the
+<a href="cmd-set-reviewers.html">set-reviewers</a> command.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="addreviewer.maxAllowed"></a>addreviewer.maxAllowed
+</dt>
+<dd>
+<div class="paragraph"><p>The maximum number of reviewers a user can add at once by adding a
+group as reviewer.</p></div>
+<div class="paragraph"><p>If set to 0, there is no limit for the number of reviewers that can
+be added at once by adding a group as reviewer.</p></div>
+<div class="paragraph"><p>Default is 20.</p></div>
+</dd>
+</dl></div>
 <h3 id="_a_id_auth_a_section_auth"><a id="auth"></a>Section auth</h3><div style="clear:left"></div>
 <div class="paragraph"><p>See also <a href="config-sso.html">SSO configuration</a>.</p></div>
 <div class="dlist"><dl>
@@ -765,6 +792,51 @@ y, year, years (<tt>1 year</tt> is treated as <tt>365 days</tt>)
 <div class="paragraph"><p>Default is -1, permitting infinite time between authentications.</p></div>
 </dd>
 <dt class="hdlist1">
+<a id="auth.maxRegisterEmailTokenAge"></a>auth.maxRegisterEmailTokenAge
+</dt>
+<dd>
+<div class="paragraph"><p>Time in seconds before an email verification token sent to a user in
+order to validate their email address expires.</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+s, sec, second, seconds
+</p>
+</li>
+<li>
+<p>
+m, min, minute, minutes
+</p>
+</li>
+<li>
+<p>
+h, hr, hour, hours
+</p>
+</li>
+<li>
+<p>
+d, day, days
+</p>
+</li>
+<li>
+<p>
+w, week, weeks (<tt>1 week</tt> is treated as <tt>7 days</tt>)
+</p>
+</li>
+<li>
+<p>
+mon, month, months (<tt>1 month</tt> is treated as <tt>30 days</tt>)
+</p>
+</li>
+<li>
+<p>
+y, year, years (<tt>1 year</tt> is treated as <tt>365 days</tt>)
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Default is 5 days.</p></div>
+</dd>
+<dt class="hdlist1">
 <a id="auth.httpHeader"></a>auth.httpHeader
 </dt>
 <dd>
@@ -811,7 +883,7 @@ will be transmitted only over HTTPS protocol.</p></div>
 <div class="paragraph"><p>Optional format string to construct user email addresses out of
 user login names.  Only used if auth.type is <tt>HTTP</tt>, <tt>HTTP_LDAP</tt>
 or <tt>LDAP</tt>.</p></div>
-<div class="paragraph"><p>This value can be set to a format string, where <tt>\{0\}</tt> is replaced
+<div class="paragraph"><p>This value can be set to a format string, where <tt>{0}</tt> is replaced
 with the login name.  E.g. "{0}+<a href="mailto:gerrit@example">gerrit@example</a>.com" with a user
 login name of "foo" will produce "foo+<a href="mailto:gerrit@example">gerrit@example</a>.com" during
 the first time user "foo" registers.</p></div>
@@ -847,6 +919,17 @@ from Google Accounts on Google App Engine to OpenID authentication.</p></div>
 <div class="paragraph"><p>Having this enabled incurs an extra database query when Google
 Account users register with the Gerrit server.</p></div>
 <div class="paragraph"><p>By default, unset/false.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="auth.trustContainerAuth"></a>auth.trustContainerAuth
+</dt>
+<dd>
+<div class="paragraph"><p>If true then it is the responsibility of the container hosting
+Gerrit to authenticate users. In this case Gerrit will blindly trust
+the container.</p></div>
+<div class="paragraph"><p>This parameter only affects git over http traffic. If set to false
+then Gerrit will do the authentication (using DIGEST authentication).</p></div>
+<div class="paragraph"><p>By default this is set to false.</p></div>
 </dd>
 </dl></div>
 <h3 id="_a_id_cache_a_section_cache"><a id="cache"></a>Section cache</h3><div style="clear:left"></div>
@@ -1053,6 +1136,19 @@ to be submitted or abandoned before their relevant difference items
 expire out.</p></div>
 </dd>
 <dt class="hdlist1">
+cache <tt>"git_tags"</tt>
+</dt>
+<dd>
+<div class="paragraph"><p>If branch or reference level READ access controls are used, this
+cache tracks which tags are reachable from the branch tips of a
+repository.  Gerrit uses this information to determine the set
+of tags that a client may access, derived from which tags are
+part of the history of a visible branch.</p></div>
+<div class="paragraph"><p>The cache is persisted to disk across server restarts as it can
+be expensive to compute (60 or more seconds for a large history
+like the Linux kernel repository).</p></div>
+</dd>
+<dt class="hdlist1">
 cache <tt>"groups"</tt>
 </dt>
 <dd>
@@ -1085,6 +1181,15 @@ cache <tt>"ldap_usernames"</tt>
 <div class="paragraph"><p>Caches a mapping of LDAP username to Gerrit account identity.  The
 cache automatically updates when a user first creates their account
 within Gerrit, so the cache expire time is largely irrelevant.</p></div>
+</dd>
+<dt class="hdlist1">
+cache <tt>"permission_sort"</tt>
+</dt>
+<dd>
+<div class="paragraph"><p>Caches the order access control sections must be applied to a
+reference.  Sorting the sections can be expensive when regular
+expressions are used, so this cache remembers the ordering for
+each branch.</p></div>
 </dd>
 <dt class="hdlist1">
 cache <tt>"projects"</tt>
@@ -1202,7 +1307,24 @@ Administrators may force the cache to flush with
 <div class="paragraph"><p>Default is 5 minutes.</p></div>
 </dd>
 </dl></div>
-<h3 id="_a_id_commentlink_a_section_commentlink"><a id="commentlink"></a>Section commentlink</h3><div style="clear:left"></div>
+<div class="paragraph"><p><a id="changeMerge"></a>Section changeMerge</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>Controls whether or not the mergeability test of changes is
+enabled.  If enabled, when the change page is loaded, the test is
+triggered. The submit button will be enabled or disabled according to
+the result.
+
+----
+[changeMerge]
+  test = true
+----
+
++
+By default this is false (test is not enabled).
+
+[[commentlink]]Section commentlink</tt></pre>
+</div></div>
 <div class="paragraph"><p>Comment links are find/replace strings applied to change descriptions,
 patch comments, and in-line code comments to turn set strings into
 hyperlinks.  One common use is for linking to bug-tracking systems.</p></div>
@@ -1658,8 +1780,18 @@ downloads are allowed.</p></div>
 <div class="paragraph"><p>Local filesystem directory holding all Git repositories that
 Gerrit knows about and can process changes for.  A project
 entity in Gerrit maps to a local Git repository by creating
-the path string <tt>"$\{basePath}/$\{project_name}.git"</tt>.</p></div>
+the path string <tt>"${basePath}/${project_name}.git"</tt>.</p></div>
 <div class="paragraph"><p>If relative, the path is resolved relative to <tt>'$site_path'</tt>.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="gerrit.allProjects"></a>gerrit.allProjects
+</dt>
+<dd>
+<div class="paragraph"><p>Name of the permissions-only project defining global server
+access controls and settings. These are inherited into every
+other project managed by the running server. The name is
+relative to <tt>gerrit.basePath</tt>.</p></div>
+<div class="paragraph"><p>Defaults to <tt>All-Projects</tt> if not set.</p></div>
 </dd>
 <dt class="hdlist1">
 <a id="gerrit.canonicalWebUrl"></a>gerrit.canonicalWebUrl
@@ -1732,8 +1864,8 @@ alternatives to gitweb, such as cgit.</p></div>
 <dd>
 <div class="paragraph"><p>Optional pattern to use for constructing the gitweb URL when pointing
 at a specific commit when <tt>custom</tt> is used above.</p></div>
-<div class="paragraph"><p>Valid replacements are <tt>$\{project\}</tt> for the project name in Gerrit
-and <tt>$\{commit\}</tt> for the SHA1 hash for the commit.</p></div>
+<div class="paragraph"><p>Valid replacements are <tt>${project}</tt> for the project name in Gerrit
+and <tt>${commit}</tt> for the SHA1 hash for the commit.</p></div>
 </dd>
 <dt class="hdlist1">
 <a id="gitweb.type"></a>gitweb.project
@@ -1741,7 +1873,7 @@ and <tt>$\{commit\}</tt> for the SHA1 hash for the commit.</p></div>
 <dd>
 <div class="paragraph"><p>Optional pattern to use for constructing the gitweb URL when pointing
 at a specific project when <tt>custom</tt> is used above.</p></div>
-<div class="paragraph"><p>Valid replacements are <tt>$\{project\}</tt> for the project name in Gerrit.</p></div>
+<div class="paragraph"><p>Valid replacements are <tt>${project}</tt> for the project name in Gerrit.</p></div>
 </dd>
 <dt class="hdlist1">
 <a id="gitweb.type"></a>gitweb.branch
@@ -1749,8 +1881,8 @@ at a specific project when <tt>custom</tt> is used above.</p></div>
 <dd>
 <div class="paragraph"><p>Optional pattern to use for constructing the gitweb URL when pointing
 at a specific branch when <tt>custom</tt> is used above.</p></div>
-<div class="paragraph"><p>Valid replacements are <tt>$\{project\}</tt> for the project name in Gerrit
-and <tt>$\{branch\}</tt> for the name of the branch.</p></div>
+<div class="paragraph"><p>Valid replacements are <tt>${project}</tt> for the project name in Gerrit
+and <tt>${branch}</tt> for the name of the branch.</p></div>
 </dd>
 </dl></div>
 <h3 id="_a_id_hooks_a_section_hooks"><a id="hooks"></a>Section hooks</h3><div style="clear:left"></div>
@@ -1826,7 +1958,7 @@ appear in the http.proxy property above.</p></div>
 </dt>
 <dd>
 <div class="paragraph"><p>Specifies the URLs the internal HTTP daemon should listen for
-connections on.  The special hostname <em>\*</em> may be used to listen
+connections on.  The special hostname <em>*</em> may be used to listen
 on all local addresses.  A context path may optionally be included,
 placing Gerrit Code Review&#8217;s web address within a subdirectory of
 the server.</p></div>
@@ -2090,9 +2222,8 @@ server is attempted.</p></div>
 <dd>
 <div class="paragraph"><p><em>(Optional)</em> How an LDAP referral should be handled if it is
 encountered during directory traversal.  Set to <tt>follow</tt> to
-automatically follow any referrals, or <tt>ignore</tt> to stop and fail
-with <tt>javax.naming.PartialResultException: Unprocessed Continuation
-Reference(s)</tt></p></div>
+automatically follow any referrals, or <tt>ignore</tt> to ignore the
+referrals.</p></div>
 <div class="paragraph"><p>By default, <tt>ignore</tt>.</p></div>
 </dd>
 <dt class="hdlist1">
@@ -2133,15 +2264,15 @@ of the form <tt>ou=people,dc=example,dc=com</tt>.</p></div>
 <div class="paragraph"><p>Query pattern to use when searching for a user account.  This may be
 any valid LDAP query expression, including the standard <tt>(&amp;...)</tt> and
 <tt>(|...)</tt> operators.  If auth.type is <tt>HTTP_LDAP</tt> then the variable
-<tt>$\{username\}</tt> is replaced with a parameter set to the username
+<tt>${username}</tt> is replaced with a parameter set to the username
 that was supplied by the HTTP server.  If auth.type is <tt>LDAP</tt> then
-the variable <tt>$\{username\}</tt> is replaced by the string entered by
+the variable <tt>${username}</tt> is replaced by the string entered by
 the end user.</p></div>
 <div class="paragraph"><p>This pattern is used to search the objects contained directly under
 the <tt>ldap.accountBase</tt> tree.  A typical setting for this parameter
-is <tt>(uid=$\{username\})</tt> or <tt>(cn=$\{username\})</tt>, but the proper
+is <tt>(uid=${username})</tt> or <tt>(cn=${username})</tt>, but the proper
 setting depends on the LDAP schema used by the directory server.</p></div>
-<div class="paragraph"><p>Default is <tt>(uid=$\{username\})</tt> for RFC 2307 servers,
+<div class="paragraph"><p>Default is <tt>(uid=${username})</tt> for RFC 2307 servers,
 and <tt>(&amp;(objectClass=user)(sAMAccountName=${username}))</tt>
 for Active Directory.</p></div>
 </dd>
@@ -2155,7 +2286,7 @@ Typically this is the <tt>displayName</tt> property in LDAP, but could
 also be <tt>legalName</tt> or <tt>cn</tt>.</p></div>
 <div class="paragraph"><p>Attribute values may be concatenated with literal strings, for
 example to join given name and surname together use the pattern
-<tt>$\{givenName\} $\{SN\}</tt>.</p></div>
+<tt>${givenName} ${SN}</tt>.</p></div>
 <div class="paragraph"><p>If set, users will be unable to modify their full name field, as
 Gerrit will populate it only from the LDAP data.</p></div>
 <div class="paragraph"><p>Default is <tt>displayName</tt> for RFC 2307 servers,
@@ -2171,7 +2302,7 @@ LDAP server.</p></div>
 <div class="paragraph"><p>Attribute values may be concatenated with literal strings,
 for example to set the email address to the lowercase form
 of sAMAccountName followed by a constant domain name, use
-<tt>$\{sAMAccountName.toLowerCase\}@example.com</tt>.</p></div>
+<tt>${sAMAccountName.toLowerCase}@example.com</tt>.</p></div>
 <div class="paragraph"><p>If set, the preferred email address will be prefilled from LDAP,
 but users may still be able to register additional email address,
 and select a different preferred email address.</p></div>
@@ -2188,12 +2319,12 @@ also be <tt>cn</tt>.  Administrators should prefer to match the attribute
 corresponding to the user&#8217;s workstation username, as this is what
 SSH clients will default to.</p></div>
 <div class="paragraph"><p>Attribute values may also be forced to lowercase, or to uppercase in
-an expression.  For example, <tt>$\{sAMAccountName.toLowerCase\}</tt> will
+an expression.  For example, <tt>${sAMAccountName.toLowerCase}</tt> will
 force the value of sAMAccountName, if defined, to be all lowercase.
 The suffix <tt>.toUpperCase</tt> can be used for the other direction.
 The suffix <tt>.localPart</tt> can be used to split attribute values of
 the form <em>user@example.com</em> and return only the left hand side, for
-example <tt>$\{userPrincipalName.localPart\}</tt> would provide only <em>user</em>.</p></div>
+example <tt>${userPrincipalName.localPart}</tt> would provide only <em>user</em>.</p></div>
 <div class="paragraph"><p>If set, users will be unable to modify their SSH username field, as
 Gerrit will populate it only from the LDAP data.</p></div>
 <div class="paragraph"><p>Default is <tt>uid</tt> for RFC 2307 servers,
@@ -2247,10 +2378,10 @@ of the form <tt>ou=groups,dc=example,dc=com</tt>.</p></div>
 <div class="paragraph"><p>Query pattern used when searching for an LDAP group to connect
 to a Gerrit group.  This may be any valid LDAP query expression,
 including the standard <tt>(&amp;...)</tt> and <tt>(|...)</tt> operators.  The variable
-<tt>$\{groupname\}</tt> is replaced with the search term supplied by the
+<tt>${groupname}</tt> is replaced with the search term supplied by the
 group owner.</p></div>
-<div class="paragraph"><p>Default is <tt>(cn=$\{groupname\})</tt> for RFC 2307,
-and <tt>(&amp;(objectClass=group)(cn=$\{groupname\}))</tt> for Active Directory.</p></div>
+<div class="paragraph"><p>Default is <tt>(cn=${groupname})</tt> for RFC 2307,
+and <tt>(&amp;(objectClass=group)(cn=${groupname}))</tt> for Active Directory.</p></div>
 </dd>
 <dt class="hdlist1">
 <a id="ldap.groupMemberPattern"></a>ldap.groupMemberPattern
@@ -2259,14 +2390,14 @@ and <tt>(&amp;(objectClass=group)(cn=$\{groupname\}))</tt> for Active Directory.
 <div class="paragraph"><p>Query pattern to use when searching for the groups that a user
 account is currently a member of.  This may be any valid LDAP query
 expression, including the standard <tt>(&amp;...)</tt> and <tt>(|...)</tt> operators.</p></div>
-<div class="paragraph"><p>If auth.type is <tt>HTTP_LDAP</tt> then the variable <tt>$\{username\}</tt> is
+<div class="paragraph"><p>If auth.type is <tt>HTTP_LDAP</tt> then the variable <tt>${username}</tt> is
 replaced with a parameter set to the username that was supplied
 by the HTTP server.  Other variables appearing in the pattern,
-such as <tt>$\{fooBarAttribute\}</tt>, are replaced with the value of the
+such as <tt>${fooBarAttribute}</tt>, are replaced with the value of the
 corresponding attribute (in this case, <tt>fooBarAttribute</tt>) as read
 from the user&#8217;s account object matched under <tt>ldap.accountBase</tt>.
-Attributes such as <tt>$\{dn\}</tt> or <tt>$\{uidNumber\}</tt> may be useful.</p></div>
-<div class="paragraph"><p>Default is <tt>(memberUid=$\{username\})</tt> for RFC 2307,
+Attributes such as <tt>${dn}</tt> or <tt>${uidNumber}</tt> may be useful.</p></div>
+<div class="paragraph"><p>Default is <tt>(memberUid=${username})</tt> for RFC 2307,
 and unset (disabled) for Active Directory.</p></div>
 </dd>
 </dl></div>
@@ -2279,8 +2410,8 @@ and unset (disabled) for Active Directory.</p></div>
 <div class="paragraph"><p>If set to true, files with the MIME type <tt>&lt;name&gt;</tt> will be sent as
 direct downloads to the user&#8217;s browser, rather than being wrapped up
 inside of zipped archives.  The type name may be a complete type
-name, e.g. <tt>image/gif</tt>, a generic media type, e.g. <tt>image/\*</tt>,
-or the wildcard <tt>\*/*</tt> to match all types.</p></div>
+name, e.g. <tt>image/gif</tt>, a generic media type, e.g. <tt>image/*</tt>,
+or the wildcard <tt>*/*</tt> to match all types.</p></div>
 <div class="paragraph"><p>By default, false for all MIME types.</p></div>
 </dd>
 </dl></div>
@@ -2348,21 +2479,18 @@ push or repo upload command.</p></div>
 </dl></div>
 <h3 id="_a_id_repository_a_section_repository"><a id="repository"></a>Section repository</h3><div style="clear:left"></div>
 <div class="paragraph"><p>Repositories in this sense are the same as projects.</p></div>
-<div class="paragraph"><p>In the following example configuration the <tt>Administrators</tt> and the
-<tt>Registered Users</tt> groups are set to be the ones to be allowed to
-create projects matching <tt>*</tt> (any project).  <tt>Registered Users</tt> is
-set to be the default owner of new projects.</p></div>
+<div class="paragraph"><p>In the following example configuration <tt>Registered Users</tt> is set
+to be the default owner of new projects.</p></div>
 <div class="listingblock">
 <div class="content">
 <pre><tt>[repository "*"]
-  createGroup = Administrators
-  createGroup = Registered Users
   ownerGroup = Registered Users</tt></pre>
 </div></div>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
-<div class="title">Note</div>
+<img alt="Note" src="data:image/png;base64,
+" />
 </td>
 <td class="content">Currently only the repository name <tt>*</tt> is supported.
 This is a wildcard designating all repositories.</td>
@@ -2370,25 +2498,12 @@ This is a wildcard designating all repositories.</td>
 </div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<a id="repository.name.createGroup"></a>repository.&lt;name&gt;.createGroup
-</dt>
-<dd>
-<div class="paragraph"><p>A name of a group which exists in the database. Zero, one or many
-groups are allowed.  Each on its own line.  Groups which don&#8217;t exist
-in the database are ignored.</p></div>
-<div class="paragraph"><p>If no groups are declared (or only non-existing ones), the default
-value <tt>Administrators</tt> is used.</p></div>
-</dd>
-<dt class="hdlist1">
 <a id="repository.name.ownerGroup"></a>repository.&lt;name&gt;.ownerGroup
 </dt>
 <dd>
 <div class="paragraph"><p>A name of a group which exists in the database. Zero, one or many
 groups are allowed.  Each on its own line.  Groups which don&#8217;t exist
 in the database are ignored.</p></div>
-<div class="paragraph"><p>If no groups are declared (or only non-existing ones), it defaults
-to whatever is declared by <tt>repository.&lt;name&gt;.createGroup</tt> (including
-any fallback to <tt>Administrators</tt>.)</p></div>
 </dd>
 </dl></div>
 <h3 id="_a_id_sendemail_a_section_sendemail"><a id="sendemail"></a>Section sendemail</h3><div style="clear:left"></div>
@@ -2422,7 +2537,7 @@ relay for that domain.</p></div>
 <p>
 <tt>MIXED</tt>
 </p>
-<div class="paragraph"><p>Shorthand for <tt>$\{user\} (Code Review) &lt;review@example.com&gt;</tt> where
+<div class="paragraph"><p>Shorthand for <tt>${user} (Code Review) &lt;review@example.com&gt;</tt> where
 <tt>review@example.com</tt> is the same as <a href="#user.email">user.email</a>.
 See below for a description of how the replacement is handled.</p></div>
 </li>
@@ -2442,7 +2557,7 @@ from the local operating system.</p></div>
 <div class="paragraph"><p>If set to a name and email address in brackets, Gerrit will use
 this name and email address for any messages, overriding the name
 that may have been selected for commits by user.name and user.email.
-Optionally, the name portion may contain the placeholder <tt>$\{user\}</tt>,
+Optionally, the name portion may contain the placeholder <tt>${user}</tt>,
 which is replaced by the Full Name of the current user.</p></div>
 </li>
 </ul></div>
@@ -2552,13 +2667,43 @@ default of 29418.</p></div>
 </li>
 <li>
 <p>
-\*:'port' (for example <tt>*:29418</tt>)
+*:'port' (for example <tt>*:29418</tt>)
 </p>
 </li>
 </ul></div>
 <div class="paragraph"><p>If multiple values are supplied, the daemon will listen on all
 of them.</p></div>
 <div class="paragraph"><p>By default, *:29418.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="sshd.advertisedAddress"></a>sshd.advertisedAddress
+</dt>
+<dd>
+<div class="paragraph"><p>Specifies the addresses clients should be told to connect to.
+This may differ from sshd.listenAddress if a firewall based port
+redirector is being used, making Gerrit appear to answer on port
+22. The following forms may be used to specify an address.  In any
+form, <tt>:'port'</tt> may be omitted to use the default SSH port of 22.</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>hostname</em>:'port' (for example <tt>review.example.com:22</tt>)
+</p>
+</li>
+<li>
+<p>
+<em>IPv4</em>:'port' (for example <tt>10.0.0.1:29418</tt>)
+</p>
+</li>
+<li>
+<p>
+[<em>IPv6</em>]:'port' (for example <tt>[ff02::1]:29418</tt>)
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>If multiple values are supplied, the daemon will advertise all
+of them.</p></div>
+<div class="paragraph"><p>By default, sshd.listenAddress.</p></div>
 </dd>
 <dt class="hdlist1">
 <a id="sshd.reuseAddress"></a>sshd.reuseAddress
@@ -2787,7 +2932,7 @@ tracking systems, parsed out of the commit message and
 saved in Gerrit&#8217;s database.  After making changes to
 this section, existing changes must be reindexed with the
 <a href="pgm-ScanTrackingIds.html">ScanTrackingIds</a> program.</p></div>
-<div class="paragraph"><p>The tracking ids are serachable using tr:&lt;tracking id&gt; or
+<div class="paragraph"><p>The tracking ids are searchable using tr:&lt;tracking id&gt; or
 bug:&lt;tracking id&gt;.</p></div>
 <div class="listingblock">
 <div class="content">
@@ -2807,7 +2952,9 @@ bug:&lt;tracking id&gt;.</p></div>
 </dt>
 <dd>
 <div class="paragraph"><p>A prefix tag that identify the footer line to parse for tracking ids.
-Several trakingid entries can have the same footer tag.
+Several trackingid entries can have the same footer tag. A single
+trackingid entry can have multiple footer tags. If multiple footer
+tags are specified, each tag will be parsed separately.
 (the trailing ":" is optional)</p></div>
 </dd>
 <dt class="hdlist1">
@@ -2904,7 +3051,10 @@ be exposed to everyone.</p></div>
 <div class="paragraph"><p>Sample <tt>etc/secure.config</tt>:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>[database]
+<pre><tt>[auth]
+  registerEmailPrivateKey = 2zHNrXE2bsoylzUqDxZp0H1cqUmjgWb6
+
+[database]
   username = webuser
   password = s3kr3t
 
@@ -2941,7 +3091,8 @@ database may be set to control how Gerrit behaves.</p></div>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
-<div class="title">Note</div>
+<img alt="Note" src="data:image/png;base64,
+" />
 </td>
 <td class="content">The contents of the <tt>system_config</tt> table are cached at startup
 by Gerrit.  If you modify any columns in this table, Gerrit needs
@@ -2973,60 +3124,6 @@ good idea.</p></div>
 </ul></div>
 </dd>
 </dl></div>
-<h3 id="_not_user_serviceable">Not User Serviceable</h3><div style="clear:left"></div>
-<div class="paragraph"><p>These fields generally shouldn&#8217;t be modified.</p></div>
-<div class="dlist"><dl>
-<dt class="hdlist1">
-register_email_private_key
-</dt>
-<dd>
-<div class="paragraph"><p>Private key used to sign the links emailed to users when they
-request to register a new email address on their user account.
-When the link is activated, the private key authenticates the link
-was created and sent by this Gerrit server, proving that the user
-can receive email at the address they are registering.</p></div>
-<div class="paragraph"><p>This column is automatically generated when the database is
-initialized.  Changing it to a new value would cause all current
-links to be invalidated.</p></div>
-<div class="paragraph"><p>Changing it is not recommended.</p></div>
-</dd>
-<dt class="hdlist1">
-admin_group_id
-</dt>
-<dd>
-<div class="paragraph"><p>Unique identity of the group with full privileges.  Any user who
-is a member of this group may manage any other group, any project,
-and other system settings over the web.</p></div>
-<div class="paragraph"><p>This is initialized by Gerrit to be the "Administrators" group.</p></div>
-<div class="paragraph"><p>Changing it is not recommended.</p></div>
-</dd>
-<dt class="hdlist1">
-anonymous_group_id
-</dt>
-<dd>
-<div class="paragraph"><p>Unique identity of the group for anonymous (not authenticated) users.</p></div>
-<div class="paragraph"><p>All users are a member of this group, whether or not they are
-actually signed in to Gerrit.  Any access rights assigned to
-this group are inherited by all users.</p></div>
-<div class="paragraph"><p>This is initialized by Gerrit to be the "Anonymous Users" group.</p></div>
-<div class="paragraph"><p>Changing it is not recommended.</p></div>
-</dd>
-<dt class="hdlist1">
-registered_group_id
-</dt>
-<dd>
-<div class="paragraph"><p>Unique identity of the group for all authenticated users.</p></div>
-<div class="paragraph"><p>All signed-in users are a member of this group.  Any access rights
-assigned to this group are inherited by all users once they have
-authenticated to Gerrit.</p></div>
-<div class="paragraph"><p>Since account registration is open and fairly easy to obtain,
-moving from the "Anonymous Users" group to this group is not
-very difficult.  Caution should be taken when assigning any
-permissions to this group.</p></div>
-<div class="paragraph"><p>This is initialized by Gerrit to be the "Registered Users" group.</p></div>
-<div class="paragraph"><p>Changing it is not recommended.</p></div>
-</dd>
-</dl></div>
 </div>
 <hr style="
   height: 2px;
@@ -3039,8 +3136,8 @@ permissions to this group.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.1<br />
-Last updated 2011-06-07 13:18:53 PDT
+Version 2.2.2-rc1<br />
+Last updated 2012-01-11 16:35:59 MDT
 </div>
 </div>
 </body>

@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>gerrit show-connections</h1>
-<span id="revnumber">version 2.2.1</span>
+<span id="revnumber">version 2.2.2-rc1</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -578,7 +578,8 @@ an activity.</p></div>
 </div>
 <h2 id="_access">ACCESS</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Caller must be a member of the privileged <em>Administrators</em> group.</p></div>
+<div class="paragraph"><p>Caller must be a member of the privileged <em>Administrators</em> group,
+or have been granted the <em>View Connections</em> global capability.</p></div>
 </div>
 <h2 id="_scripting">SCRIPTING</h2>
 <div class="sectionbody">
@@ -588,10 +589,10 @@ an activity.</p></div>
 <div class="sectionbody">
 <div class="dlist"><dl>
 <dt class="hdlist1">
--n
+--numeric
 </dt>
 <dt class="hdlist1">
---numeric
+-n
 </dt>
 <dd>
 <p>
@@ -609,7 +610,7 @@ Session
 <dd>
 <p>
         Unique session identifier on this server.  Session
-        identifiers have a period of 2\^32-1 and start from a
+        identifiers have a period of 2^32-1 and start from a
         random value.
 </p>
 </dd>
@@ -692,8 +693,8 @@ Session     Start     Idle   User            Remote Host
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.1<br />
-Last updated 2010-07-16 15:45:13 PDT
+Version 2.2.2-rc1<br />
+Last updated 2011-12-29 16:28:23 MDT
 </div>
 </div>
 </body>

@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>Gerrit Code Review - Uploading Changes</h1>
-<span id="revnumber">version 2.2.1</span>
+<span id="revnumber">version 2.2.2-rc1</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -617,7 +617,8 @@ and paste it into Gerrit&#8217;s web interface:</p></div>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
-<div class="title">Tip</div>
+<img alt="Tip" src="data:image/png;base64,
+" />
 </td>
 <td class="content">Users who frequently upload changes will also want to consider
 starting a <tt>ssh-agent</tt>, and adding their private key to the list
@@ -635,14 +636,23 @@ port 29418, using the same hostname as the web server:</p></div>
 <div class="exampleblock-content">
 <div class="literalblock">
 <div class="content">
-<pre><tt>$ ssh -p 29418 sshusername@hostname
-gerrit: no shell available
-Connection to hostname closed.</tt></pre>
+<pre><tt>  $ ssh -p 29418 sshusername@hostname
+
+    ****    Welcome to Gerrit Code Review    ****
+
+    Hi John Doe, you have successfully connected over SSH.
+
+    Unfortunately, interactive shells are disabled.
+    To clone a hosted Git repository, use:
+
+    git clone ssh://sshusername@hostname:29418/REPOSITORY_NAME.git
+
+  Connection to hostname closed.</tt></pre>
 </div></div>
 </div></div>
-<div class="paragraph"><p>In the command above, <tt>sshusername</tt> was configured on the <tt>SSH Keys</tt>
-tab of the <tt>Settings</tt> screen.  If it is not set, propose a name
-and use <tt>Change Username</tt> to select the name.</p></div>
+<div class="paragraph"><p>In the command above, <tt>sshusername</tt> was configured as <tt>Username</tt> on
+the <tt>Profile</tt> tab of the <tt>Settings</tt> screen.  If it is not set,
+propose a name and use <tt>Select Username</tt> to select the name.</p></div>
 <div class="paragraph"><p>To determine the port number Gerrit is running on, visit the special
 information URL <tt>http://'hostname'/ssh_info</tt>, and copy the port
 number from the second field:</p></div>
@@ -731,7 +741,7 @@ as arguments to `git receive-pack</tt>:</p></div>
 <pre><tt>git push --receive-pack='git receive-pack --reviewer=a@a.com --cc=b@o.com' tr:kernel/common HEAD:refs/for/experimental</tt></pre>
 </div></div>
 </div></div>
-<div class="paragraph"><p>The <tt>\--reviewer='email'</tt> and <tt>\--cc='email'</tt> options may be
+<div class="paragraph"><p>The <tt>--reviewer='email'</tt> and <tt>--cc='email'</tt> options may be
 specified as many times as necessary to cover all interested
 parties.  Gerrit will automatically avoid sending duplicate email
 notifications, such as if one of the specified reviewers or CC
@@ -902,7 +912,7 @@ be sent through command line options.</p></div>
 <div class="paragraph"><p>For more details on using <tt>repo upload</tt>, see <tt>repo help upload</tt>.</p></div>
 <h3 id="repo_replace">Replace Changes</h3><div style="clear:left"></div>
 <div class="paragraph"><p>To replace changes, ensure Change-Id lines were created in the
-commit messages, and just use <tt>repo upload</tt> without the <tt>\--replace</tt>
+commit messages, and just use <tt>repo upload</tt> without the <tt>--replace</tt>
 command line flag.  Gerrit Code Review will automatically match
 the commits back to their original changes by taking advantage of
 their Change-Id lines.</p></div>
@@ -910,7 +920,7 @@ their Change-Id lines.</p></div>
 amending the message and copying the line from the change&#8217;s page
 on the web.</p></div>
 <div class="paragraph"><p>If Change-Id lines are not available, then the user must use the much
-more manual mapping technique offered by <tt>repo upload \--replace</tt>.</p></div>
+more manual mapping technique offered by <tt>repo upload --replace</tt>.</p></div>
 <div class="paragraph"><p>For more about Change-Ids, see <a href="user-changeid.html">Change-Id Lines</a>.</p></div>
 </div>
 <h2 id="_gritty_details">Gritty Details</h2>
@@ -919,8 +929,8 @@ more manual mapping technique offered by <tt>repo upload \--replace</tt>.</p></d
 own process space, Gerrit maintains complete control over how the
 repository is updated, and what responses are sent to the <tt>git push</tt>
 client invoked by the end-user, or by <tt>repo upload</tt>.  This allows
-Gerrit to provide magical refs, such as <tt>refs/for/\*</tt> for new
-change submission and <tt>refs/changes/\*</tt> for change replacement.
+Gerrit to provide magical refs, such as <tt>refs/for/*</tt> for new
+change submission and <tt>refs/changes/*</tt> for change replacement.
 When a push request is received to create a ref in one of these
 namespaces Gerrit performs its own logic to update the database,
 and then lies to the client about the result of the operation.
@@ -950,8 +960,8 @@ supplied under at least one valid agreement.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.1<br />
-Last updated 2011-05-15 13:42:28 PDT
+Version 2.2.2-rc1<br />
+Last updated 2012-01-11 16:35:59 MDT
 </div>
 </div>
 </body>

@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>Gerrit Code Review - Change-Ids</h1>
-<span id="revnumber">version 2.2.1</span>
+<span id="revnumber">version 2.2.2-rc1</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -612,7 +612,7 @@ To install the hook, copy it from Gerrit&#8217;s daemon:</p></div>
 </div>
 <h2 id="_change_upload">Change Upload</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>During upload by pushing to a <tt>refs/for/\*</tt> or <tt>refs/heads/\*</tt>
+<div class="paragraph"><p>During upload by pushing to a <tt>refs/for/*</tt> or <tt>refs/heads/*</tt>
 branch, Gerrit will use the Change-Id line to:</p></div>
 <div class="ulist"><ul>
 <li>
@@ -656,7 +656,7 @@ the hook, which will automatically generate and insert a unique
 Change-Id line.  You can inspect the modified message after the
 commit is complete by executing <tt>git show</tt>.</p></div>
 <h3 id="amend">Amending a commit</h3><div style="clear:left"></div>
-<div class="paragraph"><p>When amending a commit with <tt>git commit \--amend</tt>, leave the
+<div class="paragraph"><p>When amending a commit with <tt>git commit --amend</tt>, leave the
 Change-Id line unmodified in the commit message.  This will allow
 Gerrit to automatically update the change with the amended commit.</p></div>
 <h3 id="rebase">Rebasing a commit</h3><div style="clear:left"></div>
@@ -705,8 +705,8 @@ be automatically associated with the prior change.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.1<br />
-Last updated 2011-04-21 17:06:02 PDT
+Version 2.2.2-rc1<br />
+Last updated 2012-01-11 16:35:59 MDT
 </div>
 </div>
 </body>

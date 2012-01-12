@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>gerrit review</h1>
-<span id="revnumber">version 2.2.1</span>
+<span id="revnumber">version 2.2.2-rc1</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -566,8 +566,13 @@ footnotes: function () {
 <h2 id="_synopsis">SYNOPSIS</h2>
 <div class="sectionbody">
 <div class="verseblock">
-<div class="verseblock-content"><em>ssh</em> -p &lt;port&gt; &lt;host&gt; <em>gerrit approve</em> [--project &lt;PROJECT&gt;] [--message &lt;MESSAGE&gt;] [--verified &lt;N&gt;] [--code-review &lt;N&gt;] [--abandon] [--restore] [--submit]  {COMMIT | CHANGEID,PATCHSET}&#8230;
-<em>ssh</em> -p &lt;port&gt; &lt;host&gt; <em>gerrit review</em> [--project &lt;PROJECT&gt;] [--message &lt;MESSAGE&gt;] [--verified &lt;N&gt;] [--code-review &lt;N&gt;] [--abandon] [--restore] [--submit]  {COMMIT | CHANGEID,PATCHSET}&#8230;</div>
+<div class="verseblock-content"><em>ssh</em> -p &lt;port&gt; &lt;host&gt; <em>gerrit review</em>
+  [--project &lt;PROJECT&gt;]
+  [--message &lt;MESSAGE&gt;]
+  [--submit]
+  [--abandon | --restore]
+  [--verified &lt;N&gt;] [--code-review &lt;N&gt;]
+  {COMMIT | CHANGEID,PATCHSET}&#8230;</div>
 <div class="verseblock-attribution">
 </div></div>
 </div>
@@ -627,20 +632,6 @@ is strongly encouraged.</p></div>
 </p>
 </dd>
 <dt class="hdlist1">
---code-review
-</dt>
-<dt class="hdlist1">
---verified
-</dt>
-<dd>
-<p>
-        Set the approval category to the value <em>N</em>.  The exact
-        option names supported and the range of values permitted
-        differs per site, check the output of --help, or contact
-        your site administrator for further details.
-</p>
-</dd>
-<dt class="hdlist1">
 --abandon
 </dt>
 <dd>
@@ -670,6 +661,20 @@ is strongly encouraged.</p></div>
         (option is mutually exclusive with --abandon)
 </p>
 </dd>
+<dt class="hdlist1">
+--code-review
+</dt>
+<dt class="hdlist1">
+--verified
+</dt>
+<dd>
+<p>
+        Set the approval category to the value <em>N</em>.  The exact
+        option names supported and the range of values permitted
+        differs per site, check the output of --help, or contact
+        your site administrator for further details.
+</p>
+</dd>
 </dl></div>
 </div>
 <h2 id="_access">ACCESS</h2>
@@ -687,7 +692,7 @@ is strongly encouraged.</p></div>
 <div class="exampleblock-content">
 <div class="literalblock">
 <div class="content">
-<pre><tt>$ ssh -p 29418 review.example.com gerrit review --verified=+1 c0ff33</tt></pre>
+<pre><tt>$ ssh -p 29418 review.example.com gerrit review --verified +1 c0ff33</tt></pre>
 </div></div>
 </div></div>
 <div class="paragraph"><p>Append the message "Build Successful". Notice two levels of quoting is
@@ -697,7 +702,7 @@ inside the Gerrit server:</p></div>
 <div class="exampleblock-content">
 <div class="literalblock">
 <div class="content">
-<pre><tt>$ ssh -p 29418 review.example.com gerrit review -m '"Build Successful"'</tt></pre>
+<pre><tt>$ ssh -p 29418 review.example.com gerrit review -m '"Build Successful"' c0ff33</tt></pre>
 </div></div>
 </div></div>
 <div class="paragraph"><p>Mark the unmerged commits both "Verified +1" and "Code Review +2" and
@@ -707,11 +712,19 @@ submit them for merging:</p></div>
 <div class="literalblock">
 <div class="content">
 <pre><tt>$ ssh -p 29418 review.example.com gerrit review \
---verified=+1 \
---code-review=+2 \
---submit \
---project=this/project \
-$(git rev-list origin/master..HEAD)</tt></pre>
+  --verified +1 \
+  --code-review +2 \
+  --submit \
+  --project this/project \
+  $(git rev-list origin/master..HEAD)</tt></pre>
+</div></div>
+</div></div>
+<div class="paragraph"><p>Abandon an active change:</p></div>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>$ ssh -p 29418 review.example.com gerrit review --abandon c0ff33</tt></pre>
 </div></div>
 </div></div>
 </div>
@@ -736,8 +749,8 @@ $(git rev-list origin/master..HEAD)</tt></pre>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.1<br />
-Last updated 2011-06-07 09:48:03 PDT
+Version 2.2.2-rc1<br />
+Last updated 2012-01-11 16:35:59 MDT
 </div>
 </div>
 </body>

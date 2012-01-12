@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>Gerrit Code Review - Command Line Tools</h1>
-<span id="revnumber">version 2.2.1</span>
+<span id="revnumber">version 2.2.2-rc1</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -617,29 +617,11 @@ see <a href="user-upload.html#test_ssh">Testing Your SSH Connection</a>.</p></di
 <h3 id="_a_id_user_commands_a_user_commands"><a id="user_commands"></a>User Commands</h3><div style="clear:left"></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-git upload-pack
+<em>gerrit approve</em>
 </dt>
 <dd>
 <p>
-        Standard Git server side command for client side <tt>git fetch</tt>.
-</p>
-</dd>
-<dt class="hdlist1">
-<a href="cmd-receive-pack.html">git receive-pack</a>
-</dt>
-<dd>
-<p>
-        Standard Git server side command for client side <tt>git push</tt>.
-</p>
-<div class="paragraph"><p>Also implements the magic associated with uploading commits for
-review.  See <a href="user-upload.html#push_create">Creating Changes</a>.</p></div>
-</dd>
-<dt class="hdlist1">
-<a href="cmd-review.html">gerrit approve</a>
-</dt>
-<dd>
-<p>
-        Alias for <em>gerrit review</em>.
+        <em>Deprecated alias for <tt>gerrit review</tt>.</em>
 </p>
 </dd>
 <dt class="hdlist1">
@@ -651,11 +633,27 @@ review.  See <a href="user-upload.html#push_create">Creating Changes</a>.</p></d
 </p>
 </dd>
 <dt class="hdlist1">
+<a href="cmd-set-reviewers.html">gerrit set-reviewers</a>
+</dt>
+<dd>
+<p>
+        Add or remove reviewers on a change.
+</p>
+</dd>
+<dt class="hdlist1">
 <a href="cmd-query.html">gerrit query</a>
 </dt>
 <dd>
 <p>
         Query the change database.
+</p>
+</dd>
+<dt class="hdlist1">
+<em>gerrit receive-pack</em>
+</dt>
+<dd>
+<p>
+        <em>Depreated alias for <tt>git receive-pack</tt>.</em>
 </p>
 </dd>
 <dt class="hdlist1">
@@ -675,12 +673,22 @@ review.  See <a href="user-upload.html#push_create">Creating Changes</a>.</p></d
 </p>
 </dd>
 <dt class="hdlist1">
-gerrit receive-pack
+git upload-pack
 </dt>
 <dd>
 <p>
-        Legacy alias for <tt>git receive-pack</tt>.
+        Standard Git server side command for client side <tt>git fetch</tt>.
 </p>
+</dd>
+<dt class="hdlist1">
+<a href="cmd-receive-pack.html">git receive-pack</a>
+</dt>
+<dd>
+<p>
+        Standard Git server side command for client side <tt>git push</tt>.
+</p>
+<div class="paragraph"><p>Also implements the magic associated with uploading commits for
+review.  See <a href="user-upload.html#push_create">Creating Changes</a>.</p></div>
 </dd>
 </dl></div>
 <h3 id="_a_id_admin_commands_a_adminstrator_commands"><a id="admin_commands"></a>Adminstrator Commands</h3><div style="clear:left"></div>
@@ -726,6 +734,14 @@ gerrit receive-pack
 </p>
 </dd>
 <dt class="hdlist1">
+<a href="cmd-replicate.html">gerrit replicate</a>
+</dt>
+<dd>
+<p>
+        Manually trigger replication, to recover a node.
+</p>
+</dd>
+<dt class="hdlist1">
 <a href="cmd-set-project-parent.html">gerrit set-project-parent</a>
 </dt>
 <dd>
@@ -755,14 +771,6 @@ gerrit receive-pack
 <dd>
 <p>
         Display the background work queues, including replication.
-</p>
-</dd>
-<dt class="hdlist1">
-<a href="cmd-replicate.html">gerrit replicate</a>
-</dt>
-<dd>
-<p>
-        Manually trigger replication, to recover a node.
 </p>
 </dd>
 <dt class="hdlist1">
@@ -802,8 +810,8 @@ gerrit receive-pack
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.1<br />
-Last updated 2011-04-21 17:06:02 PDT
+Version 2.2.2-rc1<br />
+Last updated 2012-01-11 16:08:09 MDT
 </div>
 </div>
 </body>

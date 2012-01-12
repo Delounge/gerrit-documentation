@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>Gerrit Code Review - Hooks</h1>
-<span id="revnumber">version 2.2.1</span>
+<span id="revnumber">version 2.2.2-rc1</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -632,6 +632,15 @@ changes)</p></div>
 <pre><tt>ref-updated --oldrev &lt;old rev&gt; --newrev &lt;new rev&gt; --refname &lt;ref name&gt; --project &lt;project name&gt; --submitter &lt;submitter&gt;</tt></pre>
 </div></div>
 </div></div>
+<h3 id="_cla_signed">cla-signed</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Called whenever a user signs a contributor license agreement</p></div>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>cla-signed --submitter &lt;submitter&gt; --user-id &lt;user_id&gt; --cla-id &lt;cla_id&gt;</tt></pre>
+</div></div>
+</div></div>
 </div>
 <h2 id="_configuration_settings">Configuration Settings</h2>
 <div class="sectionbody">
@@ -645,7 +654,7 @@ filenames for the hooks.</p></div>
 <h2 id="_missing_change_urls">Missing Change URLs</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>If <a href="config-gerrit.html#gerrit.canonicalWebUrl">gerrit.canonicalWebUrl</a>
-is not set in <tt>gerrit.config</tt> the <tt>\--change-url</tt> flag may not be
+is not set in <tt>gerrit.config</tt> the <tt>--change-url</tt> flag may not be
 passed to all hooks.  Hooks started out of an SSH context (for example
 the patchset-created hook) don&#8217;t know the server&#8217;s web URL, unless
 this variable is configured.</p></div>
@@ -671,8 +680,8 @@ this variable is configured.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.1<br />
-Last updated 2010-12-08 17:43:21 PDT
+Version 2.2.2-rc1<br />
+Last updated 2012-01-11 16:35:59 MDT
 </div>
 </div>
 </body>
