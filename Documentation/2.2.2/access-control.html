@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>Gerrit Code Review - Access Controls</h1>
-<span id="revnumber">version 2.2.2-rc1</span>
+<span id="revnumber">version 2.2.2</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -561,15 +561,6 @@ footnotes: function () {
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<div class="sidebarblock">
-<div class="sidebar-content">
-<div class="sidebar-title">Disclaimer</div>
-<div class="paragraph"><p>This documentation is outdated.</p></div>
-<div class="paragraph"><p>In Gerrit 2.2.x the way how the access rights are configured has
-changed, but this documentation was not updated yet.</p></div>
-<div class="paragraph"><p>This documentation still describes the access rights configuration as
-it was in Gerrit 2.1.8 and before.</p></div>
-</div></div>
 <div class="paragraph"><p>Access controls in Gerrit are group based.  Every user account is a
 member of one or more groups, and access and privileges are granted
 to those groups.  Access rights cannot be granted to individual
@@ -601,7 +592,7 @@ not signed in are a member of only this group, and no others.</p></div>
 <div class="paragraph"><p>Administrators and project owners can grant access rights to this
 group in order to permit anonymous users to view project changes,
 without requiring sign in first.  Currently it is only worthwhile
-to grant <tt>Read Access</tt> to this group as Gerrit requires an account
+to grant <tt>Read</tt> access to this group as Gerrit requires an account
 identity for all other operations.</p></div>
 <h3 id="non-interactive_users">Non-Interactive Users</h3><div style="clear:left"></div>
 <div class="paragraph"><p>This is an internal user group, members of this group are not expected
@@ -618,15 +609,15 @@ context of a project to which the access rights apply. These rights
 therefore apply to all the users who are owners of this project.</p></div>
 <div class="paragraph"><p>By assigning access rights to this group on a parent project Gerrit
 administrators can define a set of default access rights for
-<a href="#category_OWN">project owners</a>. Child projects inherit these
+<a href="#category_owner">project owners</a>. Child projects inherit these
 access rights where they are resolved to the users that own the child
 project.  Having default access rights for
-<a href="#category_OWN">project owners</a> assigned on a parent project may
+<a href="#category_owner">project owners</a> assigned on a parent project may
 avoid the need to initially configure access rights for
 newly created child projects.</p></div>
 <h3 id="registered_users">Registered Users</h3><div style="clear:left"></div>
 <div class="paragraph"><p>All signed-in users are automatically a member of this group (and
-also <em>Anonymous Users</em>, see above).</p></div>
+also <a href="#anonymous_users"><em>Anonymous Users</em></a>, see above).</p></div>
 <div class="paragraph"><p>Any access rights assigned to this group are inherited by all
 users as soon as they sign-in to Gerrit.  If OpenID authentication
 is being employed, moving from only <em>Anonymous Users</em> into this
@@ -636,7 +627,7 @@ permissions to this group.</p></div>
 allowing signed-in users to vote on a change, but not actually
 cause it to become approved or rejected.</p></div>
 <div class="paragraph"><p>Registered users are always permitted to make and publish comments
-on any change in any project they have <tt>Read Access</tt> to.</p></div>
+on any change in any project they have <tt>Read</tt> access to.</p></div>
 </div>
 <h2 id="_account_groups">Account Groups</h2>
 <div class="sectionbody">
@@ -771,16 +762,18 @@ on the project:</p></div>
 width="100%"
 frame="border"
 cellspacing="0" cellpadding="4">
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
 <thead>
 <tr>
 <th align="left" valign="top">Group            </th>
 <th align="left" valign="top">Reference Name</th>
 <th align="left" valign="top">Category   </th>
-<th align="left" valign="top">Range</th>
+<th align="left" valign="top">Range   </th>
+<th align="left" valign="top">Exclusive</th>
 </tr>
 </thead>
 <tbody>
@@ -789,18 +782,21 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">refs/heads/*</p></td>
 <td align="left" valign="top"><p class="table">Code Review</p></td>
 <td align="left" valign="top"><p class="table">-1..+1</p></td>
+<td align="left" valign="top"><p class="table"></p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Foo Leads</p></td>
 <td align="left" valign="top"><p class="table">refs/heads/*</p></td>
 <td align="left" valign="top"><p class="table">Code Review</p></td>
 <td align="left" valign="top"><p class="table">-2..+2</p></td>
+<td align="left" valign="top"><p class="table"></p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">QA Leads</p></td>
 <td align="left" valign="top"><p class="table">refs/heads/qa</p></td>
 <td align="left" valign="top"><p class="table">Code Review</p></td>
 <td align="left" valign="top"><p class="table">-2..+2</p></td>
+<td align="left" valign="top"><p class="table"></p></td>
 </tr>
 </tbody>
 </table>
@@ -811,8 +807,9 @@ them access to the entire reference space, thanks to the wildcard.</p></div>
 <div class="paragraph"><p>Gerrit also supports exclusive reference-level access control.</p></div>
 <div class="paragraph"><p>It is possible to configure Gerrit to grant an exclusive ref level
 access control so that only users of a specific group can perform
-an operation on a project/reference pair. This is done by prefixing
-the reference specified with a <tt>'-'</tt>.</p></div>
+an operation on a project/reference pair. This is done by ticking
+the exclusive flag when setting the permission for the
+<tt>refs/heads/qa</tt> branch.</p></div>
 <div class="paragraph"><p>For example, if a user who is a member of <tt>Foo Leads</tt> tries to
 review a change destined for branch <tt>refs/heads/qa</tt> in a project,
 and the following ACLs are granted:</p></div>
@@ -821,16 +818,18 @@ and the following ACLs are granted:</p></div>
 width="100%"
 frame="border"
 cellspacing="0" cellpadding="4">
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
 <thead>
 <tr>
 <th align="left" valign="top">Group           </th>
 <th align="left" valign="top">Reference Name</th>
 <th align="left" valign="top">Category   </th>
-<th align="left" valign="top">Range</th>
+<th align="left" valign="top">Range   </th>
+<th align="left" valign="top">Exclusive</th>
 </tr>
 </thead>
 <tbody>
@@ -839,18 +838,21 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">refs/heads/*</p></td>
 <td align="left" valign="top"><p class="table">Code Review</p></td>
 <td align="left" valign="top"><p class="table">-1..+1</p></td>
+<td align="left" valign="top"><p class="table"></p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Foo Leads</p></td>
 <td align="left" valign="top"><p class="table">refs/heads/*</p></td>
 <td align="left" valign="top"><p class="table">Code Review</p></td>
 <td align="left" valign="top"><p class="table">-2..+2</p></td>
+<td align="left" valign="top"><p class="table"></p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">QA Leads</p></td>
-<td align="left" valign="top"><p class="table">-refs/heads/qa</p></td>
+<td align="left" valign="top"><p class="table">refs/heads/qa</p></td>
 <td align="left" valign="top"><p class="table">Code Review</p></td>
 <td align="left" valign="top"><p class="table">-2..+2</p></td>
+<td align="left" valign="top"><p class="table">X</p></td>
 </tr>
 </tbody>
 </table>
@@ -868,16 +870,18 @@ would be needed:</p></div>
 width="100%"
 frame="border"
 cellspacing="0" cellpadding="4">
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
 <thead>
 <tr>
 <th align="left" valign="top">Group           </th>
 <th align="left" valign="top">Reference Name</th>
 <th align="left" valign="top">Category   </th>
-<th align="left" valign="top">Range</th>
+<th align="left" valign="top">Range   </th>
+<th align="left" valign="top">Exclusive</th>
 </tr>
 </thead>
 <tbody>
@@ -886,24 +890,28 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">refs/heads/*</p></td>
 <td align="left" valign="top"><p class="table">Code Review</p></td>
 <td align="left" valign="top"><p class="table">-1..+1</p></td>
+<td align="left" valign="top"><p class="table"></p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Foo Leads</p></td>
 <td align="left" valign="top"><p class="table">refs/heads/*</p></td>
 <td align="left" valign="top"><p class="table">Code Review</p></td>
 <td align="left" valign="top"><p class="table">-2..+2</p></td>
+<td align="left" valign="top"><p class="table"></p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">QA Leads</p></td>
-<td align="left" valign="top"><p class="table">-refs/heads/qa</p></td>
+<td align="left" valign="top"><p class="table">refs/heads/qa</p></td>
 <td align="left" valign="top"><p class="table">Code Review</p></td>
 <td align="left" valign="top"><p class="table">-2..+2</p></td>
+<td align="left" valign="top"><p class="table">X</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Foo Leads</p></td>
 <td align="left" valign="top"><p class="table">refs/heads/qa</p></td>
 <td align="left" valign="top"><p class="table">Code Review</p></td>
 <td align="left" valign="top"><p class="table">-2..+2</p></td>
+<td align="left" valign="top"><p class="table"></p></td>
 </tr>
 </tbody>
 </table>
@@ -931,9 +939,8 @@ permissions for every managed project including global capabilities.</p></div>
 <h3 id="_per_project">Per-Project</h3><div style="clear:left"></div>
 <div class="paragraph"><p>The per-project ACL is evaluated before the global <tt>All-Projects</tt> ACL,
 permitting some limited override capability to project owners. This
-behavior is generally only useful on the <tt>Read Access</tt> category when
-granting <tt>-1 No Access</tt> within a specific project to deny access to
-a group.</p></div>
+behavior is generally only useful on the <tt>Read</tt> category when
+granting <em>DENY</em> within a specific project to deny a group access.</p></div>
 </div>
 <h2 id="access_category">Access Categories</h2>
 <div class="sectionbody">
@@ -1002,8 +1009,7 @@ rows into the <tt>approval_category_values</tt> with <tt>category_id</tt> set to
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
-<img alt="Note" src="data:image/png;base64,
-" />
+<div class="title">Note</div>
 </td>
 <td class="content">A restart is required after making database changes.
 See <a href="#restart_changes">below</a>.</td>
@@ -1099,24 +1105,44 @@ have false-negatives that shouldn&#8217;t block the change.</p></div>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
-<img alt="Note" src="data:image/png;base64,
-" />
+<div class="title">Note</div>
 </td>
 <td class="content">A restart is required after making database changes.
 See <a href="#restart_changes">below</a>.</td>
 </tr></table>
 </div>
-<h3 id="category_FORG">Forge Identity</h3><div style="clear:left"></div>
+<h3 id="category_create">Create reference</h3><div style="clear:left"></div>
+<div class="paragraph"><p>The create reference category controls whether it is possible to
+create new references, branches or tags.  This implies that the
+reference must not already exist, it&#8217;s not a destructive permission
+in that you can&#8217;t overwrite or remove any previosuly existing
+references (and also discard any commits in the process).</p></div>
+<div class="paragraph"><p>It&#8217;s probably most common to either permit the creation of a single
+branch in many gits (by granting permission on a parent project), or
+to grant this permission to a name pattern of branches.</p></div>
+<div class="paragraph"><p>This permission is often given in conjunction with regular push
+branch permissions, allowing the holder of both to create new branches
+as well as bypass review for new commits on that branch.</p></div>
+<div class="paragraph"><p>To push lightweight (non annotated) tags, grant
+<tt>Create Reference</tt> for reference name <tt>refs/tags/*</tt>, as lightweight
+tags are implemented just like branches in Git.</p></div>
+<div class="paragraph"><p>For example, to grant the possibility to create new branches under the
+namespace <tt>foo</tt>, you have to grant this permission on
+<tt>refs/heads/foo/*</tt> for the group that should have it.
+Finally, if you plan to grant each user a personal namespace in
+where they are free to create as many branches as they wish, you
+should grant the create reference permission so it&#8217;s possible
+to create new branches. This is done by using the special
+<tt>${username}</tt> keyword in the reference pattern, e.g.
+<tt>refs/heads/sandbox/${username}/*</tt>. If you do, it&#8217;s also recommended
+you grant the users the push force permission to be able to clean up
+stale branches.</p></div>
+<h3 id="category_forge_author">Forge Author</h3><div style="clear:left"></div>
 <div class="paragraph"><p>Normally Gerrit requires the author and the committer identity
 lines in a Git commit object (or tagger line in an annotated tag) to
 match one of the registered email addresses of the uploading user.
-This permission allows users to bypass that validation, which may
-be necessary when mirroring changes from an upstream project.</p></div>
-<div class="ulist"><ul>
-<li>
-<p>
-+1 Forge Author Identity
-</p>
+This permission allows users to bypass parts of that validation, which
+may be necessary when mirroring changes from an upstream project.</p></div>
 <div class="paragraph"><p>Permits the use of an unverified author line in commit objects.
 This can be useful when applying patches received by email from
 3rd parties, when cherry-picking changes written by others across
@@ -1125,29 +1151,27 @@ problem before submitting.</p></div>
 <div class="paragraph"><p>By default this is granted to <tt>Registered Users</tt> in all projects,
 but a site administrator may disable it if verified authorship
 is required.</p></div>
-</li>
-<li>
-<p>
-+2 Forge Committer or Tagger Identity
-</p>
-<div class="paragraph"><p>Implies <em>Forge Author Identity</em>, but also allows the use of an
-unverified committer line in commit objects, or an unverified tagger
-line in annotated tag objects.  Typically this is only required
-when mirroring commits from an upstream project repository.</p></div>
-</li>
-<li>
-<p>
-+3 Forge Gerrit Code Review Server Identity
-</p>
-<div class="paragraph"><p>Implies <em>Forge Committer or Tagger Identity</em> as well as <em>Forge
-Author Identity</em>, but additionally allows the use of the server&#8217;s
-own name and email on the committer line of a new commit object.
-This should only be necessary when force pushing a commit history
-which has been rewritten by <em>git filter-branch</em> and that contains
-merge commits previously created by this Gerrit Code Review server.</p></div>
-</li>
-</ul></div>
-<h3 id="category_OWN">Owner</h3><div style="clear:left"></div>
+<h3 id="category_forge_committer">Forge Committer</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Normally Gerrit requires the author and the committer identity
+lines in a Git commit object (or tagger line in an annotated tag) to
+match one of the registered email addresses of the uploading user.
+This permission allows users to bypass parts of that validation, which
+may be necessary when mirroring changes from an upstream project.</p></div>
+<div class="paragraph"><p>Allows the use of an unverified committer line in commit objects, or an
+unverified tagger line in annotated tag objects.  Typically this is only
+required when mirroring commits from an upstream project repository.</p></div>
+<h3 id="category_forge_server">Forge Server</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Normally Gerrit requires the author and the committer identity
+lines in a Git commit object (or tagger line in an annotated tag) to
+match one of the registered email addresses of the uploading user.
+This permission allows users to bypass parts of that validation, which
+may be necessary when mirroring changes from an upstream project.</p></div>
+<div class="paragraph"><p>Allows the use of the server&#8217;s own name and email on the committer
+line of a new commit object.  This should only be necessary when force
+pushing a commit history which has been rewritten by <em>git filter-branch</em>
+and that contains merge commits previously created by this Gerrit Code
+Review server.</p></div>
+<h3 id="category_owner">Owner</h3><div style="clear:left"></div>
 <div class="paragraph"><p>The <tt>Owner</tt> category controls which groups can modify the project&#8217;s
 configuration.  Users who are members of an owner group can:</p></div>
 <div class="ulist"><ul>
@@ -1178,64 +1202,65 @@ for reference <tt>refs/heads/qa/\*</tt>.  Members of the QA group can
 further refine access, but only for references that begin with
 <tt>refs/heads/qa/</tt>. See <a href="#project_owners">project owners</a> to find
 out more about this role.</p></div>
-<h3 id="category_pHD">Push Branch</h3><div style="clear:left"></div>
-<div class="paragraph"><p>This category permits users to push directly into a branch over SSH,
-bypassing any code review process that would otherwise be used.</p></div>
-<div class="paragraph"><p>This category has several possible values:</p></div>
+<h3 id="category_push">Push</h3><div style="clear:left"></div>
+<div class="paragraph"><p>This category controls how users are allowed to upload new commits
+to projects in Gerrit. It can either give permission to push
+directly into a branch, bypassing any code review process
+that would otherwise be used. Or it may give permission to upload
+new changes for code review, this depends on which namespace the
+permission is granted to.</p></div>
+<h4 id="category_push_direct">Direct Push</h4>
+<div class="paragraph"><p>Any existing branch can be fast-forwarded to a new commit.
+Creation of new branches is controlled by the
+<a href="access-control.html#category_create"><em>Create Reference</em></a>
+category.  Deletion of existing branches is rejected.  This is the
+safest mode as commits cannot be discarded.</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
-+1 Update Branch
+Force option
 </p>
-<div class="paragraph"><p>Any existing branch can be fast-forwarded to a new commit.
-Creation of new branches is rejected.  Deletion of existing branches
-is rejected.  This is the safest mode as commits cannot be discarded.</p></div>
-</li>
-<li>
-<p>
-+2 Create Branch
-</p>
-<div class="paragraph"><p>Implies <em>Update Branch</em>, but also allows the creation of a new branch
-if the name does not not already designate an existing branch name.
-Like update branch, existing commits cannot be discarded.</p></div>
-</li>
-<li>
-<p>
-+3 Force Push Branch; Delete Branch
-</p>
-<div class="paragraph"><p>Implies both <em>Update Branch</em> and <em>Create Branch</em>, but also allows an
-existing branch to be deleted. Since a force push is effectively a
-delete immediately followed by a create, but performed atomically on
-the server and logged, this level also permits forced push updates
-to branches.  This level may allow existing commits to be discarded
-from a project history.</p></div>
+<div class="paragraph"><p>Allows an existing branch to be deleted. Since a force push is
+effectively a delete immediately followed by a create, but performed
+atomically on the server and logged, this option also permits forced
+push updates to branches.  Enabling this option allows existing commits
+to be discarded from a project history.</p></div>
 </li>
 </ul></div>
-<div class="paragraph"><p>This category is primarily useful for projects that only want to
+<div class="paragraph"><p>The push category is primarily useful for projects that only want to
 take advantage of Gerrit&#8217;s access control features and do not need
 its code review functionality.  Projects that need to require code
 reviews should not grant this category.</p></div>
-<h3 id="category_READ_2">Upload Access</h3><div style="clear:left"></div>
-<div class="paragraph"><p>The <tt>Read Access +2</tt> permits the user to upload a non-merge commit
-to the project&#8217;s <tt>refs/for/BRANCH</tt> namespace, creating a new change
-for code review.</p></div>
-<div class="paragraph"><p>Rather than place this permission in its own category, its chained
-into the Read Access category as a higher level of access.  A user
-must be able to clone or fetch the project in order to create a new
-commit on their local system, so in practice they must also have
-Read Access +1 to even develop a change.  Therefore upload access
-implies read access by simply being a higher level of it.</p></div>
+<h4 id="category_push_review">Upload To Code Review</h4>
+<div class="paragraph"><p>The <tt>Push</tt> access right granted on the namespace
+<tt>refs/for/refs/heads/BRANCH</tt> permits the user to upload a non-merge
+commit to the project&#8217;s <tt>refs/for/BRANCH</tt> namespace, creating a new
+change for code review.</p></div>
+<div class="paragraph"><p>A user must be able to clone or fetch the project in order to create
+a new commit on their local system, so in practice they must also
+have the <tt>Read</tt> access granted to upload a change.</p></div>
 <div class="paragraph"><p>For an open source, public Gerrit installation, it is common to
-grant <tt>Read Access +1..+2</tt> to <tt>Registered Users</tt> in the <tt>\-- All
-Projects \--</tt> ACL.  For more private installations, its common to
-simply grant <tt>Read Access +1..+2</tt> to all users of a project.</p></div>
-<h3 id="category_READ_3">Upload Merge Access</h3><div style="clear:left"></div>
-<div class="paragraph"><p>The <tt>Read Access +3</tt> permits the user to upload merge commits, but is
-otherwise identical to <tt>Read Access +2</tt>. Some projects wish to
-restrict merges to being created by Gerrit. By granting,
-<tt>Read Access +1..+2</tt>, the only merges that enter the system will be
-those created by Gerrit, or those pushed directly.</p></div>
-<h3 id="category_pTAG">Push Tag</h3><div style="clear:left"></div>
+grant <tt>Read</tt> and <tt>Push</tt> for <tt>refs/for/refs/heads/*</tt>
+to <tt>Registered Users</tt> in the <tt>All-Projects</tt> ACL.  For more
+private installations, its common to simply grant <tt>Read</tt> and
+<tt>Push</tt> for <tt>refs/for/refs/heads/*</tt> to all users of a project.</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Force option
+</p>
+<div class="paragraph"><p>The force option has no function when granted to a branch in the
+<tt>refs/for/refs/heads/*</tt> namespace.</p></div>
+</li>
+</ul></div>
+<h3 id="category_push_merge">Push Merge Commits</h3><div style="clear:left"></div>
+<div class="paragraph"><p>The <tt>Push Merge Commit</tt> permits the user to upload merge commits.
+It&#8217;s an addon to the <a href="#category_push">Push</a> access right, and so it
+won&#8217;t be sufficient with only <tt>Push Merge Commit</tt> granted for a push
+to happen.  Some projects wish to restrict merges to being created by
+Gerrit. By granting <tt>Push</tt> without <tt>Push Merge Commit</tt>, the only
+merges that enter the system will be those created by Gerrit.</p></div>
+<h3 id="category_push_annotated">Push Annotated Tag</h3><div style="clear:left"></div>
 <div class="paragraph"><p>This category permits users to push an annotated tag object over
 SSH into the project&#8217;s repository.  Typically this would be done
 with a command line such as:</p></div>
@@ -1250,57 +1275,43 @@ with a command line such as:</p></div>
 should exist in the <tt>refs/tags/</tt> namespace, and should be new.</p></div>
 <div class="paragraph"><p>This category is intended to be used to publish tags when a project
 reaches a stable release point worth remembering in history.</p></div>
-<div class="paragraph"><p>The range of values is:</p></div>
-<div class="ulist"><ul>
-<li>
-<p>
-+1 Create Signed Tag
-</p>
-<div class="paragraph"><p>A new signed tag may be created.  The tagger email address must be
-verified for the current user.</p></div>
-</li>
-<li>
-<p>
-+2 Create Annotated Tag
-</p>
-<div class="paragraph"><p>A new annotated (unsigned) tag may be created.  The tagger email
-address must be verified for the current user.</p></div>
-</li>
-</ul></div>
+<div class="paragraph"><p>It allows for a new annotated (unsigned) tag to be created.  The
+tagger email address must be verified for the current user.</p></div>
 <div class="paragraph"><p>To push tags created by users other than the current user (such
-as tags mirrored from an upstream project), <tt>Forge Identity +2</tt>
-must be also granted in addition to <tt>Push Tag &gt;= +1</tt>.</p></div>
-<div class="paragraph"><p>To push lightweight (non annotated) tags, grant <tt>Push Branch +2
-Create Branch</tt> for reference name <tt>refs/tags/*</tt>, as lightweight
-tags are implemented just like branches in Git.</p></div>
-<div class="paragraph"><p>To delete or overwrite an existing tag, grant <tt>Push Branch +3
-Force Push Branch; Delete Branch</tt> for reference name <tt>refs/tags/*</tt>,
-as deleting a tag requires the same permission as deleting a branch.</p></div>
-<h3 id="category_READ">Read Access</h3><div style="clear:left"></div>
-<div class="paragraph"><p>The <tt>Read Access</tt> category controls visibility to the project&#8217;s
+as tags mirrored from an upstream project), <tt>Forge Committer Identity</tt>
+must be also granted in addition to <tt>Push Annotated Tag</tt>.</p></div>
+<div class="paragraph"><p>To push lightweight (non annotated) tags, grant
+<a href="#category_create"><tt>Create Reference</tt></a> for reference name
+<tt>refs/tags/*</tt>, as lightweight tags are implemented just like
+branches in Git.</p></div>
+<div class="paragraph"><p>To delete or overwrite an existing tag, grant <tt>Push</tt> with the force
+option enabled for reference name <tt>refs/tags/*</tt>, as deleting a tag
+requires the same permission as deleting a branch.</p></div>
+<h3 id="category_read">Read</h3><div style="clear:left"></div>
+<div class="paragraph"><p>The <tt>Read</tt> category controls visibility to the project&#8217;s
 changes, comments, code diffs, and Git access over SSH or HTTP.
-A user must have <tt>Read Access +1</tt> in order to see a project, its
+A user must have this access granted in order to see a project, its
 changes, or any of its data.</p></div>
 <div class="paragraph"><p>This category has a special behavior, where the per-project ACL is
 evaluated before the global all projects ACL.  If the per-project
-ACL has granted <tt>Read Access -1</tt>, and does not otherwise grant
-<tt>Read Access \+1</tt>, then a <tt>Read Access +1</tt> in the all projects ACL
+ACL has granted <tt>Read</tt> with <em>DENY</em>, and does not otherwise grant
+<tt>Read</tt> with <em>ALLOW</em>, then a <tt>Read</tt> in the all projects ACL
 is ignored.  This behavior is useful to hide a handful of projects
 on an otherwise public server.</p></div>
 <div class="paragraph"><p>For an open source, public Gerrit installation it is common to grant
-<tt>Read Access +1</tt> to <tt>Anonymous Users</tt> in the <tt>\-- All Projects
-\--</tt> ACL, enabling casual browsing of any project&#8217;s changes,
-as well as fetching any project&#8217;s repository over SSH or HTTP.
-New projects can be temporarily hidden from public view by granting
-<tt>Read Access -1</tt> to <tt>Anonymous Users</tt> and granting <tt>Read Access +1</tt>
-to the project owner&#8217;s group within the per-project ACL.</p></div>
+<tt>Read</tt> to <tt>Anonymous Users</tt> in the <tt>All-Projects</tt> ACL, enabling
+casual browsing of any project&#8217;s changes, as well as fetching any
+project&#8217;s repository over SSH or HTTP.  New projects can be
+temporarily hidden from public view by granting <tt>Read</tt> with <em>DENY</em>
+to <tt>Anonymous Users</tt> and granting <tt>Read</tt> to the project owner&#8217;s
+group within the per-project ACL.</p></div>
 <div class="paragraph"><p>For a private Gerrit installation using a trusted HTTP authentication
-source, granting <tt>Read Access +1</tt> to <tt>Registered Users</tt> may be more
+source, granting <tt>Read</tt> to <tt>Registered Users</tt> may be more
 typical, enabling read access only to those users who have been
 able to authenticate through the HTTP access controls.  This may
 be suitable in a corporate deployment if the HTTP access control
 is already restricted to the correct set of users.</p></div>
-<h3 id="category_SUBM">Submit</h3><div style="clear:left"></div>
+<h3 id="category_submit">Submit</h3><div style="clear:left"></div>
 <div class="paragraph"><p>This category permits users to push the <tt>Submit Patch Set n</tt> button
 on the web UI.</p></div>
 <div class="paragraph"><p>Submitting a change causes it to be merged into the destination
@@ -1311,16 +1322,14 @@ project&#8217;s history.</p></div>
 See above for details on each category.</p></div>
 <h3 id="category_makeoneup">Your Category Here</h3><div style="clear:left"></div>
 <div class="paragraph"><p>Gerrit administrators can also make up their own categories.</p></div>
-<div class="paragraph"><p>See above for descriptions of how <tt>Verified</tt> and <tt>Code Review</tt> work,
-and insert your own category with <tt>function_name = 'MaxWithBlock'</tt>
-to get the same behavior over your own range of values, in any
-category you desire.</p></div>
+<div class="paragraph"><p>See above for descriptions of how <a href="#category_verified"><tt>Verified</tt></a>
+and <a href="#category_review"><tt>Code Review</tt></a> work, and insert your own
+category with <tt>function_name = 'MaxWithBlock'</tt> to get the same
+behavior over your own range of values, in any category you desire.</p></div>
 <div class="paragraph"><p>Ensure <tt>category_id</tt> is unique within your <tt>approval_categories</tt>
 table.  The default values <tt>VRIF</tt> and <tt>CVRF</tt> used for the categories
 described above are simply that, defaults, and have no special
-meaning to Gerrit.  The other standard category_id values like
-<tt>OWN</tt>, <tt>READ</tt>, <tt>SUBM</tt>, <tt>pTAG</tt> and <tt>pHD</tt> have special meaning and
-should not be modified or reused.</p></div>
+meaning to Gerrit.</p></div>
 <div class="paragraph"><p>The <tt>position</tt> column of <tt>approval_categories</tt> controls which column
 of the <em>Approvals</em> table the category appears in, providing some
 layout control to the administrator.</p></div>
@@ -1394,39 +1403,39 @@ cellspacing="0" cellpadding="4">
 <tbody>
 <tr>
 <td align="left" valign="top"><p class="table">Code review</p></td>
-<td align="left" valign="top"><p class="table">Label: Code review</p></td>
+<td align="left" valign="top"><p class="table"><a href="#category_label-Code-Review">Label: Code review</a></p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Verify</p></td>
-<td align="left" valign="top"><p class="table">Label: Verify</p></td>
+<td align="left" valign="top"><p class="table"><a href="#category_label-Verified">Label: Verify</a></p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Forge Identity +1</p></td>
-<td align="left" valign="top"><p class="table">Forge author identity</p></td>
+<td align="left" valign="top"><p class="table">Forge <a href="#category_forge_author">author</a> identity</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Forge Identity +2</p></td>
-<td align="left" valign="top"><p class="table">Forge committer &amp; author identity</p></td>
+<td align="left" valign="top"><p class="table">Forge <a href="#category_forge_committer">committer</a> &amp; <a href="#category_forge_author">author</a> identity</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Forge Identity +3</p></td>
-<td align="left" valign="top"><p class="table">Forge server &amp; committer &amp; author identity</p></td>
+<td align="left" valign="top"><p class="table">Forge <a href="#category_forge_server">server</a> &amp; <a href="#category_forge_committer">committer</a> &amp; <a href="#category_forge_author">author</a> identity</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Owner</p></td>
-<td align="left" valign="top"><p class="table">Owner</p></td>
+<td align="left" valign="top"><p class="table"><a href="#category_owner">Owner</a></p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Push branch +1</p></td>
-<td align="left" valign="top"><p class="table">Push</p></td>
+<td align="left" valign="top"><p class="table"><a href="#category_push_direct">Push</a></p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Push branch +2</p></td>
-<td align="left" valign="top"><p class="table">Create reference &amp; Push</p></td>
+<td align="left" valign="top"><p class="table"><a href="#category_create">Create reference</a> &amp; <a href="#category_push_direct">Push</a></p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Push branch +3</p></td>
-<td align="left" valign="top"><p class="table">Push (with force) &amp; Create reference</p></td>
+<td align="left" valign="top"><p class="table"><a href="#category_push_direct">Push</a> (with force) &amp; <a href="#category_create">Create reference</a></p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Push tag +1 &amp; Push Branch +2</p></td>
@@ -1434,23 +1443,31 @@ cellspacing="0" cellpadding="4">
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Push tag +2 &amp; Push Branch +2</p></td>
-<td align="left" valign="top"><p class="table">Push annotated tag</p></td>
+<td align="left" valign="top"><p class="table"><a href="#category_push_annotated">Push annotated tag</a></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Push Branch +2 (refs/tags/*)</p></td>
+<td align="left" valign="top"><p class="table"><a href="#category_create">Create reference</a> (refs/tags/&#8230;)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Push Branch +3 (refs/tags/*)</p></td>
+<td align="left" valign="top"><p class="table"><a href="#category_push_direct">Push</a> (with force on refs/tags/&#8230;)</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Read +1</p></td>
-<td align="left" valign="top"><p class="table">Read</p></td>
+<td align="left" valign="top"><p class="table"><a href="#category_read">Read</a></p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Read +2</p></td>
-<td align="left" valign="top"><p class="table">Read &amp; Push branch (refs/for/refs/&#8230;)</p></td>
+<td align="left" valign="top"><p class="table"><a href="#category_read">Read</a> &amp; <a href="#category_push_review">Push</a> (refs/for/refs/&#8230;)</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Read +3</p></td>
-<td align="left" valign="top"><p class="table">Read &amp; Push branch (refs/for/refs/&#8230;) &amp; Push merge</p></td>
+<td align="left" valign="top"><p class="table"><a href="#category_read">Read</a> &amp; <a href="#category_push_review">Push</a> (refs/for/refs/&#8230;) &amp; <a href="#category_push_merge">Push Merge Commit</a></p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Submit</p></td>
-<td align="left" valign="top"><p class="table">Submit</p></td>
+<td align="left" valign="top"><p class="table"><a href="#category_submit">Submit</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -1458,8 +1475,7 @@ cellspacing="0" cellpadding="4">
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
-<img alt="Note" src="data:image/png;base64,
-" />
+<div class="title">Note</div>
 </td>
 <td class="content">In Gerrit 2.2.x, the way to set permissions for upload has changed entirely.
 To upload a change for review is no longer a separate permission type,
@@ -1472,8 +1488,7 @@ on <tt>refs/heads/&lt;branch&gt;</tt>.</td>
 <div class="admonitionblock" id="restart_changes">
 <table><tr>
 <td class="icon">
-<img alt="Note" src="data:image/png;base64,
-" />
+<div class="title">Note</div>
 </td>
 <td class="content">Restart the Gerrit web application and reload all browsers after
 making any database changes to approval categories.  Browsers are
@@ -1494,8 +1509,8 @@ or is reloaded.</td>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.2-rc1<br />
-Last updated 2012-01-11 16:43:22 MDT
+Version 2.2.2<br />
+Last updated 2012-01-27 09:47:03 MDT
 </div>
 </div>
 </body>
