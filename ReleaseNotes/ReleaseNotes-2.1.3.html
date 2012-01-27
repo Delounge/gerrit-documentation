@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.2.2" />
+<meta name="generator" content="AsciiDoc 8.5.2" />
+<title>Release notes for Gerrit 2.1.3</title>
 <style type="text/css">
 /* Debug borders */
 p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 {
@@ -26,10 +27,12 @@ a:visited {
 
 em {
   font-style: italic;
+  color: navy;
 }
 
 strong {
   font-weight: bold;
+  color: #083194;
 }
 
 tt {
@@ -44,12 +47,17 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.3;
 }
 
-h1 {
+h1, h2, h3 {
   border-bottom: 2px solid silver;
 }
 h2 {
-  border-bottom: 2px solid silver;
   padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
 }
 
 div.sectionbody {
@@ -66,6 +74,10 @@ p {
   margin-bottom: 0.5em;
 }
 
+ul, ol, li > p {
+  margin-top: 0;
+}
+
 pre {
   padding: 0;
   margin: 0;
@@ -79,7 +91,7 @@ span#author {
 }
 span#email {
 }
-span#revision {
+span#revnumber, span#revdate, span#revremark {
   font-family: sans-serif;
 }
 
@@ -99,17 +111,21 @@ div#footer-badges {
   padding-bottom: 0.5em;
 }
 
-div#preamble,
-div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
-div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
-div.admonitionblock {
-  margin-right: 10%;
+div#preamble {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
+div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
 div.admonitionblock {
-  margin-top: 2.5em;
-  margin-bottom: 2.5em;
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
 }
 
 div.content { /* Block element content. */
@@ -118,6 +134,7 @@ div.content { /* Block element content. */
 
 /* Block element titles. */
 div.title, caption.title {
+  color: #527bbd;
   font-family: sans-serif;
   font-weight: bold;
   text-align: left;
@@ -144,22 +161,33 @@ div.sidebarblock > div.content {
   padding: 0.5em;
 }
 
-div.listingblock {
-  margin-right: 0%;
-}
 div.listingblock > div.content {
   border: 1px solid silver;
   background: #f4f4f4;
   padding: 0.5em;
 }
 
-div.quoteblock > div.content {
-  padding-left: 2.0em;
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #dddddd;
+  color: #777777;
 }
 
-div.attribution {
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
   text-align: right;
 }
+
+div.verseblock > div.content {
+  white-space: pre;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
 div.verseblock + div.attribution {
   text-align: left;
 }
@@ -174,21 +202,17 @@ div.admonitionblock .icon {
 }
 div.admonitionblock td.content {
   padding-left: 0.5em;
-  border-left: 2px solid silver;
+  border-left: 3px solid #dddddd;
 }
 
 div.exampleblock > div.content {
-  border-left: 2px solid silver;
-  padding: 0.5em;
-}
-
-div.verseblock div.content {
-  white-space: pre;
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
 }
 
 div.imageblock div.content { padding-left: 0; }
-div.imageblock img { border: 1px solid silver; }
 span.image img { border-style: none; }
+a.image:visited { color: white; }
 
 dl {
   margin-top: 0.8em;
@@ -197,48 +221,131 @@ dl {
 dt {
   margin-top: 0.5em;
   margin-bottom: 0;
-  font-style: italic;
+  font-style: normal;
+  color: navy;
 }
 dd > *:first-child {
-  margin-top: 0;
+  margin-top: 0.1em;
 }
 
 ul, ol {
     list-style-position: outside;
 }
-ol.olist2 {
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
   list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
 }
 
 div.tableblock > table {
   border: 3px solid #527bbd;
 }
-thead {
+thead, p.table.header {
   font-family: sans-serif;
   font-weight: bold;
 }
 tfoot {
   font-weight: bold;
 }
+td > div.verse {
+  white-space: pre;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
 
-div.hlist {
+
+div.hdlist {
   margin-top: 0.8em;
   margin-bottom: 0.8em;
 }
-div.hlist td {
-  padding-bottom: 5px;
+div.hdlist tr {
+  padding-bottom: 15px;
 }
-td.hlist1 {
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
   vertical-align: top;
-  font-style: italic;
+  font-style: normal;
   padding-right: 0.8em;
+  color: navy;
 }
-td.hlist2 {
+td.hdlist2 {
   vertical-align: top;
 }
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
 
 @media print {
   div#footer-badges { display: none; }
+}
+
+div#toc {
+  margin-bottom: 2.5em;
 }
 
 div#toctitle {
@@ -274,6 +381,7 @@ div.sidebar-content {
   padding: 0.5em;
 }
 div.sidebar-title, div.image-title {
+  color: #527bbd;
   font-family: sans-serif;
   font-weight: bold;
   margin-top: 0.0em;
@@ -286,12 +394,21 @@ div.listingblock div.content {
   padding: 0.5em;
 }
 
-div.quoteblock-content {
-  padding-left: 2.0em;
+div.quoteblock-attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock-content {
+  white-space: pre;
+}
+div.verseblock-attribution {
+  padding-top: 0.75em;
+  text-align: left;
 }
 
 div.exampleblock-content {
-  border-left: 2px solid silver;
+  border-left: 3px solid #dddddd;
   padding-left: 0.5em;
 }
 
@@ -300,253 +417,266 @@ div#toc a:visited { color: blue; }
 </style>
 <script type="text/javascript">
 /*<![CDATA[*/
-window.onload = function(){generateToc(2)}
+window.onload = function(){asciidoc.footnotes(); asciidoc.toc(2);}
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
 /* Author: Mihai Bazon, September 2002
  * http://students.infoiasi.ro/~mishoo
  *
  * Table Of Content generator
- * Version: 0.4.sp
+ * Version: 0.4
  *
  * Feel free to use this script under the terms of the GNU General Public
  * License, as long as you do not remove or alter this notice.
  */
 
  /* modified by Troy D. Hanson, September 2006. License: GPL */
- /* modified by Stuart Rackham, October 2006. License: GPL */
- /* modified by Shawn Pearce, August 2009. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
 
-function getText(el) {
-  var text = "";
-  for (var i = el.firstChild; i != null; i = i.nextSibling) {
-    if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
-      text += i.data;
-    else if (i.firstChild != null)
-      text += getText(i);
-  }
-  return text;
-}
+// toclevels = 1..4.
+toc: function (toclevels) {
 
-function TocEntry(el, text, toclevel) {
-  this.element = el;
-  this.text = text;
-  this.toclevel = toclevel;
-  this.assigned = false;
-
-  if (el.id != '') {
-    this.id = el.id;
-
-  } else {
-    var a = el.firstChild;
-    if ((a.tagName == "a" || a.tagName == "A") && a.id != "") {
-      this.id = a.id;
-    } else {
-      this.id = '';
-    }
-  }
-}
-
-function tocEntries(el, toclevels) {
-  var result = new Array;
-  var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
-  // Function that scans the DOM tree for header elements (the DOM2
-  // nodeIterator API would be a better technique but not supported by all
-  // browsers).
-  var iterate = function (el) {
+  function getText(el) {
+    var text = "";
     for (var i = el.firstChild; i != null; i = i.nextSibling) {
-      if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
-        var mo = re.exec(i.tagName)
-        if (mo)
-          result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
-        iterate(i);
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
       }
     }
-  }
-  iterate(el);
-  return result;
-}
-
-// This function does the work. toclevels = 1..4.
-function generateToc(toclevels) {
-  var simple_re = new RegExp('^[a-zA-Z._ -]{1,}$');
-  var entries = tocEntries(document.getElementsByTagName("body")[0], toclevels);
-  var usedIds = new Array();
-
-  for (var i = 0; i < entries.length; ++i) {
-    var entry = entries[i];
-    if (entry.id != "")
-      usedIds[entry.id] = entry;
-  }
-
-  for (var i = 0; i < entries.length; ++i) {
-    var entry = entries[i];
-    if (entry.id != "" || !simple_re.exec(entry.text))
-      continue;
-
-    var n = entry.text.replace(/ /g, '_').toLowerCase();
-    var e = usedIds[n];
-    if (e) {
-      if (e.assigned)
-        e.id = '';
-      continue;
-    }
-
-    entry.assigned = true;
-    entry.id = n;
-    entry.element.id = entry.id;
-    usedIds[n] = entry;
-  }
-
-  for (var i = 0; i < entries.length; ++i) {
-    var entry = entries[i];
-    if (entry.id == '') {
-      entry.id = "toc" + i;
-      entry.element.id = entry.id;
-    }
+    iterate(el);
+    return result;
   }
 
   var toc = document.getElementById("toc");
+  var entries = tocEntries(document.getElementById("content"), toclevels);
   for (var i = 0; i < entries.length; ++i) {
     var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
     var a = document.createElement("a");
-    a.href = "#" + entry.id;
+    a.href = "#" + entry.element.id;
     a.appendChild(document.createTextNode(entry.text));
     var div = document.createElement("div");
     div.appendChild(a);
     div.className = "toclevel" + entry.toclevel;
     toc.appendChild(div);
   }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  var cont = document.getElementById("content");
+  var noteholder = document.getElementById("footnotes");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      // Use [\s\S] in place of . so multi-line matches work.
+      // Because JavaScript has no s (dotall) regex flag.
+      note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      spans[i].innerHTML =
+        "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+        "' title='View footnote' class='footnote'>" + n + "</a>]";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+}
+
 }
 /*]]>*/
 </script>
-<title>Release notes for Gerrit 2.1.3</title>
 </head>
 <body>
 <div id="header">
 <h1>Release notes for Gerrit 2.1.3</h1>
-<span id="revision">version 2.1.3 (from v2.1.3-rc2)</span>
+<span id="revnumber">version 2.1.3 (from v2.1.3-rc2)</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
 </div>
 </div>
+<div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<p>Gerrit 2.1.3 is now available in the usual location:</p>
-<p><a href="http://code.google.com/p/gerrit/downloads/list">http://code.google.com/p/gerrit/downloads/list</a></p>
+<div class="paragraph"><p>Gerrit 2.1.3 is now available in the usual location:</p></div>
+<div class="paragraph"><p><a href="http://code.google.com/p/gerrit/downloads/list">http://code.google.com/p/gerrit/downloads/list</a></p></div>
 </div>
 </div>
-<h2>Schema Change</h2>
+<h2 id="_schema_change">Schema Change</h2>
 <div class="sectionbody">
-<p><strong>WARNING</strong> This release contains multiple schema changes.  To upgrade:</p>
+<div class="paragraph"><p><strong>WARNING</strong> This release contains multiple schema changes.  To upgrade:</p></div>
 <div class="listingblock">
 <div class="content">
 <pre><tt>  java -jar gerrit.war init -d site_path</tt></pre>
 </div></div>
 </div>
-<h2>New Features</h2>
+<h2 id="_new_features">New Features</h2>
 <div class="sectionbody">
-<h3>Web UI</h3>
-<ul>
+<h3 id="_web_ui">Web UI</h3><div style="clear:left"></div>
+<div class="ulist"><ul>
 <li>
 <p>
 issue 289 Remove reviewers (or self) from a change
 </p>
-<p>Project and change owners can now remove any reviewer from a change
+<div class="paragraph"><p>Project and change owners can now remove any reviewer from a change
 by clicking an "X" next to their name in the approval table.
 Individual users can also remove themselves from any change.
 This feature permits users to stop getting notified about a change
-they no longer have an interest in, but had commented on previously.</p>
+they no longer have an interest in, but had commented on previously.</p></div>
 </li>
 <li>
 <p>
 issue 124 Index changes by external issue tracking id numbers
 </p>
-<p>Changes can be searched for by an external issue tracking system's
+<div class="paragraph"><p>Changes can be searched for by an external issue tracking system&#8217;s
 id numbers.  Site administrators can configure trackingid sections in
 gerrit.config to parse and extract issue tracking links from a commit
-message's footer, and have them indexed by Gerrit.  Users can search
+message&#8217;s footer, and have them indexed by Gerrit.  Users can search
 for relevant changes using the search operator <tt>tr:</tt> or <tt>bug:</tt>,
 for example <tt>tr:432181</tt> or <tt>bug:JIRA-42</tt>.  Administrators can index
-existing change records using the ScanTrackingIds program.</p>
+existing change records using the ScanTrackingIds program.</p></div>
 </li>
 <li>
 <p>
 List branches/tags containing a merged change
 </p>
-<p>Merged change pages now display a new expandable section, <em>Included
-In</em>, listing all branches and tags that contain the change.</p>
+<div class="paragraph"><p>Merged change pages now display a new expandable section, <em>Included
+In</em>, listing all branches and tags that contain the change.</p></div>
 </li>
 <li>
 <p>
 issue 391 Reduce clicks need to approve and submit
 </p>
-<p>Users who have Submit +1 permission for a change can now click
+<div class="paragraph"><p>Users who have Submit +1 permission for a change can now click
 <em>Publish Comments and Submit</em> on the publish comments screen,
 combining the <em>Publish Comments</em> and <em>Submit Patch Set n</em> actions
-into a single click.</p>
+into a single click.</p></div>
 </li>
 <li>
 <p>
 Simplify setup of non-range access such as Submit
 </p>
-<p>If an access control doesn't really make sense as a range of values,
+<div class="paragraph"><p>If an access control doesn&#8217;t really make sense as a range of values,
 Gerrit now displays only one box to select the maximum permitted
-value from, rather than two boxes to set the min/max.</p>
+value from, rather than two boxes to set the min/max.</p></div>
 </li>
 <li>
 <p>
 Make Admin &gt; Projects UI accessible to all users
 </p>
-<p>All projects that are visible to the current user are now listed
-in the Admin &gt; Projects page, as are the project's Branches and
+<div class="paragraph"><p>All projects that are visible to the current user are now listed
+in the Admin &gt; Projects page, as are the project&#8217;s Branches and
 Access tabs.  Editing is obviously disabled, unless the user has
-owner level access to the project, or one of its branches.</p>
+owner level access to the project, or one of its branches.</p></div>
 </li>
-</ul>
-<h3>Access Controls</h3>
-<ul>
+</ul></div>
+<h3 id="_access_controls">Access Controls</h3><div style="clear:left"></div>
+<div class="ulist"><ul>
 <li>
 <p>
 Branch-level read access is now supported
 </p>
-<p>Project owners/administrators can now use the access tab to
+<div class="paragraph"><p>Project owners/administrators can now use the access tab to
 control which groups can read certain branches, enabling hidden
 branches within a more widely visible project.  Additionally,
 replication.config honors these settings through the authGroup
 variable, allowing a server administrator to limit which branches
-are replicated to certain mirrors.</p>
+are replicated to certain mirrors.</p></div>
 </li>
 <li>
 <p>
 issue 273 Inherit project permissions from more than just All Projects
 </p>
-<p>Projects can now be organized into an inheritance hierarchy, allowing
+<div class="paragraph"><p>Projects can now be organized into an inheritance hierarchy, allowing
 administrators to cluster common access rules for different groups
 of projects.  The create-project command learned a new --parent
-option to set the hierarchy immediately.</p>
+option to set the hierarchy immediately.</p></div>
 </li>
 <li>
 <p>
 auth.allowedOpenID can limit which providers can be used
 </p>
-<p>Administrators can now set auth.allowedOpenID in gerrit.config
+<div class="paragraph"><p>Administrators can now set auth.allowedOpenID in gerrit.config
 to restrict which OpenID provider(s) a user can use to register
 for an account.  This may be useful to restrict login to only the
-organization's local provider, or a single trusted 3rd party.</p>
+organization&#8217;s local provider, or a single trusted 3rd party.</p></div>
 </li>
 <li>
 <p>
 Branch-level access control is now inherited by default
 </p>
-<p>Previously branch level access controls were exclusive, locking out
+<div class="paragraph"><p>Previously branch level access controls were exclusive, locking out
 all other groups that may have been inherited from All Projects,
 or through a wildcard like <em>refs/heads/*</em>.  Branch access is now
 inherited by default, but the old exclusive behavior can be obtained
-by prefixing the reference with <em>-</em>.</p>
+by prefixing the reference with <em>-</em>.</p></div>
 </li>
-</ul>
-<h3>SSH Commands</h3>
-<ul>
+</ul></div>
+<h3 id="_ssh_commands">SSH Commands</h3><div style="clear:left"></div>
+<div class="ulist"><ul>
 <li>
 <p>
 create-account: Permit creation of batch user accounts over SSH
@@ -571,269 +701,271 @@ ls-projects: New -t option shows the project hierarchy
 <p>
 gerrit show-queue is now accessible to all users
 </p>
-<p>Results are filtered to display only queue entries that are operating
+<div class="paragraph"><p>Results are filtered to display only queue entries that are operating
 on projects the user is permitted to see.  Replication URLs are
 masked for non-admin users, and instead display the remote name
-from the replication.config file.</p>
+from the replication.config file.</p></div>
 </li>
 <li>
 <p>
 issue 310 review --submit: Submit a change over SSH
 </p>
-<p>Changes can now be submitted over SSH by using the new --submit
-command line flag to gerrit review.</p>
+<div class="paragraph"><p>Changes can now be submitted over SSH by using the new --submit
+command line flag to gerrit review.</p></div>
 </li>
 <li>
 <p>
 gerrit approve deprecated
 </p>
-<p>To support the new --submit flag, gerrit approve has been renamed
+<div class="paragraph"><p>To support the new --submit flag, gerrit approve has been renamed
 to gerrit review, better matching the web UI name for the concept.
 The old <tt>gerrit approve</tt> name will be kept around as an alias to
-provide time to migrate hooks/scripts/etc.</p>
+provide time to migrate hooks/scripts/etc.</p></div>
 </li>
-</ul>
-<h3>Hooks / Stream Events</h3>
-<ul>
+</ul></div>
+<h3 id="_hooks_stream_events">Hooks / Stream Events</h3><div style="clear:left"></div>
+<div class="ulist"><ul>
 <li>
 <p>
 --change-url parameter passed to hooks
 </p>
-<p>The change URL was supplied in the stream-events feed, but was
+<div class="paragraph"><p>The change URL was supplied in the stream-events feed, but was
 not passed into hooks, making it difficult for a hook to send a
 notification email with a link back to Gerrit.  Fixed by adding
-the parameter.</p>
+the parameter.</p></div>
 </li>
 <li>
 <p>
 Patch set uploader passed to hooks
 </p>
-<p>The identity of the user who uploaded a patch set was added as both
+<div class="paragraph"><p>The identity of the user who uploaded a patch set was added as both
 a parameter to patchset-created hook, and to the patch set entity
-sent through stream-events.</p>
+sent through stream-events.</p></div>
 </li>
 <li>
 <p>
 issue 506 stream-events: Include the ref in patch sets
 </p>
-<p>The reference (e.g. <em>refs/changes/12/812/2</em>) to download a patch
+<div class="paragraph"><p>The reference (e.g. <em>refs/changes/12/812/2</em>) to download a patch
 set is now included in the stream-events record, making it possible
-for a monitor to easily pull down a patch set and compile it.</p>
+for a monitor to easily pull down a patch set and compile it.</p></div>
 </li>
-</ul>
-<h3>Contrib</h3>
-<ul>
+</ul></div>
+<h3 id="_contrib">Contrib</h3><div style="clear:left"></div>
+<div class="ulist"><ul>
 <li>
 <p>
 Example hook to auto-re-approve a trivial rebase
 </p>
 </li>
-</ul>
-<h3>Misc.</h3>
-<ul>
+</ul></div>
+<h3 id="_misc">Misc.</h3><div style="clear:left"></div>
+<div class="ulist"><ul>
 <li>
 <p>
 transfer.timeout: Support configurable timeouts for dead clients
 </p>
-<p>Sometimes <tt>repo sync</tt> can leave dead connections open to Gerrit Code
+<div class="paragraph"><p>Sometimes <tt>repo sync</tt> can leave dead connections open to Gerrit Code
 Review, resulting in worker threads that are tied up indefinitely,
 waiting for client IO that will never occur.  Administrators may set
 transfer.timeout to place an upper bound on how long the server will
 wait for the client before aborting the connection and releasing
-the worker thread back into the pool.</p>
+the worker thread back into the pool.</p></div>
 </li>
 <li>
 <p>
-container.slave: Automatically enable &#8212;slave
+container.slave: Automatically enable --slave
 </p>
-<p>Adminstrators can now add <tt>container.slave = true</tt> to their slave's
+<div class="paragraph"><p>Adminstrators can now add <tt>container.slave = true</tt> to their slave&#8217;s
 gerrit.config file, avoiding the need to make sure they always
-pass the &#8212;slave flag on the command line when starting their
-slave server.</p>
+pass the --slave flag on the command line when starting their
+slave server.</p></div>
 </li>
 <li>
 <p>
 Add separate task queue for non-interactive users
 </p>
-<p>Users who are a member of the special <em>Non Interactive Users</em> group
+<div class="paragraph"><p>Users who are a member of the special <em>Non Interactive Users</em> group
 can now have all of their SSH commands scheduled onto a different
 thread pool than everyone else.  If enabled, this feature can help
 ensure quick response time for normal users when the system is
-heavily loaded by batch tasks.</p>
+heavily loaded by batch tasks.</p></div>
 </li>
 <li>
 <p>
 Explain a remote rejection of a non-fast-forward
 </p>
-<p>If the remote peer rejected a non-fast-forward replication, make
+<div class="paragraph"><p>If the remote peer rejected a non-fast-forward replication, make
 it clear that it was the remote that rejected the push, and not
-Gerrit Code Review's client logic.  The error is often caused by
+Gerrit Code Review&#8217;s client logic.  The error is often caused by
 the remote repository having receive.denyNonFastForwards being set
-to true in $GIT_DIR/config.  Gerrit's error log message now hints
-at checking this setting on the remote repository.</p>
+to true in $GIT_DIR/config.  Gerrit&#8217;s error log message now hints
+at checking this setting on the remote repository.</p></div>
 </li>
 <li>
 <p>
 Internal dependencies updated
 </p>
-<p>Updated JGit to 0.8.4, Jetty to 7.0.2.v20100331, H2 database to
+<div class="paragraph"><p>Updated JGit to 0.8.4, Jetty to 7.0.2.v20100331, H2 database to
 1.2.134, Apache Commons Codec to 1.4, Apache Commons Net to 2.1,
-Apache Commons DBCP to 1.4.</p>
+Apache Commons DBCP to 1.4.</p></div>
 </li>
-</ul>
+</ul></div>
 </div>
-<h2>Bug Fixes</h2>
+<h2 id="_bug_fixes">Bug Fixes</h2>
 <div class="sectionbody">
-<h3>Web UI</h3>
-<ul>
+<h3 id="_web_ui_2">Web UI</h3><div style="clear:left"></div>
+<div class="ulist"><ul>
 <li>
 <p>
 issue 396 Prevent <em>no-score</em> approvals from being recorded
 </p>
-<p>Change messages no longer say <em>No score; no score</em> when the user
-has not selected a particular approval setting.</p>
+<div class="paragraph"><p>Change messages no longer say <em>No score; no score</em> when the user
+has not selected a particular approval setting.</p></div>
 </li>
 <li>
 <p>
 issue 396 Summarize the number of inline comments
 </p>
-<p>A change message is now always recorded at the top level of a change
+<div class="paragraph"><p>A change message is now always recorded at the top level of a change
 anytime inline comments are published, even if no score change
 took place, and no cover letter was supplied by the user. The
 auto-generated message is a one line summary indicating how many
 inline comments were published at that time.  This makes it easier
-to see what has occurred on the change.</p>
+to see what has occurred on the change.</p></div>
 </li>
 <li>
 <p>
 issue 461 Space out Review and Submit Patch Set buttons
 </p>
-<p>The risk of clicking <em>Submit Patch Set n</em> when the user meant to
-click <em>Review</em> has been reduced by spacing the buttons further apart.</p>
+<div class="paragraph"><p>The risk of clicking <em>Submit Patch Set n</em> when the user meant to
+click <em>Review</em> has been reduced by spacing the buttons further apart.</p></div>
 </li>
 <li>
 <p>
 issue 587 Fix user site header/footer preference
 </p>
-<p>The user preference to hide the site header/footer wasn't always
-being applied.  Fixed.</p>
+<div class="paragraph"><p>The user preference to hide the site header/footer wasn&#8217;t always
+being applied.  Fixed.</p></div>
 </li>
 <li>
 <p>
 issue 575 Require branches to always start from commits
 </p>
-<p>Branches could be created starting from annotated tags, resulting
+<div class="paragraph"><p>Branches could be created starting from annotated tags, resulting
 in crashes when a change gets submitted to the branch.  Fixed by
-ensuring branches always start from commits.</p>
+ensuring branches always start from commits.</p></div>
 </li>
 <li>
 <p>
 issue 574 Add Cancel button to Register New Email dialog
 </p>
-<p>Users couldn't (easily) get out of the dialog popped up by the
+<div class="paragraph"><p>Users couldn&#8217;t (easily) get out of the dialog popped up by the
 <em>Register New Email&#8230;</em> button.  A cancel button was added to
-close the dialog.</p>
+close the dialog.</p></div>
 </li>
-</ul>
-<h3>Server Programs</h3>
-<ul>
+</ul></div>
+<h3 id="_server_programs">Server Programs</h3><div style="clear:left"></div>
+<div class="ulist"><ul>
 <li>
 <p>
 init: Import non-standardly named Git repositories
 </p>
-<p>When scanning for projects, any directory that is a valid Git
+<div class="paragraph"><p>When scanning for projects, any directory that is a valid Git
 repository is now imported, even if its name does not end with
-the standard <em>.git</em> suffix.</p>
+the standard <em>.git</em> suffix.</p></div>
 </li>
 <li>
 <p>
 issue 460 gerrit.sh: Request at least 1024 file descriptors
 </p>
-<p>In the default configuration, Gerrit Code Review started with a
+<div class="paragraph"><p>In the default configuration, Gerrit Code Review started with a
 hard limit of 256 file descriptors, which is too small for any site.
 This caused a number of failures, and a number of bugs were filed.
-The default has been raised to 1024.</p>
+The default has been raised to 1024.</p></div>
 </li>
 <li>
 <p>
 issue 578 Improve schema version update by avoiding early pruning
 </p>
-<p>Previously init kept trying to remove unused tables or columns
+<div class="paragraph"><p>Previously init kept trying to remove unused tables or columns
 during each schema upgrade step.  These removes are now deferred
-until the last step.</p>
+until the last step.</p></div>
 </li>
 <li>
 <p>
-review: Actually log an internal server error's root cause
+review: Actually log an internal server error&#8217;s root cause
 </p>
-<p>Internal server failures (such as database connectivity errors)
+<div class="paragraph"><p>Internal server failures (such as database connectivity errors)
 were not properly logged by <tt>gerrit approve</tt> (now gerrit review).
-Fixed by logging the root cause of the failure.</p>
+Fixed by logging the root cause of the failure.</p></div>
 </li>
-</ul>
-<h3>Configuration</h3>
-<ul>
+</ul></div>
+<h3 id="_configuration">Configuration</h3><div style="clear:left"></div>
+<div class="ulist"><ul>
 <li>
 <p>
-Display error when HTTP authentication isn't configured
+Display error when HTTP authentication isn&#8217;t configured
 </p>
-<p>Error reporting for a failed login attempt when auth.type is HTTP
-and the HTTP server isn't supplying the expected header is now more
+<div class="paragraph"><p>Error reporting for a failed login attempt when auth.type is HTTP
+and the HTTP server isn&#8217;t supplying the expected header is now more
 explicit about describing the problem.  This helps new site setups,
-but doesn't have any impact on an existing site.</p>
+but doesn&#8217;t have any impact on an existing site.</p></div>
 </li>
 <li>
 <p>
 Fix javax.naming.PartialResultException: Unprocessed Continuation
 </p>
-<p>LDAP directory trees that require following a referral in order
+<div class="paragraph"><p>LDAP directory trees that require following a referral in order
 to lookup a name usually failed with the above Java exception
 during sign-in.  Administrators can enable following by adding
-<tt>ldap.referral = follow</tt> to their gerrit.config file.</p>
+<tt>ldap.referral = follow</tt> to their gerrit.config file.</p></div>
 </li>
-</ul>
-<h3>Documentation</h3>
-<ul>
+</ul></div>
+<h3 id="_documentation">Documentation</h3><div style="clear:left"></div>
+<div class="ulist"><ul>
 <li>
 <p>
 documentation: Clarified the ownership of <em>-- All Projects --</em>
 </p>
-<p>The magic project All Projects isn't allowed to have ownership
-delegated, and the documentation wasn't clear why.  Fixed by
-explaining the rationale in more detail.</p>
+<div class="paragraph"><p>The magic project All Projects isn&#8217;t allowed to have ownership
+delegated, and the documentation wasn&#8217;t clear why.  Fixed by
+explaining the rationale in more detail.</p></div>
 </li>
 <li>
 <p>
 issue 533 Fix JAR versions in other container installation
 </p>
-<p>The installation process for putting Gerrit Code Review under a
+<div class="paragraph"><p>The installation process for putting Gerrit Code Review under a
 3rd party servlet container was out of date, as some JARs had
-the wrong versions listed.  Fixed.</p>
+the wrong versions listed.  Fixed.</p></div>
 </li>
 <li>
 <p>
 suexec: Document the suexec command
 </p>
-<p>The suexec command introduced in 2.1.2 was never documented.  Fixed.</p>
+<div class="paragraph"><p>The suexec command introduced in 2.1.2 was never documented.  Fixed.</p></div>
 </li>
 <li>
 <p>
 Corrected Eclipse documentation on importing Maven projects
 </p>
-<p>The Maven plugin changed some of its user interface, resulting in
+<div class="paragraph"><p>The Maven plugin changed some of its user interface, resulting in
 our step-by-step documentation being out of date.  Fixed to match
-the current stable version of the Maven plugin.</p>
+the current stable version of the Maven plugin.</p></div>
 </li>
-</ul>
+</ul></div>
 </div>
-<h2>Version</h2>
+<h2 id="_version">Version</h2>
 <div class="sectionbody">
-<p>e8fd49f5f7481e2f916cb0d8cfbada79309562b4</p>
+<div class="paragraph"><p>e8fd49f5f7481e2f916cb0d8cfbada79309562b4</p></div>
 </div>
+</div>
+<div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
 Version 2.1.3 (from v2.1.3-rc2)<br />
-Last updated 15-Dec-2010 12:10:02 PDT
+Last updated 2012-01-27 09:47:03 MDT
 </div>
 </div>
 </body>

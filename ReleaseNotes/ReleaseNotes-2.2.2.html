@@ -1,0 +1,1520 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.5.2" />
+<title>Release notes for Gerrit 2.2.2</title>
+<style type="text/css">
+/* Debug borders */
+p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 {
+/*
+  border: 1px solid red;
+*/
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+tt {
+  color: navy;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  font-family: sans-serif;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+
+div.sectionbody {
+  font-family: serif;
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+
+pre {
+  padding: 0;
+  margin: 0;
+}
+
+span#author {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+span#email {
+}
+span#revnumber, span#revdate, span#revremark {
+  font-family: sans-serif;
+}
+
+div#footer {
+  font-family: sans-serif;
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+div#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+div#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+div#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #dddddd;
+  color: #777777;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > div.content {
+  white-space: pre;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-family: sans-serif;
+  font-weight: bold;
+}
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+
+@media print {
+  div#footer-badges { display: none; }
+}
+
+div#toc {
+  margin-bottom: 2.5em;
+}
+
+div#toctitle {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+/* Workarounds for IE6's broken and incomplete CSS2. */
+
+div.sidebar-content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+div.sidebar-title, div.image-title {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-weight: bold;
+  margin-top: 0.0em;
+  margin-bottom: 0.5em;
+}
+
+div.listingblock div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock-attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock-content {
+  white-space: pre;
+}
+div.verseblock-attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+
+div.exampleblock-content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+/* IE6 sets dynamically generated links as visited. */
+div#toc a:visited { color: blue; }
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function(){asciidoc.footnotes(); asciidoc.toc(2);}
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  var cont = document.getElementById("content");
+  var noteholder = document.getElementById("footnotes");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      // Use [\s\S] in place of . so multi-line matches work.
+      // Because JavaScript has no s (dotall) regex flag.
+      note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      spans[i].innerHTML =
+        "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+        "' title='View footnote' class='footnote'>" + n + "</a>]";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+}
+
+}
+/*]]>*/
+</script>
+</head>
+<body>
+<div id="header">
+<h1>Release notes for Gerrit 2.2.2</h1>
+<span id="revnumber">version 2.2.2 (from v2.2.2-rc1-1-g9509270)</span>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph"><p>Gerrit 2.2.2 is now available:</p></div>
+<div class="paragraph"><p><a href="http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.2.2.war">http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.2.2.war</a></p></div>
+</div>
+</div>
+<h2 id="_schema_change">Schema Change</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><strong>WARNING:</strong> This release contains schema changes.  To upgrade:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  java -jar gerrit.war init -d site_path</tt></pre>
+</div></div>
+<div class="paragraph"><p><strong>WARNING:</strong> Upgrading to 2.2.x requires the server be first upgraded
+to 2.1.7 (or a later 2.1.x version), and then to 2.2.x.</p></div>
+</div>
+<h2 id="_new_features">New Features</h2>
+<div class="sectionbody">
+<h3 id="_prolog">Prolog</h3><div style="clear:left"></div>
+<div class="ulist"><ul>
+<li>
+<p>
+issue 971 Use Prolog Cafe for ChangeControl.canSubmit()
+</p>
+</li>
+<li>
+<p>
+Add per-project prolog submit rule files
+</p>
+<div class="paragraph"><p>When loading the prolog environment, now checks refs/meta/config
+branch for a file called rules.pl. If it exists, consult the
+file. Expects a predicate called submit_rule. If no file is found,
+uses the default_submit predicate in common_rules.pl.</p></div>
+</li>
+<li>
+<p>
+Add inheritance of prolog rules
+</p>
+<div class="paragraph"><p>Projects now inherit the prolog rules defined in their parent
+project. Submit results from the child project are filtered by the
+parent project using the filter predicate defined the parent&#8217;s
+rules.pl. The results of the filtering are then passed up to the
+parent&#8217;s parent and filtered, repeating this process up to the top
+level All-Projects.</p></div>
+</li>
+<li>
+<p>
+Load precompiled prolog rules from jar file
+</p>
+<div class="paragraph"><p>Looks in (site)/cache/rules for a jar file called:
+  rules-(sha1 of rules.pl).jar
+Loads the precompiled prolog rules and uses them instead of
+consulting rules.pl. If the jar does not exist, consults rules.pl.
+If rules.pl does not exist, uses the default submit rules.</p></div>
+</li>
+<li>
+<p>
+Cmd line tool rulec to compile jar from prolog
+</p>
+<div class="paragraph"><p>Rulec takes rules.pl from the refs/meta/config branch and creates a
+jar file named rules-(sha1 of rules.pl).jar in (sitepath)/cache/rules.
+Generates temporary prolog, java src, and class files which are
+deleted afterwards.</p></div>
+</li>
+<li>
+<p>
+prolog-shell: Simple command line Prolog interpreter
+</p>
+<div class="paragraph"><p>Define a small interactive interpreter that users or site
+administartors can play around with by downloading the Gerrit WAR
+file and executing: java -jar gerrit.war prolog-shell</p></div>
+</li>
+</ul></div>
+<h4 id="_prolog_predicates">Prolog Predicates</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+Add Prolog Predicates to check commit messages and edits
+</p>
+<div class="paragraph"><p>commit_message returns the commit message as a symbol.</p></div>
+<div class="paragraph"><p>commit_message_matches takes in a regex pattern and checks it against
+the commit message.</p></div>
+<div class="paragraph"><p>commit_edits takes in a regex pattern for filenames and a regex
+pattern for edits. For all files in a commit that match the filename
+regex.  Returns true if the edits in any of those files match the
+edit regex.</p></div>
+</li>
+<li>
+<p>
+Add Prolog  Predicates to expose commit filelist
+</p>
+<div class="paragraph"><p>commit_delta/1,3,4 each takes a regular expression and matches it to
+the path of all the files in the latest patchset of a commit.
+If applicable (changes where the file is renamed or copied), the
+regex is also checked against the old path.</p></div>
+<div class="paragraph"><p>commit_delta/1 returns true if any files match the regex</p></div>
+<div class="paragraph"><p>commit_delta/3 returns the changetype and path, if the changetype is
+renamed, it also returns the old path. If the changetype is rename,
+it returns a delete for oldpath and an add for newpath. If the
+changetype is copy, an add is returned along with newpath.</p></div>
+<div class="paragraph"><p>commit_delta/4 returns the changetype, new path, and old path
+ (if applicable).</p></div>
+</li>
+<li>
+<p>
+Add Prolog predicates that expose the branch, owner,
+project, and  topic of a change, the author and committer of the most
+recent patchset in the change, and who is the current user.
+</p>
+</li>
+<li>
+<p>
+For user-related predicates, if the user is not a gerrit user, will
+return user(anonymous) or similar. Author and committer predicates
+for commits return user(id), name, and email.
+</p>
+</li>
+<li>
+<p>
+Make max_with_block/4 public
+</p>
+<div class="paragraph"><p>This is the current rule generally applied to a label function. Make
+it exportable for now until we can come back and clean up the legacy
+approval data code.</p></div>
+</li>
+</ul></div>
+<h3 id="_web">Web</h3><div style="clear:left"></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Support in Firefox delete key in NpIntTextBox
+</p>
+<div class="paragraph"><p>Pressing the delete key while being in a NpIntTextBox (e.g. in the
+text box for the Tab Width or Columns preference when comparing a
+file) now works in Firefox.</p></div>
+</li>
+<li>
+<p>
+Make sure special keys work in text fields
+</p>
+<div class="paragraph"><p>There is a bug in gwt 2.1.0 that prevents pressing special keys like
+Enter, Backspace etc. from being properly recognized and so they have no effect.</p></div>
+</li>
+</ul></div>
+<h4 id="_changescreen">ChangeScreen</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+issue 855 Indicate outdated dependencies on the ChangeScreen
+</p>
+<div class="paragraph"><p>If a change dependency is no longer the latest patchSet for that
+change, mark it OUTDATED in the dependencies table and make
+its row red, and add a warning message to the dependencies
+header, also keep the dependencies disclosure panel open
+even when an outdated dependent change is merged.
+Additionally make the link for dependencies link to the
+exact patchSet of the dependent change.</p></div>
+</li>
+<li>
+<p>
+issue 881 Allow adding groups as reviewer
+</p>
+<div class="paragraph"><p>On the ChangeScreen it is now possible to add a group as reviewer for
+a change. When a group is added as reviewer the group is resolved and
+all its members are added as reviewers to the change.</p></div>
+</li>
+<li>
+<p>
+Update approvals in web UI to adapt to rules.pl submit_rule
+</p>
+<div class="paragraph"><p>The UI now shows whatever the results of the submit_rule are, which
+permits the submit_rule to make an ApprovalCategory optional, or to
+make a new label required.</p></div>
+</li>
+</ul></div>
+<h4 id="_diff_screen">Diff Screen</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+Add top level menus for a new PatchScreen header
+</p>
+<div class="paragraph"><p>Modify the PatchScreen so that the header contents is selectable
+using top level menus. Allow the header to display the commit
+message, the preferences, the Patch Sets, or the File List.</p></div>
+</li>
+<li>
+<p>
+Add SideBySide and Unified links to Differences top level menus
+</p>
+<div class="paragraph"><p>These new menu entries allow a user to switch view types easily
+without returning to the ChangeScreen.  Also, they double as a
+way to hide the header on the PatchScreen (when clicking on the
+currently displayed type).</p></div>
+</li>
+<li>
+<p>
+Add user pref to retain PatchScreen Header when changing files
+</p>
+</li>
+<li>
+<p>
+Flip the orientation of PatchHistory Table
+</p>
+</li>
+<li>
+<p>
+Remove the <em>Change SHA1:</em> from the PatchScreen title
+</p>
+</li>
+<li>
+<p>
+Remove scrollbar from Commit Message
+</p>
+</li>
+<li>
+<p>
+Allow comment editing with single click on line numbers
+</p>
+<div class="paragraph"><p>Make it easier to comment (and now possible on android devices which
+zoom on double click) on a patch by simply clicking on the line number.</p></div>
+</li>
+<li>
+<p>
+Add a "Save" button to the PatchScriptSettingsPanel
+</p>
+<div class="paragraph"><p>The "Update" button now only updates the display.  Addittionally,
+for logged in users, a "Save" button now behaves the way that
+"Update" used to behave for logged in users.</p></div>
+</li>
+<li>
+<p>
+issue 665 Display merge changes as differences from automatic result
+</p>
+<div class="paragraph"><p>Instead of displaying nothing for a two-parent merge commit, compute
+the automatic merge result and display the difference between the
+automatic result that Git would create, and the actual result that
+was uploaded by the author/committer of the merge.</p></div>
+</li>
+</ul></div>
+<h4 id="_groups">Groups</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+Add menu to AccountGroupScreen
+</p>
+<div class="paragraph"><p>This change introduces a menu in the AccountGroupScreen and
+different screens for subsets of the functionality (similar as it&#8217;s
+done for the ProjectScreen).  Links from other screens to the
+AccountGroupScreen are resolved depending on the group type.</p></div>
+</li>
+<li>
+<p>
+Display groupUUID on AccountGroupInfoScreen
+</p>
+<div class="paragraph"><p>To assign a privilege to a new group by editing the
+<em>project.config</em> file, the new group needs to be added to the
+<em>groups</em> file in the <em>refs/meta/config</em> branch which requires
+the UUID of the group to be known.</p></div>
+</li>
+</ul></div>
+<h4 id="_project_access">Project Access</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+Automatically add new rule when adding new permission
+</p>
+<div class="paragraph"><p>If a new permission was added to a block, immediately create the new
+group entry box and focus it, so the user can assign the permission.</p></div>
+</li>
+<li>
+<p>
+Only show Exclusive checkbox on reference sections
+</p>
+<div class="paragraph"><p>In the access editor, hide the Exclusive checkbox on the
+Global Capabilities section since it has no inheritance and
+the exclusive bit isn&#8217;t supported.</p></div>
+</li>
+<li>
+<p>
+Disable editing after successful save of Access screen
+</p>
+<div class="paragraph"><p>When the access has been successfully modified for a project,
+switch back to the "read-only" view where the widgets are all
+disabled and the Edit button is enabled.</p></div>
+</li>
+</ul></div>
+<h4 id="_project_branches">Project Branches</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+Display refs/meta/config branch on ProjectBranchesScreen
+</p>
+<div class="paragraph"><p>The new refs/meta/config branch was not shown in the ProjectBranchesScreen.
+Since refs/meta/config is not just any branch, but has a special
+meaning to Gerrit it is now displayed at the top below HEAD.</p></div>
+</li>
+<li>
+<p>
+Highlight HEAD and refs/meta/config
+</p>
+<div class="paragraph"><p>Since HEAD and refs/meta/config do not represent ordinary branches,
+highlight their rows with a special style in the ProjectBranchesScreen.</p></div>
+</li>
+</ul></div>
+<h4 id="_urls">URLs</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+Modernize URLs to be shorter and consistent
+</p>
+<div class="paragraph"><p>Instead of <a href="http://site/change,1234">http://site/change,1234</a> we now use a slightly more
+common looking   <a href="http://site//c/1234">http://site//c/1234</a>  URL to link to a change.</p></div>
+<div class="paragraph"><p>Files within a patch set are now denoted below the change, as in
+<a href="http://site/#/c/1234/1/src/module/foo.c">http://site/#/c/1234/1/src/module/foo.c</a></p></div>
+<div class="paragraph"><p>Also fix the dynamic redirects of <a href="http://site/1234">http://site/1234</a>
+and <a href="http://site/r/deadbeef">http://site/r/deadbeef</a> to jump directly to the corresponding
+change if there is exactly one possible URL.</p></div>
+<div class="paragraph"><p>Entities that have multiple views suffix the URL with ",view-name"
+to indicate which view the user wants to see.</p></div>
+</li>
+<li>
+<p>
+issue 1018 Accept ~ in linkify() URLs
+</p>
+</li>
+</ul></div>
+<h3 id="_ssh">SSH</h3><div style="clear:left"></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Added a set-reviewers ssh command
+</p>
+</li>
+<li>
+<p>
+Support removing more than one reviewer at once
+</p>
+<div class="paragraph"><p>This way we can batch delete reviewers from a change.</p></div>
+</li>
+<li>
+<p>
+issue 881 Support adding groups as reviewer by SSH command
+</p>
+<div class="paragraph"><p>With the set-reviewers SSH command it is now possible to also add
+groups as reviewer for a change.</p></div>
+</li>
+<li>
+<p>
+Fail review command for changing labels when change is closed
+</p>
+<div class="paragraph"><p>If a reviewer attempts to change a review label (approval) after a
+change is closed using the ssh review command, cause it to fail the
+command and output a message.</p></div>
+</li>
+<li>
+<p>
+ls-projects: Fix display of All-Projects under --tree
+</p>
+<div class="paragraph"><p>Everything should be nested below All-Projects, since that is actually
+the root level.</p></div>
+</li>
+<li>
+<p>
+ls-projects: Add --type to filter by project type
+</p>
+<div class="paragraph"><p>ls-projects now supports --type code|permissions|all.  The default is
+code which now skips permissions only projects, restoring the output
+to what appears from Gerrit 2.1.7 and earlier.</p></div>
+</li>
+<li>
+<p>
+show-caches: Improve memory reporting
+</p>
+<div class="paragraph"><p>Change the way memory is reported to show the actual values,
+and the equation that determines how these are put together
+to form the current usage.  Include some additional data including
+server version, current time, process uptime, active SSH
+connections, and tasks in the task queue. The --show-jvm option
+will report additional data about the JVM, and tell the caller
+where it is running.</p></div>
+</li>
+</ul></div>
+<h4 id="_queries">Queries</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+Output patchset creation date for <em>query</em> command.
+</p>
+</li>
+<li>
+<p>
+issue 1053 Support comments option in query command
+</p>
+<div class="paragraph"><p>Query SSH command will show all comments if option --comments is
+used. If --comments is used together with --patch-sets all inline
+comments are included in the output.</p></div>
+</li>
+</ul></div>
+<h3 id="_config">Config</h3><div style="clear:left"></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Move batch user priority to a capability
+</p>
+<div class="paragraph"><p>Instead of using a magical group, use a special capability to
+denote users that should get the batch priority behavior.</p></div>
+</li>
+<li>
+<p>
+issue 742 Make administrator, create-project a global capability
+</p>
+<div class="paragraph"><p>This gets rid of the special entries in system_config and
+gerrit.config related to who the Administrators group is,
+or which groups are permitted to create new projects on
+this server.</p></div>
+</li>
+<li>
+<p>
+issue 48 &amp; 742  Add fine-grained capabilities for administrative actions
+</p>
+<div class="paragraph"><p>The Global Capabilities section in All-Projects can now be used to
+grant subcommands that are available over SSH and were previously
+restricted to only Administrators.</p></div>
+</li>
+<li>
+<p>
+Disallow project names ending in "/"
+</p>
+</li>
+<li>
+<p>
+issue 934 query: Enable configurable result limit
+</p>
+<div class="paragraph"><p>Allow site administrators to configure the query limit for user to be
+above the default hard-coded value of 500 by adding a global
+[capability] block to All-Projects project.config file with group(s)
+that should have different limits.</p></div>
+</li>
+<li>
+<p>
+Introduced a new PermissionRule.Action: BLOCK.
+</p>
+<div class="paragraph"><p>Besides already existing ALLOW and DENY actions this change
+introduces the BLOCK action in order to enable blocking some
+permission rules globally.</p></div>
+</li>
+<li>
+<p>
+issue 813 Use remote.name.replicatePermissions to hide permissions
+</p>
+<div class="paragraph"><p>Administrators can now disable replication of permissions-only
+projects and the per-project refs/meta/config in replication.config
+by setting the replicatePermissions field to false.</p></div>
+</li>
+<li>
+<p>
+Add a Restored.vm template and use it.
+</p>
+<div class="paragraph"><p>The restore action has been erroneously using the Abandoned.vm
+template.  Create a template and sender for the restorecommand.</p></div>
+</li>
+<li>
+<p>
+sshd.advertisedAddress: specify the displayed SSH host/port
+</p>
+<div class="paragraph"><p>This allows aliases which redirect to gerrit&#8217;s ssh port (say
+from port 22) to be setup and advertised to users.</p></div>
+</li>
+</ul></div>
+<h3 id="_dev">Dev</h3><div style="clear:left"></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Updated eclipse settings for 3.7 and m2e 1.0
+</p>
+</li>
+<li>
+<p>
+Fix build in m2eclipse 1.0
+</p>
+<div class="paragraph"><p>Ignore the antrun and the build-helper-maven-plugin tasks in m2eclipse.</p></div>
+</li>
+<li>
+<p>
+Make Gerrit with gwt 2.3.0 run in gwtdebug mode
+</p>
+</li>
+<li>
+<p>
+Fix a number of build warnings that have crept in
+</p>
+</li>
+<li>
+<p>
+Accept email address automatically
+</p>
+<div class="paragraph"><p>Enable Gerrit to accept email address automatically in
+"DEVELOPMENT_BECOME_ANY_ACCOUNT" mode without a confirmation email.</p></div>
+</li>
+<li>
+<p>
+Added clickable user names at the BecomeAnyAccountLoginServlet.
+</p>
+<div class="paragraph"><p>The first 5 (by accountId) user names are displayed as clickable
+links. Clicking a user name logs in as this user, speeding up
+switching between different users when using the
+DEVELOPMENT_BECOME_ANY_ACCOUNT authentication type.</p></div>
+</li>
+</ul></div>
+<h3 id="_miscellaneous">Miscellaneous</h3><div style="clear:left"></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Permit adding reviewers to closed changes
+</p>
+<div class="paragraph"><p>Permit adding a reviewer to closed changes to support post-submit
+discussion threads.</p></div>
+</li>
+<li>
+<p>
+issue 805 Don&#8217;t check for multiple change-ids when pushing directly
+to refs/heads.
+</p>
+</li>
+<li>
+<p>
+Avoid costly findMergedInto during push to refs/for/*
+</p>
+<div class="paragraph"><p>No longer close a change when a commit is pushed to res/for/* and the
+Change-Id in the commit message footer matches another commit on an
+existing branch or tag.</p></div>
+</li>
+<li>
+<p>
+Allow serving static files in subdirectories
+</p>
+</li>
+<li>
+<p>
+issue 1019 Normalize OpenID URLs with http:// prefix
+</p>
+<div class="paragraph"><p>No longer violate OpenID 1.1 and 2.0, both of which require
+OpenIDs to be normalized (http:// added).</p></div>
+</li>
+<li>
+<p>
+Allow container-based authentication for git over http
+</p>
+<div class="paragraph"><p>Gerrit was insisting on DIGEST authentication when doing git over
+http. A new boolean configuration parameter auth.trustContainerAuth
+allows gerrit to be configured to trust the container to do the
+authentication.</p></div>
+</li>
+<li>
+<p>
+issue 848 Add rpc method for GerritConfig
+</p>
+<div class="paragraph"><p>Exposes what types of reviews are possible via json rpc, so that the
+Eclipse Reviews plugin currently can parse the javascript from a
+gerrit page load.</p></div>
+</li>
+</ul></div>
+</div>
+<h2 id="_performance">Performance</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+Bumped Brics version to 1.11.8
+</p>
+<div class="paragraph"><p>This Brics version fixes a performance issue in some larger Gerrit systems.</p></div>
+</li>
+<li>
+<p>
+Add permission_sort cache to remember sort orderings
+</p>
+<div class="paragraph"><p>Cache the order AccessSections should be sorted in, making any future
+sorting for the same reference name and same set of section patterns
+cheaper.</p></div>
+</li>
+<li>
+<p>
+Refactor how permissions are matched by ProjectControl, RefControl
+</p>
+<div class="paragraph"><p>More aggressively cache many of the auth objects at a cost of memory,
+but this should be an improvement in response timse.</p></div>
+</li>
+<li>
+<p>
+Substantialy speed up pushing changes for review
+</p>
+<div class="paragraph"><p>Pushing a new change for review checks if the change is related to
+the branch it&#8217;s destined for. It used to do this in a way that
+required a topo-sort of the rev history, and now uses JGit&#8217;s
+merge-base functionality.</p></div>
+</li>
+<li>
+<p>
+Add cache for tag advertisements
+</p>
+<div class="paragraph"><p>To make the general case more efficient, introduce a cache called "git_tags".</p></div>
+<div class="paragraph"><p>On a trivial usage of the Linux kernel repository, the average
+running time of the VisibleRefFilter when caches were hot was
+7195.68 ms.  With this commit, it is a mere 5.07 milliseconds
+on a hot cache.  A reduction of 99% of the running time.</p></div>
+</li>
+<li>
+<p>
+Don&#8217;t set lastCheckTime in ProjectState
+</p>
+<div class="paragraph"><p>The lastCheckTime/generation fields are actually a counter that
+is incremented using a background thread. The values don&#8217;t match
+the system clock, and thus reading System.currentTimeMillis()
+during the construction of ProjectState is a waste of resources.</p></div>
+</li>
+</ul></div>
+</div>
+<h2 id="_upgrades">Upgrades</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+Upgrade to GWT 2.3.0
+</p>
+</li>
+<li>
+<p>
+Upgrade to Gson to 1.7.1
+</p>
+</li>
+<li>
+<p>
+Upgrade to gwtjsonrpc 1.2.4
+</p>
+</li>
+<li>
+<p>
+Upgrade to gwtexpui 1.2.5
+</p>
+</li>
+<li>
+<p>
+Upgrade to Jsch 0.1.44-1
+</p>
+</li>
+<li>
+<p>
+Upgrade to Brics 1.11.8
+</p>
+</li>
+</ul></div>
+</div>
+<h2 id="_bug_fixes">Bug Fixes</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+Fix: Issue where Gerrit could not linkify certain URLs
+</p>
+</li>
+<li>
+<p>
+issue 1015 Fix handling of regex ref patterns in Access panel
+</p>
+<div class="paragraph"><p>regex patterns such as "^refs/heads/[A-Z]{2,}-[0-9]+.*" were being
+prefixed with "refs/heads/", resulting in invalid reference patterns
+like "refs/heads/^refs/heads/[A-Z]{2,}-[0-9]+.*".</p></div>
+</li>
+<li>
+<p>
+issue 1002 Check for and disallow pushing of invalid refs/meta/config
+</p>
+<div class="paragraph"><p>If the project.config or groups files are somehow invalid on
+the refs/meta/config branch, or would be made invalid due to
+a bad code review being submitted to this branch, reject the
+user&#8217;s attempt to push.</p></div>
+</li>
+<li>
+<p>
+issue 1002 Fix NPE in PermissionRuleEditor when group lacks UUID
+</p>
+<div class="paragraph"><p>If a group does not have an entry in the "groups" table within
+the refs/meta/config branch render the group name as a span,
+without the link instead of crashing the UI.</p></div>
+</li>
+<li>
+<p>
+issue 972 Filter access section rules to only visible groups
+</p>
+<div class="paragraph"><p>Users who are not the owner of an access section can now only
+see group names and rules for groups which they are a member of,
+are visible to all users, or that they own.</p></div>
+</li>
+<li>
+<p>
+Correctly handle missing refs/meta/config branch
+</p>
+<div class="paragraph"><p>If the refs/meta/config branch did not exist, getRevision() no longer
+throws an NPE when trying to access the ProjectDetail.</p></div>
+</li>
+<li>
+<p>
+Allow loading Project Access when there is no refs/meta/config
+</p>
+<div class="paragraph"><p>Enable loading the access screen with a null revision field,
+and on save of any edits require the branch to be new.</p></div>
+</li>
+<li>
+<p>
+create-project: Fix creation vs. replication order
+</p>
+<div class="paragraph"><p>Create the project on remote mirrors before creating either the
+refs/meta/config or the initial empty branch. This way those can be
+replicated to the remote mirrors once they have been created locally.</p></div>
+</li>
+<li>
+<p>
+create-project: Bring back --permissions-only flag
+</p>
+<div class="paragraph"><p>If a project is permissions only, assign HEAD to point to
+refs/meta/config. This way the gitweb view of the project
+shows the permissions history by default, and clients that
+clone the project are able to get a detached HEAD pointing
+to the current permission state, rather than an empty
+repository.</p></div>
+</li>
+<li>
+<p>
+create-project: Fix error reporting when repository exists
+</p>
+<div class="paragraph"><p>If a repository already exists, tell the user it already is
+available, without disclosing the server side path from gerrit.basePath.</p></div>
+</li>
+<li>
+<p>
+Do not log timeout errors on upload and receive connections
+</p>
+</li>
+<li>
+<p>
+Only automatically create accounts for LDAP systems
+</p>
+<div class="paragraph"><p>If the account management is LDAP, try to automatically create
+accounts by looking up the data in LDAP. Otherwise fail and reject an
+invalid account reference that was supplied on the command line via
+SSH.</p></div>
+</li>
+<li>
+<p>
+Add missing RevWalk.reset() after checking merge base
+</p>
+<div class="paragraph"><p>This fixes an exception from RevWalk when trying to push a new
+commit for review.</p></div>
+</li>
+<li>
+<p>
+issue 1069 Do not send an email on reviews when there is no message.
+</p>
+<div class="paragraph"><p>No longer send an email when reviewing a change via ssh, and
+the change message is blank (when no change message is actually
+added to the review).</p></div>
+</li>
+<li>
+<p>
+Ignore PartialResultException from LDAP.
+</p>
+<div class="paragraph"><p>This exception occurs when the server isn&#8217;t following referrals for
+you, and thus the result contains a referral. That happens when
+you&#8217;re using Active Directory. You almost certainly don&#8217;t really want
+to follow referrals in AD <strong>anyways</strong>, so just ignore these exceptions,
+so we can still use the actual data.</p></div>
+</li>
+<li>
+<p>
+issue 518 Fix MySQL counter resets
+</p>
+<div class="paragraph"><p>gwtorm 1.1.5 was patched to leave in the dummy row that incremented
+the counter, ensuring the server will use MAX() + 1 instead of 1 on
+the next increment after restart.</p></div>
+</li>
+<li>
+<p>
+Don&#8217;t delete account_id row on MySQL
+</p>
+<div class="paragraph"><p>If the table is an InnoDB table deleting the row after allocation may
+cause the sequence to reset when the server restarts, giving out
+duplicate account_ids later.</p></div>
+</li>
+</ul></div>
+</div>
+<h2 id="_documentation">Documentation</h2>
+<div class="sectionbody">
+<h3 id="_new_documents">New Documents</h3><div style="clear:left"></div>
+<div class="ulist"><ul>
+<li>
+<p>
+First Cut of Gerrit Walkthrough Introduction documentation.
+</p>
+<div class="paragraph"><p>Add a new document intended to be a complement for the existing
+reference documentation to allow potential users to easily get a
+feel for how Gerrit is used, where it fits and whether it will
+work for them.</p></div>
+</li>
+<li>
+<p>
+Introducing a quick and dirty setup tutorial
+</p>
+<div class="paragraph"><p>The new document covers quick installation, new project and first
+upload.  It contains lots of quoted output, with a demo style to it.</p></div>
+</li>
+</ul></div>
+<h3 id="_access_control">Access Control</h3><div style="clear:left"></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Code review
+</p>
+</li>
+<li>
+<p>
+Conversion table between 2.1 and 2.2
+</p>
+<div class="paragraph"><p>Add a table to ease conversion from 2.1.x. The table tries to address
+the old permissions one by one except for the push tag permission which
+in effect needed two permissions to work properly. This should
+be familiar to the administrator used to the 2.1.x permission model
+however.</p></div>
+</li>
+<li>
+<p>
+Reformatted text
+</p>
+</li>
+<li>
+<p>
+Verify
+</p>
+<div class="paragraph"><p>Updated some text in the Per project-section and edited the verified
+section to reflect the current label.</p></div>
+</li>
+<li>
+<p>
+Capabilities
+</p>
+<div class="paragraph"><p>Adds general information about global capabilities, how the server
+ownership is administered.</p></div>
+</li>
+<li>
+<p>
+Added non-interactive users
+</p>
+<div class="paragraph"><p>This change adds the non-interactive user group.
+It also adds that groups can be members of other groups.
+The groups are now sorted in alphabetical order.</p></div>
+</li>
+<li>
+<p>
+Reordering categories
+</p>
+<div class="paragraph"><p>Access categories are now sorted to match drop down box in UI</p></div>
+</li>
+</ul></div>
+<h3 id="_other_documentation">Other Documentation</h3><div style="clear:left"></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Added additional information on the install instructions.
+</p>
+<div class="paragraph"><p>The installation instructions presumes much prior knowledge,
+make some of that knowledge less implicit.</p></div>
+</li>
+<li>
+<p>
+Provides a template to the download example.
+</p>
+<div class="paragraph"><p>Clarifies that the example host must be replaced with proper
+hostname.</p></div>
+</li>
+<li>
+<p>
+Provided an example on how to abandon a change from
+the command line
+</p>
+</li>
+<li>
+<p>
+update links from kernel.org to code.google.com
+</p>
+</li>
+<li>
+<p>
+Rename <em>-- All Projects --</em> in documentation to <em>All-Projects</em>
+</p>
+</li>
+<li>
+<p>
+Explain <em>Automatically resolve conflicts</em>
+</p>
+</li>
+<li>
+<p>
+Update documentation for testing SSH connection
+</p>
+<div class="paragraph"><p>The command output that is shown in the example and the description
+how to set the ssh username were outdated.</p></div>
+</li>
+<li>
+<p>
+Remove unneeded escape characters from the documentation
+</p>
+<div class="paragraph"><p>The old version of asciidoc required certain characters to be escaped
+with a backslash and when the upgrade to the new version was done all
+those backslashes that were used for escaping became visible.</p></div>
+</li>
+<li>
+<p>
+Clean up pgm-index
+</p>
+<div class="paragraph"><p>Break out the utilities into their own section, and correct
+some of the item descriptions.</p></div>
+</li>
+<li>
+<p>
+Update manual project creation instructions
+</p>
+</li>
+<li>
+<p>
+Update project configuration documentation
+</p>
+<div class="paragraph"><p>Remove the textual reference to obsolete SQL insert statement to
+create new projects.</p></div>
+</li>
+<li>
+<p>
+Clean up command line documentation, examples
+</p>
+<div class="paragraph"><p>The formatting was pretty wrong after upgrading to a newer version
+of AsciiDoc, so fix up most of the formatting, correct some order
+of commands in the index, and make create-project conform to the
+same format used by create-account and create-group.</p></div>
+</li>
+<li>
+<p>
+Correct syntax of SQL statement for inserting approval category
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Version 2.2.2 (from v2.2.2-rc1-1-g9509270)<br />
+Last updated 2012-01-27 09:47:03 MDT
+</div>
+</div>
+</body>
+</html>
