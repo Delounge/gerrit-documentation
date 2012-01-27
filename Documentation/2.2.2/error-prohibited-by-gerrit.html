@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>prohibited by Gerrit</h1>
-<span id="revnumber">version 2.2.2-rc1</span>
+<span id="revnumber">version 2.2.2</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -569,27 +569,29 @@ privileges.</p></div>
 <li>
 <p>
 if you push a commit for code review to a branch for which you
-   don&#8217;t have upload permissions (access right <em>+2 Upload permission</em>
-   in the <a href="access-control.html#category_READ"><em>Read Access</em></a> category)
+   don&#8217;t have upload permissions (access right
+   <a href="access-control.html#category_push_review"><em>Push</em></a> on
+   <tt>refs/for/refs/heads/*</tt>)
 </p>
 </li>
 <li>
 <p>
-if you bypass code review without sufficient privileges in the
-   <a href="access-control.html#category_pHD"><em>Push Branch</em></a> category
+if you bypass code review without
+   <a href="access-control.html#category_push_direct"><em>Push</em></a> access right
+   on <tt>refs/heads/*</tt>
 </p>
 </li>
 <li>
 <p>
-if you push a signed or annotated tag without sufficient
-   privileges in the <a href="access-control.html#category_pTAG"><em>Push Tag</em></a> category
+if you push an annotated tag without
+   <a href="access-control.html#category_push_annotated"><em>Push Annotated Tag</em></a>
+   access right on <em>refs/tags/*</em>
 </p>
 </li>
 <li>
 <p>
-if you push a lightweight tag without the access right <em>+2 Create
-   Branch</em> for the reference name <em>refs/tags/*</em> in the <a href="access-control.html#category_pHD"><em>Push Branch</em></a>
-   category
+if you push a lightweight tag without the access right <a href="access-control.html#category_create"><em>Create
+   Reference</em></a> for the reference name <em>refs/tags/*</em>
 </p>
 </li>
 </ol></div>
@@ -613,8 +615,8 @@ are explained <a href="user-upload.html#push_create">here</a>.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.2-rc1<br />
-Last updated 2011-12-19 15:16:03 MDT
+Version 2.2.2<br />
+Last updated 2012-01-27 09:47:03 MDT
 </div>
 </div>
 </body>
