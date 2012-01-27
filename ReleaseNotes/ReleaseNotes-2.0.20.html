@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.2.2" />
+<meta name="generator" content="AsciiDoc 8.5.2" />
+<title>Release notes for Gerrit 2.0.20</title>
 <style type="text/css">
 /* Debug borders */
 p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 {
@@ -26,10 +27,12 @@ a:visited {
 
 em {
   font-style: italic;
+  color: navy;
 }
 
 strong {
   font-weight: bold;
+  color: #083194;
 }
 
 tt {
@@ -44,12 +47,17 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.3;
 }
 
-h1 {
+h1, h2, h3 {
   border-bottom: 2px solid silver;
 }
 h2 {
-  border-bottom: 2px solid silver;
   padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
 }
 
 div.sectionbody {
@@ -66,6 +74,10 @@ p {
   margin-bottom: 0.5em;
 }
 
+ul, ol, li > p {
+  margin-top: 0;
+}
+
 pre {
   padding: 0;
   margin: 0;
@@ -79,7 +91,7 @@ span#author {
 }
 span#email {
 }
-span#revision {
+span#revnumber, span#revdate, span#revremark {
   font-family: sans-serif;
 }
 
@@ -99,17 +111,21 @@ div#footer-badges {
   padding-bottom: 0.5em;
 }
 
-div#preamble,
-div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
-div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
-div.admonitionblock {
-  margin-right: 10%;
+div#preamble {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
+div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
 div.admonitionblock {
-  margin-top: 2.5em;
-  margin-bottom: 2.5em;
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
 }
 
 div.content { /* Block element content. */
@@ -118,6 +134,7 @@ div.content { /* Block element content. */
 
 /* Block element titles. */
 div.title, caption.title {
+  color: #527bbd;
   font-family: sans-serif;
   font-weight: bold;
   text-align: left;
@@ -144,22 +161,33 @@ div.sidebarblock > div.content {
   padding: 0.5em;
 }
 
-div.listingblock {
-  margin-right: 0%;
-}
 div.listingblock > div.content {
   border: 1px solid silver;
   background: #f4f4f4;
   padding: 0.5em;
 }
 
-div.quoteblock > div.content {
-  padding-left: 2.0em;
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #dddddd;
+  color: #777777;
 }
 
-div.attribution {
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
   text-align: right;
 }
+
+div.verseblock > div.content {
+  white-space: pre;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
 div.verseblock + div.attribution {
   text-align: left;
 }
@@ -174,21 +202,17 @@ div.admonitionblock .icon {
 }
 div.admonitionblock td.content {
   padding-left: 0.5em;
-  border-left: 2px solid silver;
+  border-left: 3px solid #dddddd;
 }
 
 div.exampleblock > div.content {
-  border-left: 2px solid silver;
-  padding: 0.5em;
-}
-
-div.verseblock div.content {
-  white-space: pre;
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
 }
 
 div.imageblock div.content { padding-left: 0; }
-div.imageblock img { border: 1px solid silver; }
 span.image img { border-style: none; }
+a.image:visited { color: white; }
 
 dl {
   margin-top: 0.8em;
@@ -197,48 +221,131 @@ dl {
 dt {
   margin-top: 0.5em;
   margin-bottom: 0;
-  font-style: italic;
+  font-style: normal;
+  color: navy;
 }
 dd > *:first-child {
-  margin-top: 0;
+  margin-top: 0.1em;
 }
 
 ul, ol {
     list-style-position: outside;
 }
-ol.olist2 {
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
   list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
 }
 
 div.tableblock > table {
   border: 3px solid #527bbd;
 }
-thead {
+thead, p.table.header {
   font-family: sans-serif;
   font-weight: bold;
 }
 tfoot {
   font-weight: bold;
 }
+td > div.verse {
+  white-space: pre;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
 
-div.hlist {
+
+div.hdlist {
   margin-top: 0.8em;
   margin-bottom: 0.8em;
 }
-div.hlist td {
-  padding-bottom: 5px;
+div.hdlist tr {
+  padding-bottom: 15px;
 }
-td.hlist1 {
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
   vertical-align: top;
-  font-style: italic;
+  font-style: normal;
   padding-right: 0.8em;
+  color: navy;
 }
-td.hlist2 {
+td.hdlist2 {
   vertical-align: top;
 }
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
 
 @media print {
   div#footer-badges { display: none; }
+}
+
+div#toc {
+  margin-bottom: 2.5em;
 }
 
 div#toctitle {
@@ -274,6 +381,7 @@ div.sidebar-content {
   padding: 0.5em;
 }
 div.sidebar-title, div.image-title {
+  color: #527bbd;
   font-family: sans-serif;
   font-weight: bold;
   margin-top: 0.0em;
@@ -286,12 +394,21 @@ div.listingblock div.content {
   padding: 0.5em;
 }
 
-div.quoteblock-content {
-  padding-left: 2.0em;
+div.quoteblock-attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock-content {
+  white-space: pre;
+}
+div.verseblock-attribution {
+  padding-top: 0.75em;
+  text-align: left;
 }
 
 div.exampleblock-content {
-  border-left: 2px solid silver;
+  border-left: 3px solid #dddddd;
   padding-left: 0.5em;
 }
 
@@ -300,182 +417,195 @@ div#toc a:visited { color: blue; }
 </style>
 <script type="text/javascript">
 /*<![CDATA[*/
-window.onload = function(){generateToc(2)}
+window.onload = function(){asciidoc.footnotes(); asciidoc.toc(2);}
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
 /* Author: Mihai Bazon, September 2002
  * http://students.infoiasi.ro/~mishoo
  *
  * Table Of Content generator
- * Version: 0.4.sp
+ * Version: 0.4
  *
  * Feel free to use this script under the terms of the GNU General Public
  * License, as long as you do not remove or alter this notice.
  */
 
  /* modified by Troy D. Hanson, September 2006. License: GPL */
- /* modified by Stuart Rackham, October 2006. License: GPL */
- /* modified by Shawn Pearce, August 2009. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
 
-function getText(el) {
-  var text = "";
-  for (var i = el.firstChild; i != null; i = i.nextSibling) {
-    if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
-      text += i.data;
-    else if (i.firstChild != null)
-      text += getText(i);
-  }
-  return text;
-}
+// toclevels = 1..4.
+toc: function (toclevels) {
 
-function TocEntry(el, text, toclevel) {
-  this.element = el;
-  this.text = text;
-  this.toclevel = toclevel;
-  this.assigned = false;
-
-  if (el.id != '') {
-    this.id = el.id;
-
-  } else {
-    var a = el.firstChild;
-    if ((a.tagName == "a" || a.tagName == "A") && a.id != "") {
-      this.id = a.id;
-    } else {
-      this.id = '';
-    }
-  }
-}
-
-function tocEntries(el, toclevels) {
-  var result = new Array;
-  var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
-  // Function that scans the DOM tree for header elements (the DOM2
-  // nodeIterator API would be a better technique but not supported by all
-  // browsers).
-  var iterate = function (el) {
+  function getText(el) {
+    var text = "";
     for (var i = el.firstChild; i != null; i = i.nextSibling) {
-      if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
-        var mo = re.exec(i.tagName)
-        if (mo)
-          result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
-        iterate(i);
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
       }
     }
-  }
-  iterate(el);
-  return result;
-}
-
-// This function does the work. toclevels = 1..4.
-function generateToc(toclevels) {
-  var simple_re = new RegExp('^[a-zA-Z._ -]{1,}$');
-  var entries = tocEntries(document.getElementsByTagName("body")[0], toclevels);
-  var usedIds = new Array();
-
-  for (var i = 0; i < entries.length; ++i) {
-    var entry = entries[i];
-    if (entry.id != "")
-      usedIds[entry.id] = entry;
-  }
-
-  for (var i = 0; i < entries.length; ++i) {
-    var entry = entries[i];
-    if (entry.id != "" || !simple_re.exec(entry.text))
-      continue;
-
-    var n = entry.text.replace(/ /g, '_').toLowerCase();
-    var e = usedIds[n];
-    if (e) {
-      if (e.assigned)
-        e.id = '';
-      continue;
-    }
-
-    entry.assigned = true;
-    entry.id = n;
-    entry.element.id = entry.id;
-    usedIds[n] = entry;
-  }
-
-  for (var i = 0; i < entries.length; ++i) {
-    var entry = entries[i];
-    if (entry.id == '') {
-      entry.id = "toc" + i;
-      entry.element.id = entry.id;
-    }
+    iterate(el);
+    return result;
   }
 
   var toc = document.getElementById("toc");
+  var entries = tocEntries(document.getElementById("content"), toclevels);
   for (var i = 0; i < entries.length; ++i) {
     var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
     var a = document.createElement("a");
-    a.href = "#" + entry.id;
+    a.href = "#" + entry.element.id;
     a.appendChild(document.createTextNode(entry.text));
     var div = document.createElement("div");
     div.appendChild(a);
     div.className = "toclevel" + entry.toclevel;
     toc.appendChild(div);
   }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  var cont = document.getElementById("content");
+  var noteholder = document.getElementById("footnotes");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      // Use [\s\S] in place of . so multi-line matches work.
+      // Because JavaScript has no s (dotall) regex flag.
+      note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      spans[i].innerHTML =
+        "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+        "' title='View footnote' class='footnote'>" + n + "</a>]";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+}
+
 }
 /*]]>*/
 </script>
-<title>Release notes for Gerrit 2.0.20</title>
 </head>
 <body>
 <div id="header">
 <h1>Release notes for Gerrit 2.0.20</h1>
-<span id="revision">version 2.0.20 (from v2.1.1.1-104-gc20e283)</span>
+<span id="revnumber">version 2.0.20 (from v2.1.1.1-104-gc20e283)</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
 </div>
 </div>
+<div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<p>Gerrit 2.0.20 is now available in the usual location:</p>
-<p><a href="http://code.google.com/p/gerrit/downloads/list">http://code.google.com/p/gerrit/downloads/list</a></p>
+<div class="paragraph"><p>Gerrit 2.0.20 is now available in the usual location:</p></div>
+<div class="paragraph"><p><a href="http://code.google.com/p/gerrit/downloads/list">http://code.google.com/p/gerrit/downloads/list</a></p></div>
 </div>
 </div>
-<h2>Schema Change</h2>
+<h2 id="_schema_change">Schema Change</h2>
 <div class="sectionbody">
-<p>A prior bug (GERRIT-262) permitted some invalid data to enter into some databases.  Administrators should consider running the following update statement as part of their upgrade to .20 to make any comments which were created with this bug visible:</p>
+<div class="paragraph"><p>A prior bug (GERRIT-262) permitted some invalid data to enter into some databases.  Administrators should consider running the following update statement as part of their upgrade to .20 to make any comments which were created with this bug visible:</p></div>
 <div class="listingblock">
 <div class="content">
 <pre><tt>  UPDATE patch_comments SET line_nbr = 1 WHERE line_nbr &lt; 1;</tt></pre>
 </div></div>
-<p>Unfortunately the correct position of the comment has been lost, and the statement above will simply position them on the first line of the file.  Fortunately the lost comments were only on the wrong side of an insertion or deletion, and are generally rare.  (On my servers only 0.33% of the comments were created like this.)</p>
+<div class="paragraph"><p>Unfortunately the correct position of the comment has been lost, and the statement above will simply position them on the first line of the file.  Fortunately the lost comments were only on the wrong side of an insertion or deletion, and are generally rare.  (On my servers only 0.33% of the comments were created like this.)</p></div>
 </div>
-<h2>New Features</h2>
+<h2 id="_new_features">New Features</h2>
 <div class="sectionbody">
-<ul>
+<div class="ulist"><ul>
 <li>
 <p>
 New ssh command approve
 </p>
-<p>Patch sets can now be approved remotely via SSH.  For more
+<div class="paragraph"><p>Patch sets can now be approved remotely via SSH.  For more
 details on this new feature please see the user documentation:
-<a href="http://gerrit.googlecode.com/svn/documentation/2.0/cmd-approve.html">http://gerrit.googlecode.com/svn/documentation/2.0/cmd-approve.html</a></p>
+<a href="http://gerrit.googlecode.com/svn/documentation/2.0/cmd-approve.html">http://gerrit.googlecode.com/svn/documentation/2.0/cmd-approve.html</a></p></div>
 </li>
 <li>
 <p>
 Support changing Google Account identity strings
 </p>
-<p>For various reasons, including but not being limited to server
+<div class="paragraph"><p>For various reasons, including but not being limited to server
 host name changes, the Google Accounts OpenID provider service
 may change the identity string it returns to users.  By setting
 auth.allowGoogleAccountUpgrade = true in the configuration file
 administrators may permit automatically updating an existing
-account with a new identity by matching on the email address.</p>
+account with a new identity by matching on the email address.</p></div>
 </li>
-</ul>
+</ul></div>
 </div>
-<h2>Bug Fixes</h2>
+<h2 id="_bug_fixes">Bug Fixes</h2>
 <div class="sectionbody">
-<ul>
+<div class="ulist"><ul>
 <li>
 <p>
 GERRIT-262  Disallow creating comments on line 0
 </p>
-<p>Users were able to create comments in dead regions of a file.
+<div class="paragraph"><p>Users were able to create comments in dead regions of a file.
 That is, if a region was deleted, and thus the left hand side
 showed red deletion of lines, and the right hand side showed a
 grey background of nothing, users were able to place a comment on
@@ -487,14 +617,14 @@ the "X comments" counter seen on the Patch History or in the
 listing of files in a patch set.
 The UI and RPC layer was fixed to prevent comments on line 0,
 but existing comments need to be manually moved to a real line.
-See above for the suggested SQL UPDATE command.</p>
+See above for the suggested SQL UPDATE command.</p></div>
 </li>
 <li>
 <p>
 Make ID column same font size as rest of table
 </p>
-<p>The font size of the ID column was too small, it is now the
-same size as the other columns in the table.</p>
+<div class="paragraph"><p>The font size of the ID column was too small, it is now the
+same size as the other columns in the table.</p></div>
 </li>
 <li>
 <p>
@@ -505,13 +635,13 @@ Fix ALTER INDEX in upgrade015_016_part1_mysql
 <p>
 GERRIT-269  Fix bad change_key creation in upgrade016_017_mysql
 </p>
-<p>MySQL schema upgrade scripts had a few bugs, fixed.</p>
+<div class="paragraph"><p>MySQL schema upgrade scripts had a few bugs, fixed.</p></div>
 </li>
-</ul>
+</ul></div>
 </div>
-<h2>Other Changes</h2>
+<h2 id="_other_changes">Other Changes</h2>
 <div class="sectionbody">
-<ul>
+<div class="ulist"><ul>
 <li>
 <p>
 Restart 2.0.20
@@ -554,7 +684,7 @@ Fix deprecated constructor warning in PatchSetIdHandler
 </li>
 <li>
 <p>
-Don't log command line caused failures in flush-caches
+Don&#8217;t log command line caused failures in flush-caches
 </p>
 </li>
 <li>
@@ -564,7 +694,7 @@ Use Guice to create custom arg4j OptionHandler instanc&#8230;
 </li>
 <li>
 <p>
-gerrit approve: Allow &#8212;code-review=+2
+gerrit approve: Allow --code-review=+2
 </p>
 </li>
 <li>
@@ -584,7 +714,7 @@ Parse project names through custom args4j OptionHandler
 </li>
 <li>
 <p>
-git receive-pack: Use args4j to parse &#8212;reviewer and -&#8230;
+git receive-pack: Use args4j to parse --reviewer and -&#8230;
 </p>
 </li>
 <li>
@@ -632,12 +762,14 @@ Rename loginType to authType
 gerrit 2.0.20
 </p>
 </li>
-</ul>
+</ul></div>
 </div>
+</div>
+<div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
 Version 2.0.20 (from v2.1.1.1-104-gc20e283)<br />
-Last updated 06-Dec-2010 16:46:43 PDT
+Last updated 2012-01-27 09:47:03 MDT
 </div>
 </div>
 </body>

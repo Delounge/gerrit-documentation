@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.2.2" />
+<meta name="generator" content="AsciiDoc 8.5.2" />
+<title>Release notes for Gerrit 2.0.19, 2.0.19.1, 2.0.19.2</title>
 <style type="text/css">
 /* Debug borders */
 p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 {
@@ -26,10 +27,12 @@ a:visited {
 
 em {
   font-style: italic;
+  color: navy;
 }
 
 strong {
   font-weight: bold;
+  color: #083194;
 }
 
 tt {
@@ -44,12 +47,17 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.3;
 }
 
-h1 {
+h1, h2, h3 {
   border-bottom: 2px solid silver;
 }
 h2 {
-  border-bottom: 2px solid silver;
   padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
 }
 
 div.sectionbody {
@@ -66,6 +74,10 @@ p {
   margin-bottom: 0.5em;
 }
 
+ul, ol, li > p {
+  margin-top: 0;
+}
+
 pre {
   padding: 0;
   margin: 0;
@@ -79,7 +91,7 @@ span#author {
 }
 span#email {
 }
-span#revision {
+span#revnumber, span#revdate, span#revremark {
   font-family: sans-serif;
 }
 
@@ -99,17 +111,21 @@ div#footer-badges {
   padding-bottom: 0.5em;
 }
 
-div#preamble,
-div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
-div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
-div.admonitionblock {
-  margin-right: 10%;
+div#preamble {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
+div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
 div.admonitionblock {
-  margin-top: 2.5em;
-  margin-bottom: 2.5em;
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
 }
 
 div.content { /* Block element content. */
@@ -118,6 +134,7 @@ div.content { /* Block element content. */
 
 /* Block element titles. */
 div.title, caption.title {
+  color: #527bbd;
   font-family: sans-serif;
   font-weight: bold;
   text-align: left;
@@ -144,22 +161,33 @@ div.sidebarblock > div.content {
   padding: 0.5em;
 }
 
-div.listingblock {
-  margin-right: 0%;
-}
 div.listingblock > div.content {
   border: 1px solid silver;
   background: #f4f4f4;
   padding: 0.5em;
 }
 
-div.quoteblock > div.content {
-  padding-left: 2.0em;
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #dddddd;
+  color: #777777;
 }
 
-div.attribution {
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
   text-align: right;
 }
+
+div.verseblock > div.content {
+  white-space: pre;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
 div.verseblock + div.attribution {
   text-align: left;
 }
@@ -174,21 +202,17 @@ div.admonitionblock .icon {
 }
 div.admonitionblock td.content {
   padding-left: 0.5em;
-  border-left: 2px solid silver;
+  border-left: 3px solid #dddddd;
 }
 
 div.exampleblock > div.content {
-  border-left: 2px solid silver;
-  padding: 0.5em;
-}
-
-div.verseblock div.content {
-  white-space: pre;
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
 }
 
 div.imageblock div.content { padding-left: 0; }
-div.imageblock img { border: 1px solid silver; }
 span.image img { border-style: none; }
+a.image:visited { color: white; }
 
 dl {
   margin-top: 0.8em;
@@ -197,48 +221,131 @@ dl {
 dt {
   margin-top: 0.5em;
   margin-bottom: 0;
-  font-style: italic;
+  font-style: normal;
+  color: navy;
 }
 dd > *:first-child {
-  margin-top: 0;
+  margin-top: 0.1em;
 }
 
 ul, ol {
     list-style-position: outside;
 }
-ol.olist2 {
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
   list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
 }
 
 div.tableblock > table {
   border: 3px solid #527bbd;
 }
-thead {
+thead, p.table.header {
   font-family: sans-serif;
   font-weight: bold;
 }
 tfoot {
   font-weight: bold;
 }
+td > div.verse {
+  white-space: pre;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
 
-div.hlist {
+
+div.hdlist {
   margin-top: 0.8em;
   margin-bottom: 0.8em;
 }
-div.hlist td {
-  padding-bottom: 5px;
+div.hdlist tr {
+  padding-bottom: 15px;
 }
-td.hlist1 {
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
   vertical-align: top;
-  font-style: italic;
+  font-style: normal;
   padding-right: 0.8em;
+  color: navy;
 }
-td.hlist2 {
+td.hdlist2 {
   vertical-align: top;
 }
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
 
 @media print {
   div#footer-badges { display: none; }
+}
+
+div#toc {
+  margin-bottom: 2.5em;
 }
 
 div#toctitle {
@@ -274,6 +381,7 @@ div.sidebar-content {
   padding: 0.5em;
 }
 div.sidebar-title, div.image-title {
+  color: #527bbd;
   font-family: sans-serif;
   font-weight: bold;
   margin-top: 0.0em;
@@ -286,12 +394,21 @@ div.listingblock div.content {
   padding: 0.5em;
 }
 
-div.quoteblock-content {
-  padding-left: 2.0em;
+div.quoteblock-attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock-content {
+  white-space: pre;
+}
+div.verseblock-attribution {
+  padding-top: 0.75em;
+  text-align: left;
 }
 
 div.exampleblock-content {
-  border-left: 2px solid silver;
+  border-left: 3px solid #dddddd;
   padding-left: 0.5em;
 }
 
@@ -300,242 +417,255 @@ div#toc a:visited { color: blue; }
 </style>
 <script type="text/javascript">
 /*<![CDATA[*/
-window.onload = function(){generateToc(2)}
+window.onload = function(){asciidoc.footnotes(); asciidoc.toc(2);}
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
 /* Author: Mihai Bazon, September 2002
  * http://students.infoiasi.ro/~mishoo
  *
  * Table Of Content generator
- * Version: 0.4.sp
+ * Version: 0.4
  *
  * Feel free to use this script under the terms of the GNU General Public
  * License, as long as you do not remove or alter this notice.
  */
 
  /* modified by Troy D. Hanson, September 2006. License: GPL */
- /* modified by Stuart Rackham, October 2006. License: GPL */
- /* modified by Shawn Pearce, August 2009. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
 
-function getText(el) {
-  var text = "";
-  for (var i = el.firstChild; i != null; i = i.nextSibling) {
-    if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
-      text += i.data;
-    else if (i.firstChild != null)
-      text += getText(i);
-  }
-  return text;
-}
+// toclevels = 1..4.
+toc: function (toclevels) {
 
-function TocEntry(el, text, toclevel) {
-  this.element = el;
-  this.text = text;
-  this.toclevel = toclevel;
-  this.assigned = false;
-
-  if (el.id != '') {
-    this.id = el.id;
-
-  } else {
-    var a = el.firstChild;
-    if ((a.tagName == "a" || a.tagName == "A") && a.id != "") {
-      this.id = a.id;
-    } else {
-      this.id = '';
-    }
-  }
-}
-
-function tocEntries(el, toclevels) {
-  var result = new Array;
-  var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
-  // Function that scans the DOM tree for header elements (the DOM2
-  // nodeIterator API would be a better technique but not supported by all
-  // browsers).
-  var iterate = function (el) {
+  function getText(el) {
+    var text = "";
     for (var i = el.firstChild; i != null; i = i.nextSibling) {
-      if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
-        var mo = re.exec(i.tagName)
-        if (mo)
-          result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
-        iterate(i);
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
       }
     }
-  }
-  iterate(el);
-  return result;
-}
-
-// This function does the work. toclevels = 1..4.
-function generateToc(toclevels) {
-  var simple_re = new RegExp('^[a-zA-Z._ -]{1,}$');
-  var entries = tocEntries(document.getElementsByTagName("body")[0], toclevels);
-  var usedIds = new Array();
-
-  for (var i = 0; i < entries.length; ++i) {
-    var entry = entries[i];
-    if (entry.id != "")
-      usedIds[entry.id] = entry;
-  }
-
-  for (var i = 0; i < entries.length; ++i) {
-    var entry = entries[i];
-    if (entry.id != "" || !simple_re.exec(entry.text))
-      continue;
-
-    var n = entry.text.replace(/ /g, '_').toLowerCase();
-    var e = usedIds[n];
-    if (e) {
-      if (e.assigned)
-        e.id = '';
-      continue;
-    }
-
-    entry.assigned = true;
-    entry.id = n;
-    entry.element.id = entry.id;
-    usedIds[n] = entry;
-  }
-
-  for (var i = 0; i < entries.length; ++i) {
-    var entry = entries[i];
-    if (entry.id == '') {
-      entry.id = "toc" + i;
-      entry.element.id = entry.id;
-    }
+    iterate(el);
+    return result;
   }
 
   var toc = document.getElementById("toc");
+  var entries = tocEntries(document.getElementById("content"), toclevels);
   for (var i = 0; i < entries.length; ++i) {
     var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
     var a = document.createElement("a");
-    a.href = "#" + entry.id;
+    a.href = "#" + entry.element.id;
     a.appendChild(document.createTextNode(entry.text));
     var div = document.createElement("div");
     div.appendChild(a);
     div.className = "toclevel" + entry.toclevel;
     toc.appendChild(div);
   }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  var cont = document.getElementById("content");
+  var noteholder = document.getElementById("footnotes");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      // Use [\s\S] in place of . so multi-line matches work.
+      // Because JavaScript has no s (dotall) regex flag.
+      note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      spans[i].innerHTML =
+        "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+        "' title='View footnote' class='footnote'>" + n + "</a>]";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+}
+
 }
 /*]]>*/
 </script>
-<title>Release notes for Gerrit 2.0.19, 2.0.19.1, 2.0.19.2</title>
 </head>
 <body>
 <div id="header">
 <h1>Release notes for Gerrit 2.0.19, 2.0.19.1, 2.0.19.2</h1>
-<span id="revision">version 2.0.19 (from v2.1.1.1-104-gc20e283)</span>
+<span id="revnumber">version 2.0.19 (from v2.1.1.1-104-gc20e283)</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
 </div>
 </div>
+<div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<p>Gerrit 2.0.19.2 is now available in the usual location:</p>
-<p><a href="http://code.google.com/p/gerrit/downloads/list">http://code.google.com/p/gerrit/downloads/list</a></p>
+<div class="paragraph"><p>Gerrit 2.0.19.2 is now available in the usual location:</p></div>
+<div class="paragraph"><p><a href="http://code.google.com/p/gerrit/downloads/list">http://code.google.com/p/gerrit/downloads/list</a></p></div>
 </div>
 </div>
-<h2>Important Notices</h2>
+<h2 id="_important_notices">Important Notices</h2>
 <div class="sectionbody">
-<ul>
+<div class="ulist"><ul>
 <li>
 <p>
 Prior User Sessions
 </p>
-<p>The cookie used to identify a signed-in user has been changed.  All users
+<div class="paragraph"><p>The cookie used to identify a signed-in user has been changed.  All users
 will be automatically signed-out during this upgrade, and will need to
 sign-in again after the upgrade is complete.
 Users who try to use a web session from before the upgrade may receive the
 obtuse error message "Invalid xsrfKey in request".  Prior web clients are
 misinterpreting the error from the server.  Users need to sign-out and
 sign-in again to pick up a new session.
-This change was necessary to close GERRIT-83, see below.</p>
+This change was necessary to close GERRIT-83, see below.</p></div>
 </li>
 <li>
 <p>
 Preserving Sessions Across Restarts
 </p>
-<p>Administrators who wish to preserve user sessions across server restarts must
-set [http://gerrit.googlecode.com/svn/documentation/2.0/config-gerrit.html#cache.directory cache.directory] in gerrit.config.  This allows Gerrit to flush the set
-of active sessions to disk during shutdown, and load them back during startup.</p>
+<div class="paragraph"><p>Administrators who wish to preserve user sessions across server restarts must
+set [<a href="http://gerrit.googlecode.com/svn/documentation/2.0/config-gerrit.html#cache.directory">http://gerrit.googlecode.com/svn/documentation/2.0/config-gerrit.html#cache.directory</a> cache.directory] in gerrit.config.  This allows Gerrit to flush the set
+of active sessions to disk during shutdown, and load them back during startup.</p></div>
 </li>
-</ul>
+</ul></div>
 </div>
-<h2>Schema Change</h2>
+<h2 id="_schema_change">Schema Change</h2>
 <div class="sectionbody">
-<p><strong>WARNING: This version contains a schema change</strong> (since 2.0.18)</p>
-<p>Important notes about this schema change:</p>
-<ul>
+<div class="paragraph"><p><strong>WARNING: This version contains a schema change</strong> (since 2.0.18)</p></div>
+<div class="paragraph"><p>Important notes about this schema change:</p></div>
+<div class="ulist"><ul>
 <li>
 <p>
 Do not run the schema change while the server is running.
 </p>
-<p>This upgrade adds a new required column to the changes table, something
+<div class="paragraph"><p>This upgrade adds a new required column to the changes table, something
 which cannot be done while users are creating records. Like .18, I <em>strongly</em>
 suggest a full shutdown, schema upgrade, then startup approach.
-Apply the database specific schema script:</p>
+Apply the database specific schema script:</p></div>
 </li>
-</ul>
+</ul></div>
 <div class="listingblock">
 <div class="content">
 <pre><tt>  java -jar gerrit.war --cat sql/upgrade016_017_postgres.sql | psql reviewdb
   java -jar gerrit.war --cat sql/upgrade016_017_mysql.sql    | mysql reviewdb</tt></pre>
 </div></div>
 </div>
-<h2>New Features</h2>
+<h2 id="_new_features">New Features</h2>
 <div class="sectionbody">
-<ul>
+<div class="ulist"><ul>
 <li>
 <p>
 New ssh create-project command
 </p>
-<p>Thanks to Ulrik Sjölin we now have <tt>gerrit create-project</tt>
+<div class="paragraph"><p>Thanks to Ulrik Sjölin we now have <tt>gerrit create-project</tt>
 available over SSH, to construct a new repository and database
 record for a project.  Documentation has also been updated to
-reflect that the command is now available.</p>
+reflect that the command is now available.</p></div>
 </li>
 <li>
 <p>
 Be more liberal in accepting Signed-off-by lines
 </p>
-<p>The "Require Signed-off-by line" feature in a project is now
+<div class="paragraph"><p>The "Require Signed-off-by line" feature in a project is now
 more liberal.  Gerrit now requires that the commit be signed off
 by either the author or the committer.  This was relaxed because
 kernel developers often cherry-pick in patches signed off by
 the author and by Linus Torvalds, but not by the committer who
-did the backport cherry-pick.</p>
+did the backport cherry-pick.</p></div>
 </li>
 <li>
 <p>
 Allow cache.name.diskLimit = 0 to disable on disk cache
 </p>
-<p>Setting cache.name.diskLimit to 0 will disable the disk for
+<div class="paragraph"><p>Setting cache.name.diskLimit to 0 will disable the disk for
 that cache, even though cache.directory was set.  This allows
 sites to set cache.diff.diskLimit to 0 to avoid caching the diff
 records on disk, but still allow caching web_sessions to disk,
 so that live sessions are maintained across server restarts.
 This is a change in behavior, the prior meaning of diskLimit =
 0 was "unlimited", which is not very sane given how Ehcache
-manages the on disk cache files.</p>
+manages the on disk cache files.</p></div>
 </li>
 <li>
 <p>
 Allow human-readable units in config.name.maxage
 </p>
-<p>Timeouts for any cache.name.maxAge may now be specified in human
+<div class="paragraph"><p>Timeouts for any cache.name.maxAge may now be specified in human
 readable units, such as "12 days" or "3 hours".  The server will
 automatically convert them to minutes during parsing.  If no
 unit is specified, minutes are assumed, to retain compatibility
-with prior releases.</p>
+with prior releases.</p></div>
 </li>
 <li>
 <p>
 Add native LDAP support to Gerrit
 </p>
-<p>Gerrit now has native LDAP support.  Setting auth.type to
+<div class="paragraph"><p>Gerrit now has native LDAP support.  Setting auth.type to
 HTTP_LDAP and then configuring the handful of ldap properties
 in gerrit.config will allow Gerrit to load group membership
-directly from the organization's LDAP server.  This replaces
+directly from the organization&#8217;s LDAP server.  This replaces
 the need for the sync-groups script posted in the wiki.  See:
 <a href="http://gerrit.googlecode.com/svn/documentation/2.0/config-gerrit.html#ldap">http://gerrit.googlecode.com/svn/documentation/2.0/config-gerrit.html#ldap</a>
 If you use the sync-groups script from the wiki page, you would
@@ -546,34 +676,34 @@ DELETE FROM account_group_members
 WHERE group_id IN (
 SELECT group_id FROM account_groups
 WHERE automatic_membership = <em>Y</em>);
-}}}</p>
+}}}</p></div>
 </li>
 <li>
 <p>
-Don't allow users to edit their name if it comes from LDAP
+Don&#8217;t allow users to edit their name if it comes from LDAP
 </p>
-<p>User information loaded from LDAP, such as full name or SSH
+<div class="paragraph"><p>User information loaded from LDAP, such as full name or SSH
 username, cannot be modified by the end-user.  This allows the
 Gerrit site administrator to require that users conform to the
-standard information published by the organization's directory
+standard information published by the organization&#8217;s directory
 service.  Updates in LDAP are automatically reflected in Gerrit
-the next time the user signs-in.</p>
+the next time the user signs-in.</p></div>
 </li>
 <li>
 <p>
 Remembers anchor during HTTP logins
 </p>
-<p>When using an HTTP SSO product, clicking on a Gerrit link received
+<div class="paragraph"><p>When using an HTTP SSO product, clicking on a Gerrit link received
 out-of-band (e.g. by email or IM) often required clicking the
 link twice.  On the first click Gerrit redirect you to the
-organization's single-sign-on authentication system, which upon
+organization&#8217;s single-sign-on authentication system, which upon
 success redirected to your dashboard.  The actual target of the
 link was often lost, so a second click was required.
 With .19 and later, if the administrator changes the frontend web
 server to perform authentication only for the /login/ subdirectory
-of Gerrit, this can be avoided.  For example with Apache:</p>
+of Gerrit, this can be avoided.  For example with Apache:</p></div>
 </li>
-</ul>
+</ul></div>
 <div class="listingblock">
 <div class="content">
 <pre><tt>     &lt;Location "/login/"&gt;
@@ -594,30 +724,30 @@ the secured area, and performs the authentication.  When the
 authenticated user returns to '/login/change,42' Gerrit sends
 a redirect back to the original URL, '/#change,42'.</tt></pre>
 </div></div>
-<ul>
+<div class="ulist"><ul>
 <li>
 <p>
 Create check_schema_version during schema creation
 </p>
-<p>Schema upgrades for PostgreSQL now validate that the current
+<div class="paragraph"><p>Schema upgrades for PostgreSQL now validate that the current
 schema version matches the expected schema version at the start
 of the upgrade script.  If the schema does not match, the script
-aborts, although it will spew many errors.</p>
+aborts, although it will spew many errors.</p></div>
 </li>
 <li>
 <p>
 Reject disconnected ancestries when creating changes
 </p>
-<p>Uploading commits to a project now requires that the new commits
+<div class="paragraph"><p>Uploading commits to a project now requires that the new commits
 share a common ancestry with the existing commits of that project.
 This catches and prevents problems caused by a user making a typo
-in the project name, and inadverently selecting the wrong project.</p>
+in the project name, and inadverently selecting the wrong project.</p></div>
 </li>
 <li>
 <p>
 Change-Id tags in commit messages to associate commits
 </p>
-<p>Gerrit now looks for <em>Change-Id: I&#8230;.</em> in the footer area of a
+<div class="paragraph"><p>Gerrit now looks for <em>Change-Id: I&#8230;.</em> in the footer area of a
 commit message and uses this to identify a change record within
 the project.
 If the listed Change-Id has not been seen before, a new change
@@ -633,19 +763,19 @@ scp -P 29418 review.example.com:hooks/commit-msg .git/hooks/
 Using this hook ensures that the Change-Id is predicatable once
 the commit is uploaded for review.
 For more details, please see the docs:
-<a href="http://gerrit.googlecode.com/svn/documentation/2.0/user-changeid.html">http://gerrit.googlecode.com/svn/documentation/2.0/user-changeid.html</a></p>
+<a href="http://gerrit.googlecode.com/svn/documentation/2.0/user-changeid.html">http://gerrit.googlecode.com/svn/documentation/2.0/user-changeid.html</a></p></div>
 </li>
-</ul>
+</ul></div>
 </div>
-<h2>Bug Fixes</h2>
+<h2 id="_bug_fixes">Bug Fixes</h2>
 <div class="sectionbody">
-<ul>
+<div class="ulist"><ul>
 <li>
 <p>
 Fix yet another ArrayIndexOutOfBounds during side-by-s&#8230;
 </p>
-<p>We found yet another bug with the side-by-side view failing
-under certain conditions.  I think this is the last bug.</p>
+<div class="paragraph"><p>We found yet another bug with the side-by-side view failing
+under certain conditions.  I think this is the last bug.</p></div>
 </li>
 <li>
 <p>
@@ -656,85 +786,85 @@ Apply URL decoding to parameter of /cat/
 <p>
 Fix old image when shown inline in unified diff
 </p>
-<p>Images weren't displaying correctly, even though
+<div class="paragraph"><p>Images weren&#8217;t displaying correctly, even though
 mimetype.image/png.safe was true in gerrit.config.
 Turned out to be a problem with the parameter decoding of the
-/cat/ servlet, as well as the link being generated wrong.</p>
+/cat/ servlet, as well as the link being generated wrong.</p></div>
 </li>
 <li>
 <p>
 Fix high memory usage seen in <tt>gerrit show-caches</tt>
 </p>
-<p>In Gerrit 2.0.18 JGit had a bug where the repository wasn't being
+<div class="paragraph"><p>In Gerrit 2.0.18 JGit had a bug where the repository wasn&#8217;t being
 reused in memory.  This meant that we were constantly reloading
 the repository data in from disk, so the server was always maxed
 out at core.packedGitLimit and core.packedGitOpenFiles, as no
-data was being reused from the cache.  Fixed in this release.</p>
+data was being reused from the cache.  Fixed in this release.</p></div>
 </li>
 <li>
 <p>
 Fix display of timeouts in <tt>gerrit show-caches</tt>
 </p>
-<p>Timeouts were not always shown correctly, sometimes 12 hours
-was showing up as 2.5 days, which is completely wrong.  Fixed.</p>
+<div class="paragraph"><p>Timeouts were not always shown correctly, sometimes 12 hours
+was showing up as 2.5 days, which is completely wrong.  Fixed.</p></div>
 </li>
 <li>
 <p>
 GERRIT-261  Fix reply button when comment is on the last line
 </p>
-<p>The "Reply" button didn't work if the comment was on the last
+<div class="paragraph"><p>The "Reply" button didn&#8217;t work if the comment was on the last
 line of the file, the browser caught an array index out of
 bounds exception as we walked off the end of the table looking
-for where to insert the new editor box.</p>
+for where to insert the new editor box.</p></div>
 </li>
 <li>
 <p>
-GERRIT-83   Make sign-out really invalidate the user's session
+GERRIT-83   Make sign-out really invalidate the user&#8217;s session
 </p>
-<p>The sign-out link now does more than delete the cookie from the
-user's browser, it also removes the token from the server side.
+<div class="paragraph"><p>The sign-out link now does more than delete the cookie from the
+user&#8217;s browser, it also removes the token from the server side.
 By removing it from the server, we prevent replay attacks where
-an attacker has observed the user's cookie and then later tries
-to issue their own requests with the user's cookie.  Note that
+an attacker has observed the user&#8217;s cookie and then later tries
+to issue their own requests with the user&#8217;s cookie.  Note that
 this sort of attack is difficult if SSL is used, as the attacker
-would have a much more difficult time of sniffing the user's
-cookie while it was still live.</p>
+would have a much more difficult time of sniffing the user&#8217;s
+cookie while it was still live.</p></div>
 </li>
 <li>
 <p>
 Evict account record after changing SSH username
 </p>
-<p>Changing the SSH username on the web immediately affected the
+<div class="paragraph"><p>Changing the SSH username on the web immediately affected the
 SSH daemon, but the web still showed the old username.  This
 was due to the change operation not flushing the cache that
-the web code was displaying from.  Fixed.</p>
+the web code was displaying from.  Fixed.</p></div>
 </li>
 <li>
 <p>
-Really don't allow commits to replace in wrong project
+Really don&#8217;t allow commits to replace in wrong project
 </p>
-<p>It was possible for users to upload replacement commits to the
+<div class="paragraph"><p>It was possible for users to upload replacement commits to the
 wrong project, e.g. uploading a replacement commit to project
-B while picking a change number from project A.  Fixed.</p>
+B while picking a change number from project A.  Fixed.</p></div>
 </li>
-</ul>
+</ul></div>
 </div>
-<h2>=Fixes in 2.0.19.1=</h2>
+<h2 id="_fixes_in_2_0_19_1">=Fixes in 2.0.19.1=</h2>
 <div class="sectionbody">
-<ul>
+<div class="ulist"><ul>
 <li>
 <p>
 Fix NPE during direct push to branch closing a change
 </p>
-<p>Closing changes by pushing their commits directly into the branch didn't
-always work as expected, due to some data not being initialized correctly.</p>
+<div class="paragraph"><p>Closing changes by pushing their commits directly into the branch didn&#8217;t
+always work as expected, due to some data not being initialized correctly.</p></div>
 </li>
 <li>
 <p>
 Ignore harmless "Pipe closed" in scp command
 </p>
-<p>scp command on the server side threw exceptions when a client aborted the
-data transfer.  We typically don't care to log such cases.</p>
+<div class="paragraph"><p>scp command on the server side threw exceptions when a client aborted the
+data transfer.  We typically don&#8217;t care to log such cases.</p></div>
 </li>
 <li>
 <p>
@@ -745,49 +875,49 @@ Refactor user lookup during permission checking
 <p>
 GERRIT-264  Fix membership in Registered Users group
 </p>
-<p>Users were not a member of "Registered Users", this was a rather serious
-bug in the code as it meant many users lost their access rights.</p>
+<div class="paragraph"><p>Users were not a member of "Registered Users", this was a rather serious
+bug in the code as it meant many users lost their access rights.</p></div>
 </li>
 <li>
 <p>
 GERRIT-265  Correctly catch "Invalid xsrfKey in request" error as &#8230;
 </p>
-<p>Above I mentioned we should handle this error as "Not Signed In", only
-the pattern match wasn't quite right.  Fixed.</p>
+<div class="paragraph"><p>Above I mentioned we should handle this error as "Not Signed In", only
+the pattern match wasn&#8217;t quite right.  Fixed.</p></div>
 </li>
 <li>
 <p>
-GERRIT-263  Fix &#8212;re=bob to match bob@example.com when using HTTP_LDAP
+GERRIT-263  Fix --re=bob to match <a href="mailto:bob@example.com">bob@example.com</a> when using HTTP_LDAP
 </p>
-<p>HTTP_LDAP broke using local usernames to match an account.  Fixed.</p>
+<div class="paragraph"><p>HTTP_LDAP broke using local usernames to match an account.  Fixed.</p></div>
 </li>
-</ul>
+</ul></div>
 </div>
-<h2>=Fixes in 2.0.19.2=</h2>
+<h2 id="_fixes_in_2_0_19_2">=Fixes in 2.0.19.2=</h2>
 <div class="sectionbody">
-<ul>
+<div class="ulist"><ul>
 <li>
 <p>
-Don't line wrap project or group names in admin panels
+Don&#8217;t line wrap project or group names in admin panels
 </p>
-<p>Line wrapping group names like "All Users" when the description column
-has a very long name in it is ugly.</p>
+<div class="paragraph"><p>Line wrapping group names like "All Users" when the description column
+has a very long name in it is ugly.</p></div>
 </li>
 <li>
 <p>
-GERRIT-267  Don't add users to a change review if they cannot access
+GERRIT-267  Don&#8217;t add users to a change review if they cannot access
 </p>
-<p>If a user cannot access a change, let the owner know when they try to
-add the user as a reviewer, or CC them on it.</p>
+<div class="paragraph"><p>If a user cannot access a change, let the owner know when they try to
+add the user as a reviewer, or CC them on it.</p></div>
 </li>
 <li>
 <p>
 commit-msg: Do not insert Change-Id if the message is &#8230;
 </p>
-<p>The commit-msg hook didn't allow users to abort accidental git commit
+<div class="paragraph"><p>The commit-msg hook didn&#8217;t allow users to abort accidental git commit
 invocations, as it still modified the file, making git commit think
 that the end-user wanted to make a commit.  Anyone who has a copy of
-the hook should upgrade to the new hook, if possible.</p>
+the hook should upgrade to the new hook, if possible.</p></div>
 </li>
 <li>
 <p>
@@ -798,27 +928,27 @@ Support recursive queries against LDAP directories
 <p>
 Fix parsing of LDAP search scope properties
 </p>
-<p>As reported on repo-discuss, recursive search is sometimes necessary,
-and is now the default.</p>
+<div class="paragraph"><p>As reported on repo-discuss, recursive search is sometimes necessary,
+and is now the default.</p></div>
 </li>
-</ul>
+</ul></div>
 </div>
-<h2>Removed Features</h2>
+<h2 id="_removed_features">Removed Features</h2>
 <div class="sectionbody">
-<ul>
+<div class="ulist"><ul>
 <li>
 <p>
 Remove support for /user/email style URLs
 </p>
-<p>I decided to remove this URL, its a pain to support and not
+<div class="paragraph"><p>I decided to remove this URL, its a pain to support and not
 discoverable.  Its unlikely anyone is really using it, but if
-they are, they could try using "#q,owner:email,n,z" instead.</p>
+they are, they could try using "#q,owner:email,n,z" instead.</p></div>
 </li>
-</ul>
+</ul></div>
 </div>
-<h2>Other Changes</h2>
+<h2 id="_other_changes">Other Changes</h2>
 <div class="sectionbody">
-<ul>
+<div class="ulist"><ul>
 <li>
 <p>
 Start 2.0.19 development
@@ -931,12 +1061,12 @@ Remove old commented out cache configuration code
 </li>
 <li>
 <p>
-Don't NPE in SSH keys panel when SSHD is bound to loca&#8230;
+Don&#8217;t NPE in SSH keys panel when SSHD is bound to loca&#8230;
 </p>
 </li>
 <li>
 <p>
-Don't send users to #register,register,mine
+Don&#8217;t send users to #register,register,mine
 </p>
 </li>
 <li>
@@ -1216,7 +1346,7 @@ Fix commit-msg hook to handle first lines like "foo: f&#8230;
 </li>
 <li>
 <p>
-Add a link to Gerrit's project to the top of gerrit-ch&#8230;
+Add a link to Gerrit&#8217;s project to the top of gerrit-ch&#8230;
 </p>
 </li>
 <li>
@@ -1226,12 +1356,12 @@ Add full ASLv2 copyright notice to commit-msg hook
 </li>
 <li>
 <p>
-Embed Gerrit's version number into shell scripts copie&#8230;
+Embed Gerrit&#8217;s version number into shell scripts copie&#8230;
 </p>
 </li>
 <li>
 <p>
-Don't drop max_session_age column in transaction durin&#8230;
+Don&#8217;t drop max_session_age column in transaction durin&#8230;
 </p>
 </li>
 <li>
@@ -1239,12 +1369,14 @@ Don't drop max_session_age column in transaction durin&#8230;
 gerrit 2.0.19
 </p>
 </li>
-</ul>
+</ul></div>
 </div>
+</div>
+<div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
 Version 2.0.19 (from v2.1.1.1-104-gc20e283)<br />
-Last updated 06-Dec-2010 16:46:42 PDT
+Last updated 2012-01-27 09:47:03 MDT
 </div>
 </div>
 </body>
