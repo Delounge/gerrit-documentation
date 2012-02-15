@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>Gerrit Code Review - Quick get started guide</h1>
-<span id="revnumber">version 2.2.2</span>
+<span id="revnumber">version 2.2.2-340-g287db97</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -586,7 +586,7 @@ OpenID provider you choose is necessary for both you and your Gerrit instance.</
 <pre><tt>  $ java -version
   java version "1.6.0_26"
   Java(TM) SE Runtime Environment (build 1.6.0_26-b03-384-10M3425)
-    Java HotSpot(TM) 64-Bit Server VM (build 20.1-b02-384, mixed mode)</tt></pre>
+  Java HotSpot(TM) 64-Bit Server VM (build 20.1-b02-384, mixed mode)</tt></pre>
 </div></div>
 <div class="paragraph"><p>If Java isn&#8217;t installed, get it:</p></div>
 <div class="ulist"><ul>
@@ -603,8 +603,8 @@ JDK, minimum version 1.6 <a href="http://www.oracle.com/technetwork/java/javase/
 First create the user and then become the user:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>  sudo adduser gerrit2
-  sudo su gerrit2</tt></pre>
+<pre><tt>  $ sudo adduser gerrit2
+  $ sudo su gerrit2</tt></pre>
 </div></div>
 <div class="paragraph"><p>If you don&#8217;t have root privileges you could skip this step and run gerrit
 as your own user as well.</p></div>
@@ -620,11 +620,11 @@ as your own user as well.</p></div>
 </p>
 </li>
 </ul></div>
-<div class="paragraph"><p>This tutorial is based on version 2.2.1, and you can download that from this link</p></div>
+<div class="paragraph"><p>This tutorial is based on version 2.2.2, and you can download that from this link</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
-<a href="http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.2.1.war">Link to the 2.2.1 war archive</a>
+<a href="http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.2.2.war">Link to the 2.2.2 war archive</a>
 </p>
 </li>
 </ul></div>
@@ -634,21 +634,22 @@ as your own user as well.</p></div>
 <div class="paragraph"><p>It&#8217;s time to run the initialization, and with the batch switch enabled, we don&#8217;t have to answer any questions at all:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>gerrit2@host:~$ java -jar gerrit.war init --batch -d ~/gerrit_testsite
-Generating SSH host key ... rsa(simple)... done
-Initialized /home/gerrit2/gerrit_testsite
-Executing /home/gerrit2/gerrit_testsite/bin/gerrit.sh start
-Starting Gerrit Code Review: OK
-gerrit2@host:~$</tt></pre>
+<pre><tt>  gerrit2@host:~$ java -jar gerrit.war init --batch -d ~/gerrit_testsite
+  Generating SSH host key ... rsa(simple)... done
+  Initialized /home/gerrit2/gerrit_testsite
+  Executing /home/gerrit2/gerrit_testsite/bin/gerrit.sh start
+  Starting Gerrit Code Review: OK
+  gerrit2@host:~$</tt></pre>
 </div></div>
 <div class="paragraph"><p>When the init is complete, you can review your settings in the
 file <tt>'$site_path/etc/gerrit.config'</tt>.</p></div>
-<div class="paragraph"><p>Installation is complete and you&#8217;re ready to start up Gerrit!</p></div>
+<div class="paragraph"><p>An important setting will be the canonicalWebUrl which will
+be needed later to access gerrit&#8217;s web interface.</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>gerrit2@host:~$ $site_path/bin/gerrit.sh start
-Starting Gerrit Code Review: OK
-Waiting for server to start ... OK</tt></pre>
+<pre><tt>  gerrit2@host:~$ cat ~/gerrit_testsite/etc/gerrit.config | grep canonical
+  canonicalWebUrl = http://localhost:8080/
+  gerrit2@host:~$</tt></pre>
 </div></div>
 </div>
 <h2 id="usersetup">The first user</h2>
@@ -661,8 +662,9 @@ development under.</p></div>
 id_rsa and id_rsa.pub.</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>user@host:~$ ls .ssh
-authorized_keys  config  id_rsa  id_rsa.pub  known_hosts</tt></pre>
+<pre><tt>  user@host:~$ ls .ssh
+  authorized_keys  config  id_rsa  id_rsa.pub  known_hosts
+  user@host:~$</tt></pre>
 </div></div>
 <div class="paragraph"><p>If you have the files, you may skip the key generating step.</p></div>
 <div class="paragraph"><p>If you don&#8217;t see the files in your listing, your will have to generate rsa
@@ -672,37 +674,36 @@ keys for your ssh sessions:</p></div>
 <strong>They will be overwritten!</strong></p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>user@host:~$ ssh-keygen -t rsa
-Generating public/private rsa key pair.
-Enter file in which to save the key (/home/user/.ssh/id_rsa):
-Created directory '/home/user/.ssh'.
-Enter passphrase (empty for no passphrase):
-Enter same passphrase again:
-Your identification has been saved in /home/user/.ssh/id_rsa.
-Your public key has been saved in /home/user/.ssh/id_rsa.pub.
-The key fingerprint is:
-00:11:22:00:11:22:00:11:44:00:11:22:00:11:22:99 user@host
-The key's randomart image is:
-+--[ RSA 2048]----+
-|     ..+.*=+oo.*E|
-|      u.OoB.. . +|
-|       ..*.      |
-|       o         |
-|      . S ..     |
-|                 |
-|                 |
-|          ..     |
-|                 |
-+-----------------+
-
-user@host:~$</tt></pre>
+<pre><tt>  user@host:~$ ssh-keygen -t rsa
+  Generating public/private rsa key pair.
+  Enter file in which to save the key (/home/user/.ssh/id_rsa):
+  Created directory '/home/user/.ssh'.
+  Enter passphrase (empty for no passphrase):
+  Enter same passphrase again:
+  Your identification has been saved in /home/user/.ssh/id_rsa.
+  Your public key has been saved in /home/user/.ssh/id_rsa.pub.
+  The key fingerprint is:
+  00:11:22:00:11:22:00:11:44:00:11:22:00:11:22:99 user@host
+  The key's randomart image is:
+  +--[ RSA 2048]----+
+  |     ..+.*=+oo.*E|
+  |      u.OoB.. . +|
+  |       ..*.      |
+  |       o         |
+  |      . S ..     |
+  |                 |
+  |                 |
+  |          ..     |
+  |                 |
+  +-----------------+
+  user@host:~$</tt></pre>
 </div></div>
 <h3 id="_registering_your_key_in_gerrit">Registering your key in Gerrit</h3><div style="clear:left"></div>
-<div class="paragraph"><p>Open a browser and enter the canonical url you used above when initializing
-Gerrit.</p></div>
+<div class="paragraph"><p>Open a browser and enter the canonical url you got before when
+initializing Gerrit.</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>Canonical URL                  [http://localhost:8080/]:</tt></pre>
+<pre><tt>  Canonical URL                [http://localhost:8080/]:</tt></pre>
 </div></div>
 <div class="paragraph"><p>Register a new account in Gerrit through the web interface with the
 email address of your choice.
@@ -738,8 +739,9 @@ about our new key and can identify us by it.
 </ul></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>user@host:~$ cat .ssh/id_rsa.pub
-ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA5E785mWtMckorP5v40PyFeui9T50dKpaGYw67Mlv2J3aGBG3tS0qBQxKEpiV0J4+W0RgQHbWfNqdUYen9bC5VVH/GatYWkpL9TjjUcHzF1rX3Eyv7PHuHLAyd/8Zdv6R3saF+hNpp1JW0BSa7HXzK7iNCVA3kBuBthxeGh3OoFbaXHn1zwwVQw8I5+Lp9OOIY7sJEsM/kW699XDV6z2zlkByNVEp45j+g26x5rCnGS8GJM7A0uHsaWJddO6TiyR6/2SOBF1VtKw49XLTQcmDInFAZzUsAZSDKlfYloPkpA6YdqeG0eJqau+jtzuigydoVj4j9xidcJ9HtxZcJNuraw== user@host</tt></pre>
+<pre><tt>  user@host:~$ cat .ssh/id_rsa.pub
+  ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA5E785mWtMckorP5v40PyFeui9T50dKpaGYw67Mlv2J3aGBG3tS0qBQxKEpiV0J4+W0RgQHbWfNqdUYen9bC5VVH/GatYWkpL9TjjUcHzF1rX3Eyv7PHuHLAyd/8Zdv6R3saF+hNpp1JW0BSa7HXzK7iNCVA3kBuBthxeGh3OoFbaXHn1zwwVQw8I5+Lp9OOIY7sJEsM/kW699XDV6z2zlkByNVEp45j+g26x5rCnGS8GJM7A0uHsaWJddO6TiyR6/2SOBF1VtKw49XLTQcmDInFAZzUsAZSDKlfYloPkpA6YdqeG0eJqau+jtzuigydoVj4j9xidcJ9HtxZcJNuraw== user@host
+  user@host:~$</tt></pre>
 </div></div>
 <div class="paragraph"><p>Copy the string starting with ssh-rsa to your clipboard and then paste it
 into the box for RSA keys. Make <strong>absolutely sure</strong> no extra spaces or line feeds
@@ -747,18 +749,18 @@ are entered in the middle of the RSA string.</p></div>
 <div class="paragraph"><p>Verify that the ssh connection works for you.</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt> user@host:~$ ssh user@localhost -p 29418
- The authenticity of host '[localhost]:29418 ([127.0.0.1]:29418)' can't be established.
- RSA key fingerprint is db:07:3d:c2:94:25:b5:8d:ac:bc:b5:9e:2f:95:5f:4a.
- Are you sure you want to continue connecting (yes/no)? yes
- Warning: Permanently added '[localhost]:29418' (RSA) to the list of known hosts.
+<pre><tt>  user@host:~$ ssh user@localhost -p 29418
+  The authenticity of host '[localhost]:29418 ([127.0.0.1]:29418)' can't be established.
+  RSA key fingerprint is db:07:3d:c2:94:25:b5:8d:ac:bc:b5:9e:2f:95:5f:4a.
+  Are you sure you want to continue connecting (yes/no)? yes
+  Warning: Permanently added '[localhost]:29418' (RSA) to the list of known hosts.
 
   ****    Welcome to Gerrit Code Review    ****
 
   Hi user, you have successfully connected over SSH.
 
   Unfortunately, interactive shells are disabled.
-    To clone a hosted Git repository, use:
+  To clone a hosted Git repository, use:
 
   git clone ssh://user@localhost:29418/REPOSITORY_NAME.git
 
@@ -781,8 +783,8 @@ time setup between client and server is easier.</p></div>
 <pre><tt>  user@host:~$ ssh -p 29418 user@localhost gerrit create-project --empty-commit --name demo-project
   user@host:~$</tt></pre>
 </div></div>
-<div class="paragraph"><p>This will create a test repository to work with.</p></div>
-<h3 id="_previous_project_exist">Previous project exist</h3><div style="clear:left"></div>
+<div class="paragraph"><p>This will create a repository that you could clone to work with.</p></div>
+<h3 id="_already_existing_project">Already existing project</h3><div style="clear:left"></div>
 <div class="paragraph"><p>The other alternative is if you already have a git project that you
 want to try out Gerrit on.
 First you have to create the project, this is done via the SSH port:</p></div>
@@ -791,20 +793,26 @@ First you have to create the project, this is done via the SSH port:</p></div>
 <pre><tt>  user@host:~$ ssh -p 29418 user@localhost gerrit create-project --name demo-project
   user@host:~$</tt></pre>
 </div></div>
+<div class="paragraph"><p>You need to make sure that at least initially your account is granted
+"Create Reference" privileges for the refs/heads/* reference.
+This is done via the web interface in the Admin/Projects/Access page
+that correspond to your project.</p></div>
 <div class="paragraph"><p>After that it&#8217;s time to upload the previous history to the server:</p></div>
 <div class="listingblock">
 <div class="content">
 <pre><tt>  user@host:~/my-project$ git push ssh://user@localhost:29418/demo-project *:*
-    Counting objects: 2011, done.
-    Writing objects: 100% (2011/2011), 456293 bytes, done.
-    Total 2011 (delta 0), reused 0 (delta 0)
-    * [new branch]      master -&gt; master</tt></pre>
+  Counting objects: 2011, done.
+  Writing objects: 100% (2011/2011), 456293 bytes, done.
+  Total 2011 (delta 0), reused 0 (delta 0)
+  To ssh://user@localhost:29418/demo-project
+   * [new branch]      master -&gt; master
+  user@host:~/my-project$</tt></pre>
 </div></div>
-<div class="paragraph"><p>This will create a test repository to work with.</p></div>
+<div class="paragraph"><p>This will create a repository that you could clone to work with.</p></div>
 </div>
 <h2 id="_my_first_change">My first change</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Download a local clone of the repository</p></div>
+<div class="paragraph"><p>Download a local clone of the repository and move into it</p></div>
 <div class="listingblock">
 <div class="content">
 <pre><tt>  user@host:~$ git clone ssh://user@host:29418/demo-project
@@ -812,17 +820,19 @@ First you have to create the project, this is done via the SSH port:</p></div>
   remote: Counting objects: 2, done
   remote: Finding sources: 100% (2/2)
   remote: Total 2 (delta 0), reused 0 (delta 0)
-  user@host:~$</tt></pre>
+  user@host:~$ cd demo-project
+  user@host:~/demo-project$</tt></pre>
 </div></div>
 <div class="paragraph"><p>Then make a change to it and upload it as a reviewable change in Gerrit.</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>  date &gt; testfile.txt
-  git add testfile.txt
-  git commit -m "My pretty test commit"
-    [master ff643a5] My pretty test commit
-    1 files changed, 1 insertions(+), 0 deletions(-)
-    create mode 100644 testfile.txt</tt></pre>
+<pre><tt>  user@host:~/demo-project$ date &gt; testfile.txt
+  user@host:~/demo-project$ git add testfile.txt
+  user@host:~/demo-project$ git commit -m "My pretty test commit"
+  [master ff643a5] My pretty test commit
+   1 files changed, 1 insertions(+), 0 deletions(-)
+   create mode 100644 testfile.txt
+  user@host:~/demo-project$</tt></pre>
 </div></div>
 <div class="paragraph"><p>Usually when you push to a remote git, you push to the reference
 <tt>'/refs/heads/branch'</tt>, but when working with Gerrit you have to push to a
@@ -830,16 +840,17 @@ virtual branch representing "code review before submittal to branch".
 This virtual name space is known as /refs/for/&lt;branch&gt;</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>  git push origin HEAD:refs/for/master
-    Counting objects: 4, done.
-    Writing objects: 100% (3/3), 293 bytes, done.
-    Total 3 (delta 0), reused 0 (delta 0)
-    remote:
-    remote: New Changes:
-    remote:   http://localhost:8080/1
-    remote:
-    To ssh://user@localhost:29418/demo-project
-     * [new branch]      HEAD -&gt; refs/for/master</tt></pre>
+<pre><tt>  user@host:~/demo-project$ git push origin HEAD:refs/for/master
+  Counting objects: 4, done.
+  Writing objects: 100% (3/3), 293 bytes, done.
+  Total 3 (delta 0), reused 0 (delta 0)
+  remote:
+  remote: New Changes:
+  remote:   http://localhost:8080/1
+  remote:
+  To ssh://user@localhost:29418/demo-project
+   * [new branch]      HEAD -&gt; refs/for/master
+  user@host:~/demo-project$</tt></pre>
 </div></div>
 <div class="paragraph"><p>You should now be able to access your change by browsing to the http URL
 suggested above, <a href="http://localhost:8080/1">http://localhost:8080/1</a></p></div>
@@ -864,8 +875,8 @@ installation page</a>.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.2<br />
-Last updated 2012-01-27 09:47:03 MDT
+Version 2.2.2-340-g287db97<br />
+Last updated 2012-02-14 10:00:58 MDT
 </div>
 </div>
 </body>

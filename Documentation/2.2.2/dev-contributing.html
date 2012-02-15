@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.5.2" />
-<title>Gerrit Code Review - Installation Guide</title>
+<title>Gerrit Code Review - Contributing</title>
 <style type="text/css">
 /* Debug borders */
 p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 {
@@ -551,7 +551,7 @@ footnotes: function () {
 </head>
 <body>
 <div id="header">
-<h1>Gerrit Code Review - Installation Guide</h1>
+<h1>Gerrit Code Review - Contributing</h1>
 <span id="revnumber">version 2.2.2-340-g287db97</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
@@ -559,236 +559,408 @@ footnotes: function () {
 </div>
 </div>
 <div id="content">
-<h2 id="requirements">Requirements</h2>
+<div id="preamble">
 <div class="sectionbody">
-<div class="paragraph"><p>To run the Gerrit service, the following requirements must be met on
-the host:</p></div>
+<div class="paragraph"><p>Gerrit is developed as a self-hosting open source project and
+very much welcomes contributions from anyone with a contributor&#8217;s
+agreement on file with the project.</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
-JDK, minimum version 1.6 <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">Download</a>
+<a href="https://gerrit-review.googlesource.com/">https://gerrit-review.googlesource.com/</a>
 </p>
 </li>
 </ul></div>
-<div class="paragraph"><p>You&#8217;ll also need a SQL database to house the review metadata. You have the
-choice of either using the embedded H2 or to host your own MySQL or PostgreSQL.</p></div>
-</div>
-<h2 id="download">Download Gerrit</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>Current and past binary releases of Gerrit can be obtained from
-the downloads page at the project site:</p></div>
+<div class="paragraph"><p>The Contributor License Agreements:</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
-<a href="http://code.google.com/p/gerrit/downloads/list">Gerrit Downloads</a>
+<a href="https://gerrit-review.googlesource.com/static/cla_individual.html">https://gerrit-review.googlesource.com/static/cla_individual.html</a>
+</p>
+</li>
+<li>
+<p>
+<a href="https://gerrit-review.googlesource.com/static/cla_corporate.html">https://gerrit-review.googlesource.com/static/cla_corporate.html</a>
 </p>
 </li>
 </ul></div>
-<div class="paragraph"><p>Download any current <tt>*.war</tt> package. The war will be referred to as
-<tt>gerrit.war</tt> from this point forward, so you may find it easier to
-rename the downloaded file.</p></div>
-<div class="paragraph"><p>If you would prefer to build Gerrit directly from source, review
-the notes under <a href="dev-readme.html">developer setup</a>.</p></div>
+<div class="paragraph"><p>As Gerrit is a code review tool, naturally contributions will
+be reviewed before they will get submitted to the code base.  To
+start your contribution, please make a git commit and upload it
+for review to the main Gerrit review server.  To help speed up the
+review of your change, review these guidelines before submitting
+your change.  You can view the pending Gerrit contributions and
+their statuses here:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://gerrit-review.googlesource.com/#/q/status:open+project:gerrit,n,z">https://gerrit-review.googlesource.com/#/q/status:open+project:gerrit,n,z</a>
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Depending on the size of that list it might take a while for
+your change to get reviewed.  Naturally there are fewer
+approvers than contributors; so anything that you can do to
+ensure that your contribution will undergo fewer revisions
+will speed up the contribution process.  This includes helping
+out reviewing other people&#8217;s changes to relieve the load from
+the approvers.  Even if you are not familiar with Gerrit&#8217;s
+internals, it would be of great help if you can download, try
+out, and comment on new features.  If it works as advertised,
+say so, and if you have the priviliges to do so, go ahead
+and give it a +1 Verified.  If you would find the feature
+useful, say so and give it a +1 code review.</p></div>
+<div class="paragraph"><p>And finally, the quicker you respond to the comments of your
+reviewers, the quicker your change might get merged!  Try to
+reply to every comment after submitting your new patch,
+particularly if you decided against making the suggested change.
+Reviewers don&#8217;t want to seem like nags and pester you if you
+haven&#8217;t replied or made a fix, so it helps them know if you
+missed it or decided against it.</p></div>
 </div>
-<h2 id="createdb">Database Setup</h2>
-<div class="sectionbody">
-<h3 id="createdb_h2">H2</h3><div style="clear:left"></div>
-<div class="paragraph"><p>During the init phase of Gerrit you will need to specify which database to use.
-If you choose H2, Gerrit will automatically set up the embedded H2 database as
-backend so no set up in advance is necessary.  Also, no additional configuration is
-necessary.  Using the embedded H2 database is the easiest way to get a Gerrit
-site up and running, making it ideal for proof of concepts or small team
-servers.  On the flip side, H2 is not the recommended option for large
-corporate installations. This is because there is no easy way to interact
-with the database while Gerrit is offline, it&#8217;s not easy to backup the data,
-and it&#8217;s not possible to set up H2 in a load balanced/hotswap configuration.</p></div>
-<div class="paragraph"><p>If this option interests you, you might want to consider <a href="install-quick.html">the quick guide</a>.</p></div>
-<h3 id="createdb_postgres">PostgreSQL</h3><div style="clear:left"></div>
-<div class="paragraph"><p>This option is more complicated than the H2 option but is recommended
-for larger installations. It&#8217;s the database backend with the largest userbase
-in the Gerrit community.</p></div>
-<div class="paragraph"><p>Create a user for the web application within Postgres, assign it a
-password, create a database to store the metadata, and grant the user
-full rights on the newly created database:</p></div>
-<div class="listingblock">
-<div class="content">
-<pre><tt>  createuser -A -D -P -E gerrit2
-  createdb -E UTF-8 -O gerrit2 reviewdb</tt></pre>
-</div></div>
-<h3 id="createdb_mysql">MySQL</h3><div style="clear:left"></div>
-<div class="paragraph"><p>This option is also more complicated than the H2 option. Just as with
-PostgreSQL it&#8217;s also recommended for larger installations.</p></div>
-<div class="paragraph"><p>Create a user for the web application within the database, assign it a
-password, create a database, and give the newly created user full
-rights on it:</p></div>
-<div class="listingblock">
-<div class="content">
-<pre><tt>  mysql
-
-  CREATE USER 'gerrit2'@'localhost' IDENTIFIED BY 'secret';
-  CREATE DATABASE reviewdb;
-  ALTER DATABASE reviewdb charset=latin1;
-  GRANT ALL ON reviewdb.* TO 'gerrit2'@'localhost';
-  FLUSH PRIVILEGES;</tt></pre>
-</div></div>
 </div>
-<h2 id="init">Initialize the Site</h2>
+<h2 id="_review_criteria">Review Criteria</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Gerrit stores configuration files, the server&#8217;s SSH keys, and the
-managed Git repositories under a local directory, typically referred
-to as <tt>'$site_path'</tt>.  If the embedded H2 database is being used,
-its data files will also be stored under this directory.</p></div>
-<div class="paragraph"><p>You also have to decide where to store your server side git repositories. This
-can either be a relative path under <tt>'$site_path'</tt> or an absolute path
-anywhere on your server system. You have to choose a place before commencing
-your init phase.</p></div>
-<div class="paragraph"><p>Initialize a new site directory by running the init command, passing
-the path of the site directory to be created as an argument to the
-<em>-d</em> option.  Its recommended that Gerrit Code Review be given its
-own user account on the host system:</p></div>
-<div class="listingblock">
-<div class="content">
-<pre><tt>  sudo adduser gerrit2
-  sudo su gerrit2
-
-  java -jar gerrit.war init -d /path/to/your/gerrit_application_directory</tt></pre>
-</div></div>
-<div class="paragraph"><p><em>Please note:</em> If you choose a location where your new user doesn&#8217;t
-have any privileges, you may have to manually create the directory first and
-then give ownership of that location to the <tt>'gerrit2'</tt> user.</p></div>
-<div class="paragraph"><p>If run from an interactive terminal, the init command will prompt through a
-series of configuration questions, including gathering information
-about the database created above.  If the terminal is not interactive,
-running the init command will choose some reasonable default selections,
-and will use the embedded H2 database. Once the init phase is complete,
-you can review your settings in the file <tt>'$site_path/etc/gerrit.config'</tt>.</p></div>
-<div class="paragraph"><p>When running the init command, additional JARs might be downloaded to
-support optional selected functionality.  If a download fails a URL will
-be displayed and init will wait for the user to manually download the JAR
-and store it in the target location.</p></div>
-<div class="paragraph"><p>When the init phase is complete, the daemon will be automatically started
-in the background and your web browser will open to the site:</p></div>
-<div class="listingblock">
-<div class="content">
-<pre><tt>  Initialized /home/gerrit2/review_site
-  Executing /home/gerrit2/review_site/bin/gerrit.sh start
-  Starting Gerrit Code Review: OK
-  Waiting for server to start ... OK
-  Opening browser ...</tt></pre>
-</div></div>
-<div class="paragraph"><p>When the browser opens, sign in to Gerrit through the web interface.
-The first user to sign-in and register an account will be
-automatically placed into the fully privileged Administrators group,
-permitting server management over the web and over SSH.  Subsequent
-users will be automatically registered as unprivileged users.</p></div>
+<div class="paragraph"><p>Here are some hints as to what approvers may be looking for
+before approving or submitting changes to the Gerrit project.
+Let&#8217;s start with the simple nit picky stuff.  You are likely
+excited that your code works; help us share your excitement
+by not distracting us with the simple stuff.  Thanks to Gerrit,
+problems are often highlighted and we find it hard to look
+beyond simple spacing issues.  Blame it on our short attention
+spans, we really do want your code.</p></div>
 </div>
-<h2 id="_installation_complete">Installation Complete</h2>
+<h2 id="_commit_message">Commit Message</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Your base Gerrit server is now installed and running.  You&#8217;re now ready to
-either set up more projects or start working with the projects you&#8217;ve already
-imported.</p></div>
-</div>
-<h2 id="project_setup">Project Setup</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>See <a href="project-setup.html">Project Setup</a> for further details on
-how to register a new project with Gerrit.  This step is necessary
-if existing Git repositories were not imported during <em>init</em>.</p></div>
-</div>
-<h2 id="rc_d">Start/Stop Daemon</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>To control the Gerrit Code Review daemon that is running in the
-background, use the rc.d style start script created by <em>init</em>:</p></div>
+<div class="paragraph"><p>It is essential to have a good commit message if you want your
+change to be reviewed.</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Keep lines no longer than 72 chars
+</p>
+</li>
+<li>
+<p>
+Start with a short one line summary
+</p>
+</li>
+<li>
+<p>
+Followed by a blank line
+</p>
+</li>
+<li>
+<p>
+Followed by one or more explanatory paragraphs
+</p>
+</li>
+<li>
+<p>
+Use the present tense (fix instead of fixed)
+</p>
+</li>
+<li>
+<p>
+Include a Bug: Issue &lt;#&gt; line if fixing a Gerrit issue
+</p>
+</li>
+<li>
+<p>
+Include a Change-Id line
+</p>
+</li>
+</ul></div>
+<h3 id="_a_sample_good_gerrit_commit_message">A sample good Gerrit commit message:</h3><div style="clear:left"></div>
 <div class="exampleblock">
 <div class="exampleblock-content">
 <div class="literalblock">
 <div class="content">
-<pre><tt>review_site/bin/gerrit.sh start
-review_site/bin/gerrit.sh stop
-review_site/bin/gerrit.sh restart</tt></pre>
+<pre><tt>Add sample commit message to guidelines doc</tt></pre>
 </div></div>
-</div></div>
-<div class="paragraph"><p>(<em>Optional</em>) Link the gerrit.sh script into rc3.d so the daemon
-automatically starts and stops with the operating system:</p></div>
-<div class="exampleblock">
-<div class="exampleblock-content">
 <div class="literalblock">
 <div class="content">
-<pre><tt>sudo ln -snf `pwd`/review_site/bin/gerrit.sh /etc/init.d/gerrit.sh
-sudo ln -snf ../init.d/gerrit.sh /etc/rc3.d/S90gerrit</tt></pre>
+<pre><tt>The original patch set for the contributing guidelines doc did not
+include a sample commit message, this new patchset does.  Hopefully this
+makes things a bit clearer since examples can sometimes help when
+explanations don't.</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>Note that the body of this commit message can be several paragraphs, and
+that I word wrap it at 72 characters.  Also note that I keep the summary
+line under 50 characters since it is often truncated by tools which
+display just the git summary.</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>Bug: Issue 98765605
+Change-Id: Ic4a7c07eeb98cdeaf44e9d231a65a51f3fceae52</tt></pre>
 </div></div>
 </div></div>
-<div class="paragraph"><p>To install Gerrit into an existing servlet container instead of using
-the embedded Jetty server, see
-<a href="install-j2ee.html">J2EE installation</a>.</p></div>
 </div>
-<h2 id="customize">Site Customization</h2>
+<h2 id="_style">Style</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Gerrit Code Review supports some site-specific customization options.
-For more information, see the related topic in this manual:</p></div>
+<div class="paragraph"><p>The basic coding style is covered by the tools/GoogleFormat.xml
+doc, see the <a href="dev-eclipse.html#Formatting">Eclipse Setup</a>
+for that.</p></div>
+<div class="paragraph"><p>Highlighted/additional styling notes:</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
-<a href="config-reverseproxy.html">Reverse Proxy</a>
+It is generally more important to match the style of the nearby
+    code which you are modifying than it is to match the style
+    in the formatting guidelines.  This is especially true within the
+    same file.
 </p>
 </li>
 <li>
 <p>
-<a href="config-sso.html">Single Sign-On Systems</a>
+Review your change in Gerrit to see if it highlights
+    mistakingly deleted/added spaces on lines, trailing spaces.
 </p>
 </li>
 <li>
 <p>
-<a href="config-replication.html">Git Replication/Mirroring</a>
+Line length should be 80 or less, unless the code reads
+    better with something slightly longer.  Shorter lines not only
+    help reviewers who may use a tablet to review the code, but future
+    contributors may also like to open several editors side by
+    side while editing new changes.
 </p>
 </li>
 <li>
 <p>
-<a href="config-headerfooter.html">Site Header/Footer</a>
+Use 2 spaces for indent (no tabs)
 </p>
 </li>
 <li>
 <p>
-<a href="config-gitweb.html">Gitweb Integration</a>
+Use brackets in all ifs, spaces before/after if parens.
 </p>
 </li>
 <li>
 <p>
-<a href="config-gerrit.html">Other System Settings</a>
+Use /** */ style Javadocs for variables.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Additionally, you will notice that most of the newline spacing
+is fairly consistent throughout the code in Gerrit, it helps to
+stick to the blank line conventions.  Here are some specific
+examples:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Keep a blank line between all class and method declarations.
+</p>
+</li>
+<li>
+<p>
+Do not add blank lines at the beginning or end of class/methods.
+</p>
+</li>
+<li>
+<p>
+Put a blank line between external import sources, but not
+    between internal ones.
 </p>
 </li>
 </ul></div>
 </div>
-<h2 id="anonymous_access">Anonymous Access</h2>
+<h2 id="_code_organization">Code Organization</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Exporting the Git repository directory
-(<a href="config-gerrit.html#gerrit.basePath">gerrit.basePath</a>) over the
-anonymous, unencrypted git:// protocol is more efficient than
-Gerrit&#8217;s internal SSH daemon.  See the <tt>git-daemon</tt> documentation
-for details on how to configure this if anonymous access is desired.</p></div>
+<div class="paragraph"><p>Do your best to organize classes and methods in a logical way.
+Here are some guidelines that Gerrit uses:</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
-<a href="http://www.kernel.org/pub/software/scm/git/docs/git-daemon.html">man git-daemon</a>
+Ensure a standard copyright header is included at the top
+    of any new files (copy it from another file, update the year).
+</p>
+</li>
+<li>
+<p>
+Always place loggers first in your class!
+</p>
+</li>
+<li>
+<p>
+Define any static interfaces next in your class.
+</p>
+</li>
+<li>
+<p>
+Define non static interfaces after static interfaces in your
+    class.
+</p>
+</li>
+<li>
+<p>
+Next you should define static types and members.
+</p>
+</li>
+<li>
+<p>
+Finally instance members, then constuctors, and then instance
+    methods.
+</p>
+</li>
+<li>
+<p>
+Some common exceptions are private helper static methods which
+    might appear near the instance methods which they help.
+</p>
+</li>
+<li>
+<p>
+Getters and setters for the same instance field should usually
+    be near each other baring a good reason not to.
+</p>
+</li>
+<li>
+<p>
+If you are using assisted injection, the factory for your class
+    should be before the instance members.
+</p>
+</li>
+<li>
+<p>
+Imports should be mostly aphabetical (uppercase sorts before
+    all lowercase, which means classes come before packages at the
+    same level).
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Wow that&#8217;s a lot!  But don&#8217;t worry, you&#8217;ll get the habit and most
+of the code is organized this way already; so if you pay attention
+to the class you are editing you will likely pick up on it.
+Naturally new classes are a little harder; you may want to come
+back and consult this section when creating them.</p></div>
+</div>
+<h2 id="_design">Design</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Here are some design level ojectives that you should keep in mind
+when coding:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+ORM entity objects should match exactly one row in the database.
+</p>
+</li>
+<li>
+<p>
+Most client pages should perform only one RPC to load so as to
+    keep latencies down.  Exceptions would apply to RPCs which need
+    to load large data sets if splitting them out will help the
+    page load faster.  Generally page loads are expected to complete
+    in under 100ms.  This will be the case for most operations,
+    unless the data being fetched is not using Gerrit&#8217;s caching
+    infrastructure.  In these slower cases, it is worth considering
+    mitigating this longer load by using a second RPC to fill in
+    this data after the page is displayed (or alternatively it might
+    be worth proposing caching this data).
+</p>
+</li>
+<li>
+<p>
+@Inject should be used on constructors, not on fields.  The
+    current exceptions are the ssh commands, these were implemented
+    earlier in Gerrit&#8217;s development.  To stay consistent, new ssh
+    commands should follow this older pattern; but eventually these
+    should get converted to eliminate this exception.
+</p>
+</li>
+<li>
+<p>
+Don&#8217;t leave repository objects (git or schema) open.  A .close()
+    after every open should be placed in a finally{} block.
+</p>
+</li>
+<li>
+<p>
+Don&#8217;t leave UI components, which can cause new actions to occur,
+    enabled during RPCs which update the DB.  This is to prevent
+    people from submitting actions more than once when operating
+    on slow links.  If the action buttons are disabled, they cannot
+    be resubmitted and the user can see that Gerrit is still busy.
+</p>
+</li>
+<li>
+<p>
+GWT EventBus is the new way forward.
 </p>
 </li>
 </ul></div>
 </div>
-<h2 id="_external_documentation_links">External Documentation Links</h2>
+<h2 id="_tests">Tests</h2>
 <div class="sectionbody">
 <div class="ulist"><ul>
 <li>
 <p>
-<a href="http://www.postgresql.org/docs/">PostgreSQL Documentation</a>
+Tests for new code will greatly help your change get approved.
+</p>
+</li>
+</ul></div>
+</div>
+<h2 id="_change_size_number_of_files_touched">Change Size/Number of Files Touched</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>And finally, I probably cannot say enough about change sizes.
+Generally, smaller is better, hopefully within reason.  Do try to
+keep things which will be confusing on their own together,
+especially if changing one without the other will break something!</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+If a new feature is implemented and it is a larger one, try to
+    identify if it can be split into smaller logical features; when
+    in doubt, err on the smaller side.
 </p>
 </li>
 <li>
 <p>
-<a href="http://dev.mysql.com/doc/">MySQL Documentation</a>
+Separate bug fixes from feature improvements.  The bug fix may
+    be an easy candidate for approval and should not need to wait
+    for new features to be approved.  Also, combining the two makes
+    reviewing harder since then there is no clear line between the
+    fix and the feature.
 </p>
 </li>
 <li>
 <p>
-<a href="http://www.kernel.org/pub/software/scm/git/docs/git-daemon.html">git-daemon</a>
+Separate supporting refactoring from feature changes.  If your
+    new feature requires some refactoring, it helps to make the
+    refactoring a separate change which your feature change
+    depends on.  This way, reviewers can easily review the refactor
+    change as a something that should not alter the current
+    functionality, and feel more confident they can more easily
+    spot errors this way.  Of course, it also makes it easier to
+    test and locate later on if an unfortunate error does slip in.
+    Lastly, by not having to see refactoring changes at the same
+    time, it helps reviewers understand how your feature changes
+    the current functionality.
+</p>
+</li>
+<li>
+<p>
+Separate logical features into separate changes.  This
+    is often the hardest part.  Here is an example:  when adding a
+    new ability, make separate changes for the UI and the ssh
+    commands if possible.
+</p>
+</li>
+<li>
+<p>
+Do only what the commit message describes.  In other words, things which
+    are not strictly related to the commit message shouldn&#8217;t be part of
+    a change, even trivial things like externalizing a string somewhere
+    or fixing a typo.  This help keep "git blame" more useful in the future
+    and it also makes "git revert" more useful.
+</p>
+</li>
+<li>
+<p>
+Use topic branches to link your separate changes together.
 </p>
 </li>
 </ul></div>
@@ -805,7 +977,7 @@ for details on how to configure this if anonymous access is desired.</p></div>
 <div id="footer">
 <div id="footer-text">
 Version 2.2.2-340-g287db97<br />
-Last updated 2012-02-14 10:00:58 MDT
+Last updated 2012-02-14 10:28:00 MDT
 </div>
 </div>
 </body>
