@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.5.2" />
-<title>Release notes for Gerrit 2.0.12</title>
+<title>Release notes for Gerrit 2.2.2.1</title>
 <style type="text/css">
 /* Debug borders */
 p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 {
@@ -551,8 +551,8 @@ footnotes: function () {
 </head>
 <body>
 <div id="header">
-<h1>Release notes for Gerrit 2.0.12</h1>
-<span id="revnumber">version 2.0.12 (from v2.1.1.1-104-gc20e283)</span>
+<h1>Release notes for Gerrit 2.2.2.1</h1>
+<span id="revnumber">version 2.2.2.1</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -561,416 +561,69 @@ footnotes: function () {
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<div class="paragraph"><p>Gerrit 2.0.12 is now available in the usual location:</p></div>
-<div class="paragraph"><p><a href="http://code.google.com/p/gerrit/downloads/list">http://code.google.com/p/gerrit/downloads/list</a></p></div>
-<div class="paragraph"><p><strong>WARNING: This version contains a schema change.</strong></p></div>
-<div class="paragraph"><p>Apply the schema upgrade:</p></div>
-<div class="listingblock">
-<div class="content">
-<pre><tt>  java -jar gerrit.war --cat sql/upgrade010_011.sql | psql reviewdb</tt></pre>
-</div></div>
+<div class="paragraph"><p>Gerrit 2.2.2.1 is now available:</p></div>
+<div class="paragraph"><p><a href="http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.2.2.1.war">http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.2.2.1.war</a></p></div>
+<div class="paragraph"><p>There are no schema changes from 2.2.2.  However, if upgrading from
+anything but 2.2.2, follow the upgrade procedure in the 2.2.2
+<a href="ReleaseNotes-2.2.2.html">ReleaseNotes</a>.</p></div>
 </div>
-</div>
-<h2 id="_important_notes">Important Notes</h2>
-<div class="sectionbody">
-<h3 id="_java_6_required">Java 6 Required</h3><div style="clear:left"></div>
-<div class="paragraph"><p>Gerrit now requires running within a Java 6 (or later) JVM.</p></div>
-<h3 id="_protocol_change">Protocol change</h3><div style="clear:left"></div>
-<div class="paragraph"><p>The protocol between the browser based JavaScript and the server has changed.  After installing 2.0.12 users need to load the site page again to ensure they are running 2.0.12 or later.  Users can verify they have the new version by checking the version number in the footer in the lower right.  Users who don&#8217;t load the new version (e.g. are using a stale tab from a week ago) will see errors when trying to view patches.</p></div>
-</div>
-<h2 id="_new_features">New Features</h2>
-<div class="sectionbody">
-<div class="ulist"><ul>
-<li>
-<p>
-Honor --reviewer=not.preferred.email during upload
-</p>
-</li>
-<li>
-<p>
-Also scan by preferred email for --reviewers and --cc &#8230;
-</p>
-<div class="paragraph"><p>Better DWIMery for matching reviewers by name, email address, or just local name (e.g. "jdoe") if using HTTP authentication with email_format.</p></div>
-</li>
-<li>
-<p>
-Add support for MySQL database
-</p>
-<div class="paragraph"><p>Now MySQL can be used as a backend data store.</p></div>
-</li>
-<li>
-<p>
-Switch all current SSH commands to use args4j
-</p>
-</li>
-<li>
-<p>
-Allow targeted cache flushes to only specific caches
-</p>
-<div class="paragraph"><p>SSH commands, especially administrative ones like "gerrit show-caches", "gerrit flush-caches", or "gerrit show-connections" now accept options like "-h"/"--help" to view command line options, and use a more typical option parsing semantics.</p></div>
-</li>
-<li>
-<p>
-GERRIT-164  Bind our SSH daemon with SO_REUSEADDR
-</p>
-</li>
-<li>
-<p>
-Honor sshd.tcpKeepAlive for TCP keep alive controls
-</p>
-</li>
-<li>
-<p>
-Enable SSH daemon cipher and MAC configuration
-</p>
-<div class="paragraph"><p>The SSH daemon now binds with SO_REUSEADDR, making warm-restarts of the daemon easier, especially if the site is busy.  Additionally, gerrit.config gained some new options to further control the behavior of the internal SSHD.</p></div>
-</li>
-<li>
-<p>
-Add admin command <em>gerrit show-connections</em>
-</p>
-<div class="paragraph"><p>The new "gerrit show-connections" command reports who is connected, from what host, and what command(s) they are running on that SSH session.</p></div>
-</li>
-<li>
-<p>
-Replace the top menu bar with a tab panel and links
-</p>
-</li>
-<li>
-<p>
-GERRIT-27   Add a search box to quickly locate changes by change n&#8230;
-</p>
-<div class="paragraph"><p>The top menu bar area has been redesigned, and a search box has been added on the right, below the username and Settings links.  Currently the search box only accepts change numbers, but in the future we hope to support additional types of query strings.</p></div>
-</li>
-<li>
-<p>
-Allow users to disable clippy the flash movie if they &#8230;
-</p>
-<div class="paragraph"><p>A new per-account setting permits users to disable the clippy Flash movie that supports copying text to the clipboard.  In every context where this movie appears clicking on the text converts it to a text box, allowing a fast "click Ctrl-C" interaction to place the text on the clipboard.  Personally I&#8217;ve found that loading 3 Flash movies on a change page really slowed down the UI rendering, so I wanted to disable the Flash movies.</p></div>
-</li>
-<li>
-<p>
-Allow users to control the number of results per page
-</p>
-<div class="paragraph"><p>A new per-account setting allows users to control how many rows appear per page in the All screens, like All Open Changes, etc.</p></div>
-</li>
-<li>
-<p>
-Rewrite the keyboard event handlers to use new GlobalK&#8230;
-</p>
-</li>
-<li>
-<p>
-GERRIT-136  Implement n/p keys to jump to next/previous diff chunk&#8230;
-</p>
-</li>
-<li>
-<p>
-Add keyboard bindings n/p for all change lists to pagi&#8230;
-</p>
-</li>
-<li>
-<p>
-Put the "Use <em>?</em> for keyboard help" ahead of the versi&#8230;
-</p>
-</li>
-<li>
-<p>
-GERRIT-136  Use <em>f</em> in a patch to browse the list of files in the &#8230;
-</p>
-</li>
-<li>
-<p>
-Add global jump navigation keys for the main menu
-</p>
-<div class="paragraph"><p>Keyboard bindings have been completely overhauled in this release, and should now work on every browser.  Press <em>?</em> in any context to see the available actions.  Please note that this help is context sensitive, so you will only see keys that make sense in the current context.  Actions in a user dashboard screen differ from actions in a patch (for example), but where possible the same key is used when the logical meaning is unchanged.</p></div>
-</li>
-</ul></div>
 </div>
 <h2 id="_bug_fixes">Bug Fixes</h2>
 <div class="sectionbody">
 <div class="ulist"><ul>
 <li>
 <p>
-Ignore "SshException: Already closed" errors
+issue 1139 Fix change state in patch set approval if reviewer is added to
+closed change
 </p>
-<div class="paragraph"><p>Hides some non-errors from the log file.</p></div>
+<div class="paragraph"><p>For the dummy patch set approval that is created when a reviewer is
+added the cached change state is always open, which is incorrect if a
+reviewer is added to a closed change. As a result the closed change will
+appear in the reviewers dashboard in the <em>Review Requests</em> section and will
+stay there forever.  Ensure the correct change state is cached in the dummy
+patch set approval when it is created.</p></div>
 </li>
 <li>
 <p>
-GERRIT-86   Stop generating raw #target anchor tags
+issue 1171 Fix ownerin and reviewerin searches
 </p>
-<div class="paragraph"><p>Should be a minor improvement for MSIE 6 users.</p></div>
+<div class="paragraph"><p>Update the ownerin and reviewerin searches to use AccountGroup.UUID as
+required by commit e662fb3d4d7d0ad05791b8d2143ac5ce58117335.</p></div>
+</li>
+<li>
+<p>
+issue 871 Display hash of the cherry-pick merge in comment
+</p>
+<div class="paragraph"><p>After merging a change via cherry-pick, we add the commit&#8217;s
+hash to the comment. This was accidentally removed in
+commit 14246de3c0f81c06bba8d4530e6bf00e918c11b0</p></div>
 </li>
 </ul></div>
 </div>
-<h2 id="_other_changes">Other Changes</h2>
+<h2 id="_documentation">Documentation</h2>
 <div class="sectionbody">
 <div class="ulist"><ul>
 <li>
 <p>
-Start 2.0.12 development
+Update top level SUBMITTING_PATCHES
+</p>
+<div class="paragraph"><p>This document is out of date, the URLs are from last August.
+Direct readers to the new server.</p></div>
+</li>
+<li>
+<p>
+Add contributing guideline document
 </p>
 </li>
 <li>
 <p>
-Report what version we want on a schema version mismat&#8230;
+Documentation: update version references for 2.2.2
 </p>
-</li>
-<li>
-<p>
-Remove unused imports in SshServlet
-</p>
-</li>
-<li>
-<p>
-Fix vararg warnings in GerritSshDaemon
-</p>
-</li>
-<li>
-<p>
-Update Ehcache to 1.6.0-beta5
-</p>
-</li>
-<li>
-<p>
-Update SSHD to 1.0-r773859
-</p>
-</li>
-<li>
-<p>
-Start targeting Java 1.6
-</p>
-</li>
-<li>
-<p>
-Switch Maven GWT plugin to org.codehaus.mojo:gwt-maven&#8230;
-</p>
-</li>
-<li>
-<p>
-GERRIT-75   Upgrade to GWT 1.6.4
-</p>
-</li>
-<li>
-<p>
-GERRIT-75   Switch to GWT 1.6&#8217;s new HostedMode debugging utility
-</p>
-</li>
-<li>
-<p>
-Allow become any account to use GET parameters
-</p>
-</li>
-<li>
-<p>
-Switch to gwtexpui&#8217;s new CSS linker module
-</p>
-</li>
-<li>
-<p>
-Load the GWT theme before any other stylesheets
-</p>
-</li>
-<li>
-<p>
-Switch from our own LazyTabChild to GWT 1.6&#8217;s LazyPanel
-</p>
-</li>
-<li>
-<p>
-GERRIT-75   Convert all GWT 1.5 listener uses to GWT 1.6 handlers
-</p>
-</li>
-<li>
-<p>
-Stop bundling the PostgreSQL driver
-</p>
-</li>
-<li>
-<p>
-Upgrade JGit to 0.4.0-372-gbd3c3db
-</p>
-</li>
-<li>
-<p>
-Add args4j 2.0.12 as a dependency
-</p>
-</li>
-<li>
-<p>
-Describe MySQL and H2 setup in jetty_gerrit.xml templa&#8230;
-</p>
-</li>
-<li>
-<p>
-Actually deregister a command when it exits
-</p>
-</li>
-<li>
-<p>
-Put the link to the review inside the body instead of &#8230;
-</p>
-</li>
-<li>
-<p>
-Fix change permalinks after breaking them during GWT 1&#8230;
-</p>
-</li>
-<li>
-<p>
-Delete dead CSS bundle code
-</p>
-</li>
-<li>
-<p>
-Always use NpTextBox or NpTextArea to prevent GlobalKe&#8230;
-</p>
-</li>
-<li>
-<p>
-Detect cases where system_config has too many rows
-</p>
-</li>
-<li>
-<p>
-Remove unnecessary warning supressions
-</p>
-</li>
-<li>
-<p>
-Remove dead code, these aren&#8217;t used anymore
-</p>
-</li>
-<li>
-<p>
-Fix warnings about potential serialization problems
-</p>
-</li>
-<li>
-<p>
-Fix warning about debug code in OpenIdServiceImpl
-</p>
-</li>
-<li>
-<p>
-Blur menu item hyperlinks on activation
-</p>
-</li>
-<li>
-<p>
-Fix LinkMenuItem blur on older browsers
-</p>
-</li>
-<li>
-<p>
-Remove dead LoginService, SignInResult classes
-</p>
-</li>
-<li>
-<p>
-Remove pointless GWT.isClient calls in Gerrit module
-</p>
-</li>
-<li>
-<p>
-Refactor how user preferences are applied to the UI
-</p>
-</li>
-<li>
-<p>
-Move the watched project list to its own tab in settin&#8230;
-</p>
-</li>
-<li>
-<p>
-Refactor account preferences model
-</p>
-</li>
-<li>
-<p>
-Sort the RSA host key before the DSA host key
-</p>
-</li>
-<li>
-<p>
-Clarify what the "known hosts entry" is
-</p>
-</li>
-<li>
-<p>
-Cleanup the name of the search focus key registration
-</p>
-</li>
-<li>
-<p>
-Change sign out handler to use GWT&#8217;s HandlerManager su&#8230;
-</p>
-</li>
-<li>
-<p>
-Fix all onLoad, onUnload methods to be protected acces&#8230;
-</p>
-</li>
-<li>
-<p>
-Honor GWT 1.6&#8217;s handleAsClick logic in DirectScreenLink
-</p>
-</li>
-<li>
-<p>
-Switch all hyperlinks to be InlineHyperlink
-</p>
-</li>
-<li>
-<p>
-Fix unused import in PatchScreen
-</p>
-</li>
-<li>
-<p>
-Make n/p only honor comments on file adds/deletes
-</p>
-</li>
-<li>
-<p>
-Switch to gwtjsonrpc&#8217;s new Handler based status update&#8230;
-</p>
-</li>
-<li>
-<p>
-Move the comment editor actions into their own keyboar&#8230;
-</p>
-</li>
-<li>
-<p>
-Ensure the row pointer is visible before moving it
-</p>
-</li>
-<li>
-<p>
-Automatically reposition/resize file browser if window&#8230;
-</p>
-</li>
-<li>
-<p>
-Minor cleanup to Gerrit module bootstrap code path
-</p>
-</li>
-<li>
-<p>
-Make escape in the search box abort the search
-</p>
-</li>
-<li>
-<p>
-Switch to tagged gwtexpui, gwtjsonrpc, gwtorm
-</p>
-</li>
-<li>
-<p>
-gerrit 2.0.12
-</p>
+<div class="paragraph"><p>Correct wording and instructions to be sure they match what would
+be observed with the indicated version of gerrit.
+Expand instructions when needed to ensure all commands could be
+executed and were successful.
+Indent commands and output based on a run of the instructions</p></div>
 </li>
 </ul></div>
 </div>
@@ -978,8 +631,8 @@ gerrit 2.0.12
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.0.12 (from v2.1.1.1-104-gc20e283)<br />
-Last updated 2011-12-19 15:16:01 MDT
+Version 2.2.2.1<br />
+Last updated 2012-02-15 12:31:31 MDT
 </div>
 </div>
 </body>
