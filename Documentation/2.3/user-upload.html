@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>Gerrit Code Review - Uploading Changes</h1>
-<span id="revnumber">version 2.2.2.1</span>
+<span id="revnumber">version 2.3-rc0</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -587,7 +587,8 @@ first be configured by the uploading user.</p></div>
 <div class="sectionbody">
 <div class="paragraph"><p>Each user uploading changes to Gerrit must configure one or more SSH
 public keys.  The per-user SSH key list can be accessed over the web
-within Gerrit by <tt>Settings</tt>, and then accessing the <tt>SSH Keys</tt> tab.</p></div>
+within Gerrit by <tt>Settings</tt>, and then accessing the <tt>SSH Public Keys</tt>
+tab.</p></div>
 <h3 id="configure_ssh">Configuration</h3><div style="clear:left"></div>
 <div class="paragraph"><p>To register a new SSH key for use with Gerrit, paste the contents of
 your <tt>id_rsa.pub</tt> or <tt>id_dsa.pub</tt> file into the text box and click
@@ -730,9 +731,9 @@ Host tr
 <pre><tt>$ git push tr:kernel/common HEAD:refs/for/experimental</tt></pre>
 </div></div>
 </div></div>
-<div class="paragraph"><p>Specific reviewers can be requested and/or additional <tt>`carbon
-copies'' of the notification message may be sent by including these
-as arguments to `git receive-pack</tt>:</p></div>
+<div class="paragraph"><p>Specific reviewers can be requested and/or additional <em>carbon
+copies</em> of the notification message may be sent by including these
+as arguments to <tt>git receive-pack</tt>:</p></div>
 <div class="exampleblock">
 <div class="exampleblock-content">
 <div class="literalblock">
@@ -857,29 +858,36 @@ of Git object can be created.
 </p>
 </li>
 </ul></div>
-<div class="paragraph"><p>To push branches, the <a href="access-control.html#category_push_direct"><em>Push</em></a>
-right must be granted to one (or more) of the user&#8217;s groups.  The
-allowed levels within this category are:</p></div>
+<div class="paragraph"><p>To push branches, the proper access rights must be configured first.
+Here follows a few examples of how to configure this in Gerrit:</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
 Update: Any existing branch can be fast-forwarded to a new commit.
 This is the safest mode as commits cannot be discarded.  Creation
-of new branches is rejected.
+of new branches is rejected. Can be configured with
+<a href="access-control.html#category_push_direct"><em>Push</em></a> access.
 </p>
 </li>
 <li>
 <p>
-Create: Implies Update, but also allows creation of a new branch
-if the name does not not already designate an existing branch name.
+Create: Allows creation of a new branch if the name does not
+already designate an existing branch name.  Needs
+<a href="access-control.html#category_create"><em>Create Reference</em></a>
+configured. Please note that once created, this permission doesn&#8217;t
+grant the right to update the branch with further commits (see above
+for update details).
 </p>
 </li>
 <li>
 <p>
-Delete: Implies Create and Update, but also allows an existing
+Delete: Implies Update, but also allows an existing
 branch to be deleted.  Since a force push is effectively a delete
 followed by a create, but performed atomically on the server and
 logged, this also permits forced push updates to branches.
+To grant this access, configure
+<a href="access-control.html#category_push_direct"><em>Push</em></a> with the
+<em>Force</em> option ticked.
 </p>
 </li>
 </ul></div>
@@ -959,8 +967,8 @@ supplied under at least one valid agreement.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.2.1<br />
-Last updated 2012-02-15 12:31:31 MDT
+Version 2.3-rc0<br />
+Last updated 2012-02-22 11:40:36 MDT
 </div>
 </div>
 </body>

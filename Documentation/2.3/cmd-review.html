@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>gerrit review</h1>
-<span id="revnumber">version 2.2.2.1</span>
+<span id="revnumber">version 2.3-rc0</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -569,8 +569,11 @@ footnotes: function () {
 <div class="verseblock-content"><em>ssh</em> -p &lt;port&gt; &lt;host&gt; <em>gerrit review</em>
   [--project &lt;PROJECT&gt;]
   [--message &lt;MESSAGE&gt;]
+  [--force-message]
   [--submit]
   [--abandon | --restore]
+  [--publish]
+  [--delete]
   [--verified &lt;N&gt;] [--code-review &lt;N&gt;]
   {COMMIT | CHANGEID,PATCHSET}&#8230;</div>
 <div class="verseblock-attribution">
@@ -620,6 +623,22 @@ is strongly encouraged.</p></div>
 </p>
 </dd>
 <dt class="hdlist1">
+--force-message
+</dt>
+<dd>
+<p>
+        Option which allows Gerrit to publish the --message, even
+        when the labels could not be applied due to change being
+        closed).
+</p>
+<div class="paragraph"><p>Used by some scripts/CI-systems, where the results (or links
+to the result) are posted as a message after completion of a
+build (often together with a label-change, indicating the success
+of the build).</p></div>
+<div class="paragraph"><p>If the message is posted successfully, the cmd will return
+successfully, even if the label could not be changed.</p></div>
+</dd>
+<dt class="hdlist1">
 --help
 </dt>
 <dt class="hdlist1">
@@ -645,7 +664,7 @@ is strongly encouraged.</p></div>
 </dt>
 <dd>
 <p>
-        Restore the specified abandonned patch set(s).
+        Restore the specified abandoned patch set(s).
         (option is mutually exclusive with --abandon)
 </p>
 </dd>
@@ -659,6 +678,24 @@ is strongly encouraged.</p></div>
 <p>
         Submit the specified patch set(s) for merging.
         (option is mutually exclusive with --abandon)
+</p>
+</dd>
+<dt class="hdlist1">
+--publish
+</dt>
+<dd>
+<p>
+        Publish the specified draft patch set(s).
+        (option is mutually exclusive with --submit, --restore, --abandon, and --delete)
+</p>
+</dd>
+<dt class="hdlist1">
+--delete
+</dt>
+<dd>
+<p>
+        Delete the specified draft patch set(s).
+        (option is mutually exclusive with --submit, --restore, --abandon, and --publish)
 </p>
 </dd>
 <dt class="hdlist1">
@@ -749,8 +786,8 @@ submit them for merging:</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.2.1<br />
-Last updated 2012-02-15 12:31:31 MDT
+Version 2.3-rc0<br />
+Last updated 2012-02-22 11:40:35 MDT
 </div>
 </div>
 </body>

@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.5.2" />
-<title>&#8230; has duplicates</title>
+<title>gerrit ls-groups</title>
 <style type="text/css">
 /* Debug borders */
 p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 {
@@ -551,7 +551,7 @@ footnotes: function () {
 </head>
 <body>
 <div id="header">
-<h1>&#8230; has duplicates</h1>
+<h1>gerrit ls-groups</h1>
 <span id="revnumber">version 2.3-rc0</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
@@ -559,22 +559,146 @@ footnotes: function () {
 </div>
 </div>
 <div id="content">
-<div id="preamble">
+<h2 id="_name">NAME</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>With this error message Gerrit rejects to push a commit if its commit
-message contains a Change-ID for which multiple changes can be found
-in the project.</p></div>
-<div class="paragraph"><p>This error means that there is an inconsistency in Gerrit since for
-one project there are multiple changes that have the same Change-ID.
-Every change is expected to have an unique Change-ID.</p></div>
-<div class="paragraph"><p>Since this error should never occur in practice, you should inform
-your Gerrit administrator if you hit this problem and/or
-<a href="http://code.google.com/p/gerrit/issues/list">open a Gerrit issue</a>.</p></div>
-<div class="paragraph"><p>In any case to not be blocked with your work, you can simply create a
-new Change-ID for your commit and then push it as new change to
-Gerrit. How to exchange the Change-ID in the commit message of your
-commit is explained <a href="error-push-fails-due-to-commit-message.html">here</a>.</p></div>
+<div class="paragraph"><p>gerrit ls-groups - List groups visible to caller</p></div>
 </div>
+<h2 id="_synopsis">SYNOPSIS</h2>
+<div class="sectionbody">
+<div class="verseblock">
+<div class="verseblock-content"><em>ssh</em> -p &lt;port&gt; &lt;host&gt; <em>gerrit ls-groups</em>
+  [--project &lt;NAME&gt;]
+  [--user &lt;NAME&gt;]
+  [--visible-to-all]
+  [--type {internal | ldap | system}]</div>
+<div class="verseblock-attribution">
+</div></div>
+</div>
+<h2 id="_description">DESCRIPTION</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Displays the list of group names, one per line, that are visible to
+the account of the calling user.</p></div>
+<div class="paragraph"><p>If the caller is a member of the privileged <em>Administrators</em> group,
+all groups are listed.</p></div>
+</div>
+<h2 id="_access">ACCESS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Any user who has configured an SSH key.</p></div>
+</div>
+<h2 id="_scripting">SCRIPTING</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>This command is intended to be used in scripts.</p></div>
+</div>
+<h2 id="_options">OPTIONS</h2>
+<div class="sectionbody">
+<div class="dlist"><dl>
+<dt class="hdlist1">
+--project
+</dt>
+<dt class="hdlist1">
+-p
+</dt>
+<dd>
+<p>
+        Name of the project for which the groups should be listed. Only
+        groups are listed for which any permission is set on this project
+        (or for which a permission is inherited from a parent project).
+        Multiple --project options may be specified to specify additional
+        projects. In this case all groups are listed that have a
+        permission for any of the specified projects.
+</p>
+<div class="paragraph"><p>This option can&#8217;t be used together with the <em>--user</em> option.</p></div>
+</dd>
+<dt class="hdlist1">
+--user
+</dt>
+<dt class="hdlist1">
+-u
+</dt>
+<dd>
+<p>
+        User for which the groups should be listed. Only groups are
+        listed that contain this user as a member.
+</p>
+<div class="paragraph"><p>The calling user can list the groups for the own user or must be a
+member of the privileged <em>Administrators</em> group to list the groups
+for other users.</p></div>
+<div class="paragraph"><p>This option can&#8217;t be used together with the <em>--project</em> option.</p></div>
+</dd>
+<dt class="hdlist1">
+--visible-to-all
+</dt>
+<dd>
+<p>
+        Displays only groups that are visible to all registered users
+        (groups that are explicitly marked as visible to all registered
+        users).
+</p>
+</dd>
+<dt class="hdlist1">
+--type
+</dt>
+<dd>
+<p>
+        Display only groups of the specified type. If not specified,
+        groups of all types are displayed. Supported types:
+</p>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<tt>internal</tt>
+</dt>
+<dd>
+<p>
+Any group defined within Gerrit.
+</p>
+</dd>
+<dt class="hdlist1">
+<tt>ldap</tt>
+</dt>
+<dd>
+<p>
+Any group defined by an external LDAP database.
+</p>
+</dd>
+<dt class="hdlist1">
+<tt>system</tt>
+</dt>
+<dd>
+<p>
+Any system defined and managed group.
+</p>
+</dd>
+</dl></div>
+</dd>
+</dl></div>
+</div>
+<h2 id="_examples">EXAMPLES</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>List visible groups:</p></div>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>$ ssh -p 29418 review.example.com gerrit ls-groups
+Administrators
+Anonymous Users
+MyProject_Committers
+Project Owners
+Registered Users</tt></pre>
+</div></div>
+</div></div>
+<div class="paragraph"><p>List all groups for which any permission is set for the project
+"MyProject":</p></div>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>$ ssh -p 29418 review.example.com gerrit ls-groups --project MyProject
+MyProject_Committers
+Project Owners
+Registered Users</tt></pre>
+</div></div>
+</div></div>
 </div>
 <hr style="
   height: 2px;
@@ -582,13 +706,13 @@ commit is explained <a href="error-push-fails-due-to-commit-message.html">here</
   margin-top: 1.2em;
   margin-bottom: 0.5em;
 ">
-<div class="paragraph"><p>Part of <a href="error-messages.html">Gerrit Error Messages</a></p></div>
+<div class="paragraph"><p>Part of <a href="index.html">Gerrit Code Review</a></p></div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
 Version 2.3-rc0<br />
-Last updated 2011-12-19 15:16:03 MDT
+Last updated 2012-02-22 11:40:35 MDT
 </div>
 </div>
 </body>

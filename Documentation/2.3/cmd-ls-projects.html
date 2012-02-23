@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>gerrit ls-projects</h1>
-<span id="revnumber">version 2.2.2.1</span>
+<span id="revnumber">version 2.3-rc0</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -609,6 +609,20 @@ group, all projects are listed.</p></div>
 </p>
 </dd>
 <dt class="hdlist1">
+--description
+</dt>
+<dt class="hdlist1">
+--d
+</dt>
+<dd>
+<p>
+        Allows listing of projects together with their respective
+        description.
+</p>
+<div class="paragraph"><p>Line-feeds are escaped to allow ls-project to keep the
+"one project per line"-style.</p></div>
+</dd>
+<dt class="hdlist1">
 --tree
 </dt>
 <dt class="hdlist1">
@@ -627,6 +641,19 @@ group, all projects are listed.</p></div>
 <p>
         Display only projects of the specified type.  If not
         specified, defaults to <tt>code</tt>. Supported types:
+</p>
+</dd>
+<dt class="hdlist1">
+--all
+</dt>
+<dd>
+<p>
+        Display all projects that are accessible by the calling user
+        account. Besides the projects that the calling user account has
+        been granted <em>READ</em> access to, this includes all projects that
+        are owned by the calling user account (even if for these projects
+        the <em>READ</em> access right is not assigned to the calling user
+        account).
 </p>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -703,8 +730,8 @@ done</tt></pre>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.2.1<br />
-Last updated 2012-02-15 12:31:31 MDT
+Version 2.3-rc0<br />
+Last updated 2012-02-22 11:40:35 MDT
 </div>
 </div>
 </body>

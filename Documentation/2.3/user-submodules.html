@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.5.2" />
-<title>&#8230; has duplicates</title>
+<title>Gerrit Code Review - Superprojects subscribed to submodules updates</title>
 <style type="text/css">
 /* Debug borders */
 p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 {
@@ -551,7 +551,7 @@ footnotes: function () {
 </head>
 <body>
 <div id="header">
-<h1>&#8230; has duplicates</h1>
+<h1>Gerrit Code Review - Superprojects subscribed to submodules updates</h1>
 <span id="revnumber">version 2.3-rc0</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
@@ -559,22 +559,117 @@ footnotes: function () {
 </div>
 </div>
 <div id="content">
-<div id="preamble">
+<h2 id="_description">Description</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>With this error message Gerrit rejects to push a commit if its commit
-message contains a Change-ID for which multiple changes can be found
-in the project.</p></div>
-<div class="paragraph"><p>This error means that there is an inconsistency in Gerrit since for
-one project there are multiple changes that have the same Change-ID.
-Every change is expected to have an unique Change-ID.</p></div>
-<div class="paragraph"><p>Since this error should never occur in practice, you should inform
-your Gerrit administrator if you hit this problem and/or
-<a href="http://code.google.com/p/gerrit/issues/list">open a Gerrit issue</a>.</p></div>
-<div class="paragraph"><p>In any case to not be blocked with your work, you can simply create a
-new Change-ID for your commit and then push it as new change to
-Gerrit. How to exchange the Change-ID in the commit message of your
-commit is explained <a href="error-push-fails-due-to-commit-message.html">here</a>.</p></div>
+<div class="paragraph"><p>Gerrit supports a custom git superproject feature for tracking submodules.
+This feature is useful for automatic updates on superprojects whenever
+a change is merged on tracked submodules. To take advantage of this
+feature, one should add submodule(s) to a local working copy of a
+superproject, edit the created .gitmodules configuration file to
+have a branch field on each submodule section with the value of the
+submodule branch it is subscribing to, commit the changes, push and
+merge the commit.</p></div>
+<div class="paragraph"><p>When a commit is merged to a project, the commit content is scanned
+to identify if it registers git submodules (if the commit registers
+any gitlinks and .gitmodules file with required info) and if so,
+a new submodule subscription is registered.</p></div>
+<div class="paragraph"><p>When a new commit of a registered submodule is merged, gerrit
+automatically updates the subscribers to the submodule with a new
+commit having the updated gitlinks.</p></div>
 </div>
+<h2 id="_git_submodules_overview">Git Submodules Overview</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>It is a git feature that allows an external repository to be
+attached inside a repository at a specific path. The objective here
+is to provide a brief overview, further details can be found
+in the official git submodule command documentation.</p></div>
+<div class="paragraph"><p>Imagine a repository called <em>super</em> and another one called <em>a</em>.
+Also consider <em>a</em> available in a running gerrit instance on "server".
+With this feature, one could attach <em>a</em> inside of <em>super</em> repository
+at path <em>a</em> by executing the following command when being inside
+<em>super</em>:</p></div>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="paragraph"><p>git submodule add ssh://server/a a</p></div>
+</div></div>
+<div class="paragraph"><p>Still considering the above example, after its execution notice that
+inside the local repository <em>super</em> the <em>a</em> folder is considered a
+gitlink to the external repository <em>a</em>. Also notice a file called
+.gitmodules is created (it is a config file containing the
+subscription of <em>a</em>). To provide the sha-1 each gitlink points to in
+the external repository, one should use the command:</p></div>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="paragraph"><p>git submodule status</p></div>
+</div></div>
+<div class="paragraph"><p>In the example provided, if <em>a</em> is updated and <em>super</em> is supposed
+to see the latest sha-1 (considering here <em>a</em> has only the master
+branch), one should then commit the modified gitlink for <em>a</em> in
+the <em>super</em> project. Actually it would not even need to be an
+external update, one could move to <em>a</em> folder (insider <em>super</em>),
+modify its content, commit, then move back to <em>super</em> and
+commit the modified gitlink for <em>a</em>.</p></div>
+</div>
+<h2 id="_creating_a_new_subscription">Creating a New Subscription</h2>
+<div class="sectionbody">
+<h3 id="_defining_the_submodule_branch">Defining the Submodule Branch</h3><div style="clear:left"></div>
+<div class="paragraph"><p>This is required because Submodule subscription is actually the
+subscription of a submodule project and one of its branches for
+a branch of a super project.</p></div>
+<div class="paragraph"><p>Since it manages subscriptions in the branch scope, we could have
+a scenario having a project called <em>super</em> having a branch <em>integration</em>
+subscribed to a project called <em>a</em> in branch <em>integration</em>, and also
+having the same <em>super</em> project but in branch <em>dev</em> subscribed to the <em>a</em>
+project in a branch called <em>local-dev</em>.</p></div>
+<div class="paragraph"><p>After adding the git submodule to a super project, one should edit
+the .gitmodules file to add a branch field to each submodule
+section which is supposed to be subscribed.</p></div>
+<div class="paragraph"><p>The branch field is not filled by the git submodule command. Its value
+should indicate the branch of a submodule project that when updated
+will trigger automatic update of its registered gitlink.</p></div>
+<div class="paragraph"><p>The branch value could be <em>.</em> if the submodule project branch
+has the same name as the destination branch of the commit having
+gitlinks/.gitmodules file.</p></div>
+<div class="paragraph"><p>The branch field of a submodule section is a custom git submodule
+feature for gerrit use. One should always be sure to fill it in
+editing .gitmodules file after adding submodules to a super project,
+if it is the intention to make use of the gerrit feature introduced here.</p></div>
+<div class="paragraph"><p>Any git submodules which are added and not have the branch field
+available in the .gitmodules file will not be subscribed by gerrit
+to automatically update the superproject.</p></div>
+<h3 id="_detecting_and_subscribing_submodules">Detecting and Subscribing Submodules</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Whenever a commit is merged to a project, its content is scanned
+to identify if it registers any submodules (if the commit contains new
+gitlinks and a .gitmodules file with all required info) and if so,
+a new submodule subscription is registered.</p></div>
+</div>
+<h2 id="_automatic_update_of_superprojects">Automatic Update of Superprojects</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>After a superproject is subscribed to a submodule, it is not
+required to push/merge commits to this superproject to update the
+gitlink to the submodule.</p></div>
+<div class="paragraph"><p>Whenever a commit is merged in a submodule, its subscribed superproject
+is updated.</p></div>
+<div class="paragraph"><p>Imagine a superproject called <em>super</em> having a branch called <em>dev</em>
+having subscribed to a submodule <em>a</em> on a branch <em>dev-of-a</em>. When a commit
+is merged in branch <em>dev-of-a</em> of <em>a</em> project, gerrit automatically
+creates a new commit on branch <em>dev</em> of <em>super</em> updating the gitlink
+to point to the just merged commit.</p></div>
+<h3 id="_canonical_web_url">Canonical Web Url</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Gerrit will automatically update only the superprojects that added
+the submodules of urls of the running server (the one described in
+the canonical web url value in gerrit configuration file).</p></div>
+<div class="paragraph"><p>The Gerrit instance administrator group should always certify to
+provide the canonical web url value in its configuration file. Users
+should certify to use the url value of the running gerrit instance to
+add/subscribe submodules.</p></div>
+</div>
+<h2 id="_removing_subscriptions">Removing Subscriptions</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>If one has added a submodule subscription and drops it, it is
+required to merge a commit updating the subscribed super
+project/branch to remove the gitlink and the submodule section
+of the .gitmodules file.</p></div>
 </div>
 <hr style="
   height: 2px;
@@ -582,13 +677,13 @@ commit is explained <a href="error-push-fails-due-to-commit-message.html">here</
   margin-top: 1.2em;
   margin-bottom: 0.5em;
 ">
-<div class="paragraph"><p>Part of <a href="error-messages.html">Gerrit Error Messages</a></p></div>
+<div class="paragraph"><p>Part of <a href="index.html">Gerrit Code Review</a></p></div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
 Version 2.3-rc0<br />
-Last updated 2011-12-19 15:16:03 MDT
+Last updated 2012-02-22 11:40:36 MDT
 </div>
 </div>
 </body>
