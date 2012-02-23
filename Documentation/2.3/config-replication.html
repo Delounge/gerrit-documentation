@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>Gerrit Code Review - Git Replication</h1>
-<span id="revnumber">version 2.2.2.1</span>
+<span id="revnumber">version 2.3-rc0</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -572,7 +572,10 @@ when a user uploads multiple changes at once.</p></div>
 public/private key pair.  On a trusted network it is also possible to
 use replication over the insecure (but much faster) git:// protocol,
 by enabling the <tt>receive-pack</tt> service on the receiving system, but
-this configuration is not recommended.</p></div>
+this configuration is not recommended.  It is also possible to
+specify a local path as replication target. This makes e.g. sense if
+a network share is mounted to which the repositories should be
+replicated.</p></div>
 </div>
 </div>
 <h2 id="_enabling_replication">Enabling Replication</h2>
@@ -588,8 +591,8 @@ with the command line:</p></div>
 <pre><tt>sudo su -c 'ssh mirror1.us.some.org echo' gerrit2</tt></pre>
 </div></div>
 </div></div>
-<div class="paragraph"><p>Next, create <tt>'$site_path'/replication.config</tt> as a Git-style config
-file, and restart Gerrit.</p></div>
+<div class="paragraph"><p>Next, create <tt>'$site_path'/etc/replication.config</tt> as a Git-style
+config file, and restart Gerrit.</p></div>
 <div class="paragraph"><p>Example <tt>replication.config</tt> to replicate in parallel to four
 different hosts:</p></div>
 <div class="exampleblock">
@@ -617,8 +620,9 @@ different hosts:</p></div>
 </div>
 <h2 id="_a_id_replication_config_a_file_tt_replication_config_tt"><a id="replication_config"></a>File <tt>replication.config</tt></h2>
 <div class="sectionbody">
-<div class="paragraph"><p>The optional file <tt>'$site_path'/replication.config</tt> is a Git-style
-config file that controls the replication settings for Gerrit.</p></div>
+<div class="paragraph"><p>The optional file <tt>'$site_path'/etc/replication.config</tt> is a
+Git-style config file that controls the replication settings for
+Gerrit.</p></div>
 <div class="paragraph"><p>The file is composed of one or more <tt>remote</tt> sections, each remote
 section provides common configuration settings for one or more
 destination URLs.</p></div>
@@ -867,8 +871,8 @@ connect to that destination, and replication to that URL will fail.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.2.1<br />
-Last updated 2012-02-15 12:31:31 MDT
+Version 2.3-rc0<br />
+Last updated 2012-02-22 11:40:36 MDT
 </div>
 </div>
 </body>

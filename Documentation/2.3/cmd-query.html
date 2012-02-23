@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>gerrit query</h1>
-<span id="revnumber">version 2.2.2.1</span>
+<span id="revnumber">version 2.3-rc0</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -570,7 +570,9 @@ footnotes: function () {
   [--format {TEXT | JSON}]
   [--current-patch-set]
   [--patch-sets | --all-approvals]
+  [--files]
   [--comments]
+  [--commit-message]
   [--]
   &lt;query&gt;
   [limit:&lt;n&gt;]
@@ -638,6 +640,17 @@ multiple levels of quoting required.</p></div>
 </p>
 </dd>
 <dt class="hdlist1">
+--files
+</dt>
+<dd>
+<p>
+        Support for listing files with patch sets and their
+        attributes (ADDED, MODIFIED, DELETED, RENAMED, COPIED).
+        Note that this option requires either the --current-patch-set
+        or the --patch-sets option in order to give any file information.
+</p>
+</dd>
+<dt class="hdlist1">
 --comments
 </dt>
 <dd>
@@ -645,6 +658,14 @@ multiple levels of quoting required.</p></div>
         Include comments for all changes. If combined with the
         --patch-sets flag then all in-line comments are included for
         each patch set.
+</p>
+</dd>
+<dt class="hdlist1">
+--commit-message
+</dt>
+<dd>
+<p>
+        Include the full commit message in the change description.
 </p>
 </dd>
 <dt class="hdlist1">
@@ -745,8 +766,8 @@ of this JSON stream should deal with that appropriately.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.2.1<br />
-Last updated 2012-02-15 12:31:31 MDT
+Version 2.3-rc0<br />
+Last updated 2012-02-22 11:40:35 MDT
 </div>
 </div>
 </body>

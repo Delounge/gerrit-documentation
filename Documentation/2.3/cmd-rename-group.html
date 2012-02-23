@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.5.2" />
-<title>&#8230; has duplicates</title>
+<title>gerrit rename-group</title>
 <style type="text/css">
 /* Debug borders */
 p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 {
@@ -551,7 +551,7 @@ footnotes: function () {
 </head>
 <body>
 <div id="header">
-<h1>&#8230; has duplicates</h1>
+<h1>gerrit rename-group</h1>
 <span id="revnumber">version 2.3-rc0</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
@@ -559,22 +559,63 @@ footnotes: function () {
 </div>
 </div>
 <div id="content">
-<div id="preamble">
+<h2 id="_name">NAME</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>With this error message Gerrit rejects to push a commit if its commit
-message contains a Change-ID for which multiple changes can be found
-in the project.</p></div>
-<div class="paragraph"><p>This error means that there is an inconsistency in Gerrit since for
-one project there are multiple changes that have the same Change-ID.
-Every change is expected to have an unique Change-ID.</p></div>
-<div class="paragraph"><p>Since this error should never occur in practice, you should inform
-your Gerrit administrator if you hit this problem and/or
-<a href="http://code.google.com/p/gerrit/issues/list">open a Gerrit issue</a>.</p></div>
-<div class="paragraph"><p>In any case to not be blocked with your work, you can simply create a
-new Change-ID for your commit and then push it as new change to
-Gerrit. How to exchange the Change-ID in the commit message of your
-commit is explained <a href="error-push-fails-due-to-commit-message.html">here</a>.</p></div>
+<div class="paragraph"><p>gerrit rename-group - Rename an account group.</p></div>
 </div>
+<h2 id="_synopsis">SYNOPSIS</h2>
+<div class="sectionbody">
+<div class="verseblock">
+<div class="verseblock-content"><em>ssh</em> -p &lt;port&gt; &lt;host&gt; <em>gerrit rename-group</em>
+  &lt;GROUP&gt;
+  &lt;NEWNAME&gt;</div>
+<div class="verseblock-attribution">
+</div></div>
+</div>
+<h2 id="_description">DESCRIPTION</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Renames an account group.</p></div>
+</div>
+<h2 id="_access">ACCESS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Caller must be a member of the group owning the group to be renamed
+or be a member of the privileged <em>Administrators</em> group.</p></div>
+</div>
+<h2 id="_scripting">SCRIPTING</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>This command is intended to be used in scripts.</p></div>
+</div>
+<h2 id="_options">OPTIONS</h2>
+<div class="sectionbody">
+<div class="dlist"><dl>
+<dt class="hdlist1">
+&lt;GROUP&gt;
+</dt>
+<dd>
+<p>
+        Required; name of the group to be renamed.
+</p>
+</dd>
+<dt class="hdlist1">
+&lt;NEWNAME&gt;
+</dt>
+<dd>
+<p>
+        Required; new name of the group.
+</p>
+</dd>
+</dl></div>
+</div>
+<h2 id="_examples">EXAMPLES</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Rename the group "MyGroup" to "MyCommitters".</p></div>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>$ ssh -p 29418 user@review.example.com gerrit rename-group MyGroup MyCommitters</tt></pre>
+</div></div>
+</div></div>
 </div>
 <hr style="
   height: 2px;
@@ -582,13 +623,13 @@ commit is explained <a href="error-push-fails-due-to-commit-message.html">here</
   margin-top: 1.2em;
   margin-bottom: 0.5em;
 ">
-<div class="paragraph"><p>Part of <a href="error-messages.html">Gerrit Error Messages</a></p></div>
+<div class="paragraph"><p>Part of <a href="index.html">Gerrit Code Review</a></p></div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
 Version 2.3-rc0<br />
-Last updated 2011-12-19 15:16:03 MDT
+Last updated 2012-02-22 11:40:35 MDT
 </div>
 </div>
 </body>

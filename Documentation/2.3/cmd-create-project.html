@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>gerrit create-project</h1>
-<span id="revnumber">version 2.2.2.1</span>
+<span id="revnumber">version 2.3-rc0</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -569,6 +569,7 @@ footnotes: function () {
 <div class="verseblock-content"><em>ssh</em> -p &lt;port&gt; &lt;host&gt; <em>gerrit create-project</em>
   [--owner &lt;GROUP&gt; &#8230; | -o &lt;GROUP&gt; &#8230;]
   [--parent &lt;NAME&gt; | -p &lt;NAME&gt; ]
+  [--suggest-parents | -S ]
   [--permissions-only]
   [--description &lt;DESC&gt; | -d &lt;DESC&gt;]
   [--submit-type &lt;TYPE&gt; |  -t &lt;TYPE&gt;]
@@ -664,6 +665,20 @@ in gerrit.config.</p></div>
         Name of the parent project to inherit access rights
         through. If not specified, the parent is set to the default
         project <tt>All-Projects</tt>.
+</p>
+</dd>
+<dt class="hdlist1">
+--suggest-parents
+</dt>
+<dt class="hdlist1">
+-S
+</dt>
+<dd>
+<p>
+        Suggest parent candidates. This option cannot be used with
+        other arguments. Print out a list of projects that are
+        already parents to other projects, thus it can help the user
+        find a suitable parent for the new project.
 </p>
 </dd>
 <dt class="hdlist1">
@@ -851,8 +866,8 @@ by hand to establish a new empty repository.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.2.1<br />
-Last updated 2012-02-15 12:31:31 MDT
+Version 2.3-rc0<br />
+Last updated 2012-02-22 11:40:35 MDT
 </div>
 </div>
 </body>

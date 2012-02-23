@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>Gerrit Code Review - Configuration</h1>
-<span id="revnumber">version 2.2.2.1</span>
+<span id="revnumber">version 2.3-rc0</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -634,7 +634,7 @@ provider chosen by the end-user.  For more information see
 <tt>HTTP</tt>
 </p>
 <div class="paragraph"><p>Gerrit relies upon data presented in the HTTP request.  This includes
-HTTP basic authentication, or some types of commerical single-sign-on
+HTTP basic authentication, or some types of commercial single-sign-on
 solutions.  With this setting enabled the authentication must
 take place in the web server or servlet container, and not from
 within Gerrit.</p></div>
@@ -833,7 +833,7 @@ y, year, years (<tt>1 year</tt> is treated as <tt>365 days</tt>)
 </p>
 </li>
 </ul></div>
-<div class="paragraph"><p>Default is 5 days.</p></div>
+<div class="paragraph"><p>Default is 12 hours.</p></div>
 </dd>
 <dt class="hdlist1">
 <a id="auth.httpHeader"></a>auth.httpHeader
@@ -928,6 +928,24 @@ Gerrit to authenticate users. In this case Gerrit will blindly trust
 the container.</p></div>
 <div class="paragraph"><p>This parameter only affects git over http traffic. If set to false
 then Gerrit will do the authentication (using DIGEST authentication).</p></div>
+<div class="paragraph"><p>By default this is set to false.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="auth.userNameToLowerCase"></a>auth.userNameToLowerCase
+</dt>
+<dd>
+<div class="paragraph"><p>If set the username that is received to authenticate a git operation
+is converted to lower case for looking up the user account in Gerrit.</p></div>
+<div class="paragraph"><p>By setting this parameter a case insensitive authentication for the
+git operations can be achieved, if it is ensured that the usernames in
+Gerrit (scheme <tt>username</tt>) are stored in lower case (e.g. if the
+parameter <a href="#ldap.accountSshUserName">ldap.accountSshUserName</a> is
+set to <tt>${sAMAccountName.toLowerCase}</tt>). It is important that for all
+existing accounts this username is already in lower case. It is not
+possible to convert the usernames of the existing accounts to lower
+case because this would break the access to existing per-user
+branches.</p></div>
+<div class="paragraph"><p>This parameter only affects git over http and git over SSH traffic.</p></div>
 <div class="paragraph"><p>By default this is set to false.</p></div>
 </dd>
 </dl></div>
@@ -1306,24 +1324,18 @@ Administrators may force the cache to flush with
 <div class="paragraph"><p>Default is 5 minutes.</p></div>
 </dd>
 </dl></div>
-<div class="paragraph"><p><a id="changeMerge"></a>Section changeMerge</p></div>
-<div class="listingblock">
-<div class="content">
-<pre><tt>Controls whether or not the mergeability test of changes is
+<h3 id="_a_id_changemerge_a_section_changemerge"><a id="changeMerge"></a>Section changeMerge</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Controls whether or not the mergeability test of changes is
 enabled.  If enabled, when the change page is loaded, the test is
 triggered. The submit button will be enabled or disabled according to
-the result.
-
-----
-[changeMerge]
-  test = true
-----
-
-+
-By default this is false (test is not enabled).
-
-[[commentlink]]Section commentlink</tt></pre>
+the result.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>[changeMerge]
+  test = true</tt></pre>
 </div></div>
+<div class="paragraph"><p>By default this is false (test is not enabled).</p></div>
+<h3 id="_a_id_commentlink_a_section_commentlink"><a id="commentlink"></a>Section commentlink</h3><div style="clear:left"></div>
 <div class="paragraph"><p>Comment links are find/replace strings applied to change descriptions,
 patch comments, and in-line code comments to turn set strings into
 hyperlinks.  One common use is for linking to bug-tracking systems.</p></div>
@@ -1817,6 +1829,17 @@ by the system administrator, and might not even be running on the
 same host as Gerrit.</p></div>
 </dd>
 <dt class="hdlist1">
+<a id="gerrit.gitHttpUrl"></a>gerrit.gitHttpUrl
+</dt>
+<dd>
+<div class="paragraph"><p>Optional base URL for repositories available over the HTTP
+protocol.  For example, set this to <tt>http://mirror.example.com/base/</tt>
+to have Gerrit display URLs from this server, rather than itself.</p></div>
+<div class="paragraph"><p>By default unset, as the HTTP daemon must be configured externally
+by the system administrator, and might not even be running on the
+same host as Gerrit.</p></div>
+</dd>
+<dt class="hdlist1">
 <a id="gerrit.replicateOnStartup"></a>gerrit.replicateOnStartup
 </dt>
 <dd>
@@ -1854,8 +1877,9 @@ For example, "?p=$project.git;h=$commit".</p></div>
 </dt>
 <dd>
 <div class="paragraph"><p>Optional type of affiliated gitweb service. This allows using
-alternatives to gitweb, such as cgit.</p></div>
-<div class="paragraph"><p>Valid values are <tt>gitweb</tt>, <tt>cgit</tt> or <tt>custom</tt>.</p></div>
+alternatives to gitweb, such as cgit. If set to disabled there
+is no gitweb hyperlinking support.</p></div>
+<div class="paragraph"><p>Valid values are <tt>gitweb</tt>, <tt>cgit</tt>, <tt>disabled</tt> or <tt>custom</tt>.</p></div>
 </dd>
 <dt class="hdlist1">
 <a id="gitweb.type"></a>gitweb.revision
@@ -1882,6 +1906,30 @@ at a specific project when <tt>custom</tt> is used above.</p></div>
 at a specific branch when <tt>custom</tt> is used above.</p></div>
 <div class="paragraph"><p>Valid replacements are <tt>${project}</tt> for the project name in Gerrit
 and <tt>${branch}</tt> for the name of the branch.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="gitweb.linkname"></a>gitweb.linkname
+</dt>
+<dd>
+<div class="paragraph"><p>Optional setting for modifying the link name presented to the user
+in the Gerrit web-UI.</p></div>
+<div class="paragraph"><p>Default linkname for custom type is "gitweb".</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="gitweb.pathSeparator"></a>gitweb.pathSeparator
+</dt>
+<dd>
+<div class="paragraph"><p>Optional character to substitute the standard path separator (slash) in
+project names and branch names.</p></div>
+<div class="paragraph"><p>By default, Gerrit will use hexadecimal encoding for slashes in project and
+branch names. Some web servers, such as Tomcat, reject this hexadecimal
+encoding in the URL.</p></div>
+<div class="paragraph"><p>Some alternative gitweb services, such as <a href="http://gitblit.com">Gitblit</a>,
+allow using an alternative path separator character. In Gitblit, this can be
+configured through the property <a href="http://gitblit.com/properties.html">web.forwardSlashCharacter</a>.
+In Gerrit, the alternative path separator can be configured correspondingly
+using the property <em>gitweb.pathSeparator</em>.</p></div>
+<div class="paragraph"><p>Valid values are the characters <em>*</em>, <em>(</em> and <em>)</em>.</p></div>
 </dd>
 </dl></div>
 <h3 id="_a_id_hooks_a_section_hooks"><a id="hooks"></a>Section hooks</h3><div style="clear:left"></div>
@@ -2226,6 +2274,17 @@ referrals.</p></div>
 <div class="paragraph"><p>By default, <tt>ignore</tt>.</p></div>
 </dd>
 <dt class="hdlist1">
+<a id="ldap.readTimeout"></a>ldap.readTimeout
+</dt>
+<dd>
+<div class="paragraph"><p><em>(Optional)</em> The read timeout for an LDAP operation. The value is
+in the usual time-unit format like "1 s", "100 ms", etc&#8230;
+A timeout can be used to avoid blocking all of the SSH command start
+threads in case when the LDAP server becomes slow.</p></div>
+<div class="paragraph"><p>By default there is no timeout and Gerrit will wait for the LDAP
+server to respond until the TCP connection times out.</p></div>
+</dd>
+<dt class="hdlist1">
 <a id="ldap.accountBase"></a>ldap.accountBase
 </dt>
 <dd>
@@ -2399,6 +2458,25 @@ Attributes such as <tt>${dn}</tt> or <tt>${uidNumber}</tt> may be useful.</p></d
 <div class="paragraph"><p>Default is <tt>(memberUid=${username})</tt> for RFC 2307,
 and unset (disabled) for Active Directory.</p></div>
 </dd>
+<dt class="hdlist1">
+<a id="ldap.localUsernameToLowerCase"></a>ldap.localUsernameToLowerCase
+</dt>
+<dd>
+<div class="paragraph"><p>Converts the local username, that is used to login into the Gerrit
+WebUI, to lower case before doing the LDAP authentication. By setting
+this parameter to true, a case insensitive login to the Gerrit WebUI
+can be achieved.</p></div>
+<div class="paragraph"><p>If set, it must be ensured that the local usernames for all existing
+accounts are converted to lower case, otherwise a user that has a
+local username that contains upper case characters cannot login
+anymore. The local usernames for the existing accounts can be
+converted to lower case by running the server program
+<a href="pgm-LocalUsernamesToLowerCase.html">LocalUsernamesToLowerCase</a>.
+Please be aware that the conversion of the local usernames to lower
+case can&#8217;t be undone. For newly created accounts the local username
+will be directly stored in lower case.</p></div>
+<div class="paragraph"><p>By default, unset/false.</p></div>
+</dd>
 </dl></div>
 <h3 id="_a_id_mimetype_a_section_mimetype"><a id="mimetype"></a>Section mimetype</h3><div style="clear:left"></div>
 <div class="dlist"><dl>
@@ -2456,14 +2534,16 @@ auto-detected and one thread per CPU is used, per client request.</p></div>
 </dd>
 </dl></div>
 <h3 id="_a_id_receive_a_section_receive"><a id="receive"></a>Section receive</h3><div style="clear:left"></div>
-<div class="paragraph"><p>Sets the group of users allowed to execute <em>receive-pack</em> on the
-server, <em>receive-pack</em> is what runs on the server during a user&#8217;s
-push or repo upload command.</p></div>
+<div class="paragraph"><p>This section is used to set who can execute the <em>receive-pack</em> and
+to limit the maximum Git object size that <em>receive-pack</em> will accept.
+<em>receive-pack</em> is what runs on the server during a user&#8217;s push or
+repo upload command.</p></div>
 <div class="listingblock">
 <div class="content">
 <pre><tt>[receive]
   allowGroup = GROUP_ALLOWED_TO_EXECUTE
-  allowGroup = YET_ANOTHER_GROUP_ALLOWED_TO_EXECUTE</tt></pre>
+  allowGroup = YET_ANOTHER_GROUP_ALLOWED_TO_EXECUTE
+  maxObjectSizeLimit = 40 m</tt></pre>
 </div></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -2474,6 +2554,19 @@ push or repo upload command.</p></div>
 <em>receive-pack</em> on the server. One or more groups can be set.</p></div>
 <div class="paragraph"><p>If no groups are added, any user will be allowed to execute
 <em>receive-pack</em> on the server.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="receive.maxObjectSizeLimit"></a>receive.maxObjectSizeLimit
+</dt>
+<dd>
+<div class="paragraph"><p>Maximum allowed Git object size that <em>receive-pack</em> will accept.
+If an object is larger than the given size the pack-parsing will abort
+and the push operation will fail. If set to zero then there is no
+limit.</p></div>
+<div class="paragraph"><p>Gerrit administrator can use this setting to prevent developers
+from pushing objects which are too large to Gerrit.</p></div>
+<div class="paragraph"><p>Default is zero.</p></div>
+<div class="paragraph"><p>Common unit suffixes of <em>k</em>, <em>m</em>, or <em>g</em> are supported.</p></div>
 </dd>
 </dl></div>
 <h3 id="_a_id_repository_a_section_repository"><a id="repository"></a>Section repository</h3><div style="clear:left"></div>
@@ -2502,6 +2595,18 @@ This is a wildcard designating all repositories.</td>
 <div class="paragraph"><p>A name of a group which exists in the database. Zero, one or many
 groups are allowed.  Each on its own line.  Groups which don&#8217;t exist
 in the database are ignored.</p></div>
+</dd>
+</dl></div>
+<h3 id="_a_id_rules_a_section_rules"><a id="rules"></a>Section rules</h3><div style="clear:left"></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<a id="rules.enable"></a>rules.enable
+</dt>
+<dd>
+<div class="paragraph"><p>If true, Gerrit will load and excute <em>rules.pl</em> files in each
+project&#8217;s refs/meta/config branch, if present. When set to false,
+only the default internal rules will be used.</p></div>
+<div class="paragraph"><p>Default is true, to execute project specific rules.</p></div>
 </dd>
 </dl></div>
 <h3 id="_a_id_sendemail_a_section_sendemail"><a id="sendemail"></a>Section sendemail</h3><div style="clear:left"></div>
@@ -2637,6 +2742,27 @@ should expire.</p></div>
 <div class="paragraph"><p>By default, unset, so no Expiry-Date header is generated.</p></div>
 </dd>
 </dl></div>
+<h3 id="_a_id_site_a_section_site"><a id="site"></a>Section site</h3><div style="clear:left"></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<a id="site.checkUserAgent"></a>site.checkUserAgent
+</dt>
+<dd>
+<div class="paragraph"><p>If true the server checks the User-Agent HTTP header and sends the
+correct JavaScript to the client as part of the initial page load.
+This usually reduces a round-trip for the client, allowing the UI to
+start more quickly. If false, a tiny JavaScript loader is sent to the
+client instead to determine the correct code to use. Default is true.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="site.refreshHeaderFooter"></a>site.refreshHeaderFooter
+</dt>
+<dd>
+<div class="paragraph"><p>If true the server checks the site header, footer and CSS files for
+updated versions. If false, a server restart is required to change
+any of these resources. Default is true, allowing automatic reloads.</p></div>
+</dd>
+</dl></div>
 <h3 id="_a_id_sshd_a_section_sshd"><a id="sshd"></a> Section sshd</h3><div style="clear:left"></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -2671,6 +2797,7 @@ default of 29418.</p></div>
 </ul></div>
 <div class="paragraph"><p>If multiple values are supplied, the daemon will listen on all
 of them.</p></div>
+<div class="paragraph"><p>To disable the internal SSHD, set listenAddress to <tt>off</tt>.</p></div>
 <div class="paragraph"><p>By default, *:29418.</p></div>
 </dd>
 <dt class="hdlist1">
@@ -2756,7 +2883,7 @@ pool by a simple FIFO scheduling system.</p></div>
 <div class="paragraph"><p>By default, 1 plus the number of CPUs available to the JVM.</p></div>
 </dd>
 <dt class="hdlist1">
-[sshd.commandStartThreads]]sshd.commandStartThreads
+<a id="sshd.commandStartThreads"></a>sshd.commandStartThreads
 </dt>
 <dd>
 <div class="paragraph"><p>Number of threads used to parse a command line submitted by a client
@@ -3037,6 +3164,14 @@ new Git commit, such as a merge commit during change submission.</p></div>
 <tt>hostname</tt> is the hostname of the system Gerrit is running on.</p></div>
 <div class="paragraph"><p>By default, not set, generating the value at startup.</p></div>
 </dd>
+<dt class="hdlist1">
+<a id="user.anonymousCoward"></a>user.anonymousCoward
+</dt>
+<dd>
+<div class="paragraph"><p>Username that this displayed in the Gerrit WebUI and in e-mail
+notifications if the full name of the user is not set.</p></div>
+<div class="paragraph"><p>By default "Anonymous Coward" is used.</p></div>
+</dd>
 </dl></div>
 </div>
 <h2 id="_file_tt_etc_secure_config_tt">File <tt>etc/secure.config</tt></h2>
@@ -3081,6 +3216,13 @@ repositories under its control.</p></div>
 </p>
 </li>
 </ul></div>
+</div>
+<h2 id="_file_tt_etc_peer_keys_tt">File <tt>etc/peer_keys</tt></h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The optional file <tt>'$site_path'/etc/peer_keys</tt> controls who can
+login as the <em>Gerrit Code Review</em> user, required for the <a href="cmd-suexec.html">suexec</a>
+command.</p></div>
+<div class="paragraph"><p>The format is one Base-64 encoded public key per line.</p></div>
 </div>
 <h2 id="_database_system_config">Database system_config</h2>
 <div class="sectionbody">
@@ -3133,8 +3275,8 @@ good idea.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.2.1<br />
-Last updated 2012-02-15 12:31:31 MDT
+Version 2.3-rc0<br />
+Last updated 2012-02-22 11:54:48 MDT
 </div>
 </div>
 </body>

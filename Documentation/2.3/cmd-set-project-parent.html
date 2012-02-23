@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>gerrit set-project-parent</h1>
-<span id="revnumber">version 2.2.2.1</span>
+<span id="revnumber">version 2.3-rc0</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -568,6 +568,8 @@ footnotes: function () {
 <div class="verseblock">
 <div class="verseblock-content"><em>ssh</em> -p &lt;port&gt; &lt;host&gt; <em>gerrit set-project-parent</em>
   [--parent &lt;NAME&gt;]
+  [--children-of &lt;NAME&gt;]
+  [--exclude &lt;NAME&gt;]
   &lt;NAME&gt; &#8230;</div>
 <div class="verseblock-attribution">
 </div></div>
@@ -599,6 +601,29 @@ the project to inherit through another one.</p></div>
         the parent is set back to the default <tt>All-Projects</tt>.
 </p>
 </dd>
+<dt class="hdlist1">
+--children-of
+</dt>
+<dd>
+<p>
+        Name of the parent project for which all child projects should be
+        reparented. If the new parent project or any project in its
+        parent line is a child of this parent project it is automatically
+        excluded from reparenting.
+</p>
+</dd>
+<dt class="hdlist1">
+--exclude
+</dt>
+<dd>
+<p>
+        Name of a child project that should not be reparented. This
+        option can only be used if the option --children-of is set.
+        Multiple child projects can be excluded from reparenting by
+        specifying the --exclude option multiple times. Excluding a
+        project that is not a child project has no effect.
+</p>
+</dd>
 </dl></div>
 </div>
 <h2 id="_examples">EXAMPLES</h2>
@@ -609,6 +634,15 @@ the project to inherit through another one.</p></div>
 <div class="literalblock">
 <div class="content">
 <pre><tt>$ ssh -p 29418 review.example.com gerrit set-project-parent --parent kernel/common kernel/omap</tt></pre>
+</div></div>
+</div></div>
+<div class="paragraph"><p>Reparent all children of <tt>myParent</tt> to <tt>myOtherParent</tt>:</p></div>
+<div class="exampleblock">
+<div class="exampleblock-content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>$ ssh -p 29418 review.example.com gerrit set-project-parent \
+  --children-of myParent --parent myOtherParent</tt></pre>
 </div></div>
 </div></div>
 </div>
@@ -633,8 +667,8 @@ the project to inherit through another one.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.2.1<br />
-Last updated 2012-02-15 12:31:31 MDT
+Version 2.3-rc0<br />
+Last updated 2012-02-22 11:40:35 MDT
 </div>
 </div>
 </body>
