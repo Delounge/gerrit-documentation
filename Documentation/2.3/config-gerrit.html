@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>Gerrit Code Review - Configuration</h1>
-<span id="revnumber">version 2.3-rc0</span>
+<span id="revnumber">version 2.3</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -2862,8 +2862,9 @@ are queued and serviced in a first-come-first-serve order.</p></div>
 </dt>
 <dd>
 <div class="paragraph"><p>Number of threads to allocate for SSH command requests from
-non-interactive users. If equals to 0, then all non-interactive
-requests are executed in the same queue as interactive requests.</p></div>
+<a href="access-control.html#non-interactive_users">non-interactive users</a>.
+If equals to 0, then all non-interactive requests are executed in the same
+queue as interactive requests.</p></div>
 <div class="paragraph"><p>Any other value will remove the number of threads from the queue
 allocated to interactive users, and create a separate thread pool
 of the requested size, which will be used to run commands from
@@ -2974,7 +2975,7 @@ are enabled in addition to the default MACs, MAC names starting with
 <h3 id="_a_id_suggest_a_section_suggest"><a id="suggest"></a> Section suggest</h3><div style="clear:left"></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<a id="suggest.accounts"></a>
+<a id="suggest.accounts"></a>suggest.accounts
 </dt>
 <dd>
 <div class="paragraph"><p>If <tt>ALL</tt>, all matching user accounts will be offered as
@@ -3275,8 +3276,8 @@ good idea.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.3-rc0<br />
-Last updated 2012-02-22 11:54:48 MDT
+Version 2.3<br />
+Last updated 2012-04-10 14:44:28 MDT
 </div>
 </div>
 </body>

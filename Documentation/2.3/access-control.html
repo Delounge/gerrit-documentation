@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>Gerrit Code Review - Access Controls</h1>
-<span id="revnumber">version 2.3-rc0</span>
+<span id="revnumber">version 2.3</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -1384,6 +1384,285 @@ VALUES
 <div class="paragraph"><p>The new column will appear at the end of the table (in position 3),
 and <tt>-1 Do not have copyright</tt> will block submit, while <tt>+1 Copyright
 clear</tt> is required to enable submit.</p></div>
+<div class="admonitionblock" id="restart_changes">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">Restart the Gerrit web application and reload all browsers after
+making any database changes to approval categories.  Browsers are
+sent the list of known categories when they first visit the site,
+and don&#8217;t notice changes until the page is closed and opened again,
+or is reloaded.</td>
+</tr></table>
+</div>
+</div>
+<h2 id="_examples_of_typical_roles_in_a_project">Examples of typical roles in a project</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Below follows a set of typical roles on a server and which access
+rights these roles typically should be granted. You may see them as
+general guide lines for a typical way to set up your project on a
+brand new Gerrit instance.</p></div>
+<h3 id="examples_contributor">Contributor</h3><div style="clear:left"></div>
+<div class="paragraph"><p>This is the typical user on a public server. They are able to read
+your project and upload new changes to it. They are able to give
+feedback on other changes as well, but are unable to block or approve
+any changes.</p></div>
+<div class="paragraph"><p>Suggested access rights to grant:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="#category_read"><tt>Read</tt></a> on <em>refs/heads/*</em> and <em>refs/tags/*</em>
+</p>
+</li>
+<li>
+<p>
+<a href="#category_push"><tt>Push</tt></a> to <em>refs/for/refs/heads/*</em> and <em>refs/changes/*</em>
+</p>
+</li>
+<li>
+<p>
+<a href="#category_label-Code-Review"><tt>Code review</tt></a> with range <em>-1</em> to <em>+1</em>
+</p>
+</li>
+</ul></div>
+<h3 id="examples_developer">Developer</h3><div style="clear:left"></div>
+<div class="paragraph"><p>This is the typical core developer on a public server.  They are able
+to read the project, upload changes to a branch.  They are allowed to
+push merge commits to merge branches together.  Also, they are allowed
+to forge author identity, thus handling commits belonging to others
+than themselves, effectively allowing them to transfer commits
+between different branches.</p></div>
+<div class="paragraph"><p>They are furthermore able to code review and verify commits, and
+eventually submit them.  If you have an automated CI system that
+builds all uploaded patch sets you might want to skip the
+verification rights for the developer and let the CI system do that
+exclusively.</p></div>
+<div class="paragraph"><p>Suggested access rights to grant:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="#category_read"><tt>Read</tt></a> on <em>refs/heads/*</em> and <em>refs/tags/*</em>
+</p>
+</li>
+<li>
+<p>
+<a href="#category_push"><tt>Push</tt></a> to <em>refs/for/refs/heads/*</em> and <em>refs/changes/*</em>
+</p>
+</li>
+<li>
+<p>
+<a href="#category_push_merge"><tt>Push merge commit</tt></a> to <em>refs/for/refs/heads/*</em> and <em>refs/changes/*</em>
+</p>
+</li>
+<li>
+<p>
+<a href="#category_forge_author"><tt>Forge Author Identity</tt></a>
+</p>
+</li>
+<li>
+<p>
+<a href="#category_label-Code-Review"><tt>Label: Code review</tt></a> with range <em>-2</em> to <em>+2</em>
+</p>
+</li>
+<li>
+<p>
+<a href="#category_label-Verified"><tt>Label: Verify</tt></a> with range <em>-1</em> to <em>+1</em>
+</p>
+</li>
+<li>
+<p>
+<a href="#category_submit"><tt>Submit</tt></a>
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>If the project is small or the developers are seasoned it might make
+sense to give them the freedom to push commits directly to a branch.</p></div>
+<div class="paragraph"><p>Optional access rights to grant:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="#category_push"><tt>Push</tt></a> to <em>refs/heads/*</em>
+</p>
+</li>
+<li>
+<p>
+<a href="#category_push_merge"><tt>Push merge commit</tt></a> to <em>refs/heads/*</em>
+</p>
+</li>
+</ul></div>
+<h3 id="examples_cisystem">CI system</h3><div style="clear:left"></div>
+<div class="paragraph"><p>A typical Continous Integration system should be able to download new changes
+to build and then leave a verdict somehow.</p></div>
+<div class="paragraph"><p>As an example, the popular
+<a href="https://wiki.jenkins-ci.org/display/JENKINS/Gerrit+Trigger">gerrit-trigger plugin</a>
+for Jenkins/Hudson can set labels at:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+The start of a build
+</p>
+</li>
+<li>
+<p>
+A successful build
+</p>
+</li>
+<li>
+<p>
+An unstable build (tests fails)
+</p>
+</li>
+<li>
+<p>
+A failed build
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Usually the range chosen for this verdict is the verify label.  Depending on
+the size of your project and discipline of involved developers you might want
+to limit access right to the +1 <tt>Verify</tt> label to the CI system only.  That
+way it&#8217;s guaranteed that submitted commits always get built and pass tests
+successfully.</p></div>
+<div class="paragraph"><p>If the build doesn&#8217;t complete successfully the CI system can set the
+<tt>Verify</tt> label to -1.  However that means that a failed build will block
+submit of the change even if someone else sets <tt>Verify</tt> +1.  Depending on the
+project and how much the CI system can be trusted for accurate results, a
+blocking label might not be feasible.  A recommended alternative is to set the
+label <tt>Code-review</tt> to -1 instead, as it isn&#8217;t a blocking label but still
+shows a red label in the Gerrit UI.  Optionally; to enable the possibility to
+deliver different results (build error vs unstable for instance) it&#8217;s also
+possible to set <tt>Code-review</tt> +1 as well.</p></div>
+<div class="paragraph"><p>If pushing new changes is granted, it&#8217;s possible to automate cherry-pick of
+submitted changes for upload to other branches under certain conditions.  This
+is probably not the first step of what a project wants to automate however,
+and so the push right can be found under the optional section.</p></div>
+<div class="paragraph"><p>Suggested access rights to grant, that won&#8217;t block changes:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="#category_read"><tt>Read</tt></a> on <em>refs/heads/*</em> and <em>refs/tags/*</em>
+</p>
+</li>
+<li>
+<p>
+<a href="#category_label-Code-Review"><tt>Label: Code review</tt></a> with range <em>-1</em> to <em>0</em>
+</p>
+</li>
+<li>
+<p>
+<a href="#category_label-Verified"><tt>Label: Verify</tt></a> with range <em>0</em> to <em>+1</em>
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Optional access rights to grant:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="#category_label-Code-Review"><tt>Label: Code review</tt></a> with range <em>-1</em> to <em>+1</em>
+</p>
+</li>
+<li>
+<p>
+<a href="#category_push"><tt>Push</tt></a> to <em>refs/for/refs/heads/*</em> and <em>refs/changes/*</em>
+</p>
+</li>
+</ul></div>
+<h3 id="examples_integrator">Integrator</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Integrators are like developers but with some additional rights granted due
+to their administrative role in a project.  They can upload or push any commit
+with any committer email (not just their own) and they can also create new
+tags and branches.</p></div>
+<div class="paragraph"><p>Suggested access rights to grant:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="#examples_developer">Developer rights</a>
+</p>
+</li>
+<li>
+<p>
+<a href="#category_push"><tt>Push</tt></a> to <em>refs/heads/*</em>
+</p>
+</li>
+<li>
+<p>
+<a href="#category_push_merge"><tt>Push merge commit</tt></a> to <em>refs/heads/*</em>
+</p>
+</li>
+<li>
+<p>
+<a href="#category_forge_committer"><tt>Forge Committer Identity</tt></a> to <em>refs/for/refs/heads/*</em> and <em>refs/changes/*</em>
+</p>
+</li>
+<li>
+<p>
+<a href="#category_create"><tt>Create Reference</tt></a> to <em>refs/heads/*</em>
+</p>
+</li>
+<li>
+<p>
+<a href="#category_push_annotated"><tt>Push Annotated Tag</tt></a> to <em>refs/tags/*</em>
+</p>
+</li>
+</ul></div>
+<h3 id="examples_project-owner">Project owner</h3><div style="clear:left"></div>
+<div class="paragraph"><p>The project owner is almost like an integrator but with additional destructive
+power in the form of being able to delete branches.  Optionally these users
+also have the power to configure access rights in gits assigned to them.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">These users should be really knowledgable about git, for instance knowing why
+tags never should be removed from a server.  This role is granted potentially
+destructive access rights and cleaning up after such a mishap could be time
+consuming!</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>Suggested access rights to grant:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="#examples_integrator">Integrator rights</a>
+</p>
+</li>
+<li>
+<p>
+<a href="#category_push"><tt>Push</tt></a> with the force option to <em>refs/heads/*</em> and <em>refs/tags/*</em>
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Optional access right to grant:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="#category_owner"><tt>Owner</tt></a> in the gits they mostly work with.
+</p>
+</li>
+</ul></div>
+<h3 id="examples_administrator">Administrator</h3><div style="clear:left"></div>
+<div class="paragraph"><p>The administrator role is the most powerful role known in the Gerrit universe.
+This role may grant itself (or others) any access right, and it already has
+all capabilities granted as well.  By default the
+<a href="#administrators"><tt>Administrators</tt> group</a> is the group that has this role.</p></div>
+<div class="paragraph"><p>Mandatory access rights:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="#capability_administrateServer">The <tt>Administrate Server</tt> capability</a>
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Suggested access rights to grant:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="#examples_project-owner">Project owner rights</a>
+</p>
+</li>
+</ul></div>
 </div>
 <h2 id="conversion_table">Conversion table from 2.1.x series to 2.2.x series</h2>
 <div class="sectionbody">
@@ -1485,18 +1764,118 @@ on <tt>refs/for/refs/heads/&lt;branch&gt;</tt> rather than permissions to upload
 on <tt>refs/heads/&lt;branch&gt;</tt>.</td>
 </tr></table>
 </div>
-<div class="admonitionblock" id="restart_changes">
+</div>
+<h2 id="_system_capabilities">System capabilities</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The system capabilities control actions that the administrators of
+the server can perform which usually affect the entire
+server in some way.  The administrators may delegate these
+capabilities to trusted groups of users.</p></div>
+<div class="paragraph"><p>Delegation of capabilities allows groups to be granted a subset of
+administrative capabilities without being given complete
+administrative control of the server.  This makes it possible to
+keep fewer users in the administrators group, even while spreading
+much of the server administration burden out to more users.</p></div>
+<div class="paragraph"><p>Below you find a list of capabilities available:</p></div>
+<h3 id="capability_administrateServer">Administrate Server</h3><div style="clear:left"></div>
+<div class="paragraph"><p>This is in effect the owner and administrator role of the Gerrit
+instance.  Any members of a group granted this capability will be
+able to grant any access right to any group. They will also have all
+capabilities granted to them automatically.</p></div>
+<h3 id="capability_createAccount">Create Account</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Allow <a href="cmd-create-account.html">account creation over the ssh prompt</a>.
+This capability allows the granted group members to create non-interactive
+service accounts.  These service accounts are generally used for automation
+and made to be members of the
+<a href="access-control.html#non-interactive_users"><em>Non-Interactive users</em></a> group.</p></div>
+<h3 id="capability_createGroup">Create Group</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Allow group creation.  Groups are used to grant users access to different
+actions in projects.  This capability allows the granted group members to
+either <a href="cmd-create-group.html">create new groups via ssh</a> or via the web UI.</p></div>
+<h3 id="capability_createProject">Create Project</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Allow project creation.  This capability allows the granted group to
+either <a href="cmd-create-project.html">create new git projects via ssh</a>
+or via the web UI.</p></div>
+<h3 id="capability_flushCaches">Flush Caches</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Allow the flushing of Gerrit&#8217;s caches.  This capability allows the granted
+group to <a href="cmd-flush-caches.html">flush some or all Gerrit caches via ssh</a>.</p></div>
+<div class="admonitionblock">
 <table><tr>
 <td class="icon">
 <div class="title">Note</div>
 </td>
-<td class="content">Restart the Gerrit web application and reload all browsers after
-making any database changes to approval categories.  Browsers are
-sent the list of known categories when they first visit the site,
-and don&#8217;t notice changes until the page is closed and opened again,
-or is reloaded.</td>
+<td class="content">This capability doesn&#8217;t imply permissions to the show-caches command.  For that
+you need the <a href="#capability_viewCaches">view caches capability</a>.</td>
 </tr></table>
 </div>
+<h3 id="capability_kill">Kill Task</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Allow the operation of the <a href="cmd-kill.html">kill command over ssh</a>.  The
+kill command ends tasks that currently occupy the Gerrit server, usually
+a replication task or a user initiated task such as an upload-pack or
+recieve-pack.</p></div>
+<h3 id="capability_priority">Priority</h3><div style="clear:left"></div>
+<div class="paragraph"><p>This capability allows users to use
+<a href="config-gerrit.html#sshd.batchThreads">the thread pool reserved</a> for
+<a href="access-control.html#non-interactive_users"><em>Non-Interactive Users</em></a>.
+It&#8217;s a binary value in that granted users either have access to the thread
+pool, or they don&#8217;t.</p></div>
+<div class="paragraph"><p>There are three modes for this capability and they&#8217;re listed by rising
+priority:</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+No capability configured.
+</dt>
+<dd>
+<p>
+The user isn&#8217;t a member of a group with any priority capability granted. By
+default the user is then in the <em>INTERACTIVE</em> thread pool.
+</p>
+</dd>
+<dt class="hdlist1">
+<em>BATCH</em>
+</dt>
+<dd>
+<p>
+If there&#8217;s a thread pool configured for <em>Non-Interactive Users</em> and a user is
+granted the priority capability with the <em>BATCH</em> mode selected, the user ends
+up in the separate batch user thread pool. This is true unless the user is
+also granted the below <em>INTERACTIVE</em> option.
+</p>
+</dd>
+<dt class="hdlist1">
+<em>INTERACTIVE</em>
+</dt>
+<dd>
+<p>
+If a user is granted the priority capability with the <em>INTERACTIVE</em> option,
+regardless if they also have the <em>BATCH</em> option or not, they are in the
+<em>INTERACTIVE</em> thread pool.
+</p>
+</dd>
+</dl></div>
+<h3 id="capability_queryLimit">Query Limit</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Allow site administrators to configure the query limit for users to
+be above the default hard-coded value of 500.  Administrators can add
+a global block to <tt>All-Projects</tt> with group(s) that
+should have different limits:</p></div>
+<div class="paragraph"><p>When applying a query limit to a user the largest value granted by
+any of their groups is used.</p></div>
+<div class="paragraph"><p>This limit applies not only to the <a href="cmd-query.html"><tt>gerrit query</tt></a>
+command, but also to the web UI results pagination size.</p></div>
+<h3 id="capability_startReplication">Start Replication</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Allow access to execute <a href="cmd-replicate.html">the <tt>gerrit replicate</tt> command</a>.</p></div>
+<h3 id="capability_viewCaches">View Caches</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Allow querying for status of Gerrit&#8217;s internal caches.  This capability allows
+the granted group to
+<a href="cmd-show-caches.html">look at some or all Gerrit caches via ssh</a>.</p></div>
+<h3 id="capability_viewConnections">View Connections</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Allow querying for status of Gerrit&#8217;s current client connections.  This
+capability allows the granted group to
+<a href="cmd-show-connections.html">look at Gerrit&#8217;s current connections via ssh</a>.</p></div>
+<h3 id="capability_viewQueue">View Queue</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Allow querying for status of Gerrit&#8217;s internal task queue.  This capability
+allows the granted group to
+<a href="cmd-show-queue.html">look at the Gerrit task queue via ssh</a>.</p></div>
 </div>
 <hr style="
   height: 2px;
@@ -1509,8 +1888,8 @@ or is reloaded.</td>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.3-rc0<br />
-Last updated 2012-02-17 09:25:10 MDT
+Version 2.3<br />
+Last updated 2012-04-10 14:44:28 MDT
 </div>
 </div>
 </body>

@@ -552,7 +552,7 @@ footnotes: function () {
 <body>
 <div id="header">
 <h1>gerrit create-group</h1>
-<span id="revnumber">version 2.3-rc0</span>
+<span id="revnumber">version 2.3</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -571,6 +571,7 @@ footnotes: function () {
   [--description &lt;DESC&gt;]
   [--member &lt;USERNAME&gt;]
   [--group &lt;GROUP&gt;]
+  [--visible-to-all]
   &lt;GROUP&gt;</div>
 <div class="verseblock-attribution">
 </div></div>
@@ -587,7 +588,8 @@ becomes a member of the newly created group.</p></div>
 <h2 id="_access">ACCESS</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>Caller must be a member of the privileged <em>Administrators</em> group,
-or have been granted the <em>Create Group</em> global capability.</p></div>
+or have been granted
+<a href="access-control.html#capability_createGroup">the <em>Create Group</em> global capability</a>.</p></div>
 </div>
 <h2 id="_scripting">SCRIPTING</h2>
 <div class="sectionbody">
@@ -641,6 +643,14 @@ or have been granted the <em>Create Group</em> global capability.</p></div>
         be specified to include more initial groups.
 </p>
 </dd>
+<dt class="hdlist1">
+--visible-to-all
+</dt>
+<dd>
+<p>
+        If specified, the group members will be visible to all users.
+</p>
+</dd>
 </dl></div>
 </div>
 <h2 id="_examples">EXAMPLES</h2>
@@ -679,8 +689,8 @@ the single quotes to delimit the value.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.3-rc0<br />
-Last updated 2012-01-24 13:04:32 MDT
+Version 2.3<br />
+Last updated 2012-04-10 14:44:28 MDT
 </div>
 </div>
 </body>
