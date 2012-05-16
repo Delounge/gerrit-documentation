@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.6" />
-<title>gerrit create-project</title>
+<title>Making a Gerrit Release</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
 
@@ -729,348 +729,427 @@ install: function(toclevels) {
 }
 
 }
-asciidoc.install(2);
+asciidoc.install();
 /*]]>*/
 </script>
 </head>
 <body class="article">
 <div id="header">
-<h1>gerrit create-project</h1>
-<span id="revnumber">version 2.3-rc0-16-g13cfd83</span>
-<div id="toc">
-  <div id="toctitle">Table of Contents</div>
-  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
-</div>
+<h1>Making a Gerrit Release</h1>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="_name">NAME</h2>
+<div id="preamble">
 <div class="sectionbody">
-<div class="paragraph"><p>gerrit create-project - Create a new hosted project</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph"><p>This document is meant primarily for Gerrit maintainers
+who have been given approval and submit status to the Gerrit
+projects.  Additionally, maintainers should be given owner
+status to the Gerrit web site.</p></div>
+</td>
+</tr></table>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_synopsis">SYNOPSIS</h2>
-<div class="sectionbody">
-<div class="verseblock">
-<pre class="content"><em>ssh</em> -p &lt;port&gt; &lt;host&gt; <em>gerrit create-project</em>
-  [--owner &lt;GROUP&gt; &#8230; | -o &lt;GROUP&gt; &#8230;]
-  [--parent &lt;NAME&gt; | -p &lt;NAME&gt; ]
-  [--suggest-parents | -S ]
-  [--permissions-only]
-  [--description &lt;DESC&gt; | -d &lt;DESC&gt;]
-  [--submit-type &lt;TYPE&gt; |  -t &lt;TYPE&gt;]
-  [--use-contributor-agreements | --ca]
-  [--use-signed-off-by | --so]
-  [--use-content-merge]
-  [--require-change-id | --id]
-  [--branch &lt;REF&gt; | -b &lt;REF&gt;]
-  [--empty-commit]
-  { &lt;NAME&gt; | --name &lt;NAME&gt; }</pre>
-<div class="attribution">
-</div></div>
+<div class="paragraph"><p>To make a Gerrit release involves a great deal of complex
+tasks and it is easy to miss a step so this document should
+hopefuly serve as both a how to for those new to the process
+and as a checklist for those already familiar with these
+tasks.</p></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_description">DESCRIPTION</h2>
+<h2 id="_gerrit_release_type">Gerrit Release Type</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Creates a new bare Git repository under <tt>gerrit.basePath</tt>, using
-the project name supplied.  The newly created repository is empty
-(has no commits), but is registered in the Gerrit database so that
-the initial commit may be uploaded for review, or initial content
-can be pushed directly into a branch.</p></div>
-<div class="paragraph"><p>If replication is enabled, this command also connects to each of
-the configured remote systems over SSH and uses command line git
-on the remote system to create the empty repository.</p></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_access">ACCESS</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>Caller must be a member of the privileged <em>Administrators</em> group,
-or have been granted
-<a href="access-control.html#capability_createProject">the <em>Create Project</em> global capability</a>.</p></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_scripting">SCRIPTING</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>This command is intended to be used in scripts.</p></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_options">OPTIONS</h2>
-<div class="sectionbody">
-<div class="dlist"><dl>
-<dt class="hdlist1">
-&lt;NAME&gt;
-</dt>
-<dd>
-<p>
-        Required; name of the new project to create.  If name ends
-        with <tt>.git</tt> the suffix will be automatically removed.
-</p>
-</dd>
-<dt class="hdlist1">
---name
-</dt>
-<dt class="hdlist1">
--n
-</dt>
-<dd>
-<p>
-        Deprecated alias for the &lt;NAME&gt; argument. This option may
-        be removed in a future release.
-</p>
-</dd>
-<dt class="hdlist1">
---branch
-</dt>
-<dt class="hdlist1">
--b
-</dt>
-<dd>
-<p>
-        Name of the initial branch in the newly created project.
-        Defaults to <em>master</em>.
-</p>
-</dd>
-<dt class="hdlist1">
---owner
-</dt>
-<dt class="hdlist1">
--o
-</dt>
-<dd>
-<p>
-        Name of the group(s) which will initially own this repository.
-        The specified group(s) must already be defined within Gerrit.
-        Several groups can be specified on the command line.
-</p>
-<div class="paragraph"><p>Defaults to what is specified by <tt>repository.*.ownerGroup</tt>
-in gerrit.config.</p></div>
-</dd>
-<dt class="hdlist1">
---parent
-</dt>
-<dt class="hdlist1">
--p
-</dt>
-<dd>
-<p>
-        Name of the parent project to inherit access rights
-        through. If not specified, the parent is set to the default
-        project <tt>All-Projects</tt>.
-</p>
-</dd>
-<dt class="hdlist1">
---suggest-parents
-</dt>
-<dt class="hdlist1">
--S
-</dt>
-<dd>
-<p>
-        Suggest parent candidates. This option cannot be used with
-        other arguments. Print out a list of projects that are
-        already parents to other projects, thus it can help the user
-        find a suitable parent for the new project.
-</p>
-</dd>
-<dt class="hdlist1">
---permissions-only
-</dt>
-<dd>
-<p>
-        Create the project only to serve as a parent for other
-        projects.  The new project&#8217;s Git repository will be
-        initialized to have <em>HEAD</em> point to <em>refs/meta/config</em>.
-</p>
-</dd>
-<dt class="hdlist1">
---description
-</dt>
-<dt class="hdlist1">
--d
-</dt>
-<dd>
-<p>
-        Initial description of the project.  If not specified,
-        no description is stored.
-</p>
-<div class="paragraph"><p>Description values containing spaces should be quoted in single quotes
-(').  This most likely requires double quoting the value, for example
-<tt>--description "'A description string'"</tt>.</p></div>
-</dd>
-<dt class="hdlist1">
---submit-type
-</dt>
-<dt class="hdlist1">
--t
-</dt>
-<dd>
-<p>
-        Action used by Gerrit to submit an approved change to its
-        destination branch.  Supported options are:
-</p>
+<div class="paragraph"><p>Here are some guidelines on release approaches depending on the
+type of release you want to make (stable-fix, stable, RC0, RC1&#8230;).</p></div>
+<div class="sect2">
+<h3 id="_stable">Stable</h3>
+<div class="paragraph"><p>A stable release is generally built from the master branch and may need to
+undergo some stabilization before releasing the final release.</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
-FAST_FORWARD_ONLY: produces a strictly linear history.
+Propose the release with any plans/objectives to the mailing list
 </p>
 </li>
 <li>
 <p>
-MERGE_IF_NECESSARY: create a merge commit when required.
+Create a Gerrit RC0
 </p>
 </li>
 <li>
 <p>
-MERGE_ALWAYS: always create a merge commit.
-</p>
-</li>
-<li>
-<p>
-CHERRY_PICK: always cherry-pick the commit.
+If needed create a Gerrit RC1
 </p>
 </li>
 </ul></div>
-<div class="paragraph"><p>Defaults to MERGE_IF_NECESSARY.  For more details see
-<a href="project-setup.html#submit_type">Change Submit Actions</a>.</p></div>
-</dd>
-<dt class="hdlist1">
---use-content-merge
-</dt>
-<dd>
-<p>
-        If enabled, Gerrit will try to perform a 3-way merge of text
-        file content when a file has been modified by both the
-        destination branch and the change being submitted.  This
-        option only takes effect if submit type is not
-        FAST_FORWARD_ONLY.  Disabled by default.
-</p>
-</dd>
-<dt class="hdlist1">
---use-contributor-agreements
-</dt>
-<dt class="hdlist1">
---ca
-</dt>
-<dd>
-<p>
-        If enabled, authors must complete a contributor agreement
-        on the site before pushing any commits or changes to this
-        project.  Disabled by default.
-</p>
-</dd>
-<dt class="hdlist1">
---use-signed-off-by
-</dt>
-<dd>
-<p>
---so:
-        If enabled, each change must contain a Signed-off-by line
-        from either the author or the uploader in the commit message.
-        Disabled by default.
-</p>
-</dd>
-<dt class="hdlist1">
---require-change-id
-</dt>
-<dt class="hdlist1">
---id
-</dt>
-<dd>
-<p>
-        Require a valid <a href="user-changeid.html">Change-Id</a> footer
-        in any commit uploaded for review. This does not apply to
-        commits pushed directly to a branch or tag.
-</p>
-</dd>
-<dt class="hdlist1">
---empty-commit
-</dt>
-<dd>
-<p>
-        Creates an initial empty commit for the Git repository of the
-        project that is newly created.
-</p>
-</dd>
-</dl></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph"><p>You may let in a few features to this release</p></div>
+</td>
+</tr></table>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_examples">EXAMPLES</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>Create a new project called <tt>tools/gerrit</tt>:</p></div>
-<div class="exampleblock">
-<div class="content">
-<div class="literalblock">
-<div class="content">
-<pre><tt>$ ssh -p 29418 review.example.com gerrit create-project tools/gerrit.git</tt></pre>
-</div></div>
-</div></div>
-<div class="paragraph"><p>Create a new project with a description:</p></div>
-<div class="exampleblock">
-<div class="content">
-<div class="literalblock">
-<div class="content">
-<pre><tt>$ ssh -p 29418 review.example.com gerrit create-project tool.git --description "'Tools used by build system'"</tt></pre>
-</div></div>
-</div></div>
-<div class="paragraph"><p>Note that it is necessary to quote the description twice.  The local
-shell needs double quotes around the value to ensure the single quotes
-are passed through SSH as-is to the remote Gerrit server, which uses
-the single quotes to delimit the value.</p></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_replication">REPLICATION</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>The remote repository creation is performed by a Bourne shell script:</p></div>
-<div class="exampleblock">
-<div class="content">
-<div class="literalblock">
-<div class="content">
-<pre><tt>mkdir -p '/base/project.git' &amp;&amp; cd '/base/project.git' &amp;&amp; git init --bare &amp;&amp; git update-ref HEAD refs/heads/master</tt></pre>
-</div></div>
-</div></div>
-<div class="paragraph"><p>For this to work successfully the remote system must be able to run
-arbitrary shell scripts, and must have <tt>git</tt> in the user&#8217;s PATH
-environment variable.  Administrators could also run this command line
-by hand to establish a new empty repository.</p></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_see_also">SEE ALSO</h2>
-<div class="sectionbody">
 <div class="ulist"><ul>
 <li>
 <p>
-<a href="config-replication.html">Git Replication/Mirroring</a>
+If needed create a Gerrit RC2
+</p>
+</li>
+</ul></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph"><p>There should be no new features in this release, only bug fixes</p></div>
+</td>
+</tr></table>
+</div>
+<div class="ulist"><ul>
+<li>
+<p>
+Finally create the stable release (no RC)
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_stable_fix">Stable-Fix</h3>
+<div class="paragraph"><p>Stable-fix releases should likely only contain bug fixes and doc updates.</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Propose the release with any plans/objectives to the mailing list
 </p>
 </li>
 <li>
 <p>
-<a href="project-setup.html">Project Setup</a>
+This type of release does not need any RCs, release when the objectives
+  are met
 </p>
 </li>
 </ul></div>
 </div>
 </div>
-<hr style="
-  height: 2px;
-  color: silver;
-  margin-top: 1.2em;
-  margin-bottom: 0.5em;
-">
-<div class="paragraph"><p>Part of <a href="index.html">Gerrit Code Review</a></p></div>
+</div>
+<div class="sect1">
+<h2 id="_create_the_actual_release">Create the Actual Release</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_prepare_the_subprojects">Prepare the Subprojects</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Publish the latest snapshot for all subprojects
+</p>
+</li>
+<li>
+<p>
+Freeze all subprojects and <a href="dev-release-subproject.html">publish</a>
+  them!
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_prepare_gerrit">Prepare Gerrit</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Update the top level pom in Gerrit to ensure that none of the Subprojects
+  point to snapshot releases
+</p>
+</li>
+<li>
+<p>
+Update the poms for the Gerrit version, push for review, get merged
+</p>
+</li>
+</ul></div>
+<div class="exampleblock">
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>tools/version.sh --snapshot=2.3</tt></pre>
+</div></div>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Tag
+</p>
+</li>
+</ul></div>
+<div class="exampleblock">
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>git tag -a -m "gerrit 2.2.2-rc0" v2.2.2-rc0
+git tag -a -m "gerrit 2.2.2.1" v2.2.2.1</tt></pre>
+</div></div>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Build
+</p>
+</li>
+</ul></div>
+<div class="exampleblock">
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>./tools/release.sh</tt></pre>
+</div></div>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Sanity check WAR
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_publish_to_the_project_locations">Publish to the Project Locations</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_war_file">WAR File</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Upload WAR to code.google.com/p/gerrit (manual web browser)
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Go to <a href="http://code.google.com/p/gerrit/downloads/list">http://code.google.com/p/gerrit/downloads/list</a>
+</p>
+</li>
+<li>
+<p>
+Use the "New Download" button
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Update labels:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+new war: [release-candidate], featured&#8230;
+</p>
+</li>
+<li>
+<p>
+old war: deprecated
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_plugin_api_jar_file">Plugin API JAR File</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Push JAR to commondatastorage.googleapis.com
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Run tools/deploy_api.sh
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_tag">Tag</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Push the New Tag
+</p>
+</li>
+</ul></div>
+<div class="exampleblock">
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>git push google refs/tags/v2.2.2.1:refs/tags/v2.2.2.1</tt></pre>
+</div></div>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_docs">Docs</h3>
+<div class="exampleblock">
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>make -C Documentation PRIOR=2.2.2 update
+make -C ReleaseNotes update</tt></pre>
+</div></div>
+</div></div>
+<div class="paragraph"><p>(no <tt>PRIOR=</tt>&#8230; if updating the same release again during RCs)</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Update Google Code project links
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Go to <a href="http://code.google.com/p/gerrit/admin">http://code.google.com/p/gerrit/admin</a>
+</p>
+</li>
+<li>
+<p>
+Point the main page to the new docs
+</p>
+</li>
+<li>
+<p>
+Point the main page to the new release notes
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph"><p>The docs makefile does an svn cp of the prior revision of the docs to branch
+the docs so you have less to upload on the new docs.</p></div>
+<div class="paragraph"><p>User and password from here:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>https://code.google.com/hosting/settings</tt></pre>
+</div></div>
+<div class="paragraph"><p>(requires overriding svn username on command line)</p></div>
+</td>
+</tr></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_issues">Issues</h3>
+<div class="exampleblock">
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>How do the issues get updated?  Do you run a script to do
+this?  When do you do it, after the final 2.2.2 is released?</tt></pre>
+</div></div>
+</div></div>
+<div class="paragraph"><p>By hand.</p></div>
+<div class="paragraph"><p>Our current process is an issue should be updated to say Status =
+Submitted, FixedIn-2.2.2 once the change is submitted, but before the
+release.</p></div>
+<div class="paragraph"><p>After the release is actually made, you can search in Google Code for
+&#8220;Status=Submitted FixedIn=2.2.2&#8221; and then batch update these changes
+to say Status=Released. Make sure the pulldown says &#8220;All Issues&#8221;
+because Status=Submitted is considered a closed issue.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_mailing_list">Mailing List</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Send an email to the mailing list to annouce the release
+</p>
+</li>
+<li>
+<p>
+Consider including some or all of the following in the email:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+A link to the release and the release notes (if a final release)
+</p>
+</li>
+<li>
+<p>
+A link to the docs
+</p>
+</li>
+<li>
+<p>
+Describe the type of release (stable, bug fix, RC)
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>To: Repo and Gerrit Discussion &lt;repo-discuss@googlegroups.com&gt;
+Subject: Announce: Gerrit 2.2.2.1  (Stable bug fix update)
+
+I am pleased to announce Gerrit Code Review 2.2.2.1.
+
+Download:
+
+  http://code.google.com/p/gerrit/downloads/list
+
+
+This release is a stable bug fix release with some
+documentation updates including a new "Contributing to
+Gerrit" doc:
+
+  http://gerrit-documentation.googlecode.com/svn/Documentation/2.2.2/dev-contributing.html
+
+
+To read more about the bug fixes:
+
+  http://gerrit-documentation.googlecode.com/svn/ReleaseNotes/ReleaseNotes-2.2.2.1.html
+
+-Martin</tt></pre>
+</div></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_merging_stable_fixes_to_master">Merging Stable Fixes to master</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>After every stable-fix release, stable should be merged to master to
+ensure that none of the fixes ever get lost.</p></div>
+<div class="exampleblock">
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>git config merge.summary true
+git checkout master
+git reset --hard origin/master
+git branch -f stable origin/stable
+git merge stable</tt></pre>
+</div></div>
+</div></div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.3-rc0-16-g13cfd83<br />
-Last updated 2012-03-24 13:53:08 CET
+Last updated 2012-05-16 19:34:33 CEST
 </div>
 </div>
 </body>

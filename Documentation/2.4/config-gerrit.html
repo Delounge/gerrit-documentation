@@ -2,15 +2,25 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.5.2" />
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.6" />
 <title>Gerrit Code Review - Configuration</title>
 <style type="text/css">
-/* Debug borders */
-p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 {
-/*
-  border: 1px solid red;
-*/
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Arial,Helvetica,sans-serif;
 }
 
 body {
@@ -35,13 +45,8 @@ strong {
   color: #083194;
 }
 
-tt {
-  color: navy;
-}
-
 h1, h2, h3, h4, h5, h6 {
   color: #527bbd;
-  font-family: sans-serif;
   margin-top: 1.2em;
   margin-bottom: 0.5em;
   line-height: 1.3;
@@ -59,9 +64,11 @@ h3 {
 h3 + * {
   clear: left;
 }
+h5 {
+  font-size: 1.0em;
+}
 
 div.sectionbody {
-  font-family: serif;
   margin-left: 0;
 }
 
@@ -77,45 +84,44 @@ p {
 ul, ol, li > p {
   margin-top: 0;
 }
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
 
 pre {
   padding: 0;
   margin: 0;
 }
 
-span#author {
+#author {
   color: #527bbd;
-  font-family: sans-serif;
   font-weight: bold;
   font-size: 1.1em;
 }
-span#email {
+#email {
 }
-span#revnumber, span#revdate, span#revremark {
-  font-family: sans-serif;
+#revnumber, #revdate, #revremark {
 }
 
-div#footer {
-  font-family: sans-serif;
+#footer {
   font-size: small;
   border-top: 2px solid silver;
   padding-top: 0.5em;
   margin-top: 4.0em;
 }
-div#footer-text {
+#footer-text {
   float: left;
   padding-bottom: 0.5em;
 }
-div#footer-badges {
+#footer-badges {
   float: right;
   padding-bottom: 0.5em;
 }
 
-div#preamble {
+#preamble {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
-div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.imageblock, div.exampleblock, div.verseblock,
 div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
 div.admonitionblock {
   margin-top: 1.0em;
@@ -135,7 +141,6 @@ div.content { /* Block element content. */
 /* Block element titles. */
 div.title, caption.title {
   color: #527bbd;
-  font-family: sans-serif;
   font-weight: bold;
   text-align: left;
   margin-top: 1.0em;
@@ -157,13 +162,15 @@ div.content + div.title {
 
 div.sidebarblock > div.content {
   background: #ffffee;
-  border: 1px solid silver;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
   padding: 0.5em;
 }
 
 div.listingblock > div.content {
-  border: 1px solid silver;
-  background: #f4f4f4;
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
   padding: 0.5em;
 }
 
@@ -171,8 +178,8 @@ div.quoteblock, div.verseblock {
   padding-left: 1.0em;
   margin-left: 1.0em;
   margin-right: 10%;
-  border-left: 5px solid #dddddd;
-  color: #777777;
+  border-left: 5px solid #f0f0f0;
+  color: #888;
 }
 
 div.quoteblock > div.attribution {
@@ -180,8 +187,9 @@ div.quoteblock > div.attribution {
   text-align: right;
 }
 
-div.verseblock > div.content {
-  white-space: pre;
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
 }
 div.verseblock > div.attribution {
   padding-top: 0.75em;
@@ -254,35 +262,12 @@ div.compact div, div.compact div {
   margin-bottom: 0.1em;
 }
 
-div.tableblock > table {
-  border: 3px solid #527bbd;
-}
-thead, p.table.header {
-  font-family: sans-serif;
-  font-weight: bold;
-}
 tfoot {
   font-weight: bold;
 }
 td > div.verse {
   white-space: pre;
 }
-p.table {
-  margin-top: 0;
-}
-/* Because the table frame attribute is overriden by CSS in most browsers. */
-div.tableblock > table[frame="void"] {
-  border-style: none;
-}
-div.tableblock > table[frame="hsides"] {
-  border-left-style: none;
-  border-right-style: none;
-}
-div.tableblock > table[frame="vsides"] {
-  border-top-style: none;
-  border-bottom-style: none;
-}
-
 
 div.hdlist {
   margin-top: 0.8em;
@@ -339,18 +324,25 @@ span.footnote, span.footnoteref {
   min-width: 100px;
 }
 
-
-@media print {
-  div#footer-badges { display: none; }
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
 }
 
-div#toc {
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toc {
   margin-bottom: 2.5em;
 }
 
-div#toctitle {
+#toctitle {
   color: #527bbd;
-  font-family: sans-serif;
   font-size: 1.1em;
   font-weight: bold;
   margin-top: 1.0em;
@@ -373,51 +365,181 @@ div.toclevel4 {
   margin-left: 6em;
   font-size: 0.9em;
 }
-/* Workarounds for IE6's broken and incomplete CSS2. */
 
-div.sidebar-content {
-  background: #ffffee;
-  border: 1px solid silver;
-  padding: 0.5em;
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+tt {
+  font-family: monospace;
+  font-size: inherit;
+  color: navy;
 }
-div.sidebar-title, div.image-title {
-  color: #527bbd;
-  font-family: sans-serif;
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
   font-weight: bold;
-  margin-top: 0.0em;
-  margin-bottom: 0.5em;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
 }
 
-div.listingblock div.content {
-  border: 1px solid silver;
-  background: #f4f4f4;
-  padding: 0.5em;
+
+/*
+ * html5 specific
+ *
+ * */
+
+.monospaced {
+  font-family: monospace;
+  font-size: inherit;
+  color: navy;
 }
 
-div.quoteblock-attribution {
-  padding-top: 0.5em;
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
   text-align: right;
 }
 
-div.verseblock-content {
-  white-space: pre;
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
 }
-div.verseblock-attribution {
-  padding-top: 0.75em;
-  text-align: left;
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
 }
-
-div.exampleblock-content {
-  border-left: 3px solid #dddddd;
-  padding-left: 0.5em;
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
 }
 
-/* IE6 sets dynamically generated links as visited. */
-div#toc a:visited { color: blue; }
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
 </style>
 <script type="text/javascript">
 /*<![CDATA[*/
-window.onload = function(){asciidoc.footnotes(); asciidoc.toc(2);}
 var asciidoc = {  // Namespace.
 
 /////////////////////////////////////////////////////////////////////
@@ -479,6 +601,25 @@ toc: function (toclevels) {
   }
 
   var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
   var entries = tocEntries(document.getElementById("content"), toclevels);
   for (var i = 0; i < entries.length; ++i) {
     var entry = entries[i];
@@ -506,24 +647,44 @@ toc: function (toclevels) {
  */
 
 footnotes: function () {
-  var cont = document.getElementById("content");
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
   var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
   var spans = cont.getElementsByTagName("span");
   var refs = {};
   var n = 0;
   for (i=0; i<spans.length; i++) {
     if (spans[i].className == "footnote") {
       n++;
-      // Use [\s\S] in place of . so multi-line matches work.
-      // Because JavaScript has no s (dotall) regex flag.
-      note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
       noteholder.innerHTML +=
         "<div class='footnote' id='_footnote_" + n + "'>" +
         "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
         n + "</a>. " + note + "</div>";
-      spans[i].innerHTML =
-        "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
-        "' title='View footnote' class='footnote'>" + n + "</a>]";
       var id =spans[i].getAttribute("id");
       if (id != null) refs["#"+id] = n;
     }
@@ -543,22 +704,46 @@ footnotes: function () {
       }
     }
   }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
 }
 
 }
+asciidoc.install(2);
 /*]]>*/
 </script>
 </head>
-<body>
+<body class="article">
 <div id="header">
 <h1>Gerrit Code Review - Configuration</h1>
-<span id="revnumber">version 2.3</span>
+<span id="revnumber">version 2.4 (from v2.4-rc1)</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
 </div>
 </div>
 <div id="content">
+<div class="sect1">
 <h2 id="_file_tt_etc_gerrit_config_tt">File <tt>etc/gerrit.config</tt></h2>
 <div class="sectionbody">
 <div class="paragraph"><p>The optional file <tt>'$site_path'/etc/gerrit.config</tt> is a Git-style
@@ -585,7 +770,28 @@ to be restarted before it will use the new values.</td>
 [cache "diff"]
   diskbuffer = 10 m</tt></pre>
 </div></div>
-<h3 id="_a_id_addreviewer_a_section_addreviewer"><a id="addreviewer"></a>Section addreviewer</h3><div style="clear:left"></div>
+<div class="sect2">
+<h3 id="_a_id_accounts_a_section_accounts"><a id="accounts"></a>Section accounts</h3>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<a id="accounts.visibility"></a>accounts.visibility
+</dt>
+<dd>
+<div class="paragraph"><p>Controls visibility of other users' dashboard pages and
+completion suggestions to web users.</p></div>
+<div class="paragraph"><p>If <tt>ALL</tt>, all users are visible to all other users, even
+anonymous users.</p></div>
+<div class="paragraph"><p>If <tt>SAME_GROUP</tt>, only users who are also members of a group the
+current user is a member of are visible.</p></div>
+<div class="paragraph"><p>If <tt>VISIBLE_GROUP</tt>, only users who are members of at least one group
+that is visible to the current user are visible.</p></div>
+<div class="paragraph"><p>If <tt>NONE</tt>, no users other than the current user are visible.</p></div>
+<div class="paragraph"><p>Default is <tt>ALL</tt>.</p></div>
+</dd>
+</dl></div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_addreviewer_a_section_addreviewer"><a id="addreviewer"></a>Section addreviewer</h3>
 <div class="dlist"><dl>
 <dt class="hdlist1">
 <a id="addreviewer.maxWithoutConfirmation"></a>addreviewer.maxWithoutConfirmation
@@ -611,7 +817,9 @@ be added at once by adding a group as reviewer.</p></div>
 <div class="paragraph"><p>Default is 20.</p></div>
 </dd>
 </dl></div>
-<h3 id="_a_id_auth_a_section_auth"><a id="auth"></a>Section auth</h3><div style="clear:left"></div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_auth_a_section_auth"><a id="auth"></a>Section auth</h3>
 <div class="paragraph"><p>See also <a href="config-sso.html">SSO configuration</a>.</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -949,7 +1157,9 @@ branches.</p></div>
 <div class="paragraph"><p>By default this is set to false.</p></div>
 </dd>
 </dl></div>
-<h3 id="_a_id_cache_a_section_cache"><a id="cache"></a>Section cache</h3><div style="clear:left"></div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_cache_a_section_cache"><a id="cache"></a>Section cache</h3>
 <div class="dlist"><dl>
 <dt class="hdlist1">
 <a id="cache.directory"></a>cache.directory
@@ -1074,6 +1284,7 @@ items to disk.</p></div>
 <div class="paragraph"><p>Common unit suffixes of <em>k</em>, <em>m</em>, or <em>g</em> are supported.</p></div>
 </dd>
 </dl></div>
+<div class="sect3">
 <h4 id="_a_id_cache_names_a_standard_caches"><a id="cache_names"></a>Standard Caches</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -1249,6 +1460,8 @@ this cache is approximately 248 bytes, depending on the JVM.</p></div>
 </dd>
 </dl></div>
 <div class="paragraph"><p>See also <a href="cmd-flush-caches.html">gerrit flush-caches</a>.</p></div>
+</div>
+<div class="sect3">
 <h4 id="_a_id_cache_options_a_cache_options"><a id="cache_options"></a>Cache Options</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -1324,7 +1537,10 @@ Administrators may force the cache to flush with
 <div class="paragraph"><p>Default is 5 minutes.</p></div>
 </dd>
 </dl></div>
-<h3 id="_a_id_changemerge_a_section_changemerge"><a id="changeMerge"></a>Section changeMerge</h3><div style="clear:left"></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_changemerge_a_section_changemerge"><a id="changeMerge"></a>Section changeMerge</h3>
 <div class="paragraph"><p>Controls whether or not the mergeability test of changes is
 enabled.  If enabled, when the change page is loaded, the test is
 triggered. The submit button will be enabled or disabled according to
@@ -1335,7 +1551,9 @@ the result.</p></div>
   test = true</tt></pre>
 </div></div>
 <div class="paragraph"><p>By default this is false (test is not enabled).</p></div>
-<h3 id="_a_id_commentlink_a_section_commentlink"><a id="commentlink"></a>Section commentlink</h3><div style="clear:left"></div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_commentlink_a_section_commentlink"><a id="commentlink"></a>Section commentlink</h3>
 <div class="paragraph"><p>Comment links are find/replace strings applied to change descriptions,
 patch comments, and in-line code comments to turn set strings into
 hyperlinks.  One common use is for linking to bug-tracking systems.</p></div>
@@ -1398,7 +1616,9 @@ match expression may be accessed as <tt>$'n'</tt>.</p></div>
 <tt>\"</tt> is necessary to protect them from the parser.</p></div>
 </dd>
 </dl></div>
-<h3 id="_a_id_contactstore_a_section_contactstore"><a id="contactstore"></a>Section contactstore</h3><div style="clear:left"></div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_contactstore_a_section_contactstore"><a id="contactstore"></a>Section contactstore</h3>
 <div class="dlist"><dl>
 <dt class="hdlist1">
 <a id="contactstore.url"></a>contactstore.url
@@ -1416,7 +1636,9 @@ of a contributor agreement.</p></div>
 <div class="paragraph"><p>Shared secret of the web based contact store.</p></div>
 </dd>
 </dl></div>
-<h3 id="_a_id_container_a_section_container"><a id="container"></a>Section container</h3><div style="clear:left"></div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_container_a_section_container"><a id="container"></a>Section container</h3>
 <div class="paragraph"><p>These settings are applied only if Gerrit is started as the container
 process through Gerrit&#8217;s <em>gerrit.sh</em> rc.d compatible wrapper script.</p></div>
 <div class="dlist"><dl>
@@ -1472,7 +1694,9 @@ environment variable <em>GERRIT_WAR</em>.</p></div>
 <em>$HOME/gerrit.war</em>.</p></div>
 </dd>
 </dl></div>
-<h3 id="_a_id_core_a_section_core"><a id="core"></a>Section core</h3><div style="clear:left"></div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_core_a_section_core"><a id="core"></a>Section core</h3>
 <div class="dlist"><dl>
 <dt class="hdlist1">
 <a id="core.packedGitWindowSize"></a>core.packedGitWindowSize
@@ -1561,7 +1785,9 @@ unused mapped spaces fast enough.</p></div>
 much more predictable behavior.</p></div>
 </dd>
 </dl></div>
-<h3 id="_a_id_database_a_section_database"><a id="database"></a>Section database</h3><div style="clear:left"></div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_database_a_section_database"><a id="database"></a>Section database</h3>
 <div class="paragraph"><p>The database section configures where Gerrit stores its metadata
 records about user accounts and change reviews.</p></div>
 <div class="listingblock">
@@ -1723,7 +1949,9 @@ h, hr, hour, hours
 <div class="paragraph"><p>Default is <tt>30 seconds</tt>.</p></div>
 </dd>
 </dl></div>
-<h3 id="_a_id_download_a_section_download"><a id="download"></a>Section download</h3><div style="clear:left"></div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_download_a_section_download"><a id="download"></a>Section download</h3>
 <div class="listingblock">
 <div class="content">
 <pre><tt>[download]
@@ -1782,7 +2010,9 @@ not default, as not all instances will deploy repo.</p></div>
 downloads are allowed.</p></div>
 </dd>
 </dl></div>
-<h3 id="_a_id_gerrit_a_section_gerrit"><a id="gerrit"></a>Section gerrit</h3><div style="clear:left"></div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_gerrit_a_section_gerrit"><a id="gerrit"></a>Section gerrit</h3>
 <div class="dlist"><dl>
 <dt class="hdlist1">
 <a id="gerrit.basePath"></a>gerrit.basePath
@@ -1847,7 +2077,9 @@ same host as Gerrit.</p></div>
 in-sync with this server.  By default, true.</p></div>
 </dd>
 </dl></div>
-<h3 id="_a_id_gitweb_a_section_gitweb"><a id="gitweb"></a>Section gitweb</h3><div style="clear:left"></div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_gitweb_a_section_gitweb"><a id="gitweb"></a>Section gitweb</h3>
 <div class="paragraph"><p>Gerrit can forward requests to either an internally managed gitweb
 (which allows Gerrit to enforce some access controls), or to an
 externally managed gitweb (where the web server manages access).
@@ -1882,7 +2114,7 @@ is no gitweb hyperlinking support.</p></div>
 <div class="paragraph"><p>Valid values are <tt>gitweb</tt>, <tt>cgit</tt>, <tt>disabled</tt> or <tt>custom</tt>.</p></div>
 </dd>
 <dt class="hdlist1">
-<a id="gitweb.type"></a>gitweb.revision
+<a id="gitweb.revision"></a>gitweb.revision
 </dt>
 <dd>
 <div class="paragraph"><p>Optional pattern to use for constructing the gitweb URL when pointing
@@ -1891,7 +2123,7 @@ at a specific commit when <tt>custom</tt> is used above.</p></div>
 and <tt>${commit}</tt> for the SHA1 hash for the commit.</p></div>
 </dd>
 <dt class="hdlist1">
-<a id="gitweb.type"></a>gitweb.project
+<a id="gitweb.project"></a>gitweb.project
 </dt>
 <dd>
 <div class="paragraph"><p>Optional pattern to use for constructing the gitweb URL when pointing
@@ -1899,13 +2131,24 @@ at a specific project when <tt>custom</tt> is used above.</p></div>
 <div class="paragraph"><p>Valid replacements are <tt>${project}</tt> for the project name in Gerrit.</p></div>
 </dd>
 <dt class="hdlist1">
-<a id="gitweb.type"></a>gitweb.branch
+<a id="gitweb.branch"></a>gitweb.branch
 </dt>
 <dd>
 <div class="paragraph"><p>Optional pattern to use for constructing the gitweb URL when pointing
 at a specific branch when <tt>custom</tt> is used above.</p></div>
 <div class="paragraph"><p>Valid replacements are <tt>${project}</tt> for the project name in Gerrit
 and <tt>${branch}</tt> for the name of the branch.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="gitweb.filehistory"></a>gitweb.filehistory
+</dt>
+<dd>
+<div class="paragraph"><p>Optional pattern to use for constructing the gitweb URL when pointing
+at the history of a file in a specific branch when <tt>custom</tt> is used
+above.</p></div>
+<div class="paragraph"><p>Valid replacements are <tt>${project}</tt> for the project name in Gerrit,
+<tt>${file}</tt> for the file name and <tt>${branch}</tt> for the name of the
+branch.</p></div>
 </dd>
 <dt class="hdlist1">
 <a id="gitweb.linkname"></a>gitweb.linkname
@@ -1932,7 +2175,9 @@ using the property <em>gitweb.pathSeparator</em>.</p></div>
 <div class="paragraph"><p>Valid values are the characters <em>*</em>, <em>(</em> and <em>)</em>.</p></div>
 </dd>
 </dl></div>
-<h3 id="_a_id_hooks_a_section_hooks"><a id="hooks"></a>Section hooks</h3><div style="clear:left"></div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_hooks_a_section_hooks"><a id="hooks"></a>Section hooks</h3>
 <div class="paragraph"><p>See also <a href="config-hooks.html">Hooks</a>.</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -1970,7 +2215,9 @@ using the property <em>gitweb.pathSeparator</em>.</p></div>
 <tt>change-abandoned</tt> will be used.</p></div>
 </dd>
 </dl></div>
-<h3 id="_a_id_http_a_section_http"><a id="http"></a>Section http</h3><div style="clear:left"></div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_http_a_section_http"><a id="http"></a>Section http</h3>
 <div class="dlist"><dl>
 <dt class="hdlist1">
 <a id="http.proxy"></a>http.proxy
@@ -1997,7 +2244,9 @@ This property is honored only if the password does not
 appear in the http.proxy property above.</p></div>
 </dd>
 </dl></div>
-<h3 id="_a_id_httpd_a_section_httpd"><a id="httpd"></a>Section httpd</h3><div style="clear:left"></div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_httpd_a_section_httpd"><a id="httpd"></a>Section httpd</h3>
 <div class="paragraph"><p>The httpd section configures the embedded servlet container.</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -2203,7 +2452,9 @@ abort until the client disconnects.</p></div>
 <div class="paragraph"><p>By default, 5 minutes.</p></div>
 </dd>
 </dl></div>
-<h3 id="_a_id_ldap_a_section_ldap"><a id="ldap"></a>Section ldap</h3><div style="clear:left"></div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_ldap_a_section_ldap"><a id="ldap"></a>Section ldap</h3>
 <div class="paragraph"><p>LDAP integration is only enabled if <tt>auth.type</tt> was set to
 <tt>HTTP_LDAP</tt>, <tt>LDAP</tt> or <tt>CLIENT_SSL_CERT_LDAP</tt>.  See above for a
 detailed description of the auth.type settings and their
@@ -2478,7 +2729,9 @@ will be directly stored in lower case.</p></div>
 <div class="paragraph"><p>By default, unset/false.</p></div>
 </dd>
 </dl></div>
-<h3 id="_a_id_mimetype_a_section_mimetype"><a id="mimetype"></a>Section mimetype</h3><div style="clear:left"></div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_mimetype_a_section_mimetype"><a id="mimetype"></a>Section mimetype</h3>
 <div class="dlist"><dl>
 <dt class="hdlist1">
 <a id="mimetype.name.safe"></a>mimetype.&lt;name&gt;.safe
@@ -2507,7 +2760,9 @@ or the wildcard <tt>*/*</tt> to match all types.</p></div>
 [mimetype "application/vnd.ms-excel"]
   safe = true</tt></pre>
 </div></div>
-<h3 id="_a_id_pack_a_section_pack"><a id="pack"></a>Section pack</h3><div style="clear:left"></div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_pack_a_section_pack"><a id="pack"></a>Section pack</h3>
 <div class="paragraph"><p>Global settings controlling how Gerrit Code Review creates pack
 streams for Git clients running clone, fetch, or pull.  Most of these
 variables are per-client request, and thus should be carefully set
@@ -2533,11 +2788,14 @@ auto-detected and one thread per CPU is used, per client request.</p></div>
 <div class="paragraph"><p>By default, 1.</p></div>
 </dd>
 </dl></div>
-<h3 id="_a_id_receive_a_section_receive"><a id="receive"></a>Section receive</h3><div style="clear:left"></div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_receive_a_section_receive"><a id="receive"></a>Section receive</h3>
 <div class="paragraph"><p>This section is used to set who can execute the <em>receive-pack</em> and
 to limit the maximum Git object size that <em>receive-pack</em> will accept.
 <em>receive-pack</em> is what runs on the server during a user&#8217;s push or
-repo upload command.</p></div>
+repo upload command. It also contains some advanced options for tuning the
+behavior of Gerrit&#8217;s <em>receive-pack</em> mechanism.</p></div>
 <div class="listingblock">
 <div class="content">
 <pre><tt>[receive]
@@ -2568,8 +2826,30 @@ from pushing objects which are too large to Gerrit.</p></div>
 <div class="paragraph"><p>Default is zero.</p></div>
 <div class="paragraph"><p>Common unit suffixes of <em>k</em>, <em>m</em>, or <em>g</em> are supported.</p></div>
 </dd>
+<dt class="hdlist1">
+<a id="receive.threadPoolSize"></a>receive.threadPoolSize
+</dt>
+<dd>
+<div class="paragraph"><p>Maximum size of the thread pool in which the change data in received packs is
+processed.</p></div>
+<div class="paragraph"><p>Defaults to the number of available CPUs according to the Java runtime.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="receive.timeout"></a>receive.timeout
+</dt>
+<dd>
+<div class="paragraph"><p>Overall timeout on the time taken to process the change data in
+received packs. Only includes the time processing Gerrit changes
+and updating references, not the time to index the pack. Values can
+be specified using standard time unit abbreviations (<em>ms</em>, <em>sec</em>,
+<em>min</em>, etc.).</p></div>
+<div class="paragraph"><p>Default is 2 minutes. If no unit is specified, millisconds
+is assumed.</p></div>
+</dd>
 </dl></div>
-<h3 id="_a_id_repository_a_section_repository"><a id="repository"></a>Section repository</h3><div style="clear:left"></div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_repository_a_section_repository"><a id="repository"></a>Section repository</h3>
 <div class="paragraph"><p>Repositories in this sense are the same as projects.</p></div>
 <div class="paragraph"><p>In the following example configuration <tt>Registered Users</tt> is set
 to be the default owner of new projects.</p></div>
@@ -2597,7 +2877,9 @@ groups are allowed.  Each on its own line.  Groups which don&#8217;t exist
 in the database are ignored.</p></div>
 </dd>
 </dl></div>
-<h3 id="_a_id_rules_a_section_rules"><a id="rules"></a>Section rules</h3><div style="clear:left"></div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_rules_a_section_rules"><a id="rules"></a>Section rules</h3>
 <div class="dlist"><dl>
 <dt class="hdlist1">
 <a id="rules.enable"></a>rules.enable
@@ -2609,7 +2891,9 @@ only the default internal rules will be used.</p></div>
 <div class="paragraph"><p>Default is true, to execute project specific rules.</p></div>
 </dd>
 </dl></div>
-<h3 id="_a_id_sendemail_a_section_sendemail"><a id="sendemail"></a>Section sendemail</h3><div style="clear:left"></div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_sendemail_a_section_sendemail"><a id="sendemail"></a>Section sendemail</h3>
 <div class="dlist"><dl>
 <dt class="hdlist1">
 <a id="sendemail.enable"></a>sendemail.enable
@@ -2742,7 +3026,9 @@ should expire.</p></div>
 <div class="paragraph"><p>By default, unset, so no Expiry-Date header is generated.</p></div>
 </dd>
 </dl></div>
-<h3 id="_a_id_site_a_section_site"><a id="site"></a>Section site</h3><div style="clear:left"></div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_site_a_section_site"><a id="site"></a>Section site</h3>
 <div class="dlist"><dl>
 <dt class="hdlist1">
 <a id="site.checkUserAgent"></a>site.checkUserAgent
@@ -2763,7 +3049,9 @@ updated versions. If false, a server restart is required to change
 any of these resources. Default is true, allowing automatic reloads.</p></div>
 </dd>
 </dl></div>
-<h3 id="_a_id_sshd_a_section_sshd"><a id="sshd"></a> Section sshd</h3><div style="clear:left"></div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_sshd_a_section_sshd"><a id="sshd"></a> Section sshd</h3>
 <div class="dlist"><dl>
 <dt class="hdlist1">
 <a id="sshd.listenAddress"></a>sshd.listenAddress
@@ -2972,24 +3260,30 @@ are enabled in addition to the default MACs, MAC names starting with
 <div class="paragraph"><p>By default, all supported MACs are available.</p></div>
 </dd>
 </dl></div>
-<h3 id="_a_id_suggest_a_section_suggest"><a id="suggest"></a> Section suggest</h3><div style="clear:left"></div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_suggest_a_section_suggest"><a id="suggest"></a> Section suggest</h3>
 <div class="dlist"><dl>
 <dt class="hdlist1">
 <a id="suggest.accounts"></a>suggest.accounts
 </dt>
 <dd>
-<div class="paragraph"><p>If <tt>ALL</tt>, all matching user accounts will be offered as
-completion suggestions when adding a reviewer to a change,
-or a user to a group.</p></div>
-<div class="paragraph"><p>If <tt>SAME_GROUP</tt>, only users who are also members of a group the
-current user is a member of will be offered.</p></div>
-<div class="paragraph"><p>If <tt>VISIBLE_GROUP</tt>, only users who are members of at least one group
-that is visible to the current user will be offered.</p></div>
-<div class="paragraph"><p>If <tt>OFF</tt>, no account suggestions are given.</p></div>
-<div class="paragraph"><p>Default is <tt>ALL</tt>.</p></div>
+<div class="paragraph"><p>If <tt>true</tt>, visible user accounts (according to the value of
+<tt>accounts.visibility</tt>) will be offered as completion suggestions
+when adding a reviewer to a change, or a user to a group.</p></div>
+<div class="paragraph"><p>If <tt>false</tt>, account suggestion is disabled.</p></div>
+<div class="paragraph"><p>Older configurations may also have one of the <tt>accounts.visibility</tt>
+values for this field, including <tt>OFF</tt> as a synonym for <tt>NONE</tt>. If
+<tt>accounts.visibility</tt> is also set, that value overrides this one;
+otherwise, this value applies to both <tt>suggest.accounts</tt> and
+<tt>accounts.visibility</tt>.</p></div>
+<div class="paragraph"><p>New configurations should prefer the boolean value for this field
+and an enum value for <tt>accounts.visibility</tt>.</p></div>
 </dd>
 </dl></div>
-<h3 id="_a_id_theme_a_section_theme"><a id="theme"></a> Section theme</h3><div style="clear:left"></div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_theme_a_section_theme"><a id="theme"></a> Section theme</h3>
 <div class="dlist"><dl>
 <dt class="hdlist1">
 <a id="theme.backgroundColor"></a>theme.backgroundColor
@@ -3052,7 +3346,9 @@ not specified in a section are inherited from the default theme.</p></div>
 [theme "signed-out"]
   backgroundColor = 00FFFF</tt></pre>
 </div></div>
-<h3 id="_a_id_trackingid_a_section_trackingid"><a id="trackingid"></a> Section trackingid</h3><div style="clear:left"></div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_trackingid_a_section_trackingid"><a id="trackingid"></a> Section trackingid</h3>
 <div class="paragraph"><p>Tagged footer lines containing references to external
 tracking systems, parsed out of the commit message and
 saved in Gerrit&#8217;s database.  After making changes to
@@ -3107,7 +3403,9 @@ It is possible to have several trackingid entries for the same
 tracking system.</p></div>
 </dd>
 </dl></div>
-<h3 id="_a_id_transfer_a_section_transfer"><a id="transfer"></a> Section transfer</h3><div style="clear:left"></div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_transfer_a_section_transfer"><a id="transfer"></a> Section transfer</h3>
 <div class="dlist"><dl>
 <dt class="hdlist1">
 <a id="transfer.timeout"></a>transfer.timeout
@@ -3124,7 +3422,9 @@ reasonable timeout value.</p></div>
 <div class="paragraph"><p>Defaults to 0 seconds, wait indefinitely.</p></div>
 </dd>
 </dl></div>
-<h3 id="_a_id_upload_a_section_upload"><a id="upload"></a>Section upload</h3><div style="clear:left"></div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_upload_a_section_upload"><a id="upload"></a>Section upload</h3>
 <div class="paragraph"><p>Sets the group of users allowed to execute <em>upload-pack</em> on the
 server, <em>upload-pack</em> is what runs on the server during a user&#8217;s
 fetch, clone or repo sync command.</p></div>
@@ -3145,7 +3445,9 @@ on the server. One or more groups can be set.</p></div>
 <em>upload-pack</em> on the server.</p></div>
 </dd>
 </dl></div>
-<h3 id="_a_id_user_a_section_user"><a id="user"></a> Section user</h3><div style="clear:left"></div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_user_a_section_user"><a id="user"></a> Section user</h3>
 <div class="dlist"><dl>
 <dt class="hdlist1">
 <a id="user.name"></a>user.name
@@ -3175,6 +3477,9 @@ notifications if the full name of the user is not set.</p></div>
 </dd>
 </dl></div>
 </div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_file_tt_etc_secure_config_tt">File <tt>etc/secure.config</tt></h2>
 <div class="sectionbody">
 <div class="paragraph"><p>The optional file <tt>'$site_path'/etc/secure.config</tt> overrides (or
@@ -3205,6 +3510,8 @@ be exposed to everyone.</p></div>
   password = s3kr3t</tt></pre>
 </div></div>
 </div>
+</div>
+<div class="sect1">
 <h2 id="_file_tt_etc_replication_config_tt">File <tt>etc/replication.config</tt></h2>
 <div class="sectionbody">
 <div class="paragraph"><p>The optional file <tt>'$site_path'/etc/replication.config</tt> controls how
@@ -3218,6 +3525,8 @@ repositories under its control.</p></div>
 </li>
 </ul></div>
 </div>
+</div>
+<div class="sect1">
 <h2 id="_file_tt_etc_peer_keys_tt">File <tt>etc/peer_keys</tt></h2>
 <div class="sectionbody">
 <div class="paragraph"><p>The optional file <tt>'$site_path'/etc/peer_keys</tt> controls who can
@@ -3225,6 +3534,8 @@ login as the <em>Gerrit Code Review</em> user, required for the <a href="cmd-sue
 command.</p></div>
 <div class="paragraph"><p>The format is one Base-64 encoded public key per line.</p></div>
 </div>
+</div>
+<div class="sect1">
 <h2 id="_database_system_config">Database system_config</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>Several columns in the <tt>system_config</tt> table within the metadata
@@ -3239,7 +3550,8 @@ by Gerrit.  If you modify any columns in this table, Gerrit needs
 to be restarted before it will use the new values.</td>
 </tr></table>
 </div>
-<h3 id="_configurable_parameters">Configurable Parameters</h3><div style="clear:left"></div>
+<div class="sect2">
+<h3 id="_configurable_parameters">Configurable Parameters</h3>
 <div class="dlist"><dl>
 <dt class="hdlist1">
 site_path
@@ -3265,6 +3577,8 @@ good idea.</p></div>
 </dd>
 </dl></div>
 </div>
+</div>
+</div>
 <hr style="
   height: 2px;
   color: silver;
@@ -3276,8 +3590,8 @@ good idea.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.3<br />
-Last updated 2012-04-10 14:44:28 MDT
+Version 2.4 (from v2.4-rc1)<br />
+Last updated 2012-05-16 19:35:30 CEST
 </div>
 </div>
 </body>
