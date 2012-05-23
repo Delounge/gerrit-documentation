@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.6" />
+<meta name="generator" content="AsciiDoc 8.6.5" />
 <title>Release notes for Gerrit 2.4</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
@@ -179,7 +179,7 @@ div.quoteblock, div.verseblock {
   margin-left: 1.0em;
   margin-right: 10%;
   border-left: 5px solid #f0f0f0;
-  color: #888;
+  color: #777777;
 }
 
 div.quoteblock > div.attribution {
@@ -514,29 +514,6 @@ th.tableblock.valign-middle, td.tableblock.valign-middle {
 th.tableblock.valign-bottom, td.tableblock.valign-bottom {
   vertical-align: bottom;
 }
-
-
-/*
- * manpage specific
- *
- * */
-
-body.manpage h1 {
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-  border-top: 2px solid silver;
-  border-bottom: 2px solid silver;
-}
-body.manpage h2 {
-  border-style: none;
-}
-body.manpage div.sectionbody {
-  margin-left: 3em;
-}
-
-@media print {
-  body.manpage div#toc { display: none; }
-}
 </style>
 <script type="text/javascript">
 /*<![CDATA[*/
@@ -610,7 +587,7 @@ toc: function (toclevels) {
   var i;
   for (i = 0; i < toc.childNodes.length; i++) {
     var entry = toc.childNodes[i];
-    if (entry.nodeName == 'div'
+    if (entry.nodeName == 'DIV'
      && entry.getAttribute("class")
      && entry.getAttribute("class").match(/^toclevel/))
       tocEntriesToRemove.push(entry);
@@ -656,7 +633,7 @@ footnotes: function () {
   var entriesToRemove = [];
   for (i = 0; i < noteholder.childNodes.length; i++) {
     var entry = noteholder.childNodes[i];
-    if (entry.nodeName == 'div' && entry.getAttribute("class") == "footnote")
+    if (entry.nodeName == 'DIV' && entry.getAttribute("class") == "footnote")
       entriesToRemove.push(entry);
   }
   for (i = 0; i < entriesToRemove.length; i++) {
@@ -736,7 +713,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Release notes for Gerrit 2.4</h1>
-<span id="revnumber">version 2.4 (from v2.4-rc1)</span>
+<span id="revnumber">version 2.4 (from v2.4-rc2)</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -828,6 +805,13 @@ the tip of the destination branch or the latest patchset
 of the change we depend upon. A new patch set containing
 the rebased commit will be produced and added to the
 change.</p></div>
+<div class="paragraph"><p>Rebasing of a change in web UI is restricted to change owner, submitter or
+those with the (new) <em>rebase</em> permission.</p></div>
+</li>
+<li>
+<p>
+Add a new permission <em>rebase</em> to permit rebasing changes in the web UI
+</p>
 </li>
 <li>
 <p>
@@ -1092,6 +1076,11 @@ Fix merging of access sections
 Fix inconsistent behaviour when replicating refs/meta/config
 </p>
 </li>
+<li>
+<p>
+Fix duplicated results on status:open project:P branch:B
+</p>
+</li>
 </ul></div>
 </div>
 </div>
@@ -1219,8 +1208,8 @@ Fix documentation of ls-projects
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.4 (from v2.4-rc1)<br />
-Last updated 2012-05-16 19:35:30 CEST
+Version 2.4 (from v2.4-rc2)<br />
+Last updated 2012-05-23 15:03:19 CEST
 </div>
 </div>
 </body>
