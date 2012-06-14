@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.5" />
-<title>Release notes for Gerrit 2.4</title>
+<title>Release notes for Gerrit 2.4.1</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
 
@@ -706,303 +706,22 @@ install: function(toclevels) {
 }
 
 }
-asciidoc.install(2);
+asciidoc.install();
 /*]]>*/
 </script>
 </head>
 <body class="article">
 <div id="header">
-<h1>Release notes for Gerrit 2.4</h1>
-<span id="revnumber">version 2.4</span>
-<div id="toc">
-  <div id="toctitle">Table of Contents</div>
-  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
-</div>
+<h1>Release notes for Gerrit 2.4.1</h1>
 </div>
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<div class="paragraph"><p>Gerrit 2.4 is now available:</p></div>
-<div class="paragraph"><p><a href="http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.4.war">http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.4.war</a></p></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_schema_change">Schema Change</h2>
-<div class="sectionbody">
-<div class="paragraph"><p><strong>WARNING:</strong> This release contains schema changes.  To upgrade:</p></div>
-<div class="listingblock">
-<div class="content">
-<pre><tt>  java -jar gerrit.war init -d site_path</tt></pre>
-</div></div>
-<div class="paragraph"><p><strong>WARNING:</strong> Upgrading to 2.4.x requires the server be first upgraded to 2.1.7 (or
-a later 2.1.x version), and then to 2.4.x.  If you are upgrading from 2.2.x.x or
-newer, you may ignore this warning and upgrade directly to 2.4.x.</p></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_new_features">New Features</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_security">Security</h3>
-<div class="ulist"><ul>
-<li>
-<p>
-Restrict visibility to arbitrary user dashboards
-</p>
-<div class="paragraph"><p>Administrators have some expectation when using the <em>suggest.accounts</em>
-visibility restriction feature that users cannot get the names or
-email addresses for arbitrary accounts. In fact, because account IDs
-are sequential, it would be easy for an adversary to get personal
-information of all users on the server by requesting every user&#8217;s
-dashboard.</p></div>
-<div class="paragraph"><p>This includes changing the meaning of the <em>suggest.accounts</em> config
-option to be a boolean indicating whether account suggestion should
-happen at all, which is now orthogonal to the account visibility
-restriction policy. We still recognize the old values for
-<em>suggest.accounts</em>, with the slight behavior change that
-<em>suggest.accounts=OFF</em> now means that users cannot access the dashboards
-of any other users. Administrators who do not want this behavior can
-update their configuration.</p></div>
-</li>
-<li>
-<p>
-Indicate that <em>not found</em> may actually be a permission issue
-</p>
-</li>
-</ul></div>
-</div>
-<div class="sect2">
-<h3 id="_web">Web</h3>
-<div class="ulist"><ul>
-<li>
-<p>
-Add user preference to mark files reviewed automatically or manually
-</p>
-<div class="paragraph"><p>Add a checkbox to the preferences header on the diff
-screen which allows a user to specify whether they
-want manual-reviewing enabled or disabled.  Previously,
-every file was auto marked reviewed when a user first
-displayed it.  The new manual mode prevents this auto
-marking and only marks a file reviewed when the user
-explicitly clicks on the reviewed checkbox.</p></div>
-</li>
-<li>
-<p>
-Use <em>Auto Merge</em> for merge commit&#8217;s base comparison
-</p>
-<div class="paragraph"><p>When reviewing a merge commit, the old wording in the version history dropdown
-of <em>Base</em> doesn&#8217;t really match Gerrit&#8217;s behavior.  Updating this to use
-<em>Auto Merge</em> as suggested by Shawn Pearce on IRC.</p></div>
-</li>
-<li>
-<p>
-issue 1035 Add rebase button to the change screen
-</p>
-<div class="paragraph"><p>This change adds a rebase button along with the rest of
-the action buttons in the change page. When pressing the
-button, the most recent patch set will be rebased onto
-the tip of the destination branch or the latest patchset
-of the change we depend upon. A new patch set containing
-the rebased commit will be produced and added to the
-change.</p></div>
-<div class="paragraph"><p>Rebasing of a change in web UI is restricted to change owner, submitter or
-those with the (new) <em>rebase</em> permission.</p></div>
-</li>
-<li>
-<p>
-Add a new permission <em>rebase</em> to permit rebasing changes in the web UI
-</p>
-</li>
-<li>
-<p>
-Make a user&#8217;s dashboard visible if any of the changes are visible to the
-current user.
-</p>
-</li>
-<li>
-<p>
-Change <em>Loading &#8230;</em> to say <em>Working &#8230;</em> as, often, there is more going on
-than just loading a response.
-</p>
-</li>
-</ul></div>
-</div>
-<div class="sect2">
-<h3 id="_performance">Performance</h3>
-<div class="ulist"><ul>
-<li>
-<p>
-Asynchronously send email so it does not block the UI
-</p>
-</li>
-<li>
-<p>
-Optimize queries for open/merged changes by project + branch
-</p>
-</li>
-</ul></div>
-</div>
-<div class="sect2">
-<h3 id="_git">Git</h3>
-<div class="ulist"><ul>
-<li>
-<p>
-Implement a multi-sub-task progress monitor for ReceiveCommits
-</p>
-</li>
-<li>
-<p>
-Close corresponding change when pushing to <em>refs/heads/*</em>
-</p>
-<div class="paragraph"><p>Gerrit would not close the open changes with matching change-ids,
-when the user pushes commits directly to <em>refs/heads/*</em>.</p></div>
-<div class="paragraph"><p>This issue could be triggered for two reasons:</p></div>
-<div class="olist arabic"><ol class="arabic">
-<li>
-<p>
-It is triggered when Gerrit detects no changes between the
-pushed commits and the current patchset on the open changes. This
-patch make sure that the matching open change is always closed when
-pushing to <em>refs/heads/*</em>, even if no visible changes is detected.
-</p>
-</li>
-<li>
-<p>
-The same commit exists on another branch than the destination
-branch. This could trick gerrit into just "re-closing" the wrong
-change.
-</p>
-</li>
-</ol></div>
-</li>
-<li>
-<p>
-Run ReceiveCommits in a shared thread pool
-</p>
-<div class="paragraph"><p>Since the work to ReceiveCommits may take a long, potentially unbounded
-amount of time, we would like to have it run in the background so it
-can be monitored for timeouts and cancelled, and have stalls reported
-to the user from the main thread.</p></div>
-</li>
-</ul></div>
-</div>
-<div class="sect2">
-<h3 id="_search">Search</h3>
-<div class="ulist"><ul>
-<li>
-<p>
-Add the <em>--dependencies</em> option to the <em>query</em> command.
-</p>
-<div class="paragraph"><p>This option includes information about patch sets which depend on, or are
-needed by, each patch set.</p></div>
-</li>
-<li>
-<p>
-Branch Operator: Support full branch names
-</p>
-<div class="paragraph"><p>The search operator for branches required the provided value to be the
-short branch name that is shown in the web interface (without the
-<em>refs/heads/</em> prefix). Change the branch operator so that it also
-supports full branch names as value.</p></div>
-<div class="paragraph"><p>It is intuive that searching with <em>branch:master</em> and searching with
-<em>branch:refs/for/master</em> deliver the same result. So far
-<em>branch:refs/for/master</em> was the same as searching with
-<em>refs:refs/heads/refs/heads/master</em> which is unexpected for most users.</p></div>
-</li>
-<li>
-<p>
-Add comment inclusion via <em>&amp;comments=true</em> over HTTP
-</p>
-<div class="paragraph"><p>With this change, we can fetch the comments on a patchset by sending a
-request to <em>https://site/query?comments=true</em></p></div>
-</li>
-</ul></div>
-</div>
-<div class="sect2">
-<h3 id="_access_rights">Access Rights</h3>
-<div class="ulist"><ul>
-<li>
-<p>
-Added the <em>emailReviewers</em> as a global capability.
-</p>
-<div class="paragraph"><p>This replaces the <em>emailOnlyAuthors</em> flag of account groups.</p></div>
-</li>
-</ul></div>
-</div>
-<div class="sect2">
-<h3 id="_dev">Dev</h3>
-<div class="ulist"><ul>
-<li>
-<p>
-issue 1272 Add scripts to create release notes from git log
-</p>
-<div class="paragraph"><p>These script generates a list of commits from git log between two given commits
-and outputs the asciidoc format containting list of commits subject and body.</p></div>
-</li>
-<li>
-<p>
-Update URL for m2eclipse
-</p>
-<div class="paragraph"><p>The project is now under the Eclipse Foundation umbrella.</p></div>
-</li>
-<li>
-<p>
-Add missing ignore for m2e prefs in gerrit-ehcache
-</p>
-</li>
-<li>
-<p>
-Add <em>--issues</em> and <em>--issue_numbers</em> options to the <em>gitlog2asciidoc.py</em>
-</p>
-</li>
-</ul></div>
-</div>
-<div class="sect2">
-<h3 id="_miscellaneous">Miscellaneous</h3>
-<div class="ulist"><ul>
-<li>
-<p>
-Remove perl from <em>commit-msg</em> hook
-</p>
-<div class="paragraph"><p>Removing perl from the commit-msg hook reduces the dependencies
-gerrit imposes on its users.</p></div>
-</li>
-<li>
-<p>
-updating contrib <em>trivial_rebase.py</em> for 2.2.2.1
-</p>
-</li>
-</ul></div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_upgrades">Upgrades</h2>
-<div class="sectionbody">
-<div class="ulist"><ul>
-<li>
-<p>
-Updated to Guice 3.0.
-</p>
-</li>
-<li>
-<p>
-Updated to gwtorm 1.4.
-</p>
-</li>
-<li>
-<p>
-Update JGit to 1.3.0.201202151440-r.75-gff13648
-</p>
-</li>
-<li>
-<p>
-Update to gwtjsonrpc 1.3
-</p>
-<div class="paragraph"><p>The change also shrinks the built WAR from 38M to 23M
-by excluding the now unnecessary GWT server code.</p></div>
-</li>
-</ul></div>
+<div class="paragraph"><p>Gerrit 2.4.1 is now available:</p></div>
+<div class="paragraph"><p><a href="http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.4.1.war">http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.4.1.war</a></p></div>
+<div class="paragraph"><p>There are no schema changes from 2.4.  However, if upgrading from
+anything but 2.4, follow the upgrade procedure in the 2.4
+<a href="ReleaseNotes-2.4.html">ReleaseNotes</a>.</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -1011,205 +730,85 @@ by excluding the now unnecessary GWT server code.</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
-issue 904 Users who starred a change should receive all the emails about a change.
+Catch all exceptions when async emailing
+</p>
+<div class="paragraph"><p>This fixes email notification issues reported
+<a href="https://groups.google.com/group/repo-discuss/browse_thread/thread/dd157ebc55b962ef/652822d6fbe61e71">here</a>.</p></div>
+</li>
+<li>
+<p>
+Fixed cleanup of propagated SshScopes
+</p>
+<div class="paragraph"><p>This improves error reporting in case of email notification errors.</p></div>
+</li>
+<li>
+<p>
+issue 1394 Fix lookup of the <em>Commit Message</em> file in patch set
+</p>
+<div class="paragraph"><p>There is an assumption that the commit message is always first in the list of
+files of a patch set. However, there was another place in Gerrit code, which
+did binary search through the list of the files, without taking this assumption
+into account. In case when a patch set contained a file which lexicographically
+sorted before <em>/COMMIT_MSG</em> (like <em>.gitignore</em> for example) it could have
+happened that the commit message was not found and, as a side effect, it wasn&#8217;t
+possible to review it.</p></div>
+</li>
+<li>
+<p>
+issue 1162 Fix deadlock on destroy of CommandFactoryProvider
 </p>
 </li>
 <li>
 <p>
-Fix: <em>Diff All Side-by-Side</em> and <em>Diff All Unified</em> buttons
+Honor the sendmail.smtpUser from gerrit.config on upgrade
 </p>
-<div class="paragraph"><p>When pressing the <em>Diff All Side-by-Side</em> or
-<em>Diff All Unified</em> button on the change screen, the
-opened browser windows/tabs shows diffs using "Base"
-as old version and the latest one as active patch set,
-regardless what has been set using the
-"Old Version History:" drop down menu and what is
-currently active patch set.</p></div>
-<div class="paragraph"><p>Gerrit doesn&#8217;t remember the base patch set in the URL,
-making it impossible to copy-and-paste the URL to
-co-workers to show them the same diff a user is
-looking at.</p></div>
-<div class="paragraph"><p>This change fixes this behavior to make sure that
-the opened new browser windows shows diffs using the
-correct old patch set and active patch set.</p></div>
+<div class="paragraph"><p>If sendmail.smtpUser was not present in the gerrit.config then don&#8217;t set it in
+site upgrade.</p></div>
 </li>
 <li>
 <p>
-Fix NPEs looking up groups by UUID in GroupCache
+issue 1420 Forge committer bypassed
+</p>
+<div class="paragraph"><p>It was possible to forge committer even without having permission for that.
+This was a regression from 2.3.</p></div>
+</li>
+<li>
+<p>
+Make sure the "Object too large&#8230;" error message is printed when an object
+larger than receive.maxObjectSizeLimit is rejected by Gerrit
 </p>
 </li>
 <li>
 <p>
-Fix default <em>receive.timeout</em>
-</p>
-<div class="paragraph"><p>This should be in milliseconds, not seconds. Set the default to be
-2 minutes in milliseconds and update the documentation to reflect
-that milliseconds are the default unit of time used here.</p></div>
-</li>
-<li>
-<p>
-Fix <em>development_become_any_account</em> redirects
+Display proper error if file diff fails because content is too large
 </p>
 </li>
 <li>
 <p>
-issue 1299 Allow configuration of optional pattern for gitweb file history link
+Get around a log4j bug that causes AsyncAppender-Dispatcher thread to die and
+block other threads
 </p>
-</li>
-<li>
-<p>
-Use servlet context path during logout
-</p>
-</li>
-<li>
-<p>
-issue 1353 Fix case check for project name so that symlinks work again
-</p>
-</li>
-<li>
-<p>
-Fix merging of access sections
-</p>
-</li>
-<li>
-<p>
-Fix inconsistent behaviour when replicating refs/meta/config
-</p>
-</li>
-<li>
-<p>
-Fix duplicated results on status:open project:P branch:B
-</p>
-</li>
-</ul></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_documentation">Documentation</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_access_rights_2">Access Rights</h3>
 <div class="ulist"><ul>
 <li>
 <p>
-Capabilities introduced
+Make async logging buffer size configurable
 </p>
 </li>
 <li>
 <p>
-Kill and priority capabilities
-</p>
-</li>
-<li>
-<p>
-Administrate server capability
-</p>
-</li>
-<li>
-<p>
-Create account capability
-</p>
-</li>
-<li>
-<p>
-Create group and project capability
-</p>
-</li>
-<li>
-<p>
-Flush caches capability
-</p>
-</li>
-<li>
-<p>
-Capability replication and view caches
-</p>
-</li>
-<li>
-<p>
-Capability view conn. &amp; queue
-</p>
-</li>
-<li>
-<p>
-Example roles introduced
-</p>
-</li>
-<li>
-<p>
-Developer example role
-</p>
-</li>
-<li>
-<p>
-CI system example role
-</p>
-</li>
-<li>
-<p>
-Integrator example role
-</p>
-</li>
-<li>
-<p>
-Project owner example role
-</p>
-</li>
-<li>
-<p>
-Administrator example role
+Make logging events discardable, prevent NPE in AsyncAppender-Dispatcher thread
 </p>
 </li>
 </ul></div>
-</div>
-<div class="sect2">
-<h3 id="_miscellaneous_2">Miscellaneous</h3>
-<div class="ulist"><ul>
-<li>
-<p>
-User upload documentation: Replace changes
-</p>
-</li>
-<li>
-<p>
-Add visible-to-all flag in the documentation for cmd-create-group
-</p>
-</li>
-<li>
-<p>
-Add a contributing guideline for annotations
-</p>
-</li>
-<li>
-<p>
-Add missing header for suggest.accounts documentation
-</p>
-</li>
-<li>
-<p>
-Fix anchors for description of gitweb config parameters
-</p>
-</li>
-<li>
-<p>
-Add missing section name to config-gerrit documentation
-</p>
-</li>
-<li>
-<p>
-Fix documentation of ls-projects
-</p>
 </li>
 </ul></div>
-</div>
 </div>
 </div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.4<br />
-Last updated 2012-06-06 11:27:12 CEST
+Last updated 2012-06-14 09:11:59 CEST
 </div>
 </div>
 </body>
