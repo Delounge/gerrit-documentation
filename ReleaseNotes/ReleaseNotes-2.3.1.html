@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.5" />
-<title>Release notes for Gerrit 2.2.2.1</title>
+<title>Release notes for Gerrit 2.3.1</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
 
@@ -712,8 +712,8 @@ asciidoc.install(2);
 </head>
 <body class="article">
 <div id="header">
-<h1>Release notes for Gerrit 2.2.2.1</h1>
-<span id="revnumber">version 2.2.2.1</span>
+<h1>Release notes for Gerrit 2.3.1</h1>
+<span id="revnumber">version 2.3.1</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -722,72 +722,29 @@ asciidoc.install(2);
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<div class="paragraph"><p>Gerrit 2.2.2.1 is now available:</p></div>
-<div class="paragraph"><p><a href="http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.2.2.1.war">http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.2.2.1.war</a></p></div>
-<div class="paragraph"><p>There are no schema changes from 2.2.2.  However, if upgrading from
-anything but 2.2.2, follow the upgrade procedure in the 2.2.2
-<a href="ReleaseNotes-2.2.2.html">ReleaseNotes</a>.</p></div>
+<div class="paragraph"><p>Gerrit 2.3.1 is now available:</p></div>
+<div class="paragraph"><p><a href="http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.3.1.war">http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.3.1.war</a></p></div>
+<div class="paragraph"><p>There are no schema changes from 2.3.</p></div>
+<div class="paragraph"><p>However, if upgrading from anything earlier, follow the upgrade
+procedure in the 2.3 <a href="ReleaseNotes-2.3.html">ReleaseNotes</a>.</p></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_bug_fixes">Bug Fixes</h2>
+<h2 id="_security_fixes">Security Fixes</h2>
 <div class="sectionbody">
 <div class="ulist"><ul>
 <li>
 <p>
-issue 1139 Fix change state in patch set approval if reviewer is added to
-closed change
+Some access control sections may be ignored
 </p>
-<div class="paragraph"><p>For the dummy patch set approval that is created when a reviewer is
-added the cached change state is always open, which is incorrect if a
-reviewer is added to a closed change. As a result the closed change will
-appear in the reviewers dashboard in the <em>Review Requests</em> section and will
-stay there forever.  Ensure the correct change state is cached in the dummy
-patch set approval when it is created.</p></div>
-</li>
-<li>
-<p>
-issue 1171 Fix ownerin and reviewerin searches
-</p>
-<div class="paragraph"><p>Update the ownerin and reviewerin searches to use AccountGroup.UUID as
-required by commit e662fb3d4d7d0ad05791b8d2143ac5ce58117335.</p></div>
-</li>
-<li>
-<p>
-issue 871 Display hash of the cherry-pick merge in comment
-</p>
-<div class="paragraph"><p>After merging a change via cherry-pick, we add the commit&#8217;s
-hash to the comment. This was accidentally removed in
-commit 14246de3c0f81c06bba8d4530e6bf00e918c11b0</p></div>
-</li>
-</ul></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_documentation">Documentation</h2>
-<div class="sectionbody">
-<div class="ulist"><ul>
-<li>
-<p>
-Update top level SUBMITTING_PATCHES
-</p>
-<div class="paragraph"><p>This document is out of date, the URLs are from last August.
-Direct readers to the new server.</p></div>
-</li>
-<li>
-<p>
-Add contributing guideline document
-</p>
-</li>
-<li>
-<p>
-Documentation: update version references for 2.2.2
-</p>
-<div class="paragraph"><p>Correct wording and instructions to be sure they match what would
-be observed with the indicated version of gerrit.
-Expand instructions when needed to ensure all commands could be
-executed and were successful.
-Indent commands and output based on a run of the instructions</p></div>
+<div class="paragraph"><p>Gerrit sometimes ignored an access control section in a project
+if the exact same section name appeared in All-Projects. The bug
+required an unrelated project to have access.inheritFrom set to
+All-Projects and be accessed before the project that has the same
+section name as All-Projects. This is an unlikely scenario for
+most servers, as Gerrit does not normally set inheritFrom equal to
+All-Projects. The usual behavior is to not supply this property in
+project.config, and permit the implicit inheritence to take place.</p></div>
 </li>
 </ul></div>
 </div>
@@ -796,7 +753,7 @@ Indent commands and output based on a run of the instructions</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.2.1<br />
+Version 2.3.1<br />
 Last updated 2012-06-27 14:04:35 CEST
 </div>
 </div>
