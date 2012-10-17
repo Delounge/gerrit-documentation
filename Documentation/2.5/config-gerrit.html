@@ -3,24 +3,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.5" />
+<meta name="generator" content="AsciiDoc 8.6.3" />
 <title>Gerrit Code Review - Configuration</title>
 <style type="text/css">
-/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
-
-/* Default font. */
-body {
-  font-family: Georgia,serif;
-}
-
-/* Title font. */
+/* Sans-serif font. */
 h1, h2, h3, h4, h5, h6,
 div.title, caption.title,
 thead, p.table.header,
-#toctitle,
-#author, #revnumber, #revdate, #revremark,
-#footer {
+div#toctitle,
+span#author, span#revnumber, span#revdate, span#revremark,
+div#footer {
   font-family: Arial,Helvetica,sans-serif;
+}
+
+/* Serif font. */
+div.sectionbody {
+  font-family: Georgia,"Times New Roman",Times,serif;
+}
+
+/* Monospace font. */
+tt {
+  font-size: inherit;
 }
 
 body {
@@ -45,6 +48,11 @@ strong {
   color: #083194;
 }
 
+tt {
+  font-size: inherit;
+  color: navy;
+}
+
 h1, h2, h3, h4, h5, h6 {
   color: #527bbd;
   margin-top: 1.2em;
@@ -63,9 +71,6 @@ h3 {
 }
 h3 + * {
   clear: left;
-}
-h5 {
-  font-size: 1.0em;
 }
 
 div.sectionbody {
@@ -92,36 +97,36 @@ pre {
   margin: 0;
 }
 
-#author {
+span#author {
   color: #527bbd;
   font-weight: bold;
   font-size: 1.1em;
 }
-#email {
+span#email {
 }
-#revnumber, #revdate, #revremark {
+span#revnumber, span#revdate, span#revremark {
 }
 
-#footer {
+div#footer {
   font-size: small;
   border-top: 2px solid silver;
   padding-top: 0.5em;
   margin-top: 4.0em;
 }
-#footer-text {
+div#footer-text {
   float: left;
   padding-bottom: 0.5em;
 }
-#footer-badges {
+div#footer-badges {
   float: right;
   padding-bottom: 0.5em;
 }
 
-#preamble {
+div#preamble {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
-div.imageblock, div.exampleblock, div.verseblock,
+div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
 div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
 div.admonitionblock {
   margin-top: 1.0em;
@@ -262,12 +267,35 @@ div.compact div, div.compact div {
   margin-bottom: 0.1em;
 }
 
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
 tfoot {
   font-weight: bold;
 }
 td > div.verse {
   white-space: pre;
 }
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
 
 div.hdlist {
   margin-top: 0.8em;
@@ -334,14 +362,14 @@ div.colist td img {
 }
 
 @media print {
-  #footer-badges { display: none; }
+  div#footer-badges { display: none; }
 }
 
-#toc {
+div#toc {
   margin-bottom: 2.5em;
 }
 
-#toctitle {
+div#toctitle {
   color: #527bbd;
   font-size: 1.1em;
   font-weight: bold;
@@ -366,157 +394,10 @@ div.toclevel4 {
   font-size: 0.9em;
 }
 
-span.aqua { color: aqua; }
-span.black { color: black; }
-span.blue { color: blue; }
-span.fuchsia { color: fuchsia; }
-span.gray { color: gray; }
-span.green { color: green; }
-span.lime { color: lime; }
-span.maroon { color: maroon; }
-span.navy { color: navy; }
-span.olive { color: olive; }
-span.purple { color: purple; }
-span.red { color: red; }
-span.silver { color: silver; }
-span.teal { color: teal; }
-span.white { color: white; }
-span.yellow { color: yellow; }
-
-span.aqua-background { background: aqua; }
-span.black-background { background: black; }
-span.blue-background { background: blue; }
-span.fuchsia-background { background: fuchsia; }
-span.gray-background { background: gray; }
-span.green-background { background: green; }
-span.lime-background { background: lime; }
-span.maroon-background { background: maroon; }
-span.navy-background { background: navy; }
-span.olive-background { background: olive; }
-span.purple-background { background: purple; }
-span.red-background { background: red; }
-span.silver-background { background: silver; }
-span.teal-background { background: teal; }
-span.white-background { background: white; }
-span.yellow-background { background: yellow; }
-
-span.big { font-size: 2em; }
-span.small { font-size: 0.6em; }
-
-span.underline { text-decoration: underline; }
-span.overline { text-decoration: overline; }
-span.line-through { text-decoration: line-through; }
-
-
-/*
- * xhtml11 specific
- *
- * */
-
-tt {
-  font-family: monospace;
-  font-size: inherit;
-  color: navy;
-}
-
-div.tableblock {
-  margin-top: 1.0em;
-  margin-bottom: 1.5em;
-}
-div.tableblock > table {
-  border: 3px solid #527bbd;
-}
-thead, p.table.header {
-  font-weight: bold;
-  color: #527bbd;
-}
-p.table {
-  margin-top: 0;
-}
-/* Because the table frame attribute is overriden by CSS in most browsers. */
-div.tableblock > table[frame="void"] {
-  border-style: none;
-}
-div.tableblock > table[frame="hsides"] {
-  border-left-style: none;
-  border-right-style: none;
-}
-div.tableblock > table[frame="vsides"] {
-  border-top-style: none;
-  border-bottom-style: none;
-}
-
-
-/*
- * html5 specific
- *
- * */
-
-.monospaced {
-  font-family: monospace;
-  font-size: inherit;
-  color: navy;
-}
-
-table.tableblock {
-  margin-top: 1.0em;
-  margin-bottom: 1.5em;
-}
-thead, p.tableblock.header {
-  font-weight: bold;
-  color: #527bbd;
-}
-p.tableblock {
-  margin-top: 0;
-}
-table.tableblock {
-  border-width: 3px;
-  border-spacing: 0px;
-  border-style: solid;
-  border-color: #527bbd;
-  border-collapse: collapse;
-}
-th.tableblock, td.tableblock {
-  border-width: 1px;
-  padding: 4px;
-  border-style: solid;
-  border-color: #527bbd;
-}
-
-table.tableblock.frame-topbot {
-  border-left-style: hidden;
-  border-right-style: hidden;
-}
-table.tableblock.frame-sides {
-  border-top-style: hidden;
-  border-bottom-style: hidden;
-}
-table.tableblock.frame-none {
-  border-style: hidden;
-}
-
-th.tableblock.halign-left, td.tableblock.halign-left {
-  text-align: left;
-}
-th.tableblock.halign-center, td.tableblock.halign-center {
-  text-align: center;
-}
-th.tableblock.halign-right, td.tableblock.halign-right {
-  text-align: right;
-}
-
-th.tableblock.valign-top, td.tableblock.valign-top {
-  vertical-align: top;
-}
-th.tableblock.valign-middle, td.tableblock.valign-middle {
-  vertical-align: middle;
-}
-th.tableblock.valign-bottom, td.tableblock.valign-bottom {
-  vertical-align: bottom;
-}
 </style>
 <script type="text/javascript">
 /*<![CDATA[*/
+window.onload = function(){asciidoc.footnotes(); asciidoc.toc(2);}
 var asciidoc = {  // Namespace.
 
 /////////////////////////////////////////////////////////////////////
@@ -578,25 +459,6 @@ toc: function (toclevels) {
   }
 
   var toc = document.getElementById("toc");
-  if (!toc) {
-    return;
-  }
-
-  // Delete existing TOC entries in case we're reloading the TOC.
-  var tocEntriesToRemove = [];
-  var i;
-  for (i = 0; i < toc.childNodes.length; i++) {
-    var entry = toc.childNodes[i];
-    if (entry.nodeName == 'DIV'
-     && entry.getAttribute("class")
-     && entry.getAttribute("class").match(/^toclevel/))
-      tocEntriesToRemove.push(entry);
-  }
-  for (i = 0; i < tocEntriesToRemove.length; i++) {
-    toc.removeChild(tocEntriesToRemove[i]);
-  }
-
-  // Rebuild TOC entries.
   var entries = tocEntries(document.getElementById("content"), toclevels);
   for (var i = 0; i < entries.length; ++i) {
     var entry = entries[i];
@@ -624,44 +486,24 @@ toc: function (toclevels) {
  */
 
 footnotes: function () {
-  // Delete existing footnote entries in case we're reloading the footnodes.
-  var i;
-  var noteholder = document.getElementById("footnotes");
-  if (!noteholder) {
-    return;
-  }
-  var entriesToRemove = [];
-  for (i = 0; i < noteholder.childNodes.length; i++) {
-    var entry = noteholder.childNodes[i];
-    if (entry.nodeName == 'DIV' && entry.getAttribute("class") == "footnote")
-      entriesToRemove.push(entry);
-  }
-  for (i = 0; i < entriesToRemove.length; i++) {
-    noteholder.removeChild(entriesToRemove[i]);
-  }
-
-  // Rebuild footnote entries.
   var cont = document.getElementById("content");
+  var noteholder = document.getElementById("footnotes");
   var spans = cont.getElementsByTagName("span");
   var refs = {};
   var n = 0;
   for (i=0; i<spans.length; i++) {
     if (spans[i].className == "footnote") {
       n++;
-      var note = spans[i].getAttribute("data-note");
-      if (!note) {
-        // Use [\s\S] in place of . so multi-line matches work.
-        // Because JavaScript has no s (dotall) regex flag.
-        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
-        spans[i].innerHTML =
-          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
-          "' title='View footnote' class='footnote'>" + n + "</a>]";
-        spans[i].setAttribute("data-note", note);
-      }
+      // Use [\s\S] in place of . so multi-line matches work.
+      // Because JavaScript has no s (dotall) regex flag.
+      note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
       noteholder.innerHTML +=
         "<div class='footnote' id='_footnote_" + n + "'>" +
         "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
         n + "</a>. " + note + "</div>";
+      spans[i].innerHTML =
+        "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+        "' title='View footnote' class='footnote'>" + n + "</a>]";
       var id =spans[i].getAttribute("id");
       if (id != null) refs["#"+id] = n;
     }
@@ -681,39 +523,16 @@ footnotes: function () {
       }
     }
   }
-},
-
-install: function(toclevels) {
-  var timerId;
-
-  function reinstall() {
-    asciidoc.footnotes();
-    if (toclevels) {
-      asciidoc.toc(toclevels);
-    }
-  }
-
-  function reinstallAndRemoveTimer() {
-    clearInterval(timerId);
-    reinstall();
-  }
-
-  timerId = setInterval(reinstall, 500);
-  if (document.addEventListener)
-    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
-  else
-    window.onload = reinstallAndRemoveTimer;
 }
 
 }
-asciidoc.install(2);
 /*]]>*/
 </script>
 </head>
 <body class="article">
 <div id="header">
 <h1>Gerrit Code Review - Configuration</h1>
-<span id="revnumber">version 2.4 (from v2.4-rc2)</span>
+<span id="revnumber">version 2.5-rc1</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -816,6 +635,14 @@ provider chosen by the end-user.  For more information see
 </li>
 <li>
 <p>
+<tt>OpenID_SSO</tt>
+</p>
+<div class="paragraph"><p>Supports OpenID from a single provider.  There is no registration
+link, and the "Sign In" link sends the user directly to the provider&#8217;s
+SSO entry point.</p></div>
+</li>
+<li>
+<p>
 <tt>HTTP</tt>
 </p>
 <div class="paragraph"><p>Gerrit relies upon data presented in the HTTP request.  This includes
@@ -839,7 +666,7 @@ member of available as groups in Gerrit.</p></div>
 <tt>CLIENT_SSL_CERT_LDAP</tt>
 </p>
 <div class="paragraph"><p>This authentication type is actually kind of SSO. Gerrit will configure
-Jetty&#8217;s SSL channel to request client&#8217;s SSL certificate. For this
+Jetty&#8217;s SSL channel to request the client&#8217;s SSL certificate. For this
 authentication to work a Gerrit administrator has to import the root
 certificate of the trust chain used to issue the client&#8217;s certificate
 into the &lt;review-site&gt;/etc/keystore.
@@ -898,7 +725,7 @@ authentication is not possible.</p></div>
 <dd>
 <div class="paragraph"><p>List of permitted OpenID providers.  A user may only authenticate
 with an OpenID that matches this list.  Only used if <tt>auth.type</tt>
-was set to OpenID (the default).</p></div>
+is set to OpenID (the default).</p></div>
 <div class="paragraph"><p>Patterns may be either a
 <a href="http://download.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html">standard
 Java regular expression (java.util.regex)</a> (start with <tt>^</tt> and
@@ -910,7 +737,7 @@ allowing users to authenticate with any OpenID provider.</p></div>
 <a id="auth.trustedOpenID"></a>auth.trustedOpenID
 </dt>
 <dd>
-<div class="paragraph"><p>List of trusted OpenID providers.  Only used if <tt>auth.type</tt> was
+<div class="paragraph"><p>List of trusted OpenID providers.  Only used if <tt>auth.type</tt> is
 set to OpenID (the default).</p></div>
 <div class="paragraph"><p>In order for a user to take advantage of permissions beyond those
 granted to the <tt>Anonymous Users</tt> and <tt>Registered Users</tt> groups,
@@ -1021,11 +848,19 @@ y, year, years (<tt>1 year</tt> is treated as <tt>365 days</tt>)
 <div class="paragraph"><p>Default is 12 hours.</p></div>
 </dd>
 <dt class="hdlist1">
+<a id="auth.openIdSsoUrl"></a>auth.openIdSsoUrl
+</dt>
+<dd>
+<div class="paragraph"><p>The SSO entry point URL.  Only used if <tt>auth.type</tt> was set to
+OpenID_SSO.</p></div>
+<div class="paragraph"><p>The "Sign In" link will send users directly to this URL.</p></div>
+</dd>
+<dt class="hdlist1">
 <a id="auth.httpHeader"></a>auth.httpHeader
 </dt>
 <dd>
 <div class="paragraph"><p>HTTP header to trust the username from, or unset to select HTTP basic
-or digest authentication.  Only used if <tt>auth.type</tt> was set to HTTP.</p></div>
+or digest authentication.  Only used if <tt>auth.type</tt> is set to HTTP.</p></div>
 </dd>
 <dt class="hdlist1">
 <a id="auth.logoutUrl"></a>auth.logoutUrl
@@ -1116,6 +951,18 @@ then Gerrit will do the authentication (using DIGEST authentication).</p></div>
 <div class="paragraph"><p>By default this is set to false.</p></div>
 </dd>
 <dt class="hdlist1">
+<a id="auth.gitBasicAuth"></a>auth.gitBasicAuth
+</dt>
+<dd>
+<div class="paragraph"><p>If true then Git over HTTP and HTTP/S traffic is authenticated using
+standard BasicAuth and credentials validated using the same auth
+method configured for Gerrit Web UI.</p></div>
+<div class="paragraph"><p>This parameter only affects git over http traffic. If set to false
+then Gerrit will authenticate through DIGEST authentication and
+the randomly generated HTTP password in Gerrit DB.</p></div>
+<div class="paragraph"><p>By default this is set to false.</p></div>
+</dd>
+<dt class="hdlist1">
 <a id="auth.userNameToLowerCase"></a>auth.userNameToLowerCase
 </dt>
 <dd>
@@ -1153,8 +1000,8 @@ does not exist, Gerrit will try to create it.</p></div>
 <a id="cache.name.maxAge"></a>cache.&lt;name&gt;.maxAge
 </dt>
 <dd>
-<div class="paragraph"><p>Maximum age to keep an entry in the cache.  If an entry has not
-been accessed in this period of time, it is removed from the cache.
+<div class="paragraph"><p>Maximum age to keep an entry in the cache. Entries are removed from
+the cache and refreshed from source data every maxAge interval.
 Values should use common unit suffixes to express their setting:</p></div>
 <div class="ulist"><ul>
 <li>
@@ -1196,7 +1043,7 @@ y, year, years (<tt>1 year</tt> is treated as <tt>365 days</tt>)
 <div class="paragraph"><p>If a unit suffix is not specified, <tt>minutes</tt> is assumed.  If 0 is
 supplied, the maximum age is infinite and items are never purged
 except when the cache is full.</p></div>
-<div class="paragraph"><p>Default is <tt>90 days</tt> for most caches, except:</p></div>
+<div class="paragraph"><p>Default is <tt>0</tt>, meaning store forever with no expire, except:</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
@@ -1219,8 +1066,17 @@ except when the cache is full.</p></div>
 <a id="cache.name.memoryLimit"></a>cache.&lt;name&gt;.memoryLimit
 </dt>
 <dd>
-<div class="paragraph"><p>Maximum number of cache items to retain in memory.  Keep in mind
-this is total number of items, not bytes of heap used.</p></div>
+<div class="paragraph"><p>The total cost of entries to retain in memory. The cost computation
+varies by the cache. For most caches where the in-memory size of each
+entry is relatively the same, memoryLimit is currently defined to be
+the number of entries held by the cache (each entry costs 1).</p></div>
+<div class="paragraph"><p>For caches where the size of an entry can vary significantly between
+individual entries (notably <tt>"diff"</tt>, <tt>"diff_intraline"</tt>), memoryLimit
+is an approximation of the total number of bytes stored by the cache.
+Larger entries that represent bigger patch sets or longer source files
+will consume a bigger portion of the memoryLimit. For these caches the
+memoryLimit should be set to roughly the amount of RAM (in bytes) the
+administrator can dedicate to the cache.</p></div>
 <div class="paragraph"><p>Default is 1024 for most caches, except:</p></div>
 <div class="ulist"><ul>
 <li>
@@ -1230,35 +1086,35 @@ this is total number of items, not bytes of heap used.</p></div>
 </li>
 <li>
 <p>
-<tt>"diff"</tt>: default is <tt>128</tt>
+<tt>"diff"</tt>: default is <tt>10m</tt> (10 MiB of memory)
 </p>
 </li>
 <li>
 <p>
-<tt>"diff_intraline"</tt>: default is <tt>128</tt>
+<tt>"diff_intraline"</tt>: default is <tt>10m</tt> (10 MiB of memory)
+</p>
+</li>
+<li>
+<p>
+<tt>"plugin_resources"</tt>: default is 2m (2 MiB of memory)
 </p>
 </li>
 </ul></div>
+<div class="paragraph"><p>If set to 0 the cache is disabled. Entries are removed immediately
+after being stored by the cache. This is primarily useful for testing.</p></div>
 </dd>
 <dt class="hdlist1">
 <a id="cache.name.diskLimit"></a>cache.&lt;name&gt;.diskLimit
 </dt>
 <dd>
-<div class="paragraph"><p>Maximum number of cache items to retain on disk, if this cache
-supports storing its items to disk.  Like memoryLimit, this is
-total number of items, not bytes of disk used.  If 0, disk storage
-for this cache is disabled.</p></div>
-<div class="paragraph"><p>Default is 16384.</p></div>
-</dd>
-<dt class="hdlist1">
-<a id="cache.name.diskBuffer"></a>cache.&lt;name&gt;.diskBuffer
-</dt>
-<dd>
-<div class="paragraph"><p>Number of bytes to buffer in memory before writing less frequently
-accessed cache items to disk, if this cache supports storing its
-items to disk.</p></div>
-<div class="paragraph"><p>Default is 5 MiB.</p></div>
-<div class="paragraph"><p>Common unit suffixes of <em>k</em>, <em>m</em>, or <em>g</em> are supported.</p></div>
+<div class="paragraph"><p>Total size in bytes of the keys and values stored on disk. Caches that
+have grown bigger than this size are scanned daily at 1 AM local
+server time to trim the cache. Entries are removed in least recently
+accessed order until the cache fits within this limit.  Caches may
+grow larger than this during the day, as the size check is only
+performed once every 24 hours.</p></div>
+<div class="paragraph"><p>Default is 128 MiB per cache.</p></div>
+<div class="paragraph"><p>If 0, disk storage for the cache is disabled.</p></div>
 </dd>
 </dl></div>
 <div class="sect3">
@@ -1317,13 +1173,10 @@ cache <tt>"diff"</tt>
 <div class="paragraph"><p>Each item caches the differences between two commits, at both the
 directory and file levels.  Gerrit uses this cache to accelerate
 the display of affected file names, as well as file contents.</p></div>
-<div class="paragraph"><p>Entries in this cache are relatively large, so the memory limit
-should not be set incredibly high.  Administrators should try to
-target cache.diff.memoryLimit to be roughly the number of changes
-which their users will process in a 1 or 2 day span.</p></div>
-<div class="paragraph"><p>Keeping entries for 90 days gives sufficient time for most changes
-to be submitted or abandoned before their relevant difference items
-expire out.</p></div>
+<div class="paragraph"><p>Entries in this cache are relatively large, so memoryLimit is an
+estimate in bytes of memory used. Administrators should try to target
+cache.diff.memoryLimit to fit all changes users will view in a 1 or 2
+day span.</p></div>
 </dd>
 <dt class="hdlist1">
 cache <tt>"diff_intraline"</tt>
@@ -1332,13 +1185,10 @@ cache <tt>"diff_intraline"</tt>
 <div class="paragraph"><p>Each item caches the intraline difference of one file, when compared
 between two commits. Gerrit uses this cache to accelerate display of
 intraline differences when viewing a file.</p></div>
-<div class="paragraph"><p>Entries in this cache are relatively large, so the memory limit
-should not be set incredibly high.  Administrators should try to
-target cache.diff.memoryLimit to be roughly the number of changes
-which their users will process in a 1 or 2 day span.</p></div>
-<div class="paragraph"><p>Keeping entries for 90 days gives sufficient time for most changes
-to be submitted or abandoned before their relevant difference items
-expire out.</p></div>
+<div class="paragraph"><p>Entries in this cache are relatively large, so memoryLimit is an
+estimate in bytes of memory used. Administrators should try to target
+cache.diff.memoryLimit to fit all files users will view in a 1 or 2
+day span.</p></div>
 </dd>
 <dt class="hdlist1">
 cache <tt>"git_tags"</tt>
@@ -1391,10 +1241,18 @@ within Gerrit, so the cache expire time is largely irrelevant.</p></div>
 cache <tt>"permission_sort"</tt>
 </dt>
 <dd>
-<div class="paragraph"><p>Caches the order access control sections must be applied to a
+<div class="paragraph"><p>Caches the order in which access control sections must be applied to a
 reference.  Sorting the sections can be expensive when regular
 expressions are used, so this cache remembers the ordering for
 each branch.</p></div>
+</dd>
+<dt class="hdlist1">
+cache <tt>"plugin_resources"</tt>
+</dt>
+<dd>
+<div class="paragraph"><p>Caches formatted plugin resources, such as plugin documentation that
+has been converted from Markdown to HTML. The memoryLimit refers to
+the bytes of memory dedicated to storing the documentation.</p></div>
 </dd>
 <dt class="hdlist1">
 cache <tt>"projects"</tt>
@@ -1432,8 +1290,8 @@ is set to 0) a server restart will force all users to sign-out,
 and need to sign-in again after the restart, as the cache was
 unable to persist the session information.  Enabling a disk cache
 is strongly recommended.</p></div>
-<div class="paragraph"><p>Session storage is relatively inexpensive, the average entry in
-this cache is approximately 248 bytes, depending on the JVM.</p></div>
+<div class="paragraph"><p>Session storage is relatively inexpensive. The average entry in
+this cache is approximately 346 bytes.</p></div>
 </dd>
 </dl></div>
 <div class="paragraph"><p>See also <a href="cmd-flush-caches.html">gerrit flush-caches</a>.</p></div>
@@ -1448,7 +1306,7 @@ cache.diff_intraline.maxIdleWorkers
 <div class="paragraph"><p>Number of idle worker threads to maintain for the intraline difference
 computations.  There is no upper bound on how many concurrent requests
 can occur at once, if additional threads are started to handle a peak
-load, only this many will remaining idle afterwards.</p></div>
+load, only this many will remain idle afterwards.</p></div>
 <div class="paragraph"><p>Default is 1.5x number of available CPUs.</p></div>
 </dd>
 <dt class="hdlist1">
@@ -1539,7 +1397,7 @@ will match typical Gerrit Change-Id values and create a hyperlink
 to changes which reference it.  The second configuration <em>bugzilla</em>
 will hyperlink terms such as <em>bug 42</em> to an external bug tracker,
 supplying the argument record number <em>42</em> for display.  The third
-configuration <em>tracker</em> uses raw HTML to more preciously control
+configuration <em>tracker</em> uses raw HTML to more precisely control
 how the replacement is displayed to the user.</p></div>
 <div class="listingblock">
 <div class="content">
@@ -1761,6 +1619,16 @@ unused mapped spaces fast enough.</p></div>
 <div class="paragraph"><p>Default on JGit is false. Although potentially slower, it yields
 much more predictable behavior.</p></div>
 </dd>
+<dt class="hdlist1">
+<a id="core.asyncLoggingBufferSize"></a>core.asyncLoggingBufferSize
+</dt>
+<dd>
+<div class="paragraph"><p>Size of the buffer to store logging events for asynchronous logging.
+Putting a larger value can protect threads from stalling when the
+AsyncAppender threads are not fast enough to consume the logging events
+from the buffer. It also protects from loosing log entries in this case.</p></div>
+<div class="paragraph"><p>Default is 64 entries.</p></div>
+</dd>
 </dl></div>
 </div>
 <div class="sect2">
@@ -1932,6 +1800,10 @@ h, hr, hour, hours
 <div class="listingblock">
 <div class="content">
 <pre><tt>[download]
+  command = checkout
+  command = cherry_pick
+  command = pull
+  command = format_patch
   scheme = ssh
   scheme = http
   scheme = anon_http
@@ -1940,6 +1812,43 @@ h, hr, hour, hours
 </div></div>
 <div class="paragraph"><p>The download section configures the allowed download methods.</p></div>
 <div class="dlist"><dl>
+<dt class="hdlist1">
+<a id="download.command"></a>download.command
+</dt>
+<dd>
+<div class="paragraph"><p>Commands that should be offered to download changes.</p></div>
+<div class="paragraph"><p>Multiple commands are supported:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>checkout</tt>
+</p>
+<div class="paragraph"><p>Command to fetch and checkout the patch set.</p></div>
+</li>
+<li>
+<p>
+<tt>cherry_pick</tt>
+</p>
+<div class="paragraph"><p>Command to fetch the patch set and to cherry-pick it onto the current
+commit.</p></div>
+</li>
+<li>
+<p>
+<tt>pull</tt>
+</p>
+<div class="paragraph"><p>Command to pull the patch set.</p></div>
+</li>
+<li>
+<p>
+<tt>format_patch</tt>
+</p>
+<div class="paragraph"><p>Command to fetch the patch set and to feed it into the <tt>format-patch</tt>
+command.</p></div>
+</li>
+</ul></div>
+<div class="paragraph"><p>If <tt>download.command</tt> is not specified, all download commands are
+offered.</p></div>
+</dd>
 <dt class="hdlist1">
 <a id="download.scheme"></a>download.scheme
 </dt>
@@ -1983,7 +1892,7 @@ generally worked on with the repo multi-repository tool.  This is
 not default, as not all instances will deploy repo.</p></div>
 </li>
 </ul></div>
-<div class="paragraph"><p>If download.scheme is not specified, SSH, HTTP and Anonymous HTTP
+<div class="paragraph"><p>If <tt>download.scheme</tt> is not specified, SSH, HTTP and Anonymous HTTP
 downloads are allowed.</p></div>
 </dd>
 </dl></div>
@@ -2047,11 +1956,13 @@ by the system administrator, and might not even be running on the
 same host as Gerrit.</p></div>
 </dd>
 <dt class="hdlist1">
-<a id="gerrit.replicateOnStartup"></a>gerrit.replicateOnStartup
+<a id="gerrit.reportBugUrl"></a>gerrit.reportBugUrl
 </dt>
 <dd>
-<div class="paragraph"><p>If true, replicates to all remotes on startup to ensure they are
-in-sync with this server.  By default, true.</p></div>
+<div class="paragraph"><p>URL to direct users to when they need to report a bug about the
+Gerrit service. By default this links to the upstream Gerrit
+Code Review&#8217;s own bug tracker but could be directed to the system
+administrator&#8217;s ticket queue.</p></div>
 </dd>
 </dl></div>
 </div>
@@ -2171,6 +2082,13 @@ using the property <em>gitweb.pathSeparator</em>.</p></div>
 <tt>patchset-created</tt> will be used.</p></div>
 </dd>
 <dt class="hdlist1">
+<a id="hooks.draftPublishedHook"></a>hooks.draftPublishedHook
+</dt>
+<dd>
+<div class="paragraph"><p>Optional filename for the draft published hook, if not specified then
+<tt>draft-published</tt> will be used.</p></div>
+</dd>
+<dt class="hdlist1">
 <a id="hooks.commentAddedHook"></a>hooks.commentAddedHook
 </dt>
 <dd>
@@ -2190,6 +2108,27 @@ using the property <em>gitweb.pathSeparator</em>.</p></div>
 <dd>
 <div class="paragraph"><p>Optional filename for the change abandoned hook, if not specified then
 <tt>change-abandoned</tt> will be used.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="hooks.changeRestoredHook"></a>hooks.changeRestoredHook
+</dt>
+<dd>
+<div class="paragraph"><p>Optional filename for the change restored hook, if not specified then
+<tt>change-restored</tt> will be used.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="hooks.refUpdatedHook"></a>hooks.refUpdatedHook
+</dt>
+<dd>
+<div class="paragraph"><p>Optional filename for the ref updated hook, if not specified then
+<tt>ref-updated</tt> will be used.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="hooks.claSignedHook"></a>hooks.claSignedHook
+</dt>
+<dd>
+<div class="paragraph"><p>Optional filename for the CLA signed hook, if not specified then
+<tt>cla-signed</tt> will be used.</p></div>
 </dd>
 </dl></div>
 </div>
@@ -2329,7 +2268,7 @@ chmod 600 keystore</tt></pre>
 </dt>
 <dd>
 <div class="paragraph"><p>Password used to decrypt the private portion of the sslKeyStore.
-Java key stores require a password, even if the administrator
+Java keystores require a password, even if the administrator
 doesn&#8217;t want to enable one.</p></div>
 <div class="paragraph"><p>If set to the empty string the embedded server will prompt for the
 password during startup.</p></div>
@@ -2350,7 +2289,7 @@ and false if httpd.listenUrl uses proxy-http:// or proxy-https://.</p></div>
 </dt>
 <dd>
 <div class="paragraph"><p>Number of worker threads dedicated to accepting new incoming TCP
-connections and allocate them connection-specific resources.</p></div>
+connections and allocating them connection-specific resources.</p></div>
 <div class="paragraph"><p>By default, 2, which should be suitable for most high-traffic sites.</p></div>
 </dd>
 <dt class="hdlist1">
@@ -2382,7 +2321,7 @@ thread pool waiting for a worker thread to become available.
 <a id="httpd.maxWait"></a>httpd.maxWait
 </dt>
 <dd>
-<div class="paragraph"><p>Maximum amount of time a client will wait to for an available
+<div class="paragraph"><p>Maximum amount of time a client will wait for an available
 thread to handle a project clone, fetch or push request over the
 smart HTTP transport.</p></div>
 <div class="paragraph"><p>Values should use common unit suffixes to express their setting:</p></div>
@@ -2432,7 +2371,7 @@ abort until the client disconnects.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_a_id_ldap_a_section_ldap"><a id="ldap"></a>Section ldap</h3>
-<div class="paragraph"><p>LDAP integration is only enabled if <tt>auth.type</tt> was set to
+<div class="paragraph"><p>LDAP integration is only enabled if <tt>auth.type</tt> is set to
 <tt>HTTP_LDAP</tt>, <tt>LDAP</tt> or <tt>CLIENT_SSL_CERT_LDAP</tt>.  See above for a
 detailed description of the auth.type settings and their
 implications.</p></div>
@@ -2508,7 +2447,7 @@ referrals.</p></div>
 <div class="paragraph"><p><em>(Optional)</em> The read timeout for an LDAP operation. The value is
 in the usual time-unit format like "1 s", "100 ms", etc&#8230;
 A timeout can be used to avoid blocking all of the SSH command start
-threads in case when the LDAP server becomes slow.</p></div>
+threads in case the LDAP server becomes slow.</p></div>
 <div class="paragraph"><p>By default there is no timeout and Gerrit will wait for the LDAP
 server to respond until the TCP connection times out.</p></div>
 </dd>
@@ -2570,8 +2509,8 @@ for Active Directory.</p></div>
 contains the initial value for the user&#8217;s full name field in Gerrit.
 Typically this is the <tt>displayName</tt> property in LDAP, but could
 also be <tt>legalName</tt> or <tt>cn</tt>.</p></div>
-<div class="paragraph"><p>Attribute values may be concatenated with literal strings, for
-example to join given name and surname together use the pattern
+<div class="paragraph"><p>Attribute values may be concatenated with literal strings.  For
+example to join given name and surname together, use the pattern
 <tt>${givenName} ${SN}</tt>.</p></div>
 <div class="paragraph"><p>If set, users will be unable to modify their full name field, as
 Gerrit will populate it only from the LDAP data.</p></div>
@@ -2590,7 +2529,7 @@ for example to set the email address to the lowercase form
 of sAMAccountName followed by a constant domain name, use
 <tt>${sAMAccountName.toLowerCase}@example.com</tt>.</p></div>
 <div class="paragraph"><p>If set, the preferred email address will be prefilled from LDAP,
-but users may still be able to register additional email address,
+but users may still be able to register additional email addresses,
 and select a different preferred email address.</p></div>
 <div class="paragraph"><p>Default is <tt>mail</tt>.</p></div>
 </dd>
@@ -2696,7 +2635,7 @@ this parameter to true, a case insensitive login to the Gerrit WebUI
 can be achieved.</p></div>
 <div class="paragraph"><p>If set, it must be ensured that the local usernames for all existing
 accounts are converted to lower case, otherwise a user that has a
-local username that contains upper case characters cannot login
+local username that contains upper case characters will not be able to login
 anymore. The local usernames for the existing accounts can be
 converted to lower case by running the server program
 <a href="pgm-LocalUsernamesToLowerCase.html">LocalUsernamesToLowerCase</a>.
@@ -2767,6 +2706,23 @@ auto-detected and one thread per CPU is used, per client request.</p></div>
 </dl></div>
 </div>
 <div class="sect2">
+<h3 id="_a_id_plugins_a_section_plugins"><a id="plugins"></a>Section plugins</h3>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<a id="plugins.checkFrequency"></a>plugins.checkFrequency
+</dt>
+<dd>
+<div class="paragraph"><p>How often plugins should be examined for new plugins to load, removed
+plugins to be unloaded, or updated plugins to be reloaded.  Values can
+be specified using standard time unit abbreviations (<em>ms</em>, <em>sec</em>,
+<em>min</em>, etc.).</p></div>
+<div class="paragraph"><p>If set to 0, automatic plugin reloading is disabled.  Administrators
+may force reloading with <a href="cmd-plugin.html">gerrit plugin reload</a>.</p></div>
+<div class="paragraph"><p>Default is 1 minute.</p></div>
+</dd>
+</dl></div>
+</div>
+<div class="sect2">
 <h3 id="_a_id_receive_a_section_receive"><a id="receive"></a>Section receive</h3>
 <div class="paragraph"><p>This section is used to set who can execute the <em>receive-pack</em> and
 to limit the maximum Git object size that <em>receive-pack</em> will accept.
@@ -2798,7 +2754,7 @@ behavior of Gerrit&#8217;s <em>receive-pack</em> mechanism.</p></div>
 If an object is larger than the given size the pack-parsing will abort
 and the push operation will fail. If set to zero then there is no
 limit.</p></div>
-<div class="paragraph"><p>Gerrit administrator can use this setting to prevent developers
+<div class="paragraph"><p>Gerrit administrators can use this setting to prevent developers
 from pushing objects which are too large to Gerrit.</p></div>
 <div class="paragraph"><p>Default is zero.</p></div>
 <div class="paragraph"><p>Common unit suffixes of <em>k</em>, <em>m</em>, or <em>g</em> are supported.</p></div>
@@ -2810,6 +2766,19 @@ from pushing objects which are too large to Gerrit.</p></div>
 <div class="paragraph"><p>Maximum size of the thread pool in which the change data in received packs is
 processed.</p></div>
 <div class="paragraph"><p>Defaults to the number of available CPUs according to the Java runtime.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="receive.changeUpdateThreads"></a>receive.changeUpdateThreads
+</dt>
+<dd>
+<div class="paragraph"><p>Number of threads to perform change creation or patch set updates
+concurrently. Each thread uses its own database connection from
+the database connection pool, and if all threads are busy then
+main receive thread will also perform a change creation or patch
+set update.</p></div>
+<div class="paragraph"><p>Defaults to 1, using only the main receive thread. This feature is for
+databases with very high latency that can benfit from concurrent
+operations when multiple changes are impacted at once.</p></div>
 </dd>
 <dt class="hdlist1">
 <a id="receive.timeout"></a>receive.timeout
@@ -2982,6 +2951,24 @@ email from Gerrit.</p></div>
 <div class="paragraph"><p>By default, unset, permitting delivery to any email address.</p></div>
 </dd>
 <dt class="hdlist1">
+<a id="sendemail.includeDiff"></a>sendemail.includeDiff
+</dt>
+<dd>
+<div class="paragraph"><p>If true, new change emails from Gerrit will include the complete
+unified diff of the change. Variable maxmimumDiffSize places an upper
+limit on how large the email can get when this option is enabled.</p></div>
+<div class="paragraph"><p>By default, false.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="sendemail.maximumDiffSize"></a>sendemail.maximumDiffSize
+</dt>
+<dd>
+<div class="paragraph"><p>Largest size of unified diff output to include in an email. When
+the diff exceeds this size the file paths will be listed instead.
+Standard byte unit suffixes are supported.</p></div>
+<div class="paragraph"><p>By default, 256 KiB.</p></div>
+</dd>
+<dt class="hdlist1">
 <a id="sendemail.importance"></a>sendemail.importance
 </dt>
 <dd>
@@ -3025,7 +3012,56 @@ client instead to determine the correct code to use. Default is true.</p></div>
 updated versions. If false, a server restart is required to change
 any of these resources. Default is true, allowing automatic reloads.</p></div>
 </dd>
+<dt class="hdlist1">
+<a id="site.enableDeprecatedQuery"></a>site.enableDeprecatedQuery
+</dt>
+<dd>
+<div class="paragraph"><p>If true the deprecated <tt>/query</tt> URL is available to return JSON
+and text results for changes. If false, the URL is disabled and
+returns 404 to clients. Default is true, enabling <tt>/query</tt>.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="site.upgradeSchemaOnStartup"></a>site.upgradeSchemaOnStartup
+</dt>
+<dd>
+<div class="paragraph"><p>Control whether schema upgrade should be done on Gerrit startup. The following
+values are supported:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>OFF</tt>
+</p>
+<div class="paragraph"><p>No automatic schema upgrade on startup.</p></div>
+</li>
+<li>
+<p>
+<tt>AUTO</tt>
+</p>
+<div class="paragraph"><p>Perform schema migration on startup, if necessary.  If, as a result of
+schema migration, there would be any unused database objects they will
+be dropped automatically.</p></div>
+</li>
+<li>
+<p>
+<tt>AUTO_NO_PRUNE</tt>
+</p>
+<div class="paragraph"><p>Like <tt>AUTO</tt> but unused database objects will not be pruned.</p></div>
+</li>
+</ul></div>
+<div class="paragraph"><p>The default is <tt>OFF</tt>.</p></div>
+</dd>
 </dl></div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_ssh_alias_a_section_ssh_alias"><a id="ssh-alias"></a> Section ssh-alias</h3>
+<div class="paragraph"><p>Variables in section ssh-alias permit the site administrator to alias
+another command from Gerrit or a plugin into the <tt>gerrit</tt> command
+namespace. To alias <tt>replication start</tt> to <tt>gerrit replicate</tt>:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>[ssh-alias]
+  replicate = replication start</tt></pre>
+</div></div>
 </div>
 <div class="sect2">
 <h3 id="_a_id_sshd_a_section_sshd"><a id="sshd"></a> Section sshd</h3>
@@ -3119,7 +3155,7 @@ the daemon can terminate connections if the peer disappears.</p></div>
 <dd>
 <div class="paragraph"><p>Number of threads to use when executing SSH command requests.
 If additional requests are received while all threads are busy they
-are queued and serviced in a first-come-first-serve order.</p></div>
+are queued and serviced in a first-come-first-served order.</p></div>
 <div class="paragraph"><p>By default, 1.5x the number of CPUs available to the JVM.</p></div>
 </dd>
 <dt class="hdlist1">
@@ -3206,7 +3242,7 @@ d, day, days
 <dd>
 <div class="paragraph"><p>Maximum number of concurrent SSH sessions that a user account
 may open at one time.  This is the number of distinct SSH logins
-the each user may have active at one time, and is not related to
+that each user may have active at one time, and is not related to
 the number of commands a user may issue over a single connection.
 If set to 0, there is no limit.</p></div>
 <div class="paragraph"><p>By default, 64.</p></div>
@@ -3310,6 +3346,34 @@ currently selected row.  The value must be a valid HTML hex color
 code, or standard color name.</p></div>
 <div class="paragraph"><p>By default a shade of yellow, <tt>FFFFCC</tt>.</p></div>
 </dd>
+<dt class="hdlist1">
+<a id="theme.changeTableOutdatedColor"></a>theme.changeTableOutdatedColor
+</dt>
+<dd>
+<div class="paragraph"><p>Background color used for patch outdated messages.  The value must be
+a valid HTML hex color code, or standard color name.</p></div>
+<div class="paragraph"><p>By default a shade of red, <tt>F08080</tt>.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="theme.tableOddRowColor"></a>theme.tableOddRowColor
+</dt>
+<dd>
+<div class="paragraph"><p>Background color for tables such as lists of open reviews for odd
+rows.  This is so you can have a different color for odd and even
+rows of the table.  The value must be a valid HTML hex color code,
+or standard color name.</p></div>
+<div class="paragraph"><p>By default transparent.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="theme.tableEvenRowColor"></a>theme.tableEvenRowColor
+</dt>
+<dd>
+<div class="paragraph"><p>Background color for tables such as lists of open reviews for even
+rows.  This is so you can have a different color for odd and even
+rows of the table.  The value must be a valid HTML hex color code,
+or standard color name.</p></div>
+<div class="paragraph"><p>By default transparent.</p></div>
+</dd>
 </dl></div>
 <div class="paragraph"><p>A different theme may be used for signed-in vs. signed-out user status
 by using the "signed-in" and "signed-out" theme sections. Variables
@@ -3365,7 +3429,7 @@ Java regular expression (java.util.regex)</a> used to match the
 external tracking id part of the footer line. The match can
 result in several entries in the DB.  If grouping is used in the
 regex the first group will be interpreted as the tracking id.
-Tracking ids &gt; 20 char will be ignored.</p></div>
+Tracking ids longer than 20 characters will be ignored.</p></div>
 <div class="paragraph"><p>The configuration file parser eats one level of backslashes, so the
 character class <tt>\s</tt> requires <tt>\\s</tt> in the configuration file.  The
 parser also terminates the line at the first <tt>#</tt>, so a match
@@ -3375,7 +3439,7 @@ expression containing # must be wrapped in double quotes.</p></div>
 <a id="trackingid.name.system"></a>trackingid.&lt;name&gt;.system
 </dt>
 <dd>
-<div class="paragraph"><p>The name of the external tracking system(max 10 char).
+<div class="paragraph"><p>The name of the external tracking system (maximum 10 characters).
 It is possible to have several trackingid entries for the same
 tracking system.</p></div>
 </dd>
@@ -3469,6 +3533,7 @@ be exposed to everyone.</p></div>
 <div class="content">
 <pre><tt>[auth]
   registerEmailPrivateKey = 2zHNrXE2bsoylzUqDxZp0H1cqUmjgWb6
+  restTokenPrivateKey = 7e40PzCjlUKOnXATvcBNXH6oyiu+r0dFk2c=
 
 [database]
   username = webuser
@@ -3486,21 +3551,6 @@ be exposed to everyone.</p></div>
 [remote "bar"]
   password = s3kr3t</tt></pre>
 </div></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_file_tt_etc_replication_config_tt">File <tt>etc/replication.config</tt></h2>
-<div class="sectionbody">
-<div class="paragraph"><p>The optional file <tt>'$site_path'/etc/replication.config</tt> controls how
-Gerrit automatically replicates changes it makes to any of the Git
-repositories under its control.</p></div>
-<div class="ulist"><ul>
-<li>
-<p>
-<a href="config-replication.html">Git Replication/Mirroring</a>
-</p>
-</li>
-</ul></div>
 </div>
 </div>
 <div class="sect1">
@@ -3545,11 +3595,6 @@ good idea.</p></div>
 <a href="config-headerfooter.html">Site Header/Footer</a>
 </p>
 </li>
-<li>
-<p>
-<a href="config-replication.html">Git Replication/Mirroring</a>
-</p>
-</li>
 </ul></div>
 </dd>
 </dl></div>
@@ -3567,8 +3612,8 @@ good idea.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.4 (from v2.4-rc2)<br />
-Last updated 2012-05-23 15:03:19 CEST
+Version 2.5-rc1<br />
+Last updated 2012-10-17 09:10:10 CEST
 </div>
 </div>
 </body>
