@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.3" />
-<title>Release notes for Gerrit 2.5</title>
+<title>Release notes for Gerrit 2.5 RC1</title>
 <style type="text/css">
 /* Sans-serif font. */
 h1, h2, h3, h4, h5, h6,
@@ -531,8 +531,8 @@ footnotes: function () {
 </head>
 <body class="article">
 <div id="header">
-<h1>Release notes for Gerrit 2.5</h1>
-<span id="revnumber">version 2.5 (from v2.5-rc0-50-g4959684)</span>
+<h1>Release notes for Gerrit 2.5 RC1</h1>
+<span id="revnumber">version 2.5 (from v2.5-rc1)</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -541,9 +541,9 @@ footnotes: function () {
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<div class="paragraph"><p>Gerrit 2.5 is now available:</p></div>
-<div class="paragraph"><p><a href="http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.5.war">http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.5.war</a></p></div>
-<div class="paragraph"><p>Gerrit 2.5 includes the bug fixes done with
+<div class="paragraph"><p>Gerrit 2.5 RC1 is now available:</p></div>
+<div class="paragraph"><p><a href="http://code.google.com/p/gerrit/downloads/detail?name=gerrit-full-2.5-rc1.war">http://code.google.com/p/gerrit/downloads/detail?name=gerrit-full-2.5-rc1.war</a></p></div>
+<div class="paragraph"><p>Gerrit 2.5 RC1 includes the bug fixes done with
 <a href="ReleaseNotes-2.4.1.html">Gerrit 2.4.1</a> and
 <a href="ReleaseNotes-2.4.2.html">Gerrit 2.4.2</a>. These bug fixes are <strong>not</strong>
 listed in these release notes.</p></div>
@@ -616,8 +616,8 @@ the cache.</p></div>
 <div class="paragraph"><p>The Gerrit server functionality can be extended by installing plugins.
 Depending on how tightly the extension code is coupled with the Gerrit
 server code, there is a distinction between
-<a href="../Documentation/dev-plugins.html#plugin">plugins</a> and
-<a href="../Documentation/dev-plugins.html#extension">extensions</a>.</p></div>
+<a href="../Documentation/2.5/dev-plugins.html#plugin">plugins</a> and
+<a href="../Documentation/2.5/dev-plugins.html#extension">extensions</a>.</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
@@ -628,19 +628,19 @@ and moves it into a standard plugin.</p></div>
 </li>
 <li>
 <p>
-<a href="../Documentation/dev-plugins.html">Documentation about
+<a href="../Documentation/2.5/dev-plugins.html">Documentation about
   plugin development</a> including instructions for:
 </p>
 <div class="ulist"><ul>
 <li>
 <p>
-<a href="../Documentation/dev-plugins.html#getting-started">how to get
+<a href="../Documentation/2.5/dev-plugins.html#getting-started">how to get
    started with plugin development</a>
 </p>
 </li>
 <li>
 <p>
-<a href="../Documentation/dev-plugins.html#deployment">plugin
+<a href="../Documentation/2.5/dev-plugins.html#deployment">plugin
    deployment/installation</a>
 </p>
 </li>
@@ -648,13 +648,13 @@ and moves it into a standard plugin.</p></div>
 </li>
 <li>
 <p>
-<a href="../Documentation/dev-plugins.html#API">API for plugins and
+<a href="../Documentation/2.5/dev-plugins.html#API">API for plugins and
   extensions</a>
 </p>
 </li>
 <li>
 <p>
-Support for <a href="../Documentation/dev-plugins.html#ssh">SSH command
+Support for <a href="../Documentation/2.5/dev-plugins.html#ssh">SSH command
   plugins</a>
 </p>
 <div class="paragraph"><p>Allows plugin developers to declare additional SSH commands.</p></div>
@@ -672,7 +672,7 @@ define the command, "not found" is returned to the user.</p></div>
 </li>
 <li>
 <p>
-Support for <a href="../Documentation/dev-plugins.html#http">HTTP
+Support for <a href="../Documentation/2.5/dev-plugins.html#http">HTTP
   plugins</a>
 </p>
 <div class="paragraph"><p>Plugins may contribute to the /plugins/NAME/ URL space.</p></div>
@@ -687,22 +687,22 @@ appear in the plugin and the <tt>@Export</tt> annotations that appear on
 these concrete classes.</p></div>
 <div class="paragraph"><p>For any non-abstract command that extends SshCommand, plugins may
 declare the command with <tt>@Export("name")</tt> to
-<a href="../Documentation/dev-plugins.html#ssh">bind the implementation
+<a href="../Documentation/2.5/dev-plugins.html#ssh">bind the implementation
 as that SSH command</a>.</p></div>
-<div class="paragraph"><p>Likewise <a href="../Documentation/dev-plugins.html#http">HTTP servlets
+<div class="paragraph"><p>Likewise <a href="../Documentation/2.5/dev-plugins.html#http">HTTP servlets
 can also be bound to URLs</a>.</p></div>
 </li>
 <li>
 <p>
-<a href="../Documentation/dev-plugins.html#data-directory">Support a data
+<a href="../Documentation/2.5/dev-plugins.html#data-directory">Support a data
   directory for plugins on demand</a>
 </p>
 </li>
 <li>
 <p>
-Support serving static/ and Documentation/ from plugins
+Support serving static/ and Documentation/2.5/ from plugins
 </p>
-<div class="paragraph"><p>The static/ and Documentation/ resource directories of a plugin can be
+<div class="paragraph"><p>The static/ and Documentation/2.5/ resource directories of a plugin can be
 served over HTTP for any loaded and running plugin, even if it has no
 other HTTP handlers. This permits a plugin to supply icons or other
 graphics for the web UI, or documentation content to help users learn
@@ -710,7 +710,7 @@ how to use the plugin.</p></div>
 </li>
 <li>
 <p>
-<a href="../Documentation/dev-plugins.html#documentation">Auto-formatting
+<a href="../Documentation/2.5/dev-plugins.html#documentation">Auto-formatting
   of plugin HTTP pages from Markdown files</a>
 </p>
 <div class="paragraph"><p>If Gerrit detects that a requested plugin resource does not exist, but
@@ -719,13 +719,13 @@ instead a file with a <tt>.md</tt> extension does exist, Gerrit opens the
 </li>
 <li>
 <p>
-Support of <a href="../Documentation/dev-plugins.html#macros">macros in
+Support of <a href="../Documentation/2.5/dev-plugins.html#macros">macros in
   Markdown plugin documentation</a>
 </p>
 </li>
 <li>
 <p>
-<a href="../Documentation/dev-plugins.html#auto-index">Automatic
+<a href="../Documentation/2.5/dev-plugins.html#auto-index">Automatic
   generation of an index for the plugin documentation</a>
 </p>
 </li>
@@ -769,28 +769,28 @@ Support SSH commands to
 <div class="ulist"><ul>
 <li>
 <p>
-<a href="../Documentation/cmd-plugin-ls.html">list the installed
+<a href="../Documentation/2.5/cmd-plugin-ls.html">list the installed
    plugins</a>
 </p>
 </li>
 <li>
 <p>
-<a href="../Documentation/cmd-plugin-install.html">install plugins</a>
+<a href="../Documentation/2.5/cmd-plugin-install.html">install plugins</a>
 </p>
 </li>
 <li>
 <p>
-<a href="../Documentation/cmd-plugin-enable.html">enable plugins</a>
+<a href="../Documentation/2.5/cmd-plugin-enable.html">enable plugins</a>
 </p>
 </li>
 <li>
 <p>
-<a href="../Documentation/cmd-plugin-remove.html">disable plugins</a>
+<a href="../Documentation/2.5/cmd-plugin-remove.html">disable plugins</a>
 </p>
 </li>
 <li>
 <p>
-<a href="../Documentation/cmd-plugin-reload.html">reload plugins</a>
+<a href="../Documentation/2.5/cmd-plugin-reload.html">reload plugins</a>
 </p>
 </li>
 </ul></div>
@@ -808,13 +808,13 @@ Automatically load/unload/reload plugins
 newly created plugins, unloads any deleted plugins, and reloads any
 plugins that have been modified.</p></div>
 <div class="paragraph"><p>The check frequency can be configured by setting
-<a href="../Documentation/config-gerrit.html#plugins.checkFrequency">
+<a href="../Documentation/2.5/config-gerrit.html#plugins.checkFrequency">
 plugins.checkFrequency</a> in the Gerrit config file. By configuration
 the scanner can also be disabled.</p></div>
 </li>
 <li>
 <p>
-<a href="../Documentation/dev-plugins.html#classpath">Loading of plugins
+<a href="../Documentation/2.5/dev-plugins.html#classpath">Loading of plugins
   in own ClassLoader</a>
 </p>
 </li>
@@ -844,7 +844,7 @@ because it was dynamically installed or reloaded by an administrator.</p></div>
 </li>
 <li>
 <p>
-<a href="../Documentation/dev-plugins.html#getting-started">Maven
+<a href="../Documentation/2.5/dev-plugins.html#getting-started">Maven
   archetype for creating gerrit plugin projects</a>
 </p>
 </li>
@@ -864,7 +864,7 @@ ad-hoc scripting use cases.</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
-<a href="../Documentation/rest-api.html">Documentation of the REST API</a>
+<a href="../Documentation/2.5/rest-api.html">Documentation of the REST API</a>
 </p>
 </li>
 <li>
@@ -874,23 +874,23 @@ Support REST endpoints to
 <div class="ulist"><ul>
 <li>
 <p>
-<a href="../Documentation/rest-api.html#changes">query changes</a>
+<a href="../Documentation/2.5/rest-api.html#changes">query changes</a>
 </p>
 </li>
 <li>
 <p>
-<a href="../Documentation/rest-api.html#projects">list projects</a>
+<a href="../Documentation/2.5/rest-api.html#projects">list projects</a>
 </p>
 </li>
 <li>
 <p>
-<a href="../Documentation/rest-api.html#suggest-projects">suggest
+<a href="../Documentation/2.5/rest-api.html#suggest-projects">suggest
    projects</a>
 </p>
 </li>
 <li>
 <p>
-<a href="../Documentation/rest-api.html#accounts_self_capabilities">query
+<a href="../Documentation/2.5/rest-api.html#accounts_self_capabilities">query
    the global capabilities of the calling user</a>
 </p>
 </li>
@@ -898,13 +898,13 @@ Support REST endpoints to
 </li>
 <li>
 <p>
-Support <a href="../Documentation/rest-api.html#authentication">anonymous
+Support <a href="../Documentation/2.5/rest-api.html#authentication">anonymous
   and authenticated access</a> to the REST endpoints
 </p>
 </li>
 <li>
 <p>
-Support <a href="../Documentation/rest-api.html#output">JSON output
+Support <a href="../Documentation/2.5/rest-api.html#output">JSON output
   format</a> for the REST endpoints
 </p>
 </li>
@@ -946,7 +946,7 @@ completely replaced by the new REST API and got deleted:</p></div>
 </ul></div>
 <div class="paragraph" id="query-deprecation"><p>In addition the <tt>/query</tt> API has been deprecated. By default it is
 still available but server administrators may disable it by setting
-the <a href="../Documentation/config-gerrit.html#site.enableDeprecatedQuery">
+the <a href="../Documentation/2.5/config-gerrit.html#site.enableDeprecatedQuery">
 <tt>site.enableDeprecatedQuery</tt></a> parameter in the Gerrit config file. This
 allows to enforce tools to move to the new API.</p></div>
 </div>
@@ -1148,7 +1148,7 @@ Use download icons instead of the <tt>Download</tt> text links
 <div class="ulist"><ul>
 <li>
 <p>
-Support for <a href="../Documentation/user-custom-dashboards.html">custom
+Support for <a href="../Documentation/2.5/user-custom-dashboards.html">custom
   dashboards</a>
 </p>
 </li>
@@ -1263,7 +1263,7 @@ a search for changes owned by that user.</p></div>
 </li>
 <li>
 <p>
-<a href="../Documentation/config-gerrit.html#gerrit.reportBugUrl">Allow
+<a href="../Documentation/2.5/config-gerrit.html#gerrit.reportBugUrl">Allow
   configuring the <tt>Report Bug</tt> URL</a>
 </p>
 <div class="paragraph"><p>Let site administrators direct users to their own ticket queue, as for
@@ -1396,14 +1396,14 @@ Restrict rebasing of a change in the web UI to the change owner and
 </li>
 <li>
 <p>
-Add a new <a href="../Documentation/access-control.html#category_rebase">
+Add a new <a href="../Documentation/2.5/access-control.html#category_rebase">
   access right to permit rebasing changes in the web UI</a>
 </p>
 </li>
 <li>
 <p>
 <a href="http://code.google.com/p/gerrit/issues/detail?id=930">issue 930</a>:
-  Add new <a href="../Documentation/access-control.html#category_abandon">
+  Add new <a href="../Documentation/2.5/access-control.html#category_abandon">
   access right for abandoning changes</a>
 </p>
 </li>
@@ -1473,25 +1473,25 @@ Add owner username to output of query command
 <li>
 <p>
 <a href="http://code.google.com/p/gerrit/issues/detail?id=1095">issue 1095</a>
-  <a href="../Documentation/cmd-set-account.html">SSH command to manage
+  <a href="../Documentation/2.5/cmd-set-account.html">SSH command to manage
   accounts</a>
 </p>
 </li>
 <li>
 <p>
-On <a href="../Documentation/cmd-create-account.html">account creation</a> a
+On <a href="../Documentation/2.5/cmd-create-account.html">account creation</a> a
   password for HTTP can be specified.
 </p>
 </li>
 <li>
 <p>
-<a href="../Documentation/cmd-set-project.html">SSH command to manage
+<a href="../Documentation/2.5/cmd-set-project.html">SSH command to manage
   project settings</a>
 </p>
 </li>
 <li>
 <p>
-<a href="../Documentation/cmd-test-submit-rule.html">SSH command to test
+<a href="../Documentation/2.5/cmd-test-submit-rule.html">SSH command to test
   submit rules</a>
 </p>
 <div class="paragraph"><p>The command creates a fresh Prolog environment and loads a Prolog
@@ -1500,7 +1500,7 @@ returned to the user.</p></div>
 </li>
 <li>
 <p>
-<a href="../Documentation/cmd-ban-commit.html">SSH command to ban
+<a href="../Documentation/2.5/cmd-ban-commit.html">SSH command to ban
   commits</a>
 </p>
 </li>
@@ -1509,13 +1509,13 @@ returned to the user.</p></div>
 Enable aliases for SSH commands
 </p>
 <div class="paragraph" id="ssh-alias"><p>Site administrators can define aliases for SSH commands in the
-<a href="../Documentation/config-gerrit.html#ssh-alias"><tt>ssh-alias</tt> section</a>
+<a href="../Documentation/2.5/config-gerrit.html#ssh-alias"><tt>ssh-alias</tt> section</a>
 of the Gerrit configuration.</p></div>
 </li>
 <li>
 <p>
 Add submit records to the output of the
-  <a href="../Documentation/cmd-query.html">query</a> SSH command:
+  <a href="../Documentation/2.5/cmd-query.html">query</a> SSH command:
 </p>
 <div class="paragraph"><p>Add a command line option to the <tt>query</tt> SSH command to include submit
 records in the output.</p></div>
@@ -1527,13 +1527,13 @@ submission criteria for each review label has been met.</p></div>
 <li>
 <p>
 Support JSON output format for the
-  <a href="../Documentation/cmd-ls-projects.html">ls-projects</a> SSH command
+  <a href="../Documentation/2.5/cmd-ls-projects.html">ls-projects</a> SSH command
 </p>
 </li>
 <li>
 <p>
 Support creation of multiple branches in
-  <a href="../Documentation/cmd-create-project.html">create-project</a> SSH
+  <a href="../Documentation/2.5/cmd-create-project.html">create-project</a> SSH
   command
 </p>
 <div class="paragraph"><p>In case if a project has some kind of waterfall automerging
@@ -1544,7 +1544,7 @@ project creation time.</p></div>
 <li>
 <p>
 Add verbose output option to
-  <a href="../Documentation/cmd-ls-groups.html">ls-groups</a> command
+  <a href="../Documentation/2.5/cmd-ls-groups.html">ls-groups</a> command
 </p>
 <div class="paragraph"><p>The verbose mode enabled by the new option makes the ls-groups
 command output a tab-separated table containing all available
@@ -1587,7 +1587,7 @@ Update the list of unsupported slave commands
 </li>
 <li>
 <p>
-Fix <a href="../Documentation/cmd-stream-events.html"><tt>stream-events</tt></a>
+Fix <a href="../Documentation/2.5/cmd-stream-events.html"><tt>stream-events</tt></a>
   documentation
 </p>
 <div class="paragraph"><p>Some attributes contained in the events were not described, for a few
@@ -1606,7 +1606,7 @@ Fix and complete synopsis of commands
 <li>
 <p>
 Clarify the ref format for
-  <a href="../Documentation/access-control.html#category_push_merge"><tt>Push
+  <a href="../Documentation/2.5/access-control.html#category_push_merge"><tt>Push
   Merge Commit</tt></a>
 </p>
 <div class="paragraph"><p>Elaborate on the required format of the ref used for <tt>Push Merge Commit</tt>
@@ -1616,7 +1616,7 @@ access right entries to avoid user confusion when granting access to
 <li>
 <p>
 Document the
-  <a href="../Documentation/access-control.html#capability_emailReviewers">
+  <a href="../Documentation/2.5/access-control.html#capability_emailReviewers">
   <tt>emailReviewers</tt></a> capability
 </p>
 </li>
@@ -1627,7 +1627,7 @@ Document the
 <div class="ulist"><ul>
 <li>
 <p>
-Improve documentation of <a href="../Documentation/error-change-closed.html">
+Improve documentation of <a href="../Documentation/2.5/error-change-closed.html">
   <tt>change closed</tt> error</a>
 </p>
 <div class="paragraph"><p>The <tt>change closed</tt> error can also occur when trying to submit a
@@ -1664,7 +1664,7 @@ Update push URL in <a href="../SUBMITTING_PATCHES">SUBMITTING_PATCHES</a>
 </li>
 <li>
 <p>
-Update <a href="../Documentation/dev-contributing.html">contributor
+Update <a href="../Documentation/2.5/dev-contributing.html">contributor
   document</a>
 </p>
 <div class="paragraph"><p>We now prefer to use Guava (previously known as Google Collections).</p></div>
@@ -1678,14 +1678,14 @@ Fixed broken link to source code
 </li>
 <li>
 <p>
-State <a href="../Documentation/dev-eclipse.html#known-problems">known issues</a>
+State <a href="../Documentation/2.5/dev-eclipse.html#known-problems">known issues</a>
   when debugging Gerrit with Eclipse
 </p>
 </li>
 <li>
 <p>
 Improved the section on
-  <a href="../Documentation/dev-eclipse.html#hosted-mode">hosted mode
+  <a href="../Documentation/2.5/dev-eclipse.html#hosted-mode">hosted mode
   debugging</a>
 </p>
 <div class="paragraph"><p>The existing section on hosted mode debugging left out a couple of
@@ -1694,7 +1694,7 @@ instead of <tt>OpenID</tt> was not mentioned anywhere.</p></div>
 </li>
 <li>
 <p>
-Add a <a href="../Documentation/dev-release.html">release preparation
+Add a <a href="../Documentation/2.5/dev-release.html">release preparation
   document</a>
 </p>
 <div class="paragraph"><p>Document what it takes to make a Gerrit stable or stable-fix release,
@@ -1707,7 +1707,7 @@ and how to release Gerrit subprojects.</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
-Add <a href="../Documentation/prolog-cookbook.html">Cookbook for Prolog
+Add <a href="../Documentation/2.5/prolog-cookbook.html">Cookbook for Prolog
   submit rules</a>
 </p>
 <div class="paragraph"><p>A new document providing a step by step introduction into implementing
@@ -1715,13 +1715,13 @@ specific submit policies using Prolog based submit rules was added.</p></div>
 </li>
 <li>
 <p>
-Describe <a href="../Documentation/refs-notes-review.html">
+Describe <a href="../Documentation/2.5/refs-notes-review.html">
   <tt>refs/notes/review</tt> and its contents</a>
 </p>
 </li>
 <li>
 <p>
-<a href="../Documentation/config-mail.html">Document <tt>RebasedPatchSet.vm</tt>
+<a href="../Documentation/2.5/config-mail.html">Document <tt>RebasedPatchSet.vm</tt>
   and <tt>Reverted.vm</tt> mail templates</a>
 </p>
 </li>
@@ -1743,13 +1743,13 @@ Document that user must be in repository root to install <tt>commit-msg</tt>
 <li>
 <p>
 Add some clarifications to the
-  <a href="../Documentation/install-quick.html">quick installation guide</a>
+  <a href="../Documentation/2.5/install-quick.html">quick installation guide</a>
 </p>
 </li>
 <li>
 <p>
 Add missing documentation about
-  <a href="../Documentation/config-gerrit.html#hooks">hook configuration</a>
+  <a href="../Documentation/2.5/config-gerrit.html#hooks">hook configuration</a>
 </p>
 <div class="paragraph"><p>Add documentation of hook config for <tt>change-restored</tt>, <tt>ref-updated</tt>
 and <tt>cla-signed</tt> hooks.</p></div>
@@ -1784,7 +1784,7 @@ Various corrections
 <div class="ulist"><ul>
 <li>
 <p>
-Add <a href="../Documentation/dev-release.html#plugin-api">script for
+Add <a href="../Documentation/2.5/dev-release.html#plugin-api">script for
   releasing plugin API jars</a>
 </p>
 </li>
@@ -1880,7 +1880,7 @@ template. This macro is expanded to a unified diff of the patch.</p></div>
 </li>
 <li>
 <p>
-<a href="../Documentation/config-gerrit.html#sendemail.includeDiff">
+<a href="../Documentation/2.5/config-gerrit.html#sendemail.includeDiff">
   sendemail.includeDiff</a>: Enable <tt>$email.UnifiedDiff</tt> in <tt>NewChange.vm</tt>
 </p>
 <div class="paragraph"><p>Instead of making site administrators hack the email template, allow
@@ -1889,7 +1889,7 @@ in <tt>gerrit.config</tt>.</p></div>
 </li>
 <li>
 <p>
-<a href="../Documentation/config-gerrit.html#sendemail.maximumDiffSize">
+<a href="../Documentation/2.5/config-gerrit.html#sendemail.maximumDiffSize">
   sendemail.maximumDiffSize</a>: Limit the size of diffs sent by email
 </p>
 <div class="paragraph"><p>If a unified diff included in an email will exceed the limit configured
@@ -1972,7 +1972,7 @@ accessed is the last time the record was moved from disk to memory.</p></div>
 Add OpenID SSO support.
 </p>
 <div class="paragraph"><p>Setting <tt>OPENID_SSO</tt> for
-<a href="../Documentation/config-gerrit.html#auth.type"><tt>auth.type</tt></a> in the
+<a href="../Documentation/2.5/config-gerrit.html#auth.type"><tt>auth.type</tt></a> in the
 <tt>gerrit.config</tt> will allow the admin to specify an SSO entry point URL
 so that users clicking on "Sign In" are sent directly to that URL.</p></div>
 </li>
@@ -1984,8 +1984,8 @@ Git over HTTP BasicAuth against Gerrit basic auth.
 authentication scheme used for Git over HTTP BasicAuth, as alternative
 of the default DigestAuth scheme against the random generated password
 on Gerrit DB.</p></div>
-<div class="paragraph"><p>Example setting for <a href="../Documentation/config-gerrit.html#auth.type">
-<tt>auth.type</tt></a> and <a href="../Documentation/config-gerrit.html#auth.gitBasicAuth">
+<div class="paragraph"><p>Example setting for <a href="../Documentation/2.5/config-gerrit.html#auth.type">
+<tt>auth.type</tt></a> and <a href="../Documentation/2.5/config-gerrit.html#auth.gitBasicAuth">
 <tt>auth.gitBasicAuth</tt></a>:</p></div>
 <div class="listingblock">
 <div class="content">
@@ -2023,7 +2023,7 @@ and any <tt>project.config</tt>.</p></div>
 <p>
 <a href="https://code.google.com/p/gerrit/issues/detail?id=548">issue 548</a>:
   Make commands to download patch sets
-  <a href="../Documentation/config-gerrit.html#download.command">configurable</a>
+  <a href="../Documentation/2.5/config-gerrit.html#download.command">configurable</a>
 </p>
 <div class="paragraph"><p>For patch sets on the ChangeScreen different commands for downloading
 the patch sets are offered. For some installations not all commands are
@@ -2032,7 +2032,7 @@ commands should be offered.</p></div>
 </li>
 <li>
 <p>
-Add more <a href="../Documentation/config-gerrit.html#theme">theme color
+Add more <a href="../Documentation/2.5/config-gerrit.html#theme">theme color
   options</a>
 </p>
 <div class="ulist"><ul>
@@ -2051,7 +2051,7 @@ reviews.  This makes them more visible without clicking on them.
 </li>
 <li>
 <p>
-<a href="../Documentation/user-notify.html">Add <tt>notify</tt> section in
+<a href="../Documentation/2.5/user-notify.html">Add <tt>notify</tt> section in
   <tt>project.config</tt></a>
 </p>
 <div class="paragraph"><p>The notify section allows project owners to include emails to users
@@ -2139,7 +2139,7 @@ convenient if Gerrit performs schema upgrade automatically on its
 startup.</p></div>
 <div class="paragraph"><p>Since this is a potentially dangerous operation, by default it will not
 be performed. The configuration parameter
-<a href="../Documentation/config-gerrit.html#site.upgradeSchemaOnStartup">
+<a href="../Documentation/2.5/config-gerrit.html#site.upgradeSchemaOnStartup">
 site.upgradeSchemaOnStartup</a> is used to switch on automatic schema
 upgrade.</p></div>
 </li>
@@ -2306,7 +2306,7 @@ so long as there are sufficient threads available.</p></div>
 database servers that are running on a different machine from the
 Gerrit server itself, e.g. gerrit.googlesource.com.</p></div>
 <div class="paragraph"><p>The new thread pool is
-<a href="../Documentation/config-gerrit.html#receive.changeUpdateThreads">
+<a href="../Documentation/2.5/config-gerrit.html#receive.changeUpdateThreads">
 disabled by default</a>, limiting the overhead to servers that have good
 latency with their database, such as using in-process H2 database, or
 a MySQL or PostgreSQL on the same host.</p></div>
@@ -2355,7 +2355,7 @@ read every other reference in the repository.</p></div>
 Avoid second remote call to lookup approvals when loading change
   results
 </p>
-<div class="paragraph"><p>By using the new <a href="../Documentation/rest-api.html#changes"><tt>/changes/</tt></a>
+<div class="paragraph"><p>By using the new <a href="../Documentation/2.5/rest-api.html#changes"><tt>/changes/</tt></a>
 REST endpoint the web UI client now obtains the label information
 during the query and avoids a second round trip to lookup the current
 approvals for each displayed change. For most users this should improve
@@ -2943,14 +2943,14 @@ no ref for the new patch set was created.</p></div>
 </li>
 <li>
 <p>
-Set <a href="../Documentation/config-gerrit.html#transfer.timeout">transfer
+Set <a href="../Documentation/2.5/config-gerrit.html#transfer.timeout">transfer
   timeout</a> for pushes through HTTP
 </p>
 <div class="paragraph"><p>The transfer timeout was only set when pushing via SSH.</p></div>
 </li>
 <li>
 <p>
-<a href="../Documentation/config-gerrit.html#receive.maxObjectSizeLimit">
+<a href="../Documentation/2.5/config-gerrit.html#receive.maxObjectSizeLimit">
   Limit maximum Git object size</a> when pushing through HTTP
 </p>
 <div class="paragraph"><p>The limit for the maximum object size was only set when pushing via SSH.</p></div>
@@ -3105,8 +3105,8 @@ Ensure that ObjectOutputStream in H2CacheImpl is closed
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.5 (from v2.5-rc0-50-g4959684)<br />
-Last updated 2012-10-17 09:10:10 CEST
+Version 2.5 (from v2.5-rc1)<br />
+Last updated 2012-10-17 14:05:04 CEST
 </div>
 </div>
 </body>
