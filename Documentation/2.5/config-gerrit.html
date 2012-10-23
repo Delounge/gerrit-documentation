@@ -532,7 +532,7 @@ footnotes: function () {
 <body class="article">
 <div id="header">
 <h1>Gerrit Code Review - Configuration</h1>
-<span id="revnumber">version 2.5-rc1</span>
+<span id="revnumber">version 2.5-rc2</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -1228,6 +1228,12 @@ cache <tt>"ldap_groups"</tt>
 configured on this server.  This cache should be configured with a
 low maxAge setting, to ensure LDAP modifications are picked up in
 a timely fashion.</p></div>
+</dd>
+<dt class="hdlist1">
+cache <tt>"ldap_groups_byinclude"</tt>
+</dt>
+<dd>
+<div class="paragraph"><p>Caches the hierarchical structure of LDAP groups.</p></div>
 </dd>
 <dt class="hdlist1">
 cache <tt>"ldap_usernames"</tt>
@@ -3612,8 +3618,8 @@ good idea.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.5-rc1<br />
-Last updated 2012-10-17 09:10:10 CEST
+Version 2.5-rc2<br />
+Last updated 2012-10-23 09:59:00 CEST
 </div>
 </div>
 </body>
