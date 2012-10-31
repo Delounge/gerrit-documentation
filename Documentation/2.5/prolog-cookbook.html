@@ -532,7 +532,7 @@ footnotes: function () {
 <body class="article">
 <div id="header">
 <h1>Gerrit Code Review - Prolog Submit Rules Cookbook</h1>
-<span id="revnumber">version 2.5-rc2</span>
+<span id="revnumber">version 2.5</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -601,10 +601,8 @@ Prolog interpreter shell.</p></div>
 <td class="icon">
 <div class="title">Note</div>
 </td>
-<td class="content">It is currently <strong>not possible</strong> to test a Prolog program which implements
-Gerrit submit rules using the <a href="pgm-prolog-shell.html">prolog-shell</a> program.
-The reason is that the Prolog environment that exposes facts about a change
-requires a lot of Gerrit server environment to be loaded and running.</td>
+<td class="content">The interactive shell is just a prolog shell, it does not load
+a gerrit server environment and thus is not intended for <a href="#TestingSubmitRules">testing submit rules</a>.</td>
 </tr></table>
 </div>
 </div>
@@ -920,6 +918,23 @@ default implementation of submit rule that is named <tt>gerrit:default_submit</t
 its result will be filtered as described above.</td>
 </tr></table>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="TestingSubmitRules">Testing submit rules</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The prolog environment running the <tt>submit_rule</tt> is loaded with state describing the
+change that is being evaluated. The easiest way to load this state is to test your
+<tt>submit_rule</tt> against a real change on a running gerrit instance. The command
+<a href="cmd-test-submit-rule.html">test-submit-rule</a> loads a specific change and executes
+the <tt>submit_rule</tt>. It optionally reads the rule from from <tt>stdin</tt> to facilitate easy testing.</p></div>
+<div class="exampleblock">
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>cat rules.pl | ssh gerrit_srv gerrit test-submit-rule I45e080b105a50a625cc8e1fb5b357c0bfabe6d68 -s</tt></pre>
+</div></div>
+</div></div>
 </div>
 </div>
 <div class="sect1">
@@ -1390,6 +1405,125 @@ remove_verified_category([H|T], [H|R]) :- remove_verified_category(T, R).</tt></
 </div></div>
 </div></div>
 </div>
+<div class="sect2">
+<h3 id="_example_12_1_1_2_code_review">Example 12: 1+1=2 Code-Review</h3>
+<div class="paragraph"><p>In this example we introduce accumulative voting to determine if a change is
+submittable or not. We modify the standard Code-Review to be accumulative, and make the
+change submittable if the total score is 2 or higher.</p></div>
+<div class="paragraph"><p>The code in this example is very similar to Example 8, with the addition of findall/3
+and gerrit:remove_label.
+The findall/3 embedded predicate is used to form a list of all objects that satisfy a
+specified Goal. In this example it is used to get a list of all the <em>Code-Review</em> scores.
+gerrit:remove_label is a built-in helper that is implemented similarly to the
+<em>remove_verified_category</em> as seen in the previous example.</p></div>
+<div class="exampleblock">
+<div class="title">rules.pl</div>
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>sum_list([], 0).
+sum_list([H | Rest], Sum) :- sum_list(Rest,Tmp), Sum is H + Tmp.</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>add_category_min_score(In, Category, Min,  P) :-
+  findall(X, gerrit:commit_label(label(Category,X),R),Z),
+  sum_list(Z, Sum),
+  Sum &gt;= Min, !,
+  P = [label(Category,ok(R)) | In].</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>add_category_min_score(In, Category,Min,P) :-
+  P = [label(Category,need(Min)) | In].</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>submit_rule(S) :-
+  gerrit:default_submit(X),
+  X =.. [submit | Ls],
+  gerrit:remove_label(Ls,label('Code-Review',_),NoCR),
+  add_category_min_score(NoCR,'Code-Review', 2, Labels),
+  S =.. [submit | Labels].</tt></pre>
+</div></div>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_example_13_master_and_apprentice">Example 13: Master and apprentice</h3>
+<div class="paragraph"><p>The master and apprentice example allow you to specify a user (the <tt>master</tt>)
+that must approve all changes done by another user (the <tt>apprentice</tt>).</p></div>
+<div class="paragraph"><p>The code first checks if the commit author is in the apprentice database.
+If the commit is done by an apprentice, it will check if there is a +2
+review by the associated <tt>master</tt>.</p></div>
+<div class="exampleblock">
+<div class="title">rules.pl</div>
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>% master_apprentice(Master, Apprentice).
+% Extend this with appropriate user-id's for your master/apprentice setup.
+master_apprentice(user(1000064), user(1000000)).</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>submit_rule(S) :-
+  gerrit:default_submit(In),
+  In =.. [submit | Ls],
+  add_apprentice_master(Ls, R),
+  S =.. [submit | R].</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>check_master_approval(S1, S2, Master) :-
+  gerrit:commit_label(label('Code-Review', 2), R),
+  R = Master, !,
+  S2 = [label('Master-Approval', ok(R)) | S1].
+check_master_approval(S1, [label('Master-Approval', need(_)) | S1], _).</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>add_apprentice_master(S1, S2) :-
+  gerrit:commit_author(Id),
+  master_apprentice(Master, Id),
+  !,
+  check_master_approval(S1, S2, Master).</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>add_apprentice_master(S, S).</tt></pre>
+</div></div>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_example_14_only_allow_author_to_submit_change">Example 14: Only allow Author to submit change</h3>
+<div class="paragraph"><p>This example adds a new needed category <tt>Patchset-Author</tt> for any user that is
+not the author of the patch. This effectively blocks all users except the author
+from submitting the change. This could result in an impossible situation if the
+author does not have permissions for submitting the change.</p></div>
+<div class="exampleblock">
+<div class="title">rules.pl</div>
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>submit_rule(S) :-
+  gerrit:default_submit(In),
+  In =.. [submit | Ls],
+  only_allow_author_to_submit(Ls, R),
+  S =.. [submit | R].</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>only_allow_author_to_submit(S, S) :-
+  gerrit:commit_author(Id),
+  gerrit:current_user(Id),
+  !.</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>only_allow_author_to_submit(S1, [label('Patchset-Author', need(_)) | S1]).</tt></pre>
+</div></div>
+</div></div>
+</div>
 </div>
 </div>
 <hr style="
@@ -1403,8 +1537,8 @@ remove_verified_category([H|T], [H|R]) :- remove_verified_category(T, R).</tt></
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.5-rc2<br />
-Last updated 2012-10-12 16:34:33 CEST
+Version 2.5<br />
+Last updated 2012-10-31 19:10:40 CET
 </div>
 </div>
 </body>
