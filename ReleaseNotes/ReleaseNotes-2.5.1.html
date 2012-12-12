@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.3" />
-<title>Release notes for Gerrit 2.1.2.3</title>
+<title>Release notes for Gerrit 2.5.1</title>
 <style type="text/css">
 /* Sans-serif font. */
 h1, h2, h3, h4, h5, h6,
@@ -531,8 +531,8 @@ footnotes: function () {
 </head>
 <body class="article">
 <div id="header">
-<h1>Release notes for Gerrit 2.1.2.3</h1>
-<span id="revnumber">version 2.1.2.3</span>
+<h1>Release notes for Gerrit 2.5.1</h1>
+<span id="revnumber">version 2.5.1</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -541,8 +541,50 @@ footnotes: function () {
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<div class="paragraph"><p>Gerrit 2.1.2.3 is now available in the usual location:</p></div>
-<div class="paragraph"><p><a href="http://code.google.com/p/gerrit/downloads/list">http://code.google.com/p/gerrit/downloads/list</a></p></div>
+<div class="paragraph"><p>Gerrit 2.5.1 is now available:</p></div>
+<div class="paragraph"><p><a href="http://code.google.com/p/gerrit/downloads/detail?name=gerrit-full-2.5.1.war">http://code.google.com/p/gerrit/downloads/detail?name=gerrit-full-2.5.1.war</a></p></div>
+<div class="paragraph"><p>There are no schema changes from 2.5, or 2.5.1.</p></div>
+<div class="paragraph"><p>However, if upgrading from anything earlier version, follow the upgrade
+procedure in the 2.5 <a href="ReleaseNotes-2.5.html">Release Notes</a>.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_security_fixes">Security Fixes</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+Correctly identify Git-over-HTTP operations
+</p>
+<div class="paragraph"><p>Git operations over HTTP should be classified as using AccessPath.GIT
+and not WEB_UI. This ensures RefControl will correctly test for Create,
+Push or Delete access on a reference instead of Owner.</p></div>
+<div class="paragraph"><p>E.g. without this fix project owners are able to force push commits
+via HTTP that are already in the history of the target branch, even
+without having any Push access right assigned.</p></div>
+</li>
+<li>
+<p>
+Make sure only Gerrit admins can change the parent of a project
+</p>
+<div class="paragraph"><p>Only Gerrit administrators should be able to change the parent of a
+project because by changing the parent project access rights and BLOCK
+rules which are configured on a parent project can be avoided.</p></div>
+<div class="paragraph"><p>The <tt>set-project-parent</tt> SSH command already verifies that the caller
+is a Gerrit administrator, however project owners can change the parent
+project by modifying the <tt>project.config</tt> file and pushing to the
+<tt>refs/meta/config</tt> branch.</p></div>
+<div class="paragraph"><p>This fix ensures that changes to the <tt>project.config</tt> file that change
+the parent project can only be pushed/submitted by Gerrit
+administrators.</p></div>
+<div class="paragraph"><p>In addition it is now no longer possible to
+- set a non-existing project as parent (as this would make the project
+  be orphaned)
+- set a parent project for the <tt>All-Projects</tt> root project (the root
+  project by definition has no parent)
+by pushing changes of the <tt>project.config</tt> file to <tt>refs/meta/config</tt>.</p></div>
+</li>
+</ul></div>
 </div>
 </div>
 <div class="sect1">
@@ -551,102 +593,52 @@ footnotes: function () {
 <div class="ulist"><ul>
 <li>
 <p>
-issue 528 gsql: Fix escaping of quotes in JSON
+Fix RequestCleanup bug with Git over HTTP
 </p>
-<div class="paragraph"><p>JSON output was not properly escaped, due to a bug in the underlying
-Gson library.  Fixed by upgrading.</p></div>
+<div class="paragraph"><p>Decide if a continuation is going to be used early, before the filter
+that will attempt to cleanup a RequestCleanup. If so don&#8217;t allow
+entering the RequestCleanup part of the system until the request is
+actually going to be processed.</p></div>
+<div class="paragraph"><p>This fixes the IllegalStateException <tt>Request has already been cleaned
+up</tt> that occurred when running on Jetty and pushing over HTTP for URLs
+where the path starts with <tt>/p/</tt>.</p></div>
 </li>
 <li>
 <p>
-issue 531 commit-msg: Fix jumbling of URL at end of message
+Match all git fetch/clone/push commands to the command executor
 </p>
-<div class="paragraph"><p>URLs at the end of a commit message sometimes caused the Change-Id
-to be inserted above the URL, rather than below it.  Fixed, but
-users will need to recopy the hook to their local repositories.</p></div>
+<div class="paragraph"><p>Route not just <tt>/p/</tt> but any Git access to the same thread pool as the
+SSH server is using, allowing all requests to compete fairly for
+resources.</p></div>
 </li>
 <li>
 <p>
-issue 538 create-project: Don&#8217;t destroy description of repository
+Fix auto closing of changes on direct push
 </p>
-<div class="paragraph"><p>If the repository <tt>foo</tt> existed without the standard <tt>.git</tt> suffix,
-executing <tt>gerrit create-project -n foo</tt> trashed the description
-file that existed in <tt>foo</tt>, while also creating a useless sibling
-directory called <tt>foo.git</tt>.  Fixed by detecting the existing <tt>foo</tt>
-during create-project and refusing to continue.</p></div>
+<div class="paragraph"><p>When a commit is directly pushed into a repository (bypassing code
+review) and this commit has a Change-Id in its commit message then the
+corresponding change is automatically closed if it is open.</p></div>
 </li>
 <li>
 <p>
-issue 521 Use OpenID PAPE extension to force reauthentication
+Allow assigning <tt>Push</tt> for <tt>refs/meta/config</tt> on <tt>All-Projects</tt>
 </p>
-<div class="paragraph"><p>The new configuration parameter auth.maxOpenIdSessionAge is now
-sent as part of OpenID authentication requests, encouraging the
-provider to verify the user&#8217;s password.</p></div>
-</li>
-<li>
-<p>
-issue 507 Enter on auto-complete causes application error
-</p>
-<div class="paragraph"><p>Pressing enter while the auto-complete box was open inside of
-the project watch panel or the project rights panel caused an
-application error.  Fixed.</p></div>
-</li>
-<li>
-<p>
-Advertise our relying party XRDS document
-</p>
-<div class="paragraph"><p>The OpenID 2.0 specification requests relying parties to document
-themselves, so the provider can verify the request is authentic
-for this domain.  Document Gerrit&#8217;s requests in the standard XRDS
-format, and advertise it properly.  This hides warnings during the
-Yahoo! provider&#8217;s login process.</p></div>
-</li>
-<li>
-<p>
-Don&#8217;t allow OWN to be inherited from All Projects
-</p>
-<div class="paragraph"><p>The project Owner permission was accidentally inherited from the
-magical All Projects in certain cases.  This was not meant to happen,
-ownership cannot be inherited down.  Fortunately we didn&#8217;t permit
-the Owner permission to be added to All Projects, so this was not
-likely to have occurred in real installations.</p></div>
-</li>
-<li>
-<p>
-Traverse all LDAP groups that a user is member of
-</p>
-</li>
-<li>
-<p>
-Expand LDAP groups only if accountMemberField set
-</p>
-<div class="paragraph"><p>Fixes traversal of groups on an Active Directory server, ensuring
-that the user&#8217;s grandparent groups are available to Gerrit as part
-of their user session.</p></div>
-</li>
-<li>
-<p>
-Serve gitweb.js when serving gitweb.cgi
-</p>
-<div class="paragraph"><p>Recent versions of gitweb have a JavaScript asset which provides
-additional features.  Make sure that is served to browsers, in
-addition to the CSS and logo image.</p></div>
-</li>
-<li>
-<p>
-Allow gitweb assets to be cached by browser
-</p>
-<div class="paragraph"><p>Browsers were always loading the gitweb assets on each request,
-as no caching data was made available to them.  Now assets are
-cached for up to 5 minutes, and 304 Not Modified replies can be
-sent when the assets haven&#8217;t changed.</p></div>
-</li>
-<li>
-<p>
-Define a toString for PatchListKey to improve errors
-</p>
-<div class="paragraph"><p>Minor bug fix to improve the level of detail that is available when
-the server is unable to difference two patch sets on demand for a
-user request.</p></div>
+<div class="paragraph"><p>The <tt>refs/meta/config</tt> branch of the <tt>All-Projects project</tt> should only
+be modified by Gerrit administrators because being able to do
+modifications on this branch means that the user could assign himself
+administrator permissions.</p></div>
+<div class="paragraph"><p>In addition to being administrator we already require that the
+administrator has the <tt>Push</tt> access right for <tt>refs/meta/config</tt> in
+order to be able to modify it (just as with all other branches
+administrators do not have edit permissions by default).</p></div>
+<div class="paragraph"><p>The problem was that assigning the <tt>Push</tt> access right for
+<tt>refs/meta/config</tt> on the <tt>All-Projects</tt> project was not allowed.</p></div>
+<div class="paragraph"><p>Having the <tt>Push</tt> access right for <tt>refs/meta/config</tt> on the
+<tt>All-Projects</tt> project without being administrator already has no
+effect.</p></div>
+<div class="paragraph"><p>Prohibiting to assign the Push access right for <tt>refs/meta/config</tt> on
+the <tt>All-Project</tt> project was anyway pointless since it was e.g.
+possible to assign the <tt>Push</tt> access right on <tt>refs/meta/*</tt>.</p></div>
 </li>
 </ul></div>
 </div>
@@ -655,8 +647,8 @@ user request.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.1.2.3<br />
-Last updated 2012-11-23 08:41:54 CET
+Version 2.5.1<br />
+Last updated 2012-12-12 12:21:38 CET
 </div>
 </div>
 </body>
