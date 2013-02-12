@@ -532,7 +532,7 @@ footnotes: function () {
 <body class="article">
 <div id="header">
 <h1>prohibited by Gerrit</h1>
-<span id="revnumber">version 2.5.1</span>
+<span id="revnumber">version 2.5.2</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -570,6 +570,13 @@ if you push an annotated tag without
 </li>
 <li>
 <p>
+if you push a signed tag without
+   <a href="access-control.html#category_push_signed"><em>Push Signed Tag</em></a>
+   access right on <em>refs/tags/*</em>
+</p>
+</li>
+<li>
+<p>
 if you push a lightweight tag without the access right <a href="access-control.html#category_create"><em>Create
    Reference</em></a> for the reference name <em>refs/tags/*</em>
 </p>
@@ -579,6 +586,11 @@ if you push a lightweight tag without the access right <a href="access-control.h
 if you push a tag with somebody else as tagger and you don&#8217;t have the
    <a href="access-control.html#category_forge_committer"><em>Forge Committer</em></a>
    access right for the reference name <em>refs/tags/*</em>
+</p>
+</li>
+<li>
+<p>
+if you push to a project that is in state <em>Read Only</em>
 </p>
 </li>
 </ol></div>
@@ -602,8 +614,8 @@ are explained <a href="user-upload.html#push_create">here</a>.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.5.1<br />
-Last updated 2012-11-23 08:59:27 CET
+Version 2.5.2<br />
+Last updated 2013-02-01 13:39:50 CET
 </div>
 </div>
 </body>
