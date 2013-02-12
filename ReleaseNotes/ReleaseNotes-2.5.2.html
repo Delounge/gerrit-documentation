@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.3" />
-<title>Release notes for Gerrit 2.0.11</title>
+<title>Release notes for Gerrit 2.5.2</title>
 <style type="text/css">
 /* Sans-serif font. */
 h1, h2, h3, h4, h5, h6,
@@ -531,8 +531,8 @@ footnotes: function () {
 </head>
 <body class="article">
 <div id="header">
-<h1>Release notes for Gerrit 2.0.11</h1>
-<span id="revnumber">version 2.0.11 (from v2.1.1.1-104-gc20e283)</span>
+<h1>Release notes for Gerrit 2.5.2</h1>
+<span id="revnumber">version 2.5.2</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -541,104 +541,11 @@ footnotes: function () {
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<div class="paragraph"><p>Gerrit 2.0.11 is now available in the usual location:</p></div>
-<div class="paragraph"><p><a href="http://code.google.com/p/gerrit/downloads/list">http://code.google.com/p/gerrit/downloads/list</a></p></div>
-<div class="paragraph"><p><strong>WARNING: This version contains a schema change.</strong></p></div>
-<div class="paragraph"><p>Apply the schema upgrade:</p></div>
-<div class="listingblock">
-<div class="content">
-<pre><tt>  java -jar gerrit.war --cat sql/upgrade009_010.sql | psql reviewdb</tt></pre>
-</div></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_important_notes">Important Notes</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_cache_directory">Cache directory</h3>
-<div class="paragraph"><p>Gerrit now prefers having a temporary directory to store a disk-based content cache.  This cache used to be in the PostgreSQL database, and was the primary reason for the rather large size of the Gerrit schema.  In 2.0.11 the cache has been moved to the local filesystem, and now has automatic expiration management to prevent it from growing too large.  As this is only a cache, making backups of this directory is not required.</p></div>
-<div class="paragraph"><p>It is suggested (but not required) that you enable this cache:</p></div>
-<div class="listingblock">
-<div class="content">
-<pre><tt>  mkdir $site_path/disk_cache
-  chown gerrituser $site_path/disk_cache
-  chmod 700 $site_path/disk_cache           ; # just to be paranoid</tt></pre>
-</div></div>
-<div class="paragraph"><p>The directory can also be placed elsewhere in the local filesystem, see <tt>cache.directory</tt> in the <tt>gerrit.config</tt> file.</p></div>
-<div class="paragraph"><p><a href="http://gerrit.googlecode.com/svn/documentation/2.0/config-gerrit.html">http://gerrit.googlecode.com/svn/documentation/2.0/config-gerrit.html</a></p></div>
-</div>
-<div class="sect2">
-<h3 id="_protocol_change">Protocol change</h3>
-<div class="paragraph"><p>The protocol between the browser based JavaScript and the server has changed.  After installing 2.0.11 users need to load the site page again to ensure they are running 2.0.11 or later.  Users can verify they have the new version by checking the version number in the footer in the lower right.  Users who don&#8217;t load the new version (e.g. are using a stale tab from a week ago) will see errors when trying to view patches.</p></div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_new_features">New Features</h2>
-<div class="sectionbody">
-<div class="ulist"><ul>
-<li>
-<p>
-GERRIT-8    Add <em>Whole File</em> as a context preference in the user s&#8230;
-</p>
-</li>
-<li>
-<p>
-GERRIT-9    Honor user&#8217;s "Default Context" preference
-</p>
-</li>
-<li>
-<p>
-GERRIT-14   Split patch view RPCs into two halves
-</p>
-</li>
-<li>
-<p>
-GERRIT-61   Database error in side by side view
-</p>
-</li>
-<li>
-<p>
-GERRIT-156  Rewrite the side-by-side and unified diff viewers
-</p>
-<div class="paragraph"><p>The side by side and unified patch viewers have been completely rewritten.  Gerrit now honors the user&#8217;s Default Context setting (from My &gt; Settings) in both the side by side and the unified patch view.  A new "Whole File" setting is also available, showing the complete file.</p></div>
-</li>
-<li>
-<p>
-GERRIT-154  Add the branch name to the beginning of the subject li&#8230;
-</p>
-</li>
-<li>
-<p>
-Sending mail when merge failed due to path conflict, m&#8230;
-</p>
-<div class="paragraph"><p>Some improvements have been made with regards to the emails sent by Gerrit.</p></div>
-</li>
-<li>
-<p>
-Configure the JGit WindowCache from $site_path/gerrit&#8230;.
-</p>
-</li>
-<li>
-<p>
-Document the new gerrit.config file
-</p>
-<div class="paragraph"><p>Gerrit now supports a Git-style "$site_path/gerrit.config" configuration file.  Currently this supports configuration of the various memory caches, including control over JGit&#8217;s pack file cache.  See the updated documentation section for more details:
-<a href="http://gerrit.googlecode.com/svn/documentation/2.0/config-gerrit.html">http://gerrit.googlecode.com/svn/documentation/2.0/config-gerrit.html</a></p></div>
-</li>
-<li>
-<p>
-Add "gerrit show-caches" to view cache statistics
-</p>
-<div class="paragraph"><p>There is a new administrative command over SSH called "gerrit show-caches" which displays current cache statistics for the various caches within the Gerrit memory space.</p></div>
-</li>
-<li>
-<p>
-Expand local part emails when creating new changes
-</p>
-<div class="paragraph"><p>Simple DWIMery: users can now do <tt>repo upload --reviewer=who</tt> to have the reviewer email automatically expand according to the email_format column in system_config, e.g. by expanding <tt>who</tt> to <tt>who@example.com</tt>.</p></div>
-</li>
-</ul></div>
+<div class="paragraph"><p>Gerrit 2.5.2 is now available:</p></div>
+<div class="paragraph"><p><a href="http://code.google.com/p/gerrit/downloads/detail?name=gerrit-full-2.5.2.war">http://code.google.com/p/gerrit/downloads/detail?name=gerrit-full-2.5.2.war</a></p></div>
+<div class="paragraph"><p>There are no schema changes from 2.5, or 2.5.1.</p></div>
+<div class="paragraph"><p>However, if upgrading from anything earlier version, follow the upgrade
+procedure in the 2.5 <a href="ReleaseNotes-2.5.html">Release Notes</a>.</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -647,253 +554,172 @@ Expand local part emails when creating new changes
 <div class="ulist"><ul>
 <li>
 <p>
-GERRIT-81   Can&#8217;t repack a repository while Gerrit is running
+Improve performance of ReceiveCommits for repos with many refs
 </p>
-<div class="paragraph"><p>Running "git repack", "git gc" or "git fetch" in a repository owned by Gerrit is now safe while Gerrit is running.</p></div>
+<div class="paragraph"><p>When validating the received commits all existing refs were added as
+uninteresting to the RevWalk. This resulted in bad performance when a
+repository had many refs (&gt;100000). Putting existing <em>refs/changes/</em>
+or <em>refs/tags/</em> into the RevWalk is now avoided, which improves the
+performance.</p></div>
 </li>
 <li>
 <p>
-GERRIT-165  Don&#8217;t create new user accounts as full name = "null nu&#8230;
+Improve Push performance by discarding <em>cache-automerge/*</em> refs
+  early in VisibleRefFilter
 </p>
-<div class="paragraph"><p>New users coming from Google Accounts OpenID provider where given a full name of "null null" rather than "Anonymous Coward".</p></div>
+<div class="paragraph"><p>For a typical large Git repository, with many refs and lots of cached
+merges, the push time goes down significantly.</p></div>
 </li>
 <li>
 <p>
-Honor account.preferred_email when checking co&#8230;
+Don&#8217;t display all files from a merge-commit when auto-merge fails
 </p>
-<div class="paragraph"><p>Service users created by manually inserting into the accounts table didn&#8217;t permit using their preferred_email in commits or tags; administrators had to also insert a dummy record into the account_external_ids table.  The dummy account_external_ids record is no longer necessary.</p></div>
-</li>
-</ul></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_other_changes">Other Changes</h2>
-<div class="sectionbody">
+<div class="paragraph"><p>For merge commits Gerrit shows the difference to the automatic merge
+result. The creation of the auto-merge result may fail, e.g. when the
+merge commit has multiple merge bases (because JGit doesn&#8217;t support
+this case yet). In this case Gerrit was showing all files from the
+merge commit. This caused several issues:</p></div>
+<div class="openblock">
+<div class="content">
 <div class="ulist"><ul>
 <li>
 <p>
-Start 2.0.11 development
+the file list was too large for projects with a large number of
+   files
 </p>
 </li>
 <li>
 <p>
-Include the <em>Google Format</em> style we selected in our p&#8230;
+Gerrit would send too many false notification emails to users
+   watching changes under certain paths
 </p>
 </li>
 <li>
 <p>
-Upgrade JGit to v0.4.0-310-g3da8761
+both client and server needed a lot of resources in order to handle
+   such a large list of files
+</p>
+</li>
+</ul></div>
+</div></div>
+<div class="paragraph"><p>Now the file list for a merge commit will be empty when the creation
+of the auto-merge result fails.</p></div>
+</li>
+<li>
+<p>
+<a href="http://code.google.com/p/gerrit/issues/detail?id=1726">issue 1726</a>:
+  Create ref for new patch set on direct push
+</p>
+<div class="paragraph"><p>If a change is in review and a new commit that has the Change-Id of
+this change in its commit message is pushed directly, then a new patch
+set for this commit is created and the change gets automatically
+closed. The problem was that no change ref for this new patch set was
+created and as result the change ref that was shown for the new patch
+set in the WebUI, and which was contained in the patchset-created
+event, was invalid.</p></div>
+</li>
+<li>
+<p>
+<a href="http://code.google.com/p/gerrit/issues/detail?id=1767">issue 1767</a>:
+  Remove wrong error message when pushing a new ref fails
+</p>
+<div class="paragraph"><p>If pushing a new ref was rejected because the user was not allowed to
+create it the error message always told the user that he&#8217;s missing the
+<em>Create Reference</em> access right. This message was incorrect in some
+cases. Users that have the <em>Create Reference</em> access right assigned
+are e.g. not allowed to create the ref if:</p></div>
+<div class="openblock">
+<div class="content">
+<div class="ulist"><ul>
+<li>
+<p>
+they are pushing an annotated tag without having the
+   <em>Push Annotated Tag</em> access right
 </p>
 </li>
 <li>
 <p>
-Include JGit sources when building GWT code
+they are pushing a signed tag without having the <em>Push Signed Tag</em>
+   access right
 </p>
 </li>
 <li>
 <p>
-Cleanup classpath and use source JARs to build JavaScr&#8230;
+the project state is set to <em>Read Only</em>
 </p>
+</li>
+</ul></div>
+</div></div>
+<div class="paragraph"><p>Now the error message just says <em>Prohibited by Gerrit</em>. This generic
+error message is better than a more concrete error message which is
+wrong in same cases because a wrong message is misleading and
+confuses the user.</p></div>
+<div class="paragraph"><p>In addition the description of the <em>Prohibited by Gerrit</em> error in the
+documentation has been updated to explain some additional cases in
+which the <em>Prohibited by Gerrit</em> error occurs.</p></div>
 </li>
 <li>
 <p>
-Remove the ImportGerrit1 command line utility
+<a href="http://code.google.com/p/gerrit/issues/detail?id=1444">issue 1444</a>:
+  Remove <em>Mailing-List</em> header from sent emails
 </p>
+<div class="paragraph"><p>The non-standard <em>Mailing-List</em> header that is included in the emails
+sent by Gerrit isn&#8217;t allowed by the Amazon Simple Email Service and is
+now removed.</p></div>
 </li>
 <li>
 <p>
-Remove EncryptContactInfo helper program
+Improve SMTP client error messages
 </p>
+<div class="paragraph"><p>The wording of the error messages in the SMTP client was changed to
+make it more clear at exactly what stage in the SMTP transaction the
+server returned an error. Also the server&#8217;s response text is now
+always included.</p></div>
+<div class="paragraph"><p>In addition it is now ensured that already rejected recipients are
+included in the error message when the server rejects the DATA
+command. Without this there is no way of debugging rejected
+recipients if all recipients are rejected since that typically
+results in a DATA command rejection. Because some SMTP servers (e.g.
+Postfix with the default configuration) delay rejection of HELO/EHLO
+and MAIL FROM commands to the RCPT TO stage, this can happen not only
+for bad recipients.</p></div>
 </li>
 <li>
 <p>
-Add custom serialization for jgit.diff.Edit
+Allow time unit variables to be <em>0</em>
 </p>
+<div class="paragraph"><p><a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.5/config-gerrit.html">
+Gerrit Configuration parameters</a> that expect a numerical time unit as
+value can now be set to <em>0</em>.</p></div>
 </li>
 <li>
 <p>
-Add Ehcache 1.6.0-beta5 to our dependency list
+<a href="http://code.google.com/p/gerrit/issues/detail?id=1076">issue 1076</a>:
+  Fix CLA hyperlink on account registration page
 </p>
+<div class="paragraph"><p>The New Contributor Agreement hyperlink on the Account Registration page
+was malformed.</p></div>
 </li>
 <li>
 <p>
-Start/stop Ehcache when GerritServer starts/stops
+Fix broken link to repo command reference
 </p>
+<div class="paragraph"><p>The link to the repo command reference in the <em>repo upload</em> section of
+the <em>Uploading Changes</em> documentation was broken.</p></div>
 </li>
 <li>
 <p>
-Cache OpenID discovery results inside of Ehcache
+<a href="http://code.google.com/p/gerrit/issues/detail?id=1569">issue 1569</a>:
+Fix unexpected behaviour in the commit-msg hook caused by <tt>GREP_OPTIONS</tt>
 </p>
-</li>
-<li>
-<p>
-Cache JGit FileHeader and EditList inside of Ehcache
-</p>
-</li>
-<li>
-<p>
-Store FileHeader and EditList in Ehache during patch s&#8230;
-</p>
-</li>
-<li>
-<p>
-Remove the now dead patch_contents table from the data&#8230;
-</p>
-</li>
-<li>
-<p>
-Fix "null null" user names during schema upgrade from &#8230;
-</p>
-</li>
-<li>
-<p>
-Work around asciidoc 8.2.2 not including our APLv2 lic&#8230;
-</p>
-</li>
-<li>
-<p>
-Remove unused logger from SshServlet
-</p>
-</li>
-<li>
-<p>
-Reuse is administrator test in admin SSH commands
-</p>
-</li>
-<li>
-<p>
-Use common PrintWriter construction in command impleme&#8230;
-</p>
-</li>
-<li>
-<p>
-Refactor gerrit flush-caches to just flush everything &#8230;
-</p>
-</li>
-<li>
-<p>
-GERRIT-166  Move the SSH key cache into Ehcache
-</p>
-</li>
-<li>
-<p>
-Change the diff cache serialization of JGit ObjectId i&#8230;
-</p>
-</li>
-<li>
-<p>
-Fix git_base_path documentation in config-gerrit
-</p>
-</li>
-<li>
-<p>
-Clarify the default max_session_age in config-gerrit
-</p>
-</li>
-<li>
-<p>
-Enhance the site_path entry in config-gerrit
-</p>
-</li>
-<li>
-<p>
-Clarify the caching of static assets under $site_path/&#8230;
-</p>
-</li>
-<li>
-<p>
-Minor grammar fixes in the Google Analytics documentat&#8230;
-</p>
-</li>
-<li>
-<p>
-Document that replication honors StrictHostKeyChecking
-</p>
-</li>
-<li>
-<p>
-Document how ~/.ssh/known_hosts is used during replica&#8230;
-</p>
-</li>
-<li>
-<p>
-Document how ssh-agent cannot be used for replication
-</p>
-</li>
-<li>
-<p>
-Fix git_base_path references in project-setup
-</p>
-</li>
-<li>
-<p>
-Cleanup project setup documentation
-</p>
-</li>
-<li>
-<p>
-Expand the config-contact documentation to describe th&#8230;
-</p>
-</li>
-<li>
-<p>
-Clarify the gitweb integration documentation
-</p>
-</li>
-<li>
-<p>
-Minor corrections in install documentation
-</p>
-</li>
-<li>
-<p>
-Reformat the config-gerrit page to free up section hea&#8230;
-</p>
-</li>
-<li>
-<p>
-Enable table of contents in documentation files
-</p>
-</li>
-<li>
-<p>
-Add the source code version number to documentation
-</p>
-</li>
-<li>
-<p>
-More reformatting of the config-gerrit page
-</p>
-</li>
-<li>
-<p>
-Cleanup formatting references for file system path var&#8230;
-</p>
-</li>
-<li>
-<p>
-Cleanup the documentation index
-</p>
-</li>
-<li>
-<p>
-Kill the feature roadmap in the documentation
-</p>
-</li>
-<li>
-<p>
-Only use the disk cache directory if we can write to it
-</p>
-</li>
-<li>
-<p>
-Change the title of the installation guide
-</p>
-</li>
-<li>
-<p>
-Note in the developer install guides that you need to &#8230;
-</p>
+<div class="paragraph"><p>If <tt>GREP_OPTIONS</tt> was set, it caused unexpected behaviour in the
+commit-msg hook.  For example if it included a setting like
+<tt>--exclude=".git/*"</tt> it caused a new <tt>Change-Id</tt> line to be appended
+to the commit message on every amend.</p></div>
+<div class="paragraph"><p><tt>GREP_OPTIONS</tt> is now unset at the beginning of the commit-msg script
+to prevent such problems from occurring.</p></div>
+<div class="paragraph"><p>The <tt>GREP_OPTIONS</tt> setting in the user&#8217;s environment is unaffected
+by this change.</p></div>
 </li>
 </ul></div>
 </div>
@@ -902,8 +728,8 @@ Note in the developer install guides that you need to &#8230;
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.0.11 (from v2.1.1.1-104-gc20e283)<br />
-Last updated 2012-06-20 15:52:18 CEST
+Version 2.5.2<br />
+Last updated 2013-02-12 10:15:32 CET
 </div>
 </div>
 </body>
