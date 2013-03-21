@@ -3,27 +3,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.3" />
+<meta name="generator" content="AsciiDoc 8.6.6" />
 <title>Gerrit Code Review - Configuration</title>
 <style type="text/css">
-/* Sans-serif font. */
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
 h1, h2, h3, h4, h5, h6,
 div.title, caption.title,
 thead, p.table.header,
-div#toctitle,
-span#author, span#revnumber, span#revdate, span#revremark,
-div#footer {
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
   font-family: Arial,Helvetica,sans-serif;
-}
-
-/* Serif font. */
-div.sectionbody {
-  font-family: Georgia,"Times New Roman",Times,serif;
-}
-
-/* Monospace font. */
-tt {
-  font-size: inherit;
 }
 
 body {
@@ -48,11 +45,6 @@ strong {
   color: #083194;
 }
 
-tt {
-  font-size: inherit;
-  color: navy;
-}
-
 h1, h2, h3, h4, h5, h6 {
   color: #527bbd;
   margin-top: 1.2em;
@@ -71,6 +63,9 @@ h3 {
 }
 h3 + * {
   clear: left;
+}
+h5 {
+  font-size: 1.0em;
 }
 
 div.sectionbody {
@@ -97,36 +92,36 @@ pre {
   margin: 0;
 }
 
-span#author {
+#author {
   color: #527bbd;
   font-weight: bold;
   font-size: 1.1em;
 }
-span#email {
+#email {
 }
-span#revnumber, span#revdate, span#revremark {
+#revnumber, #revdate, #revremark {
 }
 
-div#footer {
+#footer {
   font-size: small;
   border-top: 2px solid silver;
   padding-top: 0.5em;
   margin-top: 4.0em;
 }
-div#footer-text {
+#footer-text {
   float: left;
   padding-bottom: 0.5em;
 }
-div#footer-badges {
+#footer-badges {
   float: right;
   padding-bottom: 0.5em;
 }
 
-div#preamble {
+#preamble {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
-div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.imageblock, div.exampleblock, div.verseblock,
 div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
 div.admonitionblock {
   margin-top: 1.0em;
@@ -184,7 +179,7 @@ div.quoteblock, div.verseblock {
   margin-left: 1.0em;
   margin-right: 10%;
   border-left: 5px solid #f0f0f0;
-  color: #777777;
+  color: #888;
 }
 
 div.quoteblock > div.attribution {
@@ -267,35 +262,12 @@ div.compact div, div.compact div {
   margin-bottom: 0.1em;
 }
 
-div.tableblock > table {
-  border: 3px solid #527bbd;
-}
-thead, p.table.header {
-  font-weight: bold;
-  color: #527bbd;
-}
 tfoot {
   font-weight: bold;
 }
 td > div.verse {
   white-space: pre;
 }
-p.table {
-  margin-top: 0;
-}
-/* Because the table frame attribute is overriden by CSS in most browsers. */
-div.tableblock > table[frame="void"] {
-  border-style: none;
-}
-div.tableblock > table[frame="hsides"] {
-  border-left-style: none;
-  border-right-style: none;
-}
-div.tableblock > table[frame="vsides"] {
-  border-top-style: none;
-  border-bottom-style: none;
-}
-
 
 div.hdlist {
   margin-top: 0.8em;
@@ -362,14 +334,14 @@ div.colist td img {
 }
 
 @media print {
-  div#footer-badges { display: none; }
+  #footer-badges { display: none; }
 }
 
-div#toc {
+#toc {
   margin-bottom: 2.5em;
 }
 
-div#toctitle {
+#toctitle {
   color: #527bbd;
   font-size: 1.1em;
   font-weight: bold;
@@ -394,10 +366,180 @@ div.toclevel4 {
   font-size: 0.9em;
 }
 
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+tt {
+  font-family: monospace;
+  font-size: inherit;
+  color: navy;
+}
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+.monospaced {
+  font-family: monospace;
+  font-size: inherit;
+  color: navy;
+}
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
 </style>
 <script type="text/javascript">
 /*<![CDATA[*/
-window.onload = function(){asciidoc.footnotes(); asciidoc.toc(2);}
 var asciidoc = {  // Namespace.
 
 /////////////////////////////////////////////////////////////////////
@@ -459,6 +601,25 @@ toc: function (toclevels) {
   }
 
   var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
   var entries = tocEntries(document.getElementById("content"), toclevels);
   for (var i = 0; i < entries.length; ++i) {
     var entry = entries[i];
@@ -486,24 +647,44 @@ toc: function (toclevels) {
  */
 
 footnotes: function () {
-  var cont = document.getElementById("content");
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
   var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
   var spans = cont.getElementsByTagName("span");
   var refs = {};
   var n = 0;
   for (i=0; i<spans.length; i++) {
     if (spans[i].className == "footnote") {
       n++;
-      // Use [\s\S] in place of . so multi-line matches work.
-      // Because JavaScript has no s (dotall) regex flag.
-      note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
       noteholder.innerHTML +=
         "<div class='footnote' id='_footnote_" + n + "'>" +
         "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
         n + "</a>. " + note + "</div>";
-      spans[i].innerHTML =
-        "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
-        "' title='View footnote' class='footnote'>" + n + "</a>]";
       var id =spans[i].getAttribute("id");
       if (id != null) refs["#"+id] = n;
     }
@@ -523,16 +704,39 @@ footnotes: function () {
       }
     }
   }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
 }
 
 }
+asciidoc.install(2);
 /*]]>*/
 </script>
 </head>
 <body class="article">
 <div id="header">
 <h1>Gerrit Code Review - Configuration</h1>
-<span id="revnumber">version 2.5</span>
+<span id="revnumber">version 2.6-rc0</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -561,10 +765,7 @@ to be restarted before it will use the new values.</td>
   packedGitLimit = 200 m
 
 [cache]
-  directory = /var/cache/gerrit2
-
-[cache "diff"]
-  diskbuffer = 10 m</tt></pre>
+  directory = /var/cache/gerrit2</tt></pre>
 </div></div>
 <div class="sect2">
 <h3 id="_a_id_accounts_a_section_accounts"><a id="accounts"></a>Section accounts</h3>
@@ -687,7 +888,8 @@ is not involved in the user authentication process.</p></div>
 <div class="paragraph"><p>The actual username used in the LDAP simple bind request is the
 account&#8217;s full DN, which is discovered by first querying the
 directory using either an anonymous request, or the configured
-<a href="#ldap.username">[ldap.username]</a> identity.</p></div>
+<a href="#ldap.username">ldap.username</a> identity. Gerrit can also use kerberos if
+<a href="#ldap.authentication">ldap.authentication</a> is set to <tt>GSSAPI</tt>.</p></div>
 </li>
 <li>
 <p>
@@ -699,7 +901,7 @@ it then verifies by performing a simple bind against the configured
 is not involved in the user authentication process.</p></div>
 <div class="paragraph"><p>Unlike LDAP above, the username used to perform the LDAP simple bind
 request is the exact string supplied by in the dialog by the user.
-The configured <a href="#ldap.username">[ldap.username]</a> identity is not used to obtain
+The configured <a href="#ldap.username">ldap.username</a> identity is not used to obtain
 account information.</p></div>
 </li>
 <li>
@@ -749,6 +951,16 @@ Java regular expression (java.util.regex)</a> (start with <tt>^</tt> and
 end with <tt>$</tt>) or be a simple prefix (any other string).</p></div>
 <div class="paragraph"><p>By default, the list contains two values, <tt>http://</tt> and <tt>https://</tt>,
 allowing Gerrit to trust any OpenID it receives.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="auth.openIdDomain"></a>auth.openIdDomain
+</dt>
+<dd>
+<div class="paragraph"><p>List of allowed OpenID email address domains. Only used if
+<tt>auth.type</tt> is set to "OPENID" or "OPENID_SSO".</p></div>
+<div class="paragraph"><p>Domain is case insensitive and must be in the same form as it
+appears in the email address, for example, "example.com".</p></div>
+<div class="paragraph"><p>By default, any domain is accepted.</p></div>
 </dd>
 <dt class="hdlist1">
 <a id="auth.maxOpenIdSessionAge"></a>auth.maxOpenIdSessionAge
@@ -881,6 +1093,28 @@ when auth.type is <tt>LDAP</tt>.</p></div>
 <div class="paragraph"><p>If not set, no "Register" link is displayed.</p></div>
 </dd>
 <dt class="hdlist1">
+<a id="auth.registerText"></a>auth.registerText
+</dt>
+<dd>
+<div class="paragraph"><p>Text for the "Register" link in the upper right corner.  Used only
+when auth.type is <tt>LDAP</tt>.</p></div>
+<div class="paragraph"><p>If not set, defaults to "Register".</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="auth.editFullNameUrl"></a>auth.editFullNameUrl
+</dt>
+<dd>
+<div class="paragraph"><p>Target for the "Edit" button when the user is allowed to edit their
+full name.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="auth.httpPasswordUrl"></a>auth.httpPasswordUrl
+</dt>
+<dd>
+<div class="paragraph"><p>Target for the "Obtain Password" link.  Used only when auth.type is
+<tt>LDAP</tt>, <tt>LDAP_BIND</tt> or <tt>CUSTOM_EXTENSION</tt>.</p></div>
+</dd>
+<dt class="hdlist1">
 <a id="auth.cookiePath"></a>auth.cookiePath
 </dt>
 <dd>
@@ -917,8 +1151,9 @@ email address from the LDAP directory is generally preferred.</p></div>
 <div class="paragraph"><p>Controls whether or not the contributor agreement features are
 enabled for the Gerrit site.  If enabled a user must complete a
 contributor agreement before they can upload changes.</p></div>
-<div class="paragraph"><p>If enabled, the admin must also insert one or more rows into
-<tt>contributor_agreements</tt> and create agreement files under
+<div class="paragraph"><p>If enabled, the admin must also add one or more
+<a href="config-cla.html">contributor-agreement sections</a>
+in project.config and create agreement files under
 <tt>'$site_path'/static</tt>, so users can actually complete one or
 more agreements.</p></div>
 <div class="paragraph"><p>By default this is false (no agreements are used).</p></div>
@@ -1040,7 +1275,7 @@ y, year, years (<tt>1 year</tt> is treated as <tt>365 days</tt>)
 </p>
 </li>
 </ul></div>
-<div class="paragraph"><p>If a unit suffix is not specified, <tt>minutes</tt> is assumed.  If 0 is
+<div class="paragraph"><p>If a unit suffix is not specified, <tt>seconds</tt> is assumed.  If 0 is
 supplied, the maximum age is infinite and items are never purged
 except when the cache is full.</p></div>
 <div class="paragraph"><p>Default is <tt>0</tt>, meaning store forever with no expire, except:</p></div>
@@ -1165,6 +1400,19 @@ are enabled.  The cache entry contains all commits that are avaliable
 for the client to use as potential delta bases.  Push over smart HTTP
 requires two HTTP requests, and this cache tries to carry state from
 the first request into the second to ensure it can complete.</p></div>
+</dd>
+<dt class="hdlist1">
+cache <tt>"changes"</tt>
+</dt>
+<dd>
+<div class="paragraph"><p>The size determines the number of projects that will have all its changes
+cached. If the cache is set to 1024, this means all changes for up to
+1024 projects can be held in the cache.</p></div>
+<div class="paragraph"><p>Default size is 0 (disabled). It is disabled by default due to the fact
+that change updates are not communicated between Gerrit servers.
+Hence this cache should be disabled in an multi-master/multi-slave setup.</p></div>
+<div class="paragraph"><p>The cache should be flushed whenever the database changes table is modified
+outside of gerrit.</p></div>
 </dd>
 <dt class="hdlist1">
 cache <tt>"diff"</tt>
@@ -1373,6 +1621,7 @@ minutes to see if a new revision should be loaded and used for future
 access. Values can be specified using standard time unit abbreviations
 (<em>ms</em>, <em>sec</em>, <em>min</em>, etc.).</p></div>
 <div class="paragraph"><p>If set to 0, checks occur every time, which may slow down operations.
+If set to <em>disabled</em> or <em>off</em>, no check will ever be done.
 Administrators may force the cache to flush with
 <a href="cmd-flush-caches.html">gerrit flush-caches</a>.</p></div>
 <div class="paragraph"><p>Default is 5 minutes.</p></div>
@@ -1382,22 +1631,36 @@ Administrators may force the cache to flush with
 </div>
 <div class="sect2">
 <h3 id="_a_id_changemerge_a_section_changemerge"><a id="changeMerge"></a>Section changeMerge</h3>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+changeMerge.checkFrequency
+</dt>
+<dd>
+<div class="paragraph"><p>How often the database should be rescanned for changes that have been
+submitted but not merged due to transient errors. Values can be
+specified using standard time unit abbreviations (<em>ms</em>, <em>sec</em>, <em>min</em>,
+etc.). Set to 0 to disable periodic rescanning, only scanning once on
+master node startup.</p></div>
+<div class="paragraph"><p>Default is 300 seconds (5 minutes).</p></div>
+</dd>
+<dt class="hdlist1">
+changeMerge.test
+</dt>
+<dd>
 <div class="paragraph"><p>Controls whether or not the mergeability test of changes is
 enabled.  If enabled, when the change page is loaded, the test is
 triggered. The submit button will be enabled or disabled according to
 the result.</p></div>
-<div class="listingblock">
-<div class="content">
-<pre><tt>[changeMerge]
-  test = true</tt></pre>
-</div></div>
 <div class="paragraph"><p>By default this is false (test is not enabled).</p></div>
+</dd>
+</dl></div>
 </div>
 <div class="sect2">
 <h3 id="_a_id_commentlink_a_section_commentlink"><a id="commentlink"></a>Section commentlink</h3>
 <div class="paragraph"><p>Comment links are find/replace strings applied to change descriptions,
-patch comments, and in-line code comments to turn set strings into
-hyperlinks.  One common use is for linking to bug-tracking systems.</p></div>
+patch comments, in-line code comments and approval category value descriptions
+to turn set strings into hyperlinks.  One common use is for linking to
+bug-tracking systems.</p></div>
 <div class="paragraph"><p>In the following example configuration the <em>changeid</em> comment link
 will match typical Gerrit Change-Id values and create a hyperlink
 to changes which reference it.  The second configuration <em>bugzilla</em>
@@ -1634,6 +1897,15 @@ Putting a larger value can protect threads from stalling when the
 AsyncAppender threads are not fast enough to consume the logging events
 from the buffer. It also protects from loosing log entries in this case.</p></div>
 <div class="paragraph"><p>Default is 64 entries.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="core.useRecursiveMerge"></a>core.useRecursiveMerge
+</dt>
+<dd>
+<div class="paragraph"><p>Use JGit&#8217;s new, experimental recursive merger for three-way merges.
+This only affects projects configured to automatically resolve
+conflicts.</p></div>
+<div class="paragraph"><p>Default is false, but in a future release may default to true.</p></div>
 </dd>
 </dl></div>
 </div>
@@ -2071,6 +2343,19 @@ using the property <em>gitweb.pathSeparator</em>.</p></div>
 </dl></div>
 </div>
 <div class="sect2">
+<h3 id="_a_id_groups_a_section_groups"><a id="groups"></a>Section groups</h3>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<a id="groups.newGroupsVisibleToAll"></a>groups.newGroupsVisibleToAll
+</dt>
+<dd>
+<div class="paragraph"><p>Controls whether newly created groups should be by default visible to
+all registered users.</p></div>
+<div class="paragraph"><p>By default, false.</p></div>
+</dd>
+</dl></div>
+</div>
+<div class="sect2">
 <h3 id="_a_id_hooks_a_section_hooks"><a id="hooks"></a>Section hooks</h3>
 <div class="paragraph"><p>See also <a href="config-hooks.html">Hooks</a>.</p></div>
 <div class="dlist"><dl>
@@ -2109,6 +2394,13 @@ using the property <em>gitweb.pathSeparator</em>.</p></div>
 <tt>change-merged</tt> will be used.</p></div>
 </dd>
 <dt class="hdlist1">
+<a id="hooks.mergeFailedHook"></a>hooks.mergeFailedHook
+</dt>
+<dd>
+<div class="paragraph"><p>Optional filename for the merge failed hook, if not specified then
+<tt>merge-failed</tt> will be used.</p></div>
+</dd>
+<dt class="hdlist1">
 <a id="hooks.changeAbandonedHook"></a>hooks.changeAbandonedHook
 </dt>
 <dd>
@@ -2130,11 +2422,32 @@ using the property <em>gitweb.pathSeparator</em>.</p></div>
 <tt>ref-updated</tt> will be used.</p></div>
 </dd>
 <dt class="hdlist1">
+<a id="hooks.reviewerAddedHook"></a>hooks.reviewerAddedHook
+</dt>
+<dd>
+<div class="paragraph"><p>Optional filename for the reviewer added hook, if not specified then
+<tt>reviewer-added</tt> will be used.</p></div>
+</dd>
+<dt class="hdlist1">
 <a id="hooks.claSignedHook"></a>hooks.claSignedHook
 </dt>
 <dd>
 <div class="paragraph"><p>Optional filename for the CLA signed hook, if not specified then
 <tt>cla-signed</tt> will be used.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="hooks.refUpdateHook"></a>hooks.refUpdateHook
+</dt>
+<dd>
+<div class="paragraph"><p>Optional filename for the ref update hook, if not specified then
+<tt>ref-update</tt> will be used.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="hooks.syncHookTimeout"></a>hooks.syncHookTimeout
+</dt>
+<dd>
+<div class="paragraph"><p>Optional timeout value in seconds for synchronous hooks, if not specified
+then 30 seconds will be used.</p></div>
 </dd>
 </dl></div>
 </div>
@@ -2632,6 +2945,20 @@ Attributes such as <tt>${dn}</tt> or <tt>${uidNumber}</tt> may be useful.</p></d
 and unset (disabled) for Active Directory.</p></div>
 </dd>
 <dt class="hdlist1">
+<a id="ldap.groupName"></a>ldap.groupName
+</dt>
+<dd>
+<div class="paragraph"><p><em>(Optional)</em> Name of the attribute on the group object which contains
+the value to use as the group name in Gerrit.</p></div>
+<div class="paragraph"><p>Typically the attribute name is <tt>cn</tt> for RFC 2307 and Active Directory
+servers.  For other servers the attribute name may differ, for example
+<tt>apple-group-realname</tt> on Apple MacOS X Server.</p></div>
+<div class="paragraph"><p>It is also possible to specify a literal string containing a pattern of
+attribute values.  For example to create a Gerrit group name consisting of
+LDAP group name and group ID, use the pattern <tt>${cn} (${gidNumber})</tt>.</p></div>
+<div class="paragraph"><p>Default is <tt>cn</tt>.</p></div>
+</dd>
+<dt class="hdlist1">
 <a id="ldap.localUsernameToLowerCase"></a>ldap.localUsernameToLowerCase
 </dt>
 <dd>
@@ -2650,7 +2977,37 @@ case can&#8217;t be undone. For newly created accounts the local username
 will be directly stored in lower case.</p></div>
 <div class="paragraph"><p>By default, unset/false.</p></div>
 </dd>
+<dt class="hdlist1">
+<a id="ldap.authentication"></a>ldap.authentication
+</dt>
+<dd>
+<div class="paragraph"><p>Defines how Gerrit authenticates with the server. When set to <tt>GSSAPI</tt>
+Gerrit will use Kerberos. To use kerberos the
+<tt>java.security.auth.login.config</tt> system property must point to a
+login to a JAAS configuration file and, if Java 6 is used, the system
+property <tt>java.security.krb5.conf</tt> must point to the appropriate
+krb5.ini file with references to the KDC.</p></div>
+</dd>
 </dl></div>
+<div class="paragraph"><p>Typical jaas.conf.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>KerberosLogin {
+    com.sun.security.auth.module.Krb5LoginModule
+            required
+            useTicketCache=true
+            doNotPrompt=true
+            renewTGT=true;
+};</tt></pre>
+</div></div>
+<div class="paragraph"><p>See Java documentation on how to create the krb5.ini file.</p></div>
+<div class="paragraph"><p>Note the <tt>renewTGT</tt> property to make sure the TGT does not expire,
+and <tt>useTicketCache</tt> to use the TGT supplied by the operating system. As
+the whole point of using GSSAPI is to have passwordless authentication
+to the LDAP service, this option does not aquire a new TGT on its own.</p></div>
+<div class="paragraph"><p>On Windows servers the registry key <tt>HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa\Kerberos\Parameters</tt>
+must have the DWORD value <tt>allowtgtsessionkey</tt> set to 1 and the account must not
+have local administrator privileges.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_a_id_mimetype_a_section_mimetype"><a id="mimetype"></a>Section mimetype</h3>
@@ -2744,6 +3101,33 @@ behavior of Gerrit&#8217;s <em>receive-pack</em> mechanism.</p></div>
 </div></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
+<a id="receive.checkMagicRefs"></a>receive.checkMagicRefs
+</dt>
+<dd>
+<div class="paragraph"><p>If true, Gerrit will verify the destination repository has
+no references under the magic <em>refs/drafts</em>, <em>refs/for</em>, or
+<em>refs/publish</em> branch namespaces. Names under these locations
+confuse clients when trying to upload code reviews so Gerrit
+requires them to be empty.</p></div>
+<div class="paragraph"><p>If false Gerrit skips the sanity check and assumes administrators
+have ensured the repository does not contain any magic references.
+Setting to false to skip the check can decrease latency during push.</p></div>
+<div class="paragraph"><p>Default is true.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="receive.checkReferencedObjectsAreReachable"></a>receive.checkReferencedObjectsAreReachable
+</dt>
+<dd>
+<div class="paragraph"><p>If set to true, Gerrit will validate that all referenced objects that
+are not included in the received pack are reachable by the user.</p></div>
+<div class="paragraph"><p>Carrying out this check on gits with many refs and commits can be a
+very CPU-heavy operation. For non public Gerrit-servers this check may
+be overkill.</p></div>
+<div class="paragraph"><p>Only disable this check if you trust the clients not to forge SHA1
+references to access commits intended to be hidden from the user.</p></div>
+<div class="paragraph"><p>Default is true.</p></div>
+</dd>
+<dt class="hdlist1">
 <a id="receive.allowGroup"></a>receive.allowGroup
 </dt>
 <dd>
@@ -2772,6 +3156,19 @@ from pushing objects which are too large to Gerrit.</p></div>
 <div class="paragraph"><p>Maximum size of the thread pool in which the change data in received packs is
 processed.</p></div>
 <div class="paragraph"><p>Defaults to the number of available CPUs according to the Java runtime.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="receive.changeUpdateThreads"></a>receive.changeUpdateThreads
+</dt>
+<dd>
+<div class="paragraph"><p>Number of threads to perform change creation or patch set updates
+concurrently. Each thread uses its own database connection from
+the database connection pool, and if all threads are busy then
+main receive thread will also perform a change creation or patch
+set update.</p></div>
+<div class="paragraph"><p>Defaults to 1, using only the main receive thread. This feature is for
+databases with very high latency that can benfit from concurrent
+operations when multiple changes are impacted at once.</p></div>
 </dd>
 <dt class="hdlist1">
 <a id="receive.timeout"></a>receive.timeout
@@ -2947,9 +3344,10 @@ email from Gerrit.</p></div>
 <a id="sendemail.includeDiff"></a>sendemail.includeDiff
 </dt>
 <dd>
-<div class="paragraph"><p>If true, new change emails from Gerrit will include the complete
-unified diff of the change. Variable maxmimumDiffSize places an upper
-limit on how large the email can get when this option is enabled.</p></div>
+<div class="paragraph"><p>If true, new change emails and merged change emails from Gerrit
+will include the complete unified diff of the change.
+Variable maxmimumDiffSize places an upper limit on how large the
+email can get when this option is enabled.</p></div>
 <div class="paragraph"><p>By default, false.</p></div>
 </dd>
 <dt class="hdlist1">
@@ -3286,6 +3684,14 @@ otherwise, this value applies to both <tt>suggest.accounts</tt> and
 <div class="paragraph"><p>New configurations should prefer the boolean value for this field
 and an enum value for <tt>accounts.visibility</tt>.</p></div>
 </dd>
+<dt class="hdlist1">
+<a id="suggest.from"></a>suggest.from
+</dt>
+<dd>
+<div class="paragraph"><p>The number of characters that a user must have typed before suggestions
+are provided. If set to 0, suggestions are always provided.</p></div>
+<div class="paragraph"><p>By default 0.</p></div>
+</dd>
 </dl></div>
 </div>
 <div class="sect2">
@@ -3298,8 +3704,7 @@ and an enum value for <tt>accounts.visibility</tt>.</p></div>
 <div class="paragraph"><p>Background color for the page, and major data tables like the all
 open changes table or the account dashboard. The value must be a
 valid HTML hex color code, or standard color name.</p></div>
-<div class="paragraph"><p>By default <tt>FCFEEF</tt> (a creme color) for signed-out theme and white
-(<tt>FFFFFF</tt>) for signed-in theme.</p></div>
+<div class="paragraph"><p>By default white, <tt>FFFFFF</tt>.</p></div>
 </dd>
 <dt class="hdlist1">
 <a id="theme.topMenuColor"></a>theme.topMenuColor
@@ -3307,7 +3712,8 @@ valid HTML hex color code, or standard color name.</p></div>
 <dd>
 <div class="paragraph"><p>This is the color of the main menu bar at the top of the page.
 The value must be a valid HTML hex color code, or standard color
-name.  The value defaults to <a href="#theme.trimColor">trimColor</a>.</p></div>
+name.</p></div>
+<div class="paragraph"><p>By default white, <tt>FFFFFF</tt>.</p></div>
 </dd>
 <dt class="hdlist1">
 <a id="theme.textColor"></a>theme.textColor
@@ -3316,7 +3722,7 @@ name.  The value defaults to <a href="#theme.trimColor">trimColor</a>.</p></div>
 <div class="paragraph"><p>Text color for the page, and major data tables like the all
 open changes table or the account dashboard. The value must be a
 valid HTML hex color code, or standard color name.</p></div>
-<div class="paragraph"><p>By default black, <tt>000000</tt>.</p></div>
+<div class="paragraph"><p>By default dark grey, <tt>353535</tt>.</p></div>
 </dd>
 <dt class="hdlist1">
 <a id="theme.trimColor"></a>theme.trimColor
@@ -3327,7 +3733,7 @@ the color of the main menu bar at the top, of table headers,
 and of major UI areas that we want to offset from other portions
 of the page.  The value must be a valid HTML hex color code, or
 standard color name.</p></div>
-<div class="paragraph"><p>By default a shade of green, <tt>D4E9A9</tt>.</p></div>
+<div class="paragraph"><p>By default a light grey, <tt>EEEEEE</tt>.</p></div>
 </dd>
 <dt class="hdlist1">
 <a id="theme.selectionColor"></a>theme.selectionColor
@@ -3337,7 +3743,7 @@ standard color name.</p></div>
 selected tab, or the background color used in a table to denote the
 currently selected row.  The value must be a valid HTML hex color
 code, or standard color name.</p></div>
-<div class="paragraph"><p>By default a shade of yellow, <tt>FFFFCC</tt>.</p></div>
+<div class="paragraph"><p>By default a pale blue, <tt>D8EDF9</tt>.</p></div>
 </dd>
 <dt class="hdlist1">
 <a id="theme.changeTableOutdatedColor"></a>theme.changeTableOutdatedColor
@@ -3422,7 +3828,7 @@ Java regular expression (java.util.regex)</a> used to match the
 external tracking id part of the footer line. The match can
 result in several entries in the DB.  If grouping is used in the
 regex the first group will be interpreted as the tracking id.
-Tracking ids longer than 20 characters will be ignored.</p></div>
+Tracking ids longer than 32 characters will be ignored.</p></div>
 <div class="paragraph"><p>The configuration file parser eats one level of backslashes, so the
 character class <tt>\s</tt> requires <tt>\\s</tt> in the configuration file.  The
 parser also terminates the line at the first <tt>#</tt>, so a match
@@ -3605,8 +4011,8 @@ good idea.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.5<br />
-Last updated 2012-10-31 19:34:02 CET
+Version 2.6-rc0<br />
+Last updated 2013-03-21 10:52:52 PDT
 </div>
 </div>
 </body>

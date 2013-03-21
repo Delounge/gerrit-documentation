@@ -3,27 +3,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.3" />
-<title>The refs/notes/review namespace</title>
+<meta name="generator" content="AsciiDoc 8.6.6" />
+<title>Gerrit Code Review - Contributor Agreements</title>
 <style type="text/css">
-/* Sans-serif font. */
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
 h1, h2, h3, h4, h5, h6,
 div.title, caption.title,
 thead, p.table.header,
-div#toctitle,
-span#author, span#revnumber, span#revdate, span#revremark,
-div#footer {
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
   font-family: Arial,Helvetica,sans-serif;
-}
-
-/* Serif font. */
-div.sectionbody {
-  font-family: Georgia,"Times New Roman",Times,serif;
-}
-
-/* Monospace font. */
-tt {
-  font-size: inherit;
 }
 
 body {
@@ -48,11 +45,6 @@ strong {
   color: #083194;
 }
 
-tt {
-  font-size: inherit;
-  color: navy;
-}
-
 h1, h2, h3, h4, h5, h6 {
   color: #527bbd;
   margin-top: 1.2em;
@@ -71,6 +63,9 @@ h3 {
 }
 h3 + * {
   clear: left;
+}
+h5 {
+  font-size: 1.0em;
 }
 
 div.sectionbody {
@@ -97,36 +92,36 @@ pre {
   margin: 0;
 }
 
-span#author {
+#author {
   color: #527bbd;
   font-weight: bold;
   font-size: 1.1em;
 }
-span#email {
+#email {
 }
-span#revnumber, span#revdate, span#revremark {
+#revnumber, #revdate, #revremark {
 }
 
-div#footer {
+#footer {
   font-size: small;
   border-top: 2px solid silver;
   padding-top: 0.5em;
   margin-top: 4.0em;
 }
-div#footer-text {
+#footer-text {
   float: left;
   padding-bottom: 0.5em;
 }
-div#footer-badges {
+#footer-badges {
   float: right;
   padding-bottom: 0.5em;
 }
 
-div#preamble {
+#preamble {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
-div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.imageblock, div.exampleblock, div.verseblock,
 div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
 div.admonitionblock {
   margin-top: 1.0em;
@@ -184,7 +179,7 @@ div.quoteblock, div.verseblock {
   margin-left: 1.0em;
   margin-right: 10%;
   border-left: 5px solid #f0f0f0;
-  color: #777777;
+  color: #888;
 }
 
 div.quoteblock > div.attribution {
@@ -267,35 +262,12 @@ div.compact div, div.compact div {
   margin-bottom: 0.1em;
 }
 
-div.tableblock > table {
-  border: 3px solid #527bbd;
-}
-thead, p.table.header {
-  font-weight: bold;
-  color: #527bbd;
-}
 tfoot {
   font-weight: bold;
 }
 td > div.verse {
   white-space: pre;
 }
-p.table {
-  margin-top: 0;
-}
-/* Because the table frame attribute is overriden by CSS in most browsers. */
-div.tableblock > table[frame="void"] {
-  border-style: none;
-}
-div.tableblock > table[frame="hsides"] {
-  border-left-style: none;
-  border-right-style: none;
-}
-div.tableblock > table[frame="vsides"] {
-  border-top-style: none;
-  border-bottom-style: none;
-}
-
 
 div.hdlist {
   margin-top: 0.8em;
@@ -362,14 +334,14 @@ div.colist td img {
 }
 
 @media print {
-  div#footer-badges { display: none; }
+  #footer-badges { display: none; }
 }
 
-div#toc {
+#toc {
   margin-bottom: 2.5em;
 }
 
-div#toctitle {
+#toctitle {
   color: #527bbd;
   font-size: 1.1em;
   font-weight: bold;
@@ -394,10 +366,180 @@ div.toclevel4 {
   font-size: 0.9em;
 }
 
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+tt {
+  font-family: monospace;
+  font-size: inherit;
+  color: navy;
+}
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+.monospaced {
+  font-family: monospace;
+  font-size: inherit;
+  color: navy;
+}
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
 </style>
 <script type="text/javascript">
 /*<![CDATA[*/
-window.onload = function(){asciidoc.footnotes(); asciidoc.toc(2);}
 var asciidoc = {  // Namespace.
 
 /////////////////////////////////////////////////////////////////////
@@ -459,6 +601,25 @@ toc: function (toclevels) {
   }
 
   var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
   var entries = tocEntries(document.getElementById("content"), toclevels);
   for (var i = 0; i < entries.length; ++i) {
     var entry = entries[i];
@@ -486,24 +647,44 @@ toc: function (toclevels) {
  */
 
 footnotes: function () {
-  var cont = document.getElementById("content");
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
   var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
   var spans = cont.getElementsByTagName("span");
   var refs = {};
   var n = 0;
   for (i=0; i<spans.length; i++) {
     if (spans[i].className == "footnote") {
       n++;
-      // Use [\s\S] in place of . so multi-line matches work.
-      // Because JavaScript has no s (dotall) regex flag.
-      note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
       noteholder.innerHTML +=
         "<div class='footnote' id='_footnote_" + n + "'>" +
         "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
         n + "</a>. " + note + "</div>";
-      spans[i].innerHTML =
-        "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
-        "' title='View footnote' class='footnote'>" + n + "</a>]";
       var id =spans[i].getAttribute("id");
       if (id != null) refs["#"+id] = n;
     }
@@ -523,136 +704,143 @@ footnotes: function () {
       }
     }
   }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
 }
 
 }
+asciidoc.install(2);
 /*]]>*/
 </script>
 </head>
 <body class="article">
 <div id="header">
-<h1>The refs/notes/review namespace</h1>
-<span id="revnumber">version 2.5</span>
+<h1>Gerrit Code Review - Contributor Agreements</h1>
+<span id="revnumber">version 2.6-rc0</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
 </div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="_summary">Summary</h2>
+<div id="preamble">
 <div class="sectionbody">
-<div class="paragraph"><p><tt>refs/notes/review</tt> is a special reference that Gerrit creates on repositories
-to store information about code reviews.</p></div>
-<div class="paragraph"><p>When a repository is cloned from Gerrit, the <tt>refs/notes/review</tt> reference is
-not included by default.  It has to be manually fetched:</p></div>
+<div class="paragraph"><p>Users can be required to sign one or more contributor agreements before
+being able to submit a change in a project.</p></div>
+<div class="paragraph"><p>Contributor agreements are global and can be configured by modifying
+the <tt>project.config</tt> file on the <tt>All-Projects</tt> project. Push permission
+needs to be granted for the <tt>refs/meta/config</tt> branch to be able to push
+back the <tt>project.config</tt> file. Consult
+<a href="access-control.html">access controls</a> for details on how access
+permissions work.</p></div>
+<div class="paragraph"><p>To retrieve the <tt>project.config</tt> file, initialize a temporary Git
+repository to edit the configuration:</p></div>
 <div class="exampleblock">
 <div class="content">
 <div class="literalblock">
 <div class="content">
-<pre><tt>$ git fetch origin refs/notes/review:refs/notes/review</tt></pre>
+<pre><tt>mkdir cfg_dir
+cd cfg_dir
+git init</tt></pre>
 </div></div>
 </div></div>
-<div class="paragraph"><p>It is also possible to
-<a href="http://www.kernel.org/pub/software/scm/git/docs/git-config.html">configure git</a>
-to always fetch <tt>refs/notes/review</tt>:</p></div>
+<div class="paragraph"><p>Download the existing configuration from Gerrit:</p></div>
 <div class="exampleblock">
 <div class="content">
 <div class="literalblock">
 <div class="content">
-<pre><tt>$ git config --add remote.origin.fetch refs/notes/review:refs/notes/review
-$ git fetch</tt></pre>
+<pre><tt>git fetch ssh://localhost:29418/All-Projects refs/meta/config
+git checkout FETCH_HEAD</tt></pre>
 </div></div>
 </div></div>
-<div class="paragraph"><p>When <tt>refs/notes/review</tt> is fetched on a repository, the Gerrit review
-information can be included in the git log output:</p></div>
+<div class="paragraph"><p>Contributor agreements are defined as contributor-agreement sections in
+<tt>project.config</tt>:</p></div>
 <div class="exampleblock">
 <div class="content">
 <div class="literalblock">
 <div class="content">
-<pre><tt>$ git log --show-notes=review</tt></pre>
+<pre><tt>[contributor-agreement "Individual"]
+  description = If you are going to be contributing code on your own, this is the one you want. You can sign this one online.
+  requireContactInformation = true
+  agreementUrl = static/cla_individual.html
+  autoVerify = group CLA Accepted - Individual
+  accepted = group CLA Accepted - Individual</tt></pre>
 </div></div>
 </div></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_content_of_refs_notes_review">Content of refs/notes/review</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>For each commit, Gerrit stores the following review information in
-<tt>refs/notes/review</tt>:</p></div>
-<div class="sect2">
-<h3 id="submitted_by">Submitted-by</h3>
-<div class="paragraph"><p>The name and email address of the Gerrit user that submitted the change in
-<a href="http://www.ietf.org/rfc/rfc2822.txt">RFC 2822</a> format.</p></div>
+<div class="paragraph"><p>Each <tt>contributor-agreement</tt> section within the <tt>project.config</tt> file must
+have a unique name. The section name will appear in the web UI.</p></div>
+<div class="paragraph"><p>If not already present, add the UUID of the groups used in the
+<tt>autoVerify</tt> and <tt>accepted</tt> variables in the groups file.</p></div>
+<div class="paragraph"><p>Commit the configuration change, and push it back:</p></div>
 <div class="exampleblock">
 <div class="content">
 <div class="literalblock">
 <div class="content">
-<pre><tt>Submitted-by: Random J Developer &lt;random@developer.example.org&gt;</tt></pre>
+<pre><tt>git commit -a -m "Add Individual contributor agreement"
+git push ssh://localhost:29418/All-Projects HEAD:refs/meta/config</tt></pre>
 </div></div>
 </div></div>
-</div>
-<div class="sect2">
-<h3 id="submitted_at">Submitted-at</h3>
-<div class="paragraph"><p>The time the commit was submitted in RFC 2822 time stamp format.</p></div>
-<div class="exampleblock">
-<div class="content">
-<div class="literalblock">
-<div class="content">
-<pre><tt>Submitted-at: Mon, 25 Jun 2012 16:15:57 +0200</tt></pre>
-</div></div>
-</div></div>
-</div>
-<div class="sect2">
-<h3 id="reviewed_on">Reviewed-on</h3>
-<div class="paragraph"><p>The URL to the change on the Gerrit server.</p></div>
-<div class="exampleblock">
-<div class="content">
-<div class="literalblock">
-<div class="content">
-<pre><tt>Reviewed-on: http://path.to.gerrit/12345</tt></pre>
-</div></div>
-</div></div>
-</div>
-<div class="sect2">
-<h3 id="review_scores">Review Labels and Scores</h3>
-<div class="paragraph"><p>Review label and score, and the name and email address of the Gerrit user that
-gave it in RFC 2822 format:</p></div>
-<div class="exampleblock">
-<div class="content">
-<div class="literalblock">
-<div class="content">
-<pre><tt>Code-Review+2: A. N. Other &lt;another@developer.example.org&gt;
-Verified+1: A. N. Other &lt;another@developer.example.org&gt;</tt></pre>
-</div></div>
-</div></div>
-<div class="paragraph"><p>Commonly used review labels are "Code-Review" and "Verified", but any label
-configured in Gerrit can be included.</p></div>
-<div class="paragraph"><p>All review labels and scores present on the change at the time of submit are
-included.</p></div>
-</div>
-<div class="sect2">
-<h3 id="project">Project</h3>
-<div class="paragraph"><p>The name of the project in which the commit was made.</p></div>
-<div class="exampleblock">
-<div class="content">
-<div class="literalblock">
-<div class="content">
-<pre><tt>Project: kernel/common</tt></pre>
-</div></div>
-</div></div>
-</div>
-<div class="sect2">
-<h3 id="branch">Branch</h3>
-<div class="paragraph"><p>The name of the branch on which the commit was made.</p></div>
-<div class="exampleblock">
-<div class="content">
-<div class="literalblock">
-<div class="content">
-<pre><tt>Branch: refs/heads/master</tt></pre>
-</div></div>
-</div></div>
-</div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<a id="contributor-agreement.name.description"></a>contributor-agreement.&lt;name&gt;.description
+</dt>
+<dd>
+<div class="paragraph"><p>Short text describing the contributor agreement. This text will appear
+when the user selects an agreement.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="contributor-agreement.name.requireContactInformation"></a>contributor-agreement.&lt;name&gt;.requireContactInformation
+</dt>
+<dd>
+<div class="paragraph"><p>True if the user must provide contact information when signing a
+contributor agreement. Default is false.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="contributor-agreement.name.agreementUrl"></a>contributor-agreement.&lt;name&gt;.agreementUrl
+</dt>
+<dd>
+<div class="paragraph"><p>An absolute URL or a relative path to an HTML file containing the text
+of the contributor agreement. The URL must use the http or https
+scheme. The path is relative to the <tt>gerrit.basePath</tt> variable in
+<tt>gerrit.config</tt>.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="contributor-agreement.name.autoVerify"></a>contributor-agreement.&lt;name&gt;.autoVerify
+</dt>
+<dd>
+<div class="paragraph"><p>If present, the user can sign the contributor agreement online. The
+value is the group to which the user will be added after signing the
+agreement. The group&#8217;s UUID must also appear in the <tt>groups</tt> file.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="contributor-agreement.name.accepted"></a>contributor-agreement.&lt;name&gt;.accepted
+</dt>
+<dd>
+<div class="paragraph"><p>List of groups that will be considered when verifying that a
+contributor agreement has been accepted. The groups' UUID must also
+appear in the <tt>groups</tt> file.</p></div>
+</dd>
+</dl></div>
 </div>
 </div>
 <hr style="
@@ -666,8 +854,8 @@ included.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.5<br />
-Last updated 2012-10-25 21:09:05 CEST
+Version 2.6-rc0<br />
+Last updated 2013-03-21 10:52:52 PDT
 </div>
 </div>
 </body>
