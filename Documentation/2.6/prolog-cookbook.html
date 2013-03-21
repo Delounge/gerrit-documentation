@@ -3,27 +3,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.3" />
+<meta name="generator" content="AsciiDoc 8.6.6" />
 <title>Gerrit Code Review - Prolog Submit Rules Cookbook</title>
 <style type="text/css">
-/* Sans-serif font. */
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
 h1, h2, h3, h4, h5, h6,
 div.title, caption.title,
 thead, p.table.header,
-div#toctitle,
-span#author, span#revnumber, span#revdate, span#revremark,
-div#footer {
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
   font-family: Arial,Helvetica,sans-serif;
-}
-
-/* Serif font. */
-div.sectionbody {
-  font-family: Georgia,"Times New Roman",Times,serif;
-}
-
-/* Monospace font. */
-tt {
-  font-size: inherit;
 }
 
 body {
@@ -48,11 +45,6 @@ strong {
   color: #083194;
 }
 
-tt {
-  font-size: inherit;
-  color: navy;
-}
-
 h1, h2, h3, h4, h5, h6 {
   color: #527bbd;
   margin-top: 1.2em;
@@ -71,6 +63,9 @@ h3 {
 }
 h3 + * {
   clear: left;
+}
+h5 {
+  font-size: 1.0em;
 }
 
 div.sectionbody {
@@ -97,36 +92,36 @@ pre {
   margin: 0;
 }
 
-span#author {
+#author {
   color: #527bbd;
   font-weight: bold;
   font-size: 1.1em;
 }
-span#email {
+#email {
 }
-span#revnumber, span#revdate, span#revremark {
+#revnumber, #revdate, #revremark {
 }
 
-div#footer {
+#footer {
   font-size: small;
   border-top: 2px solid silver;
   padding-top: 0.5em;
   margin-top: 4.0em;
 }
-div#footer-text {
+#footer-text {
   float: left;
   padding-bottom: 0.5em;
 }
-div#footer-badges {
+#footer-badges {
   float: right;
   padding-bottom: 0.5em;
 }
 
-div#preamble {
+#preamble {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
-div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.imageblock, div.exampleblock, div.verseblock,
 div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
 div.admonitionblock {
   margin-top: 1.0em;
@@ -184,7 +179,7 @@ div.quoteblock, div.verseblock {
   margin-left: 1.0em;
   margin-right: 10%;
   border-left: 5px solid #f0f0f0;
-  color: #777777;
+  color: #888;
 }
 
 div.quoteblock > div.attribution {
@@ -267,35 +262,12 @@ div.compact div, div.compact div {
   margin-bottom: 0.1em;
 }
 
-div.tableblock > table {
-  border: 3px solid #527bbd;
-}
-thead, p.table.header {
-  font-weight: bold;
-  color: #527bbd;
-}
 tfoot {
   font-weight: bold;
 }
 td > div.verse {
   white-space: pre;
 }
-p.table {
-  margin-top: 0;
-}
-/* Because the table frame attribute is overriden by CSS in most browsers. */
-div.tableblock > table[frame="void"] {
-  border-style: none;
-}
-div.tableblock > table[frame="hsides"] {
-  border-left-style: none;
-  border-right-style: none;
-}
-div.tableblock > table[frame="vsides"] {
-  border-top-style: none;
-  border-bottom-style: none;
-}
-
 
 div.hdlist {
   margin-top: 0.8em;
@@ -362,14 +334,14 @@ div.colist td img {
 }
 
 @media print {
-  div#footer-badges { display: none; }
+  #footer-badges { display: none; }
 }
 
-div#toc {
+#toc {
   margin-bottom: 2.5em;
 }
 
-div#toctitle {
+#toctitle {
   color: #527bbd;
   font-size: 1.1em;
   font-weight: bold;
@@ -394,10 +366,180 @@ div.toclevel4 {
   font-size: 0.9em;
 }
 
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+tt {
+  font-family: monospace;
+  font-size: inherit;
+  color: navy;
+}
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+.monospaced {
+  font-family: monospace;
+  font-size: inherit;
+  color: navy;
+}
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
 </style>
 <script type="text/javascript">
 /*<![CDATA[*/
-window.onload = function(){asciidoc.footnotes(); asciidoc.toc(2);}
 var asciidoc = {  // Namespace.
 
 /////////////////////////////////////////////////////////////////////
@@ -459,6 +601,25 @@ toc: function (toclevels) {
   }
 
   var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
   var entries = tocEntries(document.getElementById("content"), toclevels);
   for (var i = 0; i < entries.length; ++i) {
     var entry = entries[i];
@@ -486,24 +647,44 @@ toc: function (toclevels) {
  */
 
 footnotes: function () {
-  var cont = document.getElementById("content");
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
   var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
   var spans = cont.getElementsByTagName("span");
   var refs = {};
   var n = 0;
   for (i=0; i<spans.length; i++) {
     if (spans[i].className == "footnote") {
       n++;
-      // Use [\s\S] in place of . so multi-line matches work.
-      // Because JavaScript has no s (dotall) regex flag.
-      note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
       noteholder.innerHTML +=
         "<div class='footnote' id='_footnote_" + n + "'>" +
         "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
         n + "</a>. " + note + "</div>";
-      spans[i].innerHTML =
-        "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
-        "' title='View footnote' class='footnote'>" + n + "</a>]";
       var id =spans[i].getAttribute("id");
       if (id != null) refs["#"+id] = n;
     }
@@ -523,16 +704,39 @@ footnotes: function () {
       }
     }
   }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
 }
 
 }
+asciidoc.install(2);
 /*]]>*/
 </script>
 </head>
 <body class="article">
 <div id="header">
 <h1>Gerrit Code Review - Prolog Submit Rules Cookbook</h1>
-<span id="revnumber">version 2.5</span>
+<span id="revnumber">version 2.6-rc0</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -570,6 +774,47 @@ discussion thread</a> explains why Prolog was chosen for the purpose of writing
 project specific submit rules.
 <a href="http://gerrit-documentation.googlecode.com/svn/ReleaseNotes/ReleaseNotes-2.2.2.html">Gerrit
 2.2.2 ReleaseNotes</a> introduces Prolog support in Gerrit.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_submit_type">Submit Type</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>A <em>Submit Type</em> is a strategy that is used on submit to integrate the
+change into the destination branch. Supported submit types are:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>Fast Forward Only</tt>
+</p>
+</li>
+<li>
+<p>
+<tt>Merge If Necessary</tt>
+</p>
+</li>
+<li>
+<p>
+<tt>Merge Always</tt>
+</p>
+</li>
+<li>
+<p>
+<tt>Cherry Pick</tt>
+</p>
+</li>
+<li>
+<p>
+<tt>Rebase If Necessary</tt>
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p><em>Submit Type</em> is a project global setting. This means that the same submit type
+is used for all changes of one project.</p></div>
+<div class="paragraph"><p>Projects which need more flexibility in choosing, or enforcing, a submit type
+can use Prolog based submit type which replaces the project&#8217;s default submit
+type.</p></div>
+<div class="paragraph"><p>Prolog based submit type computes a submit type for each change. The computed
+submit type is shown on the change screen for each change.</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -639,7 +884,7 @@ $ git push origin HEAD:refs/meta/config</tt></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_how_to_write_submit_rules">How to write submit rules</h2>
+<h2 id="HowToWriteSubmitRules">How to write submit rules</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>Whenever Gerrit needs to evaluate submit rules for a change <tt>C</tt> from project <tt>P</tt> it
 will first initialize the embedded Prolog interpreter by:</p></div>
@@ -810,16 +1055,16 @@ change that are already provided by Gerrit.</p></div>
 <div class="paragraph"><p>Another aspect of the return result from the <tt>submit_rule</tt> predicate is that
 Gerrit uses it to decide which set of labels to display on the change review
 screen for voting. If the return result contains label <tt>'ABC'</tt> and if the label
-<tt>'ABC'</tt> is one of the (global) voting categories then voting for the label
-<tt>'ABC'</tt> will be displayed. Otherwise, it is not displayed. Note that we don&#8217;t
-need a (global) voting category for each label contained in the result of
+<tt>'ABC'</tt> is <a href="config-labels.html">defined for the project</a> then voting for the
+label <tt>'ABC'</tt> will be displayed. Otherwise, it is not displayed. Note that the
+project doesn&#8217;t need a defined label for each label contained in the result of
 <tt>submit_rule</tt> predicate.  For example, the decision whether <tt>'Author-is-John-Doe'</tt>
 label is met will probably not be made by explicit voting but, instead, by
 inspecting the facts about the change.</p></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_submit_filter">Submit Filter</h2>
+<h2 id="SubmitFilter">Submit Filter</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>Another mechanism of changing the default submit rules is to implement the
 <tt>submit_filter/2</tt> predicate. While Gerrit will search for the <tt>submit_rule</tt> only
@@ -921,6 +1166,60 @@ its result will be filtered as described above.</td>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_how_to_write_submit_type">How to write submit type</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Writing custom submit type logic in Prolog is the similar top
+<a href="#HowToWriteSubmitRules">writing submit rules</a>. The only difference is that
+one has to implement a <tt>submit_type</tt> predicate (instead of the <tt>submit_rule</tt>)
+and that the return result of the <tt>submit_type</tt> has to be an atom that
+represents one of the supported submit types:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>fast_forward_only</tt>
+</p>
+</li>
+<li>
+<p>
+<tt>merge_if_necessary</tt>
+</p>
+</li>
+<li>
+<p>
+<tt>merge_always</tt>
+</p>
+</li>
+<li>
+<p>
+<tt>cherry_pick</tt>
+</p>
+</li>
+<li>
+<p>
+<tt>rebase_if_necessary</tt>
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_submit_type_filter">Submit Type Filter</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Submit type filter works the same way as the <a href="#SubmitFilter">Submit Filter</a>
+where the name of the filter predicate is <tt>submit_type_filter</tt>.</p></div>
+<div class="exampleblock">
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>submit_type_filter(In, Out).</tt></pre>
+</div></div>
+</div></div>
+<div class="paragraph"><p>Gerrit will invoke <tt>submit_type_filter</tt> with the <tt>In</tt> parameter containing a
+result of the <tt>submit_type</tt> and will take the value of the <tt>Out</tt> parameter as
+the result.</p></div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="TestingSubmitRules">Testing submit rules</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>The prolog environment running the <tt>submit_rule</tt> is loaded with state describing the
@@ -951,10 +1250,12 @@ for review by pushing to <tt>refs/for/refs/meta/config</tt> branch.</p></div>
 <div class="paragraph"><p>On the other hand, Prolog based submit rules get a limited amount of facts about
 the change exposed to them. Gerrit plugins get full access to Gerrit internals
 and can potentially check more things than Prolog based rules.</p></div>
+<div class="paragraph"><p>From version 2.6 Gerrit plugins can contribute Prolog predicates. This way, we
+can make use of the plugin provided predicates when writing Prolog based rules.</p></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_examples">Examples</h2>
+<h2 id="_examples_submit_rule">Examples - Submit Rule</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>The following examples should serve as a cookbook for developing own submit rules.
 Some of them are too trivial to be used in production and their only purpose is
@@ -973,7 +1274,8 @@ regardless of the votes it has:</p></div>
 <div class="content">
 <div class="literalblock">
 <div class="content">
-<pre><tt>submit_rule(submit(label('Any-Label-Name', ok(_)))).</tt></pre>
+<pre><tt>submit_rule(submit(W)) :-
+  W = label('Any-Label-Name', ok(_)).</tt></pre>
 </div></div>
 </div></div>
 <div class="paragraph"><p>In this case we make no use of facts about the change. We don&#8217;t need it as we are simply
@@ -992,7 +1294,9 @@ every change submittable we want to enable voting in the standard
 <div class="content">
 <div class="literalblock">
 <div class="content">
-<pre><tt>submit_rule(submit(label('Code-Review', ok(_)), label('Verified', ok(_)))).</tt></pre>
+<pre><tt>submit_rule(submit(CR, V)) :-
+  CR = label('Code-Review', ok(_)),
+  V = label('Verified', ok(_)).</tt></pre>
 </div></div>
 </div></div>
 <div class="paragraph"><p>Since for every change all label statuses are <tt>'ok'</tt> every change will be submittable.
@@ -1008,7 +1312,8 @@ votes they have.</p></div>
 <div class="content">
 <div class="literalblock">
 <div class="content">
-<pre><tt>submit_rule(submit(label('Any-Label-Name', reject(_)))).</tt></pre>
+<pre><tt>submit_rule(submit(R)) :-
+  R = label('Any-Label-Name', reject(_)).</tt></pre>
 </div></div>
 </div></div>
 <div class="paragraph"><p>Since for any change we return only one label with status <tt>reject</tt>, no change
@@ -1025,17 +1330,21 @@ change to become submittable as we return no labels with status <tt>need</tt>.</
 <div class="literalblock">
 <div class="content">
 <pre><tt>% In the UI this will show: Need Any-Label-Name
-submit_rule(submit(label('Any-Label-Name', need(_)))).</tt></pre>
+submit_rule(submit(N)) :-
+  N = label('Any-Label-Name', need(_)).</tt></pre>
 </div></div>
 <div class="literalblock">
 <div class="content">
 <pre><tt>% We could define more "need" labels by adding more rules
-submit_rule(submit(label('Another-Label-Name', need(_)))).</tt></pre>
+submit_rule(submit(N)) :-
+  N = label('Another-Label-Name', need(_)).</tt></pre>
 </div></div>
 <div class="literalblock">
 <div class="content">
 <pre><tt>% or by providing more than one need label in the same rule
-submit_rule(submit(label('X-Label-Name', need(_)), label('Y-Label-Name', need(_)))).</tt></pre>
+submit_rule(submit(NX, NY)) :-
+  NX = label('X-Label-Name', need(_)),
+  NY = label('Y-Label-Name', need(_)).</tt></pre>
 </div></div>
 </div></div>
 <div class="paragraph"><p>In the UI this will show:</p></div>
@@ -1090,8 +1399,13 @@ any of the previous <tt>submit_rule(X)</tt> solutions.</p></div>
 <div class="content">
 <div class="literalblock">
 <div class="content">
-<pre><tt>submit_rule(label('Some-Condition', need(_))).
-submit_rule(label('Another-Condition', ok(_))).</tt></pre>
+<pre><tt>submit_rule(submit(N)) :-
+  N = label('Some-Condition', need(_)).</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>submit_rule(submit(OK)) :-
+  OK = label('Another-Condition', ok(_)).</tt></pre>
 </div></div>
 </div></div>
 <div class="paragraph"><p>The <em>Need Some-Condition</em> will not be show in the UI because of the result of
@@ -1102,8 +1416,13 @@ the second rule.</p></div>
 <div class="content">
 <div class="literalblock">
 <div class="content">
-<pre><tt>submit_rule(label('Another-Condition', ok(_))).
-submit_rule(label('Some-Condition', need(_))).</tt></pre>
+<pre><tt>submit_rule(submit(OK)) :-
+  OK = label('Another-Condition', ok(_)).</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>submit_rule(submit(N)) :-
+  N = label('Some-Condition', need(_)).</tt></pre>
 </div></div>
 </div></div>
 <div class="paragraph"><p>The result of the first rule will stop search for any further solutions.</p></div>
@@ -1121,7 +1440,8 @@ submittable:</p></div>
 <div class="content">
 <div class="literalblock">
 <div class="content">
-<pre><tt>submit_rule(submit(label('Author-is-John-Doe', need(_)))).</tt></pre>
+<pre><tt>submit_rule(submit(Author)) :-
+  Author = label('Author-is-John-Doe', need(_)).</tt></pre>
 </div></div>
 </div></div>
 <div class="paragraph"><p>This will show:</p></div>
@@ -1141,9 +1461,14 @@ Need Author-is-John-Doe
 <div class="content">
 <div class="literalblock">
 <div class="content">
-<pre><tt>submit_rule(submit(label('Author-is-John-Doe', need(_)))).
-submit_rule(submit(label('Author-is-John-Doe', ok(_))))
-  :- gerrit:commit_author(_, 'John Doe', _).</tt></pre>
+<pre><tt>submit_rule(submit(Author)) :-
+  Author = label('Author-is-John-Doe', need(_)).</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>submit_rule(submit(Author)) :-
+  gerrit:commit_author(_, 'John Doe', _),
+  Author = label('Author-is-John-Doe', ok(_)).</tt></pre>
 </div></div>
 </div></div>
 <div class="paragraph"><p>In the second rule we return <tt>ok</tt> status for the <tt>'Author-is-John-Doe'</tt> label
@@ -1159,9 +1484,14 @@ change will not be submittable.</p></div>
 <div class="content">
 <div class="literalblock">
 <div class="content">
-<pre><tt>submit_rule(submit(label('Author-is-John-Doe', need(_)))).
-submit_rule(submit(label('Author-is-John-Doe', ok(_))))
-  :- gerrit:commit_author(_, _, 'john.doe@example.com').</tt></pre>
+<pre><tt>submit_rule(submit(Author)) :-
+  Author = label('Author-is-John-Doe', need(_)).</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>submit_rule(submit(Author)) :-
+  gerrit:commit_author(_, _, 'john.doe@example.com'),
+  Author = label('Author-is-John-Doe', ok(_)).</tt></pre>
 </div></div>
 </div></div>
 <div class="paragraph"><p>or by user id (assuming it is 1000000):</p></div>
@@ -1170,9 +1500,14 @@ submit_rule(submit(label('Author-is-John-Doe', ok(_))))
 <div class="content">
 <div class="literalblock">
 <div class="content">
-<pre><tt>submit_rule(submit(label('Author-is-John-Doe', need(_)))).
-submit_rule(submit(label('Author-is-John-Doe', ok(_))))
-  :- gerrit:commit_author(user(1000000), _, _).</tt></pre>
+<pre><tt>submit_rule(submit(Author)) :-
+  Author = label('Author-is-John-Doe', need(_)).</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>submit_rule(submit(Author)) :-
+  gerrit:commit_author(user(1000000), _, _),
+  Author = label('Author-is-John-Doe', ok(_)).</tt></pre>
 </div></div>
 </div></div>
 <div class="paragraph"><p>or by a combination of these 3 attributes:</p></div>
@@ -1181,14 +1516,19 @@ submit_rule(submit(label('Author-is-John-Doe', ok(_))))
 <div class="content">
 <div class="literalblock">
 <div class="content">
-<pre><tt>submit_rule(submit(label('Author-is-John-Doe', need(_)))).
-submit_rule(submit(label('Author-is-John-Doe', ok(_))))
-  :- gerrit:commit_author(_, 'John Doe', 'john.doe@example.com').</tt></pre>
+<pre><tt>submit_rule(submit(Author)) :-
+  Author = label('Author-is-John-Doe', need(_)).</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>submit_rule(submit(Author)) :-
+  gerrit:commit_author(_, 'John Doe', 'john.doe@example.com'),
+  Author = label('Author-is-John-Doe', ok(_)).</tt></pre>
 </div></div>
 </div></div>
 </div>
 <div class="sect2">
-<h3 id="_example_7_make_change_submittable_if_commit_message_starts_with_trivial_fix">Example 7: Make change submittable if commit message starts with "Trivial fix"</h3>
+<h3 id="_example_7_make_change_submittable_if_commit_message_starts_with_fix">Example 7: Make change submittable if commit message starts with "Fix "</h3>
 <div class="paragraph"><p>Besides showing how to make use of the commit message text the purpose of this
 example is also to show how to match only a part of a string symbol. Similarly
 like commit author the commit message is provided as a string symbol which is
@@ -1215,9 +1555,14 @@ use the <tt>regex_matches/2</tt> or, even more convenient, the
 <div class="content">
 <div class="literalblock">
 <div class="content">
-<pre><tt>submit_rule(submit(label('Commit-Message-starts-with-Trivial-Fix', need(_)))).
-submit_rule(submit(label('Commit-Message-starts-with-Trivial-Fix', ok(_))))
-  :- gerrit:commit_message(M), name(M, L), starts_with(L, "Trivial Fix").</tt></pre>
+<pre><tt>submit_rule(submit(Fix)) :-
+  Fix = label('Commit-Message-starts-with-Fix', need(_)).</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>submit_rule(submit(Fix)) :-
+  gerrit:commit_message(M), name(M, L), starts_with(L, "Fix "),
+  Fix = label('Commit-Message-starts-with-Fix', ok(_)).</tt></pre>
 </div></div>
 <div class="literalblock">
 <div class="content">
@@ -1244,26 +1589,87 @@ double quotes for the <tt>"Trivial Fix"</tt> in the example above.</td>
 <div class="content">
 <div class="literalblock">
 <div class="content">
-<pre><tt>submit_rule(submit(label('Commit-Message-starts-with-Trivial-Fix', need(_)))).
-submit_rule(submit(label('Commit-Message-starts-with-Trivial-Fix', ok(_))))
-  :- gerrit:commit_message_matches('^Trivial Fix').</tt></pre>
+<pre><tt>submit_rule(submit(Fix)) :-
+  Fix = label('Commit-Message-starts-with-Fix', need(_)).</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>submit_rule(submit(Fix)) :-
+  gerrit:commit_message_matches('^Fix '),
+  Fix = label('Commit-Message-starts-with-Fix', ok(_)).</tt></pre>
+</div></div>
+</div></div>
+<div class="paragraph"><p>The previous example could also be written so that it first checks if the commit
+message starts with 'Fix '. If true then it sets OK for that category and stops
+further backtracking by using the cut <tt>!</tt> operator:
+.rules.pl</p></div>
+<div class="exampleblock">
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>submit_rule(submit(Fix)) :-
+  gerrit:commit_message_matches('^Fix '),
+  Fix = label('Commit-Message-starts-with-Fix', ok(_)),
+  !.</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>% Message does not start with 'Fix ' so Fix is needed to submit
+submit_rule(submit(Fix)) :-
+  Fix = label('Commit-Message-starts-with-Fix', need(_)).</tt></pre>
 </div></div>
 </div></div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_reusing_the_default_submit_policy">Reusing the default submit policy</h2>
+<h2 id="_the_default_submit_policy">The default submit policy</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>All examples until now concentrate on one particular aspect of change data.
 However, in real-life scenarios we would rather want to reuse Gerrit&#8217;s default
-submit policy and extend/change it for our specific purpose. In other words, we
-would like to keep all the default policies (like the <tt>Verified</tt> category,
-vetoing change, etc&#8230;) and only extend/change an aspect of it. For example, we
-may want to disable the ability for change authors to approve their own changes
-but keep all other policies the same.</p></div>
+submit policy and extend/change it for our specific purpose.  This could be
+done in one of the following ways:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+understand how the default submit policy is implemented and use that as a
+  template for implementing custom submit rules,
+</p>
+</li>
+<li>
+<p>
+invoke the default submit rule implementation and then perform further
+  actions on its return result.
+</p>
+</li>
+</ul></div>
+<div class="sect2">
+<h3 id="_default_submit_rule_implementation">Default submit rule implementation</h3>
+<div class="paragraph"><p>The default submit rule with the two default categories, <tt>Code-Review</tt> and
+<tt>Verified</tt>, can be implemented as:</p></div>
+<div class="exampleblock">
+<div class="title">rules.pl</div>
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>submit_rule(submit(V, CR)) :-
+  gerrit:max_with_block(-2, 2, 'Code-Review', CR),
+  gerrit:max_with_block(-1, 1, 'Verified', V).</tt></pre>
+</div></div>
+</div></div>
+<div class="paragraph"><p>Once this implementation is understood it can be customized to implement
+project specific submit rules. Note, that this implementation hardcodes
+the two default categories. Introducing a new category in the database would
+require introducing the same category here or a <tt>submit_filter</tt> in a parent
+project would have to care about including the new category in the result of
+this <tt>submit_rule</tt>.  On the other side, this example is easy to read and
+understand.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_reusing_the_default_submit_policy">Reusing the default submit policy</h3>
 <div class="paragraph"><p>To get results of Gerrits default submit policy we use the
-<tt>gerrit:default_submit</tt> predicate. This means that if we write a submit rule like:</p></div>
+<tt>gerrit:default_submit</tt> predicate.  The <tt>gerrit:default_submit(X)</tt> includes all
+categories from the database.  This means that if we write a submit rule like:</p></div>
 <div class="exampleblock">
 <div class="title">rules.pl</div>
 <div class="content">
@@ -1288,12 +1694,15 @@ logic. The following pattern illustrates this technique:</p></div>
 <pre><tt>project_specific_policy(R, S) :- ...</tt></pre>
 </div></div>
 </div></div>
-<div class="paragraph"><p>The following examples build on top of the default submit policy.</p></div>
+<div class="paragraph"><p>In the following examples both styles will be shown.</p></div>
+</div>
 <div class="sect2">
 <h3 id="_example_8_make_change_submittable_only_if_tt_code_review_2_tt_is_given_by_a_non_author">Example 8: Make change submittable only if <tt>Code-Review+2</tt> is given by a non author</h3>
 <div class="paragraph"><p>In this example we introduce a new label <tt>Non-Author-Code-Review</tt> and make it
 satisfied if there is at least one <tt>Code-Review+2</tt> from a non author. All other
 default policies like the <tt>Verified</tt> category and vetoing changes still apply.</p></div>
+<div class="sect3">
+<h4 id="_reusing_the_tt_gerrit_default_submit_tt">Reusing the <tt>gerrit:default_submit</tt></h4>
 <div class="paragraph"><p>First, we invoke <tt>gerrit:default_submit</tt> to compute the result for the default
 submit policy and then add the <tt>Non-Author-Code-Review</tt> label to it.  The
 <tt>Non-Author-Code-Review</tt> label is added with status <tt>ok</tt> if such an approval
@@ -1312,7 +1721,8 @@ exists or with status <tt>need</tt> if it doesn&#8217;t exist.</p></div>
 <div class="literalblock">
 <div class="content">
 <pre><tt>add_non_author_approval(S1, S2) :-
-  gerrit:commit_author(A), gerrit:commit_label(label('Code-Review', 2), R),
+  gerrit:commit_author(A),
+  gerrit:commit_label(label('Code-Review', 2), R),
   R \= A, !,
   S2 = [label('Non-Author-Code-Review', ok(R)) | S1].
 add_non_author_approval(S1, [label('Non-Author-Code-Review', need(_)) | S1]).</tt></pre>
@@ -1334,6 +1744,48 @@ is no non author <tt>Code-Review+2</tt>. The second rule will only be reached
 if the <tt>cut</tt> in the first rule is not reached and it only happens if a
 predicate before the <tt>cut</tt> fails.</p></div>
 </div>
+<div class="sect3">
+<h4 id="_don_8217_t_use_tt_gerrit_default_submit_tt">Don&#8217;t use <tt>gerrit:default_submit</tt></h4>
+<div class="paragraph"><p>Let&#8217;s implement the same submit rule the other way, without reusing the
+<tt>gerrit:default_submit</tt>:</p></div>
+<div class="exampleblock">
+<div class="title">rules.pl</div>
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>submit_rule(submit(CR, V)) :-
+  base(CR, V),
+  CR = label(_, ok(Reviewer)),
+  gerrit:commit_author(Author),
+  Author \= Reviewer,
+  !.</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>submit_rule(submit(CR, V, N)) :-
+  base(CR, V),
+  N = label('Non-Author-Code-Review', need(_)).</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>base(CR, V) :-
+  gerrit:max_with_block(-2, 2, 'Code-Review', CR),
+  gerrit:max_with_block(-1, 1, 'Verified', V).</tt></pre>
+</div></div>
+</div></div>
+<div class="paragraph"><p>The latter implementation is probably easier to understand and the code looks
+cleaner. Note, however, that the latter implementation will always return the
+two standard categories only (<tt>Code-Review</tt> and <tt>Verified</tt>) even if a new
+category has beeen inserted into the database. To include the new category
+the <tt>rules.pl</tt> would need to be modified or a <tt>submit_filter</tt> in a parent
+project would have to care about including the new category in the result
+of this <tt>submit_rule</tt>.</p></div>
+<div class="paragraph"><p>The former example, however, would include any newly added category as it
+invokes the <tt>gerrit:default_submit</tt> and then modifies its result.</p></div>
+<div class="paragraph"><p>Which of these two behaviors is desired will always depend on how a particular
+Gerrit server is managed.</p></div>
+</div>
+</div>
 <div class="sect2">
 <h3 id="_example_9_remove_the_tt_verified_tt_category">Example 9: Remove the <tt>Verified</tt> category</h3>
 <div class="paragraph"><p>A project has no build and test. It consists of only text files and needs only
@@ -1341,6 +1793,17 @@ code review.  We want to remove the <tt>Verified</tt> category from this project
 that <tt>Code-Review+2</tt> is the only criteria for a change to become submittable.
 We also want the UI to not show the <tt>Verified</tt> category in the table with
 votes and on the voting screen.</p></div>
+<div class="paragraph"><p>This is quite simple without reusing the 'gerrit:default_submit`:</p></div>
+<div class="exampleblock">
+<div class="title">rules.pl</div>
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>submit_rule(submit(CR)) :-
+  gerrit:max_with_block(-2, 2, 'Code-Review', CR).</tt></pre>
+</div></div>
+</div></div>
+<div class="paragraph"><p>Implementing the same rule by reusing <tt>gerrit:default_submit</tt> is a bit more complex:</p></div>
 <div class="exampleblock">
 <div class="title">rules.pl</div>
 <div class="content">
@@ -1379,6 +1842,32 @@ principle.  This means we want a combination of examples 7 and 8.</p></div>
 </div></div>
 <div class="paragraph"><p>The <tt>remove_verified_category</tt> and <tt>add_non_author_approval</tt> predicates are the
 same as defined in the previous two examples.</p></div>
+<div class="paragraph"><p>Without reusing the <tt>gerrit:default_submit</tt> the same example may be implemented
+as:</p></div>
+<div class="exampleblock">
+<div class="title">rules.pl</div>
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>submit_rule(submit(CR)) :-
+  base(CR),
+  CR = label(_, ok(Reviewer)),
+  gerrit:commit_author(Author),
+  Author \= Reviewer,
+  !.</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>submit_rule(submit(CR, N)) :-
+  base(CR),
+  N = label('Non-Author-Code-Review', need(_)).</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>base(CR) :-
+  gerrit:max_with_block(-2, 2, 'Code-Review', CR),</tt></pre>
+</div></div>
+</div></div>
 </div>
 <div class="sect2">
 <h3 id="_example_11_remove_the_tt_verified_tt_category_from_all_projects">Example 11: Remove the <tt>Verified</tt> category from all projects</h3>
@@ -1406,7 +1895,38 @@ remove_verified_category([H|T], [H|R]) :- remove_verified_category(T, R).</tt></
 </div></div>
 </div>
 <div class="sect2">
-<h3 id="_example_12_1_1_2_code_review">Example 12: 1+1=2 Code-Review</h3>
+<h3 id="_example_12_on_release_branches_require_drno_in_addition_to_project_rules">Example 12: On release branches require DrNo in addition to project rules</h3>
+<div class="paragraph"><p>A new category <em>DrNo</em> is added to the database and is required for release
+branches. To mark a branch as a release branch we use <tt>drno('refs/heads/branch')</tt>.</p></div>
+<div class="exampleblock">
+<div class="title">rules.pl</div>
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>drno('refs/heads/master').
+drno('refs/heads/stable-2.3').
+drno('refs/heads/stable-2.4').
+drno('refs/heads/stable-2.5').
+drno('refs/heads/stable-2.5').</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>submit_filter(In, Out) :-
+  gerrit:change_branch(Branch),
+  drno(Branch),
+  !,
+  In =.. [submit | I],
+  gerrit:max_with_block(-1, 1, 'DrNo', DrNo),
+  Out =.. [submit, DrNo | I].</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>submit_filter(In, Out) :- In = Out.</tt></pre>
+</div></div>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_example_13_1_1_2_code_review">Example 13: 1+1=2 Code-Review</h3>
 <div class="paragraph"><p>In this example we introduce accumulative voting to determine if a change is
 submittable or not. We modify the standard Code-Review to be accumulative, and make the
 change submittable if the total score is 2 or higher.</p></div>
@@ -1447,9 +1967,43 @@ sum_list([H | Rest], Sum) :- sum_list(Rest,Tmp), Sum is H + Tmp.</tt></pre>
   S =.. [submit | Labels].</tt></pre>
 </div></div>
 </div></div>
+<div class="paragraph"><p>Implementing the same example without using <tt>gerrit:default_submit</tt>:</p></div>
+<div class="exampleblock">
+<div class="title">rules.pl</div>
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>submit_rule(submit(CR, V)) :-
+  sum(2, 'Code-Review', CR),
+  gerrit:max_with_block(-1, 1, 'Verified', V).</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>% Sum the votes in a category. Uses a helper function score/2
+% to select out only the score values the given category.
+sum(VotesNeeded, Category, label(Category, ok(_))) :-
+  findall(Score, score(Category, Score), All),
+  sum_list(All, Sum),
+  Sum &gt;= VotesNeeded,
+  !.
+sum(VotesNeeded, Category, label(Category, need(VotesNeeded))).</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>score(Category, Score) :-
+  gerrit:commit_label(label(Category, Score), User).</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>% Simple Prolog routine to sum a list of integers.
+sum_list(List, Sum)   :- sum_list(List, 0, Sum).
+sum_list([X|T], Y, S) :- Z is X + Y, sum_list(T, Z, S).
+sum_list([], S, S).</tt></pre>
+</div></div>
+</div></div>
 </div>
 <div class="sect2">
-<h3 id="_example_13_master_and_apprentice">Example 13: Master and apprentice</h3>
+<h3 id="_example_14_master_and_apprentice">Example 14: Master and apprentice</h3>
 <div class="paragraph"><p>The master and apprentice example allow you to specify a user (the <tt>master</tt>)
 that must approve all changes done by another user (the <tt>apprentice</tt>).</p></div>
 <div class="paragraph"><p>The code first checks if the commit author is in the apprentice database.
@@ -1495,7 +2049,7 @@ check_master_approval(S1, [label('Master-Approval', need(_)) | S1], _).</tt></pr
 </div></div>
 </div>
 <div class="sect2">
-<h3 id="_example_14_only_allow_author_to_submit_change">Example 14: Only allow Author to submit change</h3>
+<h3 id="_example_15_only_allow_author_to_submit_change">Example 15: Only allow Author to submit change</h3>
 <div class="paragraph"><p>This example adds a new needed category <tt>Patchset-Author</tt> for any user that is
 not the author of the patch. This effectively blocks all users except the author
 from submitting the change. This could result in an impossible situation if the
@@ -1526,6 +2080,72 @@ author does not have permissions for submitting the change.</p></div>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_examples_submit_type">Examples - Submit Type</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The following examples show how to implement own submit type rules.</p></div>
+<div class="sect2">
+<h3 id="_example_1_set_a_tt_cherry_pick_tt_submit_type_for_all_changes">Example 1: Set a <tt>Cherry Pick</tt> submit type for all changes</h3>
+<div class="paragraph"><p>This example sets the <tt>Cherry Pick</tt> submit type for all changes. It overrides
+whatever is set as project default submit type.</p></div>
+<div class="paragraph"><p>rules.pl</p></div>
+<div class="exampleblock">
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>submit_type(cherry_pick).</tt></pre>
+</div></div>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_example_2_tt_fast_forward_only_tt_for_all_tt_refs_heads_stable_tt_branches">Example 2: <tt>Fast Forward Only</tt> for all <tt>refs/heads/stable*</tt> branches</h3>
+<div class="paragraph"><p>For all <tt>refs/heads/stable.*</tt> branches we would like to enforce the <tt>Fast
+Forward Only</tt> submit type. A reason for this decision may be a need to never
+break the build in the stable branches.  For all other branches, those not
+matching the <tt>refs/heads/stable.*</tt> pattern, we would like to use the project&#8217;s
+default submit type as defined on the project settings page.</p></div>
+<div class="exampleblock">
+<div class="title">rules.pl</div>
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>submit_type(fast_forward_only) :-
+  gerrit:change_branch(B), regex_matches('refs/heads/stable.*', B),
+  !.
+submit_type(T) :- gerrit:project_default_submit_type(T)</tt></pre>
+</div></div>
+</div></div>
+<div class="paragraph"><p>The first <tt>submit_type</tt> predicate defines the <tt>Fast Forward Only</tt> submit type
+for <tt>refs/heads/stable.*</tt> branches. The second <tt>submit_type</tt> predicate returns
+the project&#8217;s default submit type.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_example_3_don_8217_t_require_tt_fast_forward_only_tt_if_only_documentation_was_changed">Example 3: Don&#8217;t require <tt>Fast Forward Only</tt> if only documentation was changed</h3>
+<div class="paragraph"><p>Like in the previous example we want the <tt>Fast Forward Only</tt> submit type for
+the <tt>refs/heads/stable*</tt> branches.  However, if only documentation was changed
+(only <tt>*.txt</tt> files), then we allow project&#8217;s default submit type for such
+changes.</p></div>
+<div class="exampleblock">
+<div class="title">rules.pl</div>
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>submit_type(fast_forward_only) :-
+  gerrit:commit_delta('(?&lt;!\.txt)$'),
+  gerrit:change_branch(B), regex_matches('refs/heads/stable.*', B),
+  !.
+submit_type(T) :- gerrit:project_default_submit_type(T)</tt></pre>
+</div></div>
+</div></div>
+<div class="paragraph"><p>The <tt>gerrit:commit_delta('(?&lt;!\.txt)$')</tt> succeeds if the change contains a file
+whose name doesn&#8217;t end with <tt>.txt</tt> The rest of this rule is same like in the
+previous example.</p></div>
+<div class="paragraph"><p>If all file names in the change end with <tt>.txt</tt>, then the
+<tt>gerrit:commit_delta('(?&lt;!\.txt)$')</tt> will fail as no file name will match this
+regular expression.</p></div>
+</div>
+</div>
+</div>
 <hr style="
   height: 2px;
   color: silver;
@@ -1537,8 +2157,8 @@ author does not have permissions for submitting the change.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.5<br />
-Last updated 2012-10-31 19:10:40 CET
+Version 2.6-rc0<br />
+Last updated 2013-03-21 10:52:52 PDT
 </div>
 </div>
 </body>
