@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.6" />
-<title>Release notes for Gerrit 2.0.9</title>
+<title>Release notes for Gerrit 2.6</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
 
@@ -735,8 +735,8 @@ asciidoc.install(2);
 </head>
 <body class="article">
 <div id="header">
-<h1>Release notes for Gerrit 2.0.9</h1>
-<span id="revnumber">version 2.0.9 (from v2.1.1.1-104-gc20e283)</span>
+<h1>Release notes for Gerrit 2.6</h1>
+<span id="revnumber">version 2.6 (from v2.5.2-1737-g19f6c27)</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -745,212 +745,578 @@ asciidoc.install(2);
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<div class="paragraph"><p>Gerrit 2.0.9 is now available in the usual location:</p></div>
-<div class="paragraph"><p><a href="http://code.google.com/p/gerrit/downloads/list">http://code.google.com/p/gerrit/downloads/list</a></p></div>
-<div class="paragraph"><p><strong>WARNING: This version contains schema changes.</strong></p></div>
-<div class="paragraph"><p>Schema upgrades:</p></div>
+<div class="paragraph"><p>Gerrit 2.6 is now available:</p></div>
+<div class="paragraph"><p><a href="http://code.google.com/p/gerrit/downloads/detail?name=gerrit-full-2.6.war">http://code.google.com/p/gerrit/downloads/detail?name=gerrit-full-2.6.war</a></p></div>
+<div class="paragraph"><p>Gerrit 2.6 includes the bug fixes done with
+<a href="ReleaseNotes-2.5.1.html">Gerrit 2.5.1</a> and
+<a href="ReleaseNotes-2.5.2.html">Gerrit 2.5.2</a>. These bug fixes are <strong>not</strong>
+listed in these release notes.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_schema_change">Schema Change</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><strong>WARNING:</strong> This release contains schema changes.  To upgrade:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>  java -jar gerrit.war --cat sql/upgrade007_008.sql | psql reviewdb
-  java -jar gerrit.war --cat sql/upgrade008_009.sql | psql reviewdb</tt></pre>
+<pre><tt>  java -jar gerrit.war init -d site_path</tt></pre>
 </div></div>
-<div class="paragraph"><p>If one or more of your projects are using the undocumented <tt>gerrit.fastforwardonly</tt> configuration option, you should import that setting into the database:</p></div>
-<div class="listingblock">
-<div class="content">
-<pre><tt>  java -DGerritServer=GerritServer.properties -jar gerrit.war ImportProjectSubmitTypes</tt></pre>
-</div></div>
-<div class="paragraph"><p>The SQL statement to insert a new project into the database has been changed.  Please see [<a href="http://gerrit.googlecode.com/svn/documentation/2.0/project-setup.html">http://gerrit.googlecode.com/svn/documentation/2.0/project-setup.html</a> Project Setup] for the modified statement.</p></div>
+<div class="paragraph"><p><strong>WARNING:</strong> Upgrading to 2.6.x requires the server be first upgraded to 2.1.7 (or
+a later 2.1.x version), and then to 2.6.x.  If you are upgrading from 2.2.x.x or
+newer, you may ignore this warning and upgrade directly to 2.6.x.</p></div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_new_features">New Features</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_review_ui">Review UI</h3>
 <div class="ulist"><ul>
 <li>
 <p>
-GERRIT-69   Make the merge commit message more detailed when mergi&#8230;
+The reviewer matrix on a change displays gray boxes where
+  permissions do not allow voting in that category. The coloring
+  enables authors to quickly identify if another reviewer is
+  necessary to continue the change.
 </p>
 </li>
 <li>
 <p>
-Show the user&#8217;s starred/not-starred icon in the change&#8230;
+New <em>Rebase If Necessary</em> submit type. This is similar to cherry
+  pick, but honors change dependency information.
 </p>
 </li>
 <li>
 <p>
-Modify Push Annotated Tag to require signed tags, or r&#8230;
+Submit type displayed per-change in the info block.
 </p>
 </li>
 <li>
 <p>
-GERRIT-77   Record who submitted a change in the change message
+Submit type selectable per-change by <tt>submit_type</tt> Prolog rules.
 </p>
 </li>
 <li>
 <p>
-Support different project level merge policies
+The rebase button is hidden when the patch set is current.
 </p>
 </li>
 <li>
 <p>
-GERRIT-111  Support cherry-picking changes instead of merging them
+<tt>suggest.from</tt> configures a minimum number of characters before
+  matches for reviewers, accounts, groups or projects are offered.
 </p>
-<div class="paragraph"><p>These last two changes move the hidden gerrit.fastforwardonly feature to the database and the user interface, so project owners can make use of it (or not).  Please see the new <em>Change Submit Action</em> section in the user documentation:
-<a href="http://gerrit.googlecode.com/svn/documentation/2.0/project-setup.html">http://gerrit.googlecode.com/svn/documentation/2.0/project-setup.html</a></p></div>
+</li>
+<li>
+<p>
+A change&#8217;s topic can be added, removed or changed from the
+  change screen.
+</p>
+</li>
+<li>
+<p>
+A change&#8217;s commit message can be edited from the change screen.
+</p>
+</li>
+<li>
+<p>
+The patch set review screen can include radio buttons for custom
+  labels if enabled by
+  <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/prolog-cookbook.html#_how_to_write_submit_rules">submit rules</a>.
+</p>
 </li>
 </ul></div>
+</div>
+<div class="sect2">
+<h3 id="_access_controls">Access Controls</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Remove Reviewer is a new permission.
+</p>
+</li>
+<li>
+<p>
+Pushing a signed tag is a new permission.
+</p>
+</li>
+<li>
+<p>
+Editing the topic name is a new permission.
+</p>
+</li>
+<li>
+<p>
+Raw database access with the <tt>gsql</tt> command is a new global capability.
+</p>
+<div class="paragraph"><p>Previously site administrators had this capability by default.  Now it has
+to be explicitly assigned, even for site administrators.</p></div>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1585">Issue 1585</a>:
+Viewing other users' draft changes is a new permission.
+</p>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1675">Issue 1675</a>:
+Deleting and publishing other users' draft changes is a new permission.
+</p>
+</li>
+<li>
+<p>
+LDAP group names are configurable, <tt>cn</tt> is still the default.
+</p>
+</li>
+<li>
+<p>
+LDAP cache reduces the number of recursive group queries.
+</p>
+</li>
+<li>
+<p>
+Kerberos authentication to LDAP servers is now supported.
+</p>
+</li>
+<li>
+<p>
+Basic project properities are now inherited by default from parent
+  projects: Use Content Merge, Require Contributor Agreement, Require
+  Change Id, Require Signed Off By.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_hooks">Hooks</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Change topic is passed to hooks as <tt>--topic NAME</tt>.
+</p>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1200">Issue 1200</a>:
+New <tt>reviewer-added</tt> hook and stream event when a reviewer is added.
+</p>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1237">Issue 1237</a>:
+New <tt>merge-failed</tt> hook and stream event when a change cannot be submitted due to failed merge.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_ssh">SSH</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Descriptions are added to ssh commands.
+</p>
+<div class="paragraph"><p>If <tt>gerrit</tt> is called without arguments, it will now show a list of available
+commands with their descriptions.</p></div>
+</li>
+<li>
+<p>
+<tt>create-account --http-password</tt> enables setting/resetting the
+  HTTP password of role accounts, for Git or JSON API access.
+</p>
+</li>
+<li>
+<p>
+<tt>ls-projects --has-acl-for</tt> lists projects that mention a group
+  in an ACL, identifying where rights are granted.
+</p>
+</li>
+<li>
+<p>
+<tt>query</tt> includes submit record information from Prolog rules.
+</p>
+</li>
+<li>
+<p>
+<tt>query</tt> includes <tt>resumeSortKey</tt> in summary block.
+</p>
+</li>
+<li>
+<p>
+<tt>query</tt> includes author and change size information when given
+  certain options on the command line.
+</p>
+</li>
+<li>
+<p>
+<tt>test-submit-rule</tt> tests the <tt>can_submit</tt> rule with a prolog script loaded from a file or stdin.
+</p>
+</li>
+<li>
+<p>
+<tt>ls-user-refs</tt> lists which refs are visible for a given user.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_plugins">Plugins</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Plugins can contribute Prolog facts/predicates from Java.
+</p>
+</li>
+<li>
+<p>
+Plugins can prompt for parameters during <tt>init</tt> with <tt>InitStep</tt>.
+</p>
+</li>
+<li>
+<p>
+Plugins can now contribute JavaScript to the web UI. UI plugins can
+  also be written and compiled with GWT.
+</p>
+</li>
+<li>
+<p>
+New Maven archetypes for JavaScript and GWT plugins.
+</p>
+</li>
+<li>
+<p>
+Plugins can contribute validation steps to received commits.
+</p>
+</li>
+<li>
+<p>
+Commit message length checks are moved to the <tt>commit-message-length-validator</tt>
+  plugin which is included as a core plugin in the Gerrit distribution and
+  can be installed during site initialization.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_email">EMail</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1531">Issue 1531</a>:
+Email footers now include <tt>Gerrit-HasComments: {Yes|No}</tt>.
+</p>
+</li>
+<li>
+<p>
+Notifications configured in <tt>project.config</tt> can now be addressed
+  using any of To, CC, or BCC headers.
+</p>
+</li>
+<li>
+<p>
+<tt>#if($email.hasInlineComments())</tt> can be used in templates to test
+  if there are comments to be included in this email.
+</p>
+</li>
+<li>
+<p>
+Notification emails are sent to included groups.
+</p>
+</li>
+<li>
+<p>
+Comment notification emails are sent to project watchers.
+</p>
+</li>
+<li>
+<p>
+"Change Merged" emails include the diff output when <tt>sendemail.includeDiff</tt> is enabled.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_labels">Labels</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Approval categories stored in the database have been replaced with labels
+  configured in <tt>project.config</tt>. Existing categories are migrated to
+  <tt>project.config</tt> in <tt>All-Projects</tt> as part of the schema upgrade; no user
+  action is required.
+</p>
+</li>
+<li>
+<p>
+Labels are no longer global; projects may define their own labels,
+  with inheritance.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_upgrades">Upgrades</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1619">Issue 1619</a>:
+Embedded Jetty is now 8.1.7.v20120910.
+</p>
+</li>
+<li>
+<p>
+ASM bytecode library is now 4.0.
+</p>
+</li>
+<li>
+<p>
+JGit is now 2.3.1.201302201838-r.78-g8fcde4b.
+</p>
+</li>
+<li>
+<p>
+asciidoc 8.6.3 is now required to build the documentation.
+</p>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1155">Issue 1155</a>:
+prettify is now r225
+</p>
+</li>
+</ul></div>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_bug_fixes">Bug Fixes</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_web_ui">Web UI</h3>
 <div class="ulist"><ul>
 <li>
 <p>
-Work around focus bugs in WebKit based browsers
+Links to CGit were broken when <tt>remove-suffix</tt> was enabled.
 </p>
 </li>
 <li>
 <p>
-Include our license list in the WAR file
-</p>
-</li>
-<li>
-<p>
-Whack any prior submit approvals by myself when replac&#8230;
-</p>
-</li>
-<li>
-<p>
-GERRIT-35   Handle unwrapped commit message more gracefully
-</p>
-</li>
-<li>
-<p>
-GERRIT-85   ie6: Correct rendering of commit messages
-</p>
-</li>
-<li>
-<p>
-GERRIT-89   ie6: Fix date line wrapping in messages
+<a href="https://code.google.com/p/gerrit/issues/detail?id=926">Issue 926</a>:
+Internet Explorer versions 9 and 10 are supported.
 </p>
 </li>
 </ul></div>
+</div>
+<div class="sect2">
+<h3 id="_git">Git</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+The wildcard <tt>.</tt> is now permitted in reference regex rules.
+</p>
+</li>
+<li>
+<p>
+Checking if a change is mergeable no longer writes to the repository.
+</p>
+</li>
+<li>
+<p>
+Improved <tt>git ls-remote</tt> and <tt>git fetch</tt> performance by caching
+  changes, decreasing database queries and traffic.
+</p>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1608">Issue 1608</a>:
+Commits pushed without a Change-Id now warn with instructions on how
+to download and install the commit-msg hook.
+</p>
+</li>
+<li>
+<p>
+Submitted but unmerged changes are periodically retried. This is
+  necessary for a multi-master configuration where the second master
+  may need to retry a change not yet merged by the first. Please note
+  we still do not believe this is sufficient to enable multi-master.
+</p>
+</li>
+<li>
+<p>
+Added a server-level option to use JGit&#8217;s new, experimental recursive
+  merger.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_ssh_2">SSH</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>plugin ls</tt> shows status of enabled plugins as "ENABLED".
+</p>
+</li>
+<li>
+<p>
+<tt>review --restore</tt> allows a review score to be added on the restored change.
+</p>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1721">Issue 1721</a>:
+<tt>review --message</tt> only adds the message once.
+</p>
+</li>
+<li>
+<p>
+<tt>ls-groups</tt> prints "N/A" if the group&#8217;s name is not set.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_email_2">EMail</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Missing email templates are added to the site initialization.
+</p>
+</li>
+<li>
+<p>
+Merge failure emails are only sent once per day.
+</p>
+</li>
+<li>
+<p>
+Unused macros are removed from the mail templates.
+</p>
+</li>
+<li>
+<p>
+Unnecessary ellipses are no longer applied to email subjects.
+</p>
+</li>
+<li>
+<p>
+The diff output from an "octopus merge" is made more readable in change notification emails.
+</p>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1480">Issue 1480</a>:
+Proper error message is shown when registering an email address fails.
+</p>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1692">Issue 1692</a>:
+Review comments are sorted before being added to notification emails.
+</p>
+</li>
+</ul></div>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_other_changes">Other Changes</h2>
+<h2 id="_documentation">Documentation</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_user_documentation">User Documentation</h3>
 <div class="ulist"><ul>
 <li>
 <p>
-Start 2.0.9 development
+Added documentation of how to authenticate uploads over HTTP.
 </p>
 </li>
 <li>
 <p>
-Always show the commit SHA-1 next to the patch set hea&#8230;
+Added documentation of the <tt>auth.editFullNameUrl</tt> and <tt>auth.httpPasswordUrl</tt> configuration parameters.
 </p>
 </li>
 <li>
 <p>
-Silence more non-critical log messages from openid4java
+Improved the push tag examples in the access control documentation.
 </p>
 </li>
 <li>
 <p>
-Fix default READ access on new database initialization
+Improved documentation of error messages related to commit message footer content.
 </p>
 </li>
 <li>
 <p>
-Don&#8217;t permit project rights to be created backwards
+Added documentation of the "commit already exists" error message.
 </p>
 </li>
 <li>
 <p>
-Don&#8217;t permit project rights to be created backwards (p&#8230;
+Added documentation of contributor agreements.
 </p>
 </li>
 <li>
 <p>
-Select better defaults for min/max access rights when &#8230;
+Added missing documentation of JSON attributes.
 </p>
 </li>
 <li>
 <p>
-Show the + or - numeric level when adding a new ACL en&#8230;
+Added missing documentation of mail templates.
 </p>
 </li>
 <li>
 <p>
-Fix odd formatting errors in MergeOp.java
+Added missing documentation of the ssh <tt>version</tt> command.
 </p>
 </li>
 <li>
 <p>
-Fix tab formatting in pom.xml
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1602">Issue 1602</a>:
+Corrected references to <tt>refs/changes</tt> in the access control documentation.
 </p>
 </li>
 <li>
 <p>
-Require the submitter approval to be &gt; 0 to claim it i&#8230;
+Various minor grammatical and formatting corrections.
 </p>
 </li>
 <li>
 <p>
-Fix the copyright header in pom.xml to be AOSP
-</p>
-</li>
-<li>
-<p>
-Add some missing copyright headers
-</p>
-</li>
-<li>
-<p>
-Remove Gerrit 1.x to 2.x import tools
-</p>
-</li>
-<li>
-<p>
-Upgrade JGit to 0.4.0-272-g7322ea2
-</p>
-</li>
-<li>
-<p>
-Upgrade gwtexpui to 1.0.2
-</p>
-</li>
-<li>
-<p>
-Attach submitter identity to change messages about suc&#8230;
-</p>
-</li>
-<li>
-<p>
-Automatically generate unique names for our CSS code
-</p>
-</li>
-<li>
-<p>
-Cache <tt>*</tt>.nocache.js and don&#8217;t cache the host page
-</p>
-</li>
-<li>
-<p>
-gerrit 2.0.9
+Manual pages can be optionally created/installed for core gerrit ssh commands.
 </p>
 </li>
 </ul></div>
+</div>
+<div class="sect2">
+<h3 id="_developer_and_maintainer_documentation">Developer And Maintainer Documentation</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Updated the Maven plugin installation instructions for Eclipse 3.7 (Indigo).
+</p>
+</li>
+<li>
+<p>
+Improved the release documentation.
+</p>
+</li>
+<li>
+<p>
+The release notes are now made when a release is created by running the <tt>tools/release.sh</tt> script.
+</p>
+</li>
+</ul></div>
+</div>
 </div>
 </div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.0.9 (from v2.1.1.1-104-gc20e283)<br />
-Last updated 2012-12-05 11:09:09 PST
+Version 2.6 (from v2.5.2-1737-g19f6c27)<br />
+Last updated 2013-03-21 10:52:52 PDT
 </div>
 </div>
 </body>
