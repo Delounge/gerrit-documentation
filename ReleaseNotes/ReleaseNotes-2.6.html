@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Release notes for Gerrit 2.6</h1>
-<span id="revnumber">version 2.6 (from v2.5.2-1737-g19f6c27)</span>
+<span id="revnumber">version 2.6 (from v2.6-rc0-115-gbb12492)</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -746,7 +746,7 @@ asciidoc.install(2);
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph"><p>Gerrit 2.6 is now available:</p></div>
-<div class="paragraph"><p><a href="http://code.google.com/p/gerrit/downloads/detail?name=gerrit-full-2.6.war">http://code.google.com/p/gerrit/downloads/detail?name=gerrit-full-2.6.war</a></p></div>
+<div class="paragraph"><p><a href="http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.6.war">http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.6.war</a></p></div>
 <div class="paragraph"><p>Gerrit 2.6 includes the bug fixes done with
 <a href="ReleaseNotes-2.5.1.html">Gerrit 2.5.1</a> and
 <a href="ReleaseNotes-2.5.2.html">Gerrit 2.5.2</a>. These bug fixes are <strong>not</strong>
@@ -767,44 +767,142 @@ newer, you may ignore this warning and upgrade directly to 2.6.x.</p></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_new_features">New Features</h2>
+<h2 id="_release_highlights">Release Highlights</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_review_ui">Review UI</h3>
 <div class="ulist"><ul>
 <li>
 <p>
-The reviewer matrix on a change displays gray boxes where
-  permissions do not allow voting in that category. The coloring
-  enables authors to quickly identify if another reviewer is
-  necessary to continue the change.
+42x improvement on <tt>git clone</tt> and <tt>git fetch</tt>
+</p>
+<div class="paragraph"><p>Running <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/cmd-gc.html">
+gerrit gc</a> allows JGit to optimize a repository to serve clone and fetch
+faster than C Git can, with massively lower server CPU required. Typically
+Gerrit 2.6 can completely transfer a project to a client faster than C Git
+can finish "Counting" the objects.</p></div>
+</li>
+<li>
+<p>
+Completely customizable workflow
+</p>
+<div class="paragraph"><p>Individual projects can add (or remove) score categories through
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/config-labels.html">
+labels</a> and <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/prolog-cookbook.html">
+Prolog rules</a>.</p></div>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_new_features">New Features</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_web_ui">Web UI</h3>
+<div class="sect3">
+<h4 id="_global">Global</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+New Login Screens
+</p>
+<div class="paragraph"><p>New form based HTML screens for login allow browsers to offer the
+choice to save the login data locally in the user&#8217;s password store.</p></div>
+</li>
+<li>
+<p>
+Rename "Groups" top-level menu to "People"
 </p>
 </li>
 <li>
 <p>
-New <em>Rebase If Necessary</em> submit type. This is similar to cherry
-  pick, but honors change dependency information.
+Move "Draft Comments" link next to "Drafts" link
 </p>
 </li>
 <li>
 <p>
-Submit type displayed per-change in the info block.
+Highlight the active menu item
 </p>
 </li>
 <li>
 <p>
-Submit type selectable per-change by <tt>submit_type</tt> Prolog rules.
+Move user info, settings, and logout to popup dialog
 </p>
 </li>
 <li>
 <p>
-The rebase button is hidden when the patch set is current.
+Show a small version of the avatar image next to the user&#8217;s name.
 </p>
 </li>
 <li>
 <p>
-<tt>suggest.from</tt> configures a minimum number of characters before
+Show avatar image in user info popup dialog
+</p>
+</li>
+<li>
+<p>
+Always show <em>Working &#8230;</em> message
+</p>
+<div class="paragraph"><p>The <em>Working &#8230;</em> message is now not anymore sticked to the Gerrit page
+top border so that it is now always displayed, even if the user has
+scrolled down the page and the top border is not visible.</p></div>
+<div class="paragraph"><p>This change make <em>Working &#8230;</em> message relatively positioned to
+browser top border, so that it is always visible for users.</p></div>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/config-gerrit.html#suggest.from">
+  suggest.from</a> configures a minimum number of characters before
   matches for reviewers, accounts, groups or projects are offered.
+</p>
+</li>
+<li>
+<p>
+Make the default font size "small".
+</p>
+</li>
+<li>
+<p>
+Mark all CSS classes as external so users can rely on them.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect3">
+<h4 id="_search">Search</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+Animate search bar by expanding &amp; unexpanding
+</p>
+<div class="paragraph"><p>When the search bar is used, expand it to allow for more text to be
+visible. When it is blurred, shrink it back to the original size.</p></div>
+</li>
+<li>
+<p>
+Suggest projects, groups and users in search panel
+</p>
+<div class="paragraph"><p>Suggest projects, groups and users in the search panel as parameter for
+those search operators that expect a project, group or user.</p></div>
+</li>
+<li>
+<p>
+In search panel suggest <em>self</em> as value for operators that expect a user
+</p>
+</li>
+<li>
+<p>
+Quote values suggested for search operators only if needed
+</p>
+<div class="paragraph"><p>The values that are suggested for the search operators in the search
+panel are now only quoted if they contain a whitespace.</p></div>
+</li>
+</ul></div>
+</div>
+<div class="sect3">
+<h4 id="_change_screens">Change Screens</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+A change&#8217;s commit message can be edited from the change screen.
 </p>
 </li>
 <li>
@@ -815,8 +913,54 @@ A change&#8217;s topic can be added, removed or changed from the
 </li>
 <li>
 <p>
-A change&#8217;s commit message can be edited from the change screen.
+An "Add Comment" button is added to change screen
 </p>
+</li>
+<li>
+<p>
+The reviewer matrix on a change displays gray boxes where permissions
+  do not allow voting in that category.
+</p>
+<div class="paragraph"><p>The coloring enables authors to quickly identify if another reviewer
+is necessary to continue the change.</p></div>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=353">Issue 353</a> &amp;
+  <a href="https://code.google.com/p/gerrit/issues/detail?id=1123">Issue 1123</a>:
+  New <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/project-setup.html#rebase_if_necessary">
+  Rebase If Necessary</a> submit type
+</p>
+<div class="paragraph"><p>This is similar to cherry pick, but honors change dependency
+information.</p></div>
+</li>
+<li>
+<p>
+The rebase button is hidden when the patch set is current.
+</p>
+</li>
+<li>
+<p>
+Improved review message when a change is rebased in the UI
+</p>
+<div class="paragraph"><p>When a change is rebased in the UI by pressing the rebase button, a
+comment is added onto the review. Instead of only saying <em>Rebased</em> the
+message is now more verbose, e.g. <em>Patch Set 1 was rebased</em>.</p></div>
+</li>
+<li>
+<p>
+The submit type that is used for submitting a change is shown on the
+  change screen in the info block.
+</p>
+<div class="paragraph"><p>This is useful because the submit type of a change can now be
+<a href="#submit-type-from-prolog">controlled by Prolog</a>.</p></div>
+</li>
+<li>
+<p>
+Replace the All Diff buttons on the change screen with links
+</p>
+<div class="paragraph"><p>The action buttons to open the diff for all files in own tabs consumed
+too much space due to the long label texts.</p></div>
 </li>
 <li>
 <p>
@@ -825,6 +969,475 @@ The patch set review screen can include radio buttons for custom
   <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/prolog-cookbook.html#_how_to_write_submit_rules">submit rules</a>.
 </p>
 </li>
+<li>
+<p>
+Voting on draft changes is now possible.
+</p>
+</li>
+<li>
+<p>
+Recommend rebase on Path Conflict
+</p>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1685">Issue 1685</a>:
+  After <em>Up to change</em> expand the patch set that was just reviewed
+</p>
+<div class="paragraph"><p>After clicking on the <em>Up to change</em> link on a patch screen, the patch
+set that was just reviewed is automatically expanded on the change
+screen.</p></div>
+</li>
+<li>
+<p>
+Allow direct change URLs to end with <em>/</em>.
+</p>
+</li>
+<li>
+<p>
+Slightly increase commit message text size from 8px to 9px.
+</p>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1381">Issue 1381</a>:
+  Remove the ID column from change tables
+</p>
+<div class="paragraph"><p>Users don&#8217;t really need the ID column present. For most changes the
+subject is descriptive and unique enough to identify the correct
+change.</p></div>
+</li>
+<li>
+<p>
+Do not wrap project/branch/owner fields in change table
+</p>
+<div class="paragraph"><p>This makes it easier to use Gerrit on narrow screens.</p></div>
+</li>
+</ul></div>
+</div>
+<div class="sect3">
+<h4 id="_patch_screens">Patch Screens</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+Support for file comments
+</p>
+<div class="paragraph"><p>It is now possible to comment on a whole file in a patch.</p></div>
+</li>
+<li>
+<p>
+Have the reviewed panel also at the bottom of the patch screen
+</p>
+<div class="paragraph"><p>Reviewers normally review patches top down, finishing the review when
+they reach the bottom of the patch. To use the streamlined review
+workflow they now don&#8217;t need to scroll back to the top to find the
+reviewed checkbox and link.</p></div>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1494">Issue 1494</a>:
+  Use mono-font for displaying the file contents
+</p>
+<div class="paragraph"><p>This avoids alignment errors when syntax highlighting is enabled.</p></div>
+</li>
+</ul></div>
+</div>
+<div class="sect3">
+<h4 id="_project_screens">Project Screens</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+Support filtering of projects in the project list screen
+</p>
+<div class="paragraph"><p>Filter matches are highlighted by bold printing.</p></div>
+<div class="paragraph"><p>The filter is reflected by the <tt>filter</tt> URL parameter.</p></div>
+</li>
+<li>
+<p>
+Support filtering of projects in ProjectListPopup
+</p>
+<div class="paragraph"><p>Filter matches are highlighted by bold printing.</p></div>
+</li>
+<li>
+<p>
+Display a query icon for each project in the project list screen that
+  links to the default query/dashboard of that project.
+</p>
+</li>
+<li>
+<p>
+Replace projects side menus with top menus
+</p>
+<div class="paragraph"><p>The top menus are submenus to the Project Menu and they appear only
+when a project has been selected.</p></div>
+</li>
+<li>
+<p>
+Remember the last Project Screen used
+</p>
+<div class="paragraph"><p>Remember the last project screen used every time a project screen is
+loaded. Go to the remembered screen when selecting a new project from
+the project list instead of always going to the project info screen.</p></div>
+</li>
+<li>
+<p>
+Remember the last project viewed
+</p>
+<div class="paragraph"><p>Remember the last project viewed when navigating away from a project
+screen.  If there is a remembered project, then the extra project links
+are not hidden.</p></div>
+</li>
+<li>
+<p>
+Add clone panel to the project general screen
+</p>
+</li>
+<li>
+<p>
+New screen for listing and accessing the project dashboards.
+</p>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1677">Issue 1677</a>:
+  Place the <em>Browse</em> button to select a watched project next to input field
+</p>
+</li>
+<li>
+<p>
+Ask user to login if project is not found
+</p>
+<div class="paragraph"><p>Accessing a project URL was failing with <em>Not Found - The page you
+requested was not found, or you do not have permission to view this
+page</em> if the user was not signed in and the project was not visible to
+<em>Anonymous Users</em>. Instead Gerrit now asks the user to login and
+afterwards shows the project to the user if it exists and is visible.
+If the project doesn&#8217;t exist or is not visible, the user will still get
+the Not Found screen after sign in.</p></div>
+</li>
+<li>
+<p>
+Improve error handling on branch creation
+</p>
+<div class="paragraph"><p>Improve the error messages that are displayed in the WebUI if the
+creation of a branch fails due to invalid user input.</p></div>
+</li>
+</ul></div>
+</div>
+<div class="sect3">
+<h4 id="_group_screens">Group Screens</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+Support filtering of groups in the group list screen
+</p>
+<div class="paragraph"><p>Filter matches are highlighted by bold printing.</p></div>
+<div class="paragraph"><p>The filter is reflected by the <tt>filter</tt> URL parameter.</p></div>
+</li>
+<li>
+<p>
+Remove group type from group info screen
+</p>
+<div class="paragraph"><p>The information about the group type was not much helpful. All groups
+that can be seen in Gerrit are of type <em>INTERNAL</em>, except a few
+well-known system groups which are of type <em>SYSTEM</em>. The system groups
+are so well-known that there is no need to display the type for them.</p></div>
+</li>
+</ul></div>
+</div>
+<div class="sect3">
+<h4 id="_dashboard_screens">Dashboard Screens</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+Link dashboard title to a URL version of itself
+</p>
+<div class="paragraph"><p>When using a stable project dashboard URL, the URL obfuscates the
+content of the dashboard which can make it hard to debug a dashboard or
+copy and modify it. In the special case of stable dashboards, make the
+title a link to an unstable URL version of the dashboard with the URL
+reflecting the actual dashboard contents the way a custom dashboard
+does.</p></div>
+</li>
+<li>
+<p>
+Increase time span for "Recently Closed" section in user dashboard to 4 weeks.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect3">
+<h4 id="_account_screens">Account Screens</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1740">Issue 1740</a>:
+  Display description how to generate SSH Key in SshPanel
+</p>
+<div class="paragraph"><p>Display a description of how to generate an SSH Key in an expandable
+section in the SshPanel instead of linking to the GitHub SSH tutorial.
+The GitHub SSH tutorial was partially not relevant and confused users.</p></div>
+</li>
+<li>
+<p>
+Make the text for "Register" customizable
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect3">
+<h4 id="_plugin_screens">Plugin Screens</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+Show status for enabled plugins in the WebUI as <em>Enabled</em>
+</p>
+<div class="paragraph"><p>Earlier no status was shown for enabled plugins, which was confusing to
+some users.</p></div>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rest_api">REST API</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+A big chunk of the Gerrit functionality is now available via the
+  <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/rest-api.html">REST API</a>.
+</p>
+<div class="paragraph"><p>The REST API is <strong>NOT</strong> complete yet and some functionality is still missing.</p></div>
+<div class="paragraph"><p>To find out which functionality is available, check the REST endpoint documentation for
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/rest-api-projects.html">projects</a>,
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/rest-api-changes.html">changes</a>,
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/rest-api-groups.html">groups</a> and
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/rest-api-accounts.html">accounts</a>.</p></div>
+</li>
+<li>
+<p>
+Support setting <tt>HEAD</tt> of a project
+  <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/rest-api-projects.html#set-head">via REST</a>.
+</p>
+</li>
+<li>
+<p>
+Audit support for REST API.
+</p>
+<div class="paragraph"><p>Allow generating Audit events related to REST API execution. The
+structure of the AuditEvent has been extended to support the new
+name-multivalue pairs used in the REST API.</p></div>
+<div class="paragraph"><p>This is breaking compatibility with the 2.5 API as it changes the
+params data type, this is needed anyway as the previous list of
+Objects was not providing all the necessary information of
+"what relates to what" in terms of parameters info.</p></div>
+<div class="paragraph"><p>Existing support for SSH and JSON-RPC events have been adapted in
+order to fit into the new name-multivalue syntax: this allow a
+generic audit plug-in to capture all parameters regardless of where
+they have been generated.</p></div>
+</li>
+<li>
+<p>
+Remove support for deprecated <tt>--format</tt> option when listing changes
+</p>
+<div class="paragraph"><p>Querying changes via REST is now always producing JSON output.</p></div>
+</li>
+<li>
+<p>
+Introduce <tt>id</tt> property on REST entities
+</p>
+<div class="paragraph"><p>The <tt>/changes/</tt> entities now use <tt>id</tt> to include a triplet of the
+project, branch and change-id string to uniquely identify that change
+on the server. This moves the old <tt>id</tt> field to be named <tt>change_id</tt>,
+which is a breaking change.</p></div>
+</li>
+<li>
+<p>
+Accept common forms of malformed JSON
+</p>
+<div class="paragraph"><p>Some clients may send JSON-ish instead of JSON. Be nice to those
+clients and accept various useful forms of incorrect syntax:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+End of line comments starting with <tt>//</tt> or <tt>#</tt> and ending with a
+   newline character.
+</p>
+</li>
+<li>
+<p>
+C-style comments starting with <tt>/*</tt> and ending with <tt>*/</tt>
+   Such comments may not be nested.
+</p>
+</li>
+<li>
+<p>
+Names that are unquoted or single quoted.
+</p>
+</li>
+<li>
+<p>
+Strings that are unquoted or single quoted.
+</p>
+</li>
+<li>
+<p>
+Array elements separated by <tt>;</tt> instead of <tt>,</tt>.
+</p>
+</li>
+<li>
+<p>
+Unnecessary array separators. These are interpreted as if null was
+   the omitted value.
+</p>
+</li>
+<li>
+<p>
+Names and values separated by <tt>=</tt> or <tt>=&gt;</tt> instead of <tt>:</tt>.
+</p>
+</li>
+<li>
+<p>
+Name/value pairs separated by <tt>;</tt> instead of <tt>,</tt>.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Be more liberal about parsing JSON responses
+</p>
+<div class="paragraph"><p>If the response begins with the JSON magic string, remove it before
+parsing. If a response is missing this leading string, parse the
+response as-is.</p></div>
+</li>
+<li>
+<p>
+Accept simple form encoded data for REST APIs
+</p>
+<div class="paragraph"><p>Simple cases like <tt>/review</tt> or <tt>/abandon</tt> can now accept standard form
+values for basic properties, making it simple for tools to directly
+post data:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  curl -n --digest \
+  --data 'message=Does not compile.' \
+  --data labels.Verified=-1 \
+  http://localhost:8080/a/changes/3/revisions/1/review</tt></pre>
+</div></div>
+<div class="paragraph"><p>Form field names are JSON field names in the top level object.  If dot
+appears in the name the part to the left is taken as the JSON field
+name and the part to the right as the key for a Map. This nicely fits
+with the labels structure used by <tt>/review</tt>, but doesn&#8217;t support the
+much more complex inline comment case. Clients that need to use more
+complex fields must use JSON formatting for the request body.</p></div>
+</li>
+<li>
+<p>
+Allow administrators to see other user capabilities
+</p>
+<div class="paragraph"><p>Expand <tt>/accounts/{id}/capabilities</tt> to permit an administrator
+to inspect another user&#8217;s effective capabilities.</p></div>
+</li>
+<li>
+<p>
+Declare kind in JSON API results
+</p>
+<div class="paragraph"><p>This is recommended to hint to clients what the entity type is when
+processing the JSON payload.</p></div>
+</li>
+<li>
+<p>
+Format h/help output as plain text not JSON
+</p>
+<div class="paragraph"><p>The output produced when the client requested the h or help property
+from a JSON API is always produced from constant compiled into the
+server. Assume this safe to return to the client as text/plain content
+and avoid wrapping it into an HTML escaped JSON string.</p></div>
+</li>
+<li>
+<p>
+Use string for JSON encoded plain text replies
+</p>
+<div class="paragraph"><p>Instead of wrapping the value into an object, just return the
+string by itself. This better matches what happens with the plain
+text return format.</p></div>
+</li>
+<li>
+<p>
+Wrap possible HTML plain text in JSON on GET
+</p>
+<div class="paragraph"><p>If the HTML appears like MSIE might guess it is HTML (such as if it
+contains <tt>&lt;</tt>) encode the response as a JSON object instead of as a
+simple plain text string. This won&#8217;t show up very often for clients,
+and protects MSIE users stuck on ancient versions (pre MSIE 8).</p></div>
+</li>
+<li>
+<p>
+Ask MSIE to never sniff content types on REST API responses
+</p>
+<div class="paragraph"><p>Newer versions of MSIE can disable the content sniffing feature if the
+server asks it to by setting an extension header. It is annoying, but
+necessary, that a server needs to say "No really, I <em>am</em> telling you
+the right Content-Type, trust it."</p></div>
+<div class="paragraph"><p>This feature was added in MSIE 8 Beta 2 so it doesn&#8217;t protect users
+running MSIE 6 or 7, but those are ancient and users should upgrade.</p></div>
+<div class="paragraph"><p>Enable this on the REST API responses because we sometimes send back
+text/plain results that are really just plain text. Existing JSON
+responses are protected from accidential sniffing and treatment as
+HTML thanks to Gson encoding HTML control characters using Unicode
+character escapes within JSON strings.</p></div>
+</li>
+<li>
+<p>
+Apache reverse proxies need <tt>AllowEncodedSlashes NoDecode</tt>
+</p>
+<div class="paragraph"><p>When Apache is used as a reverse proxy the NoDecode option
+must be set for AllowEncodedSlashes to prevent Apache from
+mangling Gerrit REST API URLs.</p></div>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_project_dashboards">Project Dashboards</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/user-dashboards.html#project-dashboards">
+  Support for storing custom dashboards for projects</a>
+</p>
+<div class="paragraph"><p>Custom dashboards can now be stored in the projects
+<tt>refs/meta/dashboards/*</tt> branches.</p></div>
+<div class="paragraph"><p>The project dashboards are shown in a new project screen and can be
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/rest-api-projects.html#dashboard-endpoints">
+accessed via REST</a>.</p></div>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/user-dashboards.html#project-default-dashboard">
+  Allow defining a default dashboard for projects</a>
+</p>
+</li>
+<li>
+<p>
+Support inheritance for project dashboards.
+</p>
+<div class="paragraph"><p>In dashboards queries the <tt>${project}</tt> token can be used as placeholder
+for the project name. This token will be replaced with the project to
+which a dashboard is being applied.</p></div>
+</li>
+<li>
+<p>
+On the project list screen a query icon is displayed for each project
+  that links to the default dashboard of that project.
+</p>
+</li>
+<li>
+<p>
+Support a <tt>foreach</tt> parameter for custom dashboards.
+</p>
+<div class="paragraph"><p>The <tt>foreach</tt> parameter which will get appended to all the queries in
+the dashboard.</p></div>
+</li>
 </ul></div>
 </div>
 <div class="sect2">
@@ -832,22 +1445,67 @@ The patch set review screen can include radio buttons for custom
 <div class="ulist"><ul>
 <li>
 <p>
-Remove Reviewer is a new permission.
+Allow to overrule <tt>BLOCK</tt> permissions on the same project
+</p>
+<div class="paragraph"><p>It was impossible to block a permission for a group and allow the same
+permission for a sub-group of that group as the <tt>BLOCK</tt> permission
+always won over any <tt>ALLOW</tt> permission. For example, it was impossible
+to block the "Forge Committer" permission for all users and then allow
+it only for a couple of privileged users.</p></div>
+<div class="paragraph"><p>An <tt>ALLOW</tt> permission has now  priority over a <tt>BLOCK</tt> permission when
+they are defined in the same access section of a project. To achieve the
+above mentioned policy the following could be defined:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>[access "refs/heads/*"]
+  forgeCommitter = block group Anonymous Users
+  forgeCommitter = group Privileged Users</tt></pre>
+</div></div>
+<div class="paragraph"><p>Across projects the <tt>BLOCK</tt> permission still wins over any <tt>ALLOW</tt>
+permission. This way one cannot override an inherited <tt>BLOCK</tt>
+permission in a subproject.</p></div>
+<div class="paragraph"><p>Overruling of <tt>BLOCK</tt> permissions with <tt>ALLOW</tt> permissions also works
+for labels i.e. permission ranges. If a dedicated <em>Verifiers</em> group
+need to be the only group who can vote in the <em>Verified</em> label and it
+must be ensured that even project owners cannot change this policy,
+then the following can be defined in a common parent project:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>[access "refs/heads/*"]
+  label-Verified = block -1..+1 group Anonymous Users
+  label-Verified = -1..+1 group Verifiers</tt></pre>
+</div></div>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1516">issue 1516</a>:
+  Show global capabilities to all users that can read <tt>refs/meta/config</tt>
+</p>
+<div class="paragraph"><p>Users can now propose changes to the global capabilities for review
+from the WebUI.</p></div>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/access-control.html#category_remove_reviewer">
+  Remove Reviewer</a> is a new permission.
 </p>
 </li>
 <li>
 <p>
-Pushing a signed tag is a new permission.
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/access-control.html#category_push_signed">
+  Pushing a signed tag</a> is a new permission.
 </p>
 </li>
 <li>
 <p>
-Editing the topic name is a new permission.
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/access-control.html#category_edit_topic_name">
+  Editing the topic name</a> is a new permission.
 </p>
 </li>
 <li>
 <p>
-Raw database access with the <tt>gsql</tt> command is a new global capability.
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/access-control.html#capability_accessDatabase">
+  Raw database access</a> with the <tt>gsql</tt> command is a new global capability.
 </p>
 <div class="paragraph"><p>Previously site administrators had this capability by default.  Now it has
 to be explicitly assigned, even for site administrators.</p></div>
@@ -855,23 +1513,30 @@ to be explicitly assigned, even for site administrators.</p></div>
 <li>
 <p>
 <a href="https://code.google.com/p/gerrit/issues/detail?id=1585">Issue 1585</a>:
-Viewing other users' draft changes is a new permission.
+  <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/access-control.html#category_view_drafts">
+  Viewing other users' draft changes</a> is a new permission.
 </p>
 </li>
 <li>
 <p>
 <a href="https://code.google.com/p/gerrit/issues/detail?id=1675">Issue 1675</a>:
-Deleting and publishing other users' draft changes is a new permission.
+  <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/access-control.html#category_delete_drafts">Deleting</a> and
+  <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/access-control.html#category_publish_drafts">publishing</a>
+  other users' draft changes is a new permission.
 </p>
 </li>
 <li>
 <p>
-LDAP group names are configurable, <tt>cn</tt> is still the default.
+Grant most permissions when creating <tt>All-Projects</tt>
 </p>
+<div class="paragraph"><p>Make Gerrit more like a Git server out-of-the box by granting both
+Administrators and Project Owners permissions to review changes, submit
+them, create branches, create tags, and push directly to branches.</p></div>
 </li>
 <li>
 <p>
-LDAP cache reduces the number of recursive group queries.
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/config-gerrit.html#ldap.groupName">
+  LDAP group names</a> are configurable, <tt>cn</tt> is still the default.
 </p>
 </li>
 <li>
@@ -881,10 +1546,27 @@ Kerberos authentication to LDAP servers is now supported.
 </li>
 <li>
 <p>
-Basic project properities are now inherited by default from parent
+Basic project properties are now inherited by default from parent
   projects: Use Content Merge, Require Contributor Agreement, Require
   Change Id, Require Signed Off By.
 </p>
+</li>
+<li>
+<p>
+Allow assigning <tt>Push</tt> for <tt>refs/meta/config</tt> on <tt>All-Projects</tt>
+</p>
+<div class="paragraph"><p>The <tt>refs/meta/config</tt> branch of the <tt>All-Projects</tt> project should only
+be modified by Gerrit administrators because being able to do
+modifications on this branch means that the user could assign himself
+administrator permissions.</p></div>
+<div class="paragraph"><p>In addition to being administrator Gerrit requires that the
+administrator has the <tt>Push</tt> access right for <tt>refs/meta/config</tt> in
+order to be able to modify it (just as with all other branches
+administrators do not have edit permissions by default).</p></div>
+<div class="paragraph"><p>The problem was that assigning the <tt>Push</tt> access right for
+<tt>refs/meta/config</tt> on the <tt>All-Projects</tt> project was not allowed.</p></div>
+<div class="paragraph"><p>Having the <tt>Push</tt> access right for <tt>refs/meta/config</tt> on the
+<tt>All-Projects</tt> project without being administrator has no effect.</p></div>
 </li>
 </ul></div>
 </div>
@@ -908,11 +1590,108 @@ New <tt>reviewer-added</tt> hook and stream event when a reviewer is added.
 New <tt>merge-failed</tt> hook and stream event when a change cannot be submitted due to failed merge.
 </p>
 </li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=925">Issue 925</a>:
+New <tt>ref-update</tt> hook run before a push is accepted by Gerrit.
+</p>
+</li>
+<li>
+<p>
+Add <tt>--is-draft</tt> parameter to <tt>comment-added</tt> hook
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_git">Git</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Add options to <tt>refs/for/</tt> magic branch syntax
+</p>
+<div class="paragraph"><p>Git doesn&#8217;t want to modify the network protocol to support passing
+data from the git push client to the server. Work around this by
+embedding option data into a new style of reference specification:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  refs/for/master%r=alice,cc=bob,cc=charlie,topic=options</tt></pre>
+</div></div>
+<div class="paragraph"><p>is now parsed by the server as:</p></div>
+<div class="openblock">
+<div class="content">
+<div class="ulist"><ul>
+<li>
+<p>
+set topic to "options"
+</p>
+</li>
+<li>
+<p>
+CC charlie and bob
+</p>
+</li>
+<li>
+<p>
+add reviewer alice
+</p>
+</li>
+<li>
+<p>
+for branch refs/heads/master
+</p>
+</li>
+</ul></div>
+</div></div>
+<div class="paragraph"><p>If <tt>%</tt> is used the extra information after the branch name is
+parsed as options with args4j. Each option is delimited by <tt>,</tt>.</p></div>
+<div class="paragraph"><p>Selecting publish vs. draft should be done with the options <tt>draft</tt> or
+<tt>publish</tt>, appearing anywhere in the refspec after the <tt>%</tt> marker:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  refs/for/master%draft
+  refs/for/master%draft,r=alice
+  refs/for/master%r=alice,draft
+  refs/for/master%r=alice,publish</tt></pre>
+</div></div>
+</li>
+<li>
+<p>
+Enable content merge by default
+</p>
+<div class="paragraph"><p>Most teams seem to expect Gerrit to manage simple merges within a
+source code file. Enable this out-of-the-box.</p></div>
+</li>
+<li>
+<p>
+Added a <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/config-gerrit.html#core.useRecursiveMerge">
+  server-level option</a> to use JGit&#8217;s new, experimental recursive merger.
+</p>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1608">Issue 1608</a>:
+Commits pushed without a Change-Id now warn with instructions on how
+to download and install the commit-msg hook.
+</p>
+</li>
+<li>
+<p>
+Add <tt>oldObjectId</tt> and <tt>newObjectId</tt> to the <tt>GitReferenceUpdatedListener.Update</tt>
+</p>
+</li>
 </ul></div>
 </div>
 <div class="sect2">
 <h3 id="_ssh">SSH</h3>
 <div class="ulist"><ul>
+<li>
+<p>
+New SSH command to <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/cmd-gc.html">
+  run Git garbage collection</a>
+</p>
+<div class="paragraph"><p>All GC runs are logged in a GC log file.</p></div>
+</li>
 <li>
 <p>
 Descriptions are added to ssh commands.
@@ -923,7 +1702,13 @@ commands with their descriptions.</p></div>
 <li>
 <p>
 <tt>create-account --http-password</tt> enables setting/resetting the
-  HTTP password of role accounts, for Git or JSON API access.
+  HTTP password of role accounts, for Git or REST API access.
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/cmd-ls-user-refs.html">
+  ls-user-refs</a> lists which refs are visible for a given user.
 </p>
 </li>
 <li>
@@ -934,28 +1719,52 @@ commands with their descriptions.</p></div>
 </li>
 <li>
 <p>
-<tt>query</tt> includes submit record information from Prolog rules.
+<tt>review</tt> command supports project-specific labels
 </p>
 </li>
 <li>
 <p>
-<tt>query</tt> includes <tt>resumeSortKey</tt> in summary block.
+<tt>test-submit-rule</tt> was renamed to <tt>test-submit rule</tt>:
+</p>
+<div class="paragraph"><p><tt>rule</tt> is now a subcommand of the <tt>test-submit</tt> command.</p></div>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/cmd-test-submit-type.html">
+  test-submit type</a> tests the Prolog submit type with a chosen change.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_query">Query</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Allow <tt>{}</tt> to be used for quoting in query expressions
+</p>
+<div class="paragraph"><p>This makes it a little easier to query for group names that contain
+a space over SSH:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>ssh srv gerrit query " 'status:open NOT reviewerin:{Developer Group}' "</tt></pre>
+</div></div>
+</li>
+<li>
+<p>
+The query summary block includes <tt>resumeSortKey</tt>.
 </p>
 </li>
 <li>
 <p>
-<tt>query</tt> includes author and change size information when given
-  certain options on the command line.
+Query results include author and change size information when certain
+  options are specified.
 </p>
 </li>
 <li>
 <p>
-<tt>test-submit-rule</tt> tests the <tt>can_submit</tt> rule with a prolog script loaded from a file or stdin.
-</p>
-</li>
-<li>
-<p>
-<tt>ls-user-refs</tt> lists which refs are visible for a given user.
+When a file is renamed the old file name is included in the Patch
+  attribute
 </p>
 </li>
 </ul></div>
@@ -996,21 +1805,100 @@ Commit message length checks are moved to the <tt>commit-message-length-validato
   can be installed during site initialization.
 </p>
 </li>
-</ul></div>
-</div>
-<div class="sect2">
-<h3 id="_email">EMail</h3>
-<div class="ulist"><ul>
 <li>
 <p>
-<a href="https://code.google.com/p/gerrit/issues/detail?id=1531">Issue 1531</a>:
-Email footers now include <tt>Gerrit-HasComments: {Yes|No}</tt>.
+Creation of code review notes is moved to the <tt>reviewnotes</tt> plugin
+  which is included as a core plugin in the Gerrit distribution and can
+  be installed during site initialization.
 </p>
 </li>
 <li>
 <p>
-Notifications configured in <tt>project.config</tt> can now be addressed
+A plugin extension point for avatar images was added.
+</p>
+</li>
+<li>
+<p>
+Allow HTTP plugins to change <tt>static</tt> or <tt>docs</tt> prefixes
+</p>
+<div class="paragraph"><p>An HTTP plugin may want more control over its URL space, but still
+delegate to the plugin servlet&#8217;s magic handling for static files and
+documentation. Add JAR attributes to configure these prefixes.</p></div>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_prolog">Prolog</h3>
+<div class="ulist" id="submit-type-from-prolog"><ul>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/prolog-cookbook.html#HowToWriteSubmitType">
+  Support controlling the submit type for changes from Prolog</a>
+</p>
+<div class="paragraph"><p>Similarly like the <tt>submit_rule</tt> there is now a <tt>submit_type</tt> predicate
+which returns the allowed submit type for a change. When the
+<tt>submit_type</tt> predicate is not provided in the <tt>rules.pl</tt> then the
+project default submit type is used for all changes of that project.</p></div>
+<div class="paragraph"><p>Filtering the results of the <tt>submit_type</tt> is also supported in the
+same way like filtering the results of the <tt>submit_rule</tt>. Using a
+<tt>submit_type_filter</tt> predicate one can enforce a particular submit type
+from a parent project.</p></div>
+</li>
+<li>
+<p>
+Plugins can contribute Prolog facts/predicates from Java.
+</p>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=288">Issue 288</a>:
+  Expose basic commit statistics for the Prolog rule engine
+</p>
+<div class="paragraph"><p>A new method <tt>gerrit:commit_stats(-Files,-Insertions, -Deletions)</tt> was
+added.</p></div>
+</li>
+<li>
+<p>
+A new <tt>max_with_block</tt> predicate was added for more convenient usage
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_email">Email</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Notify project watchers if draft change is published
+</p>
+</li>
+<li>
+<p>
+Notify users mentioned in commit footer on draft publish
+</p>
+</li>
+<li>
+<p>
+Add new notify type that allows watching of new patch sets
+</p>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1686">Issue 1686</a>:
+  Add new notify type that allows watching abandoning of changes
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/user-notify.html">
+  Notifications configured in <tt>project.config</tt></a> can now be addressed
   using any of To, CC, or BCC headers.
+</p>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1531">Issue 1531</a>:
+Email footers now include <tt>Gerrit-HasComments: {Yes|No}</tt>.
 </p>
 </li>
 <li>
@@ -1034,6 +1922,15 @@ Comment notification emails are sent to project watchers.
 "Change Merged" emails include the diff output when <tt>sendemail.includeDiff</tt> is enabled.
 </p>
 </li>
+<li>
+<p>
+When <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/rest-api-changes.html#set-review">
+  posting a review via REST</a> the caller can control email delivery
+</p>
+<div class="paragraph"><p>This may help automated systems to be less noisy. Tools can now choose
+which review updates should send email, and which categories of users
+on a change should get that email.</p></div>
+</li>
 </ul></div>
 </div>
 <div class="sect2">
@@ -1049,8 +1946,334 @@ Approval categories stored in the database have been replaced with labels
 </li>
 <li>
 <p>
-Labels are no longer global; projects may define their own labels,
-  with inheritance.
+Labels are no longer global;
+  <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/config-labels.html">
+  projects may define their own labels</a>, with inheritance.
+</p>
+</li>
+<li>
+<p>
+Don&#8217;t create <tt>Verify</tt> category by default
+</p>
+<div class="paragraph"><p>Most project teams seem confused with the out-of-the-box experience
+needing to vote on both <tt>Code-Review</tt> and <tt>Verified</tt> categories in
+order to submit a change. Simplify the out-of-the-box workflow to only
+have <tt>Code-Review</tt>. When a team installs the Hudson/Jenkins integration
+or their own build system they can now trivially add the <tt>Verified</tt>
+category by pasting 5 lines into <tt>project.config</tt>.</p></div>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_dev">Dev</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/dev-readme.html#debug-javascript">
+  Support loading debug JavaScript</a>
+</p>
+</li>
+<li>
+<p>
+Gerrit acceptance tests
+</p>
+<div class="paragraph"><p>An infrastructure for testing the Gerrit daemon via REST and/or SSH
+protocols has been added. Gerrit daemon is run in the headless mode and
+in the same JVM where the tests run. Besides using REST/SSH, the tests
+can also access Gerrit server internals to prepare the test environment
+and to perform assertions.</p></div>
+<div class="paragraph"><p>A new review site is created for each test and the Gerrit daemon is
+started on that site. When the test has finished the Gerrit daemon is
+shutdown.</p></div>
+</li>
+<li>
+<p>
+Lightweight LDAP server for debugging
+</p>
+</li>
+<li>
+<p>
+Add asciidoc checks in the documentation makefile
+</p>
+<div class="paragraph"><p>Exit with error if the asciidoc executable is not available or has
+version lower than 8.6.3.</p></div>
+<div class="paragraph"><p>The release script is aborted if asciidoc is missing.</p></div>
+</li>
+<li>
+<p>
+Added sublime project files to <tt>.gitignore</tt>
+</p>
+</li>
+<li>
+<p>
+Exclude all <tt>pom.xml</tt> files that are archetype resources in <tt>version.sh</tt>
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_performance">Performance</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Bitmap Optimizations
+</p>
+<div class="paragraph"><p>On running the <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/cmd-gc.html">
+garbage collection</a> JGit creates bitmap data that is saved to an
+auxiliary file. The bitmap optimizations improve the clone and fetch
+performance. git-core will ignore the bitmap data.</p></div>
+</li>
+<li>
+<p>
+Improve suggest user performance when adding a reviewer.
+</p>
+<div class="paragraph"><p>Do not check the visibility of the change for each suggested account if
+the ref is visible by all registered users.</p></div>
+<div class="paragraph"><p>On a system with about 2-3000 users, where most of the projects are
+visible by every registered user, this improves the performance of the
+suggesting reviewer by a factor of 1000 at least.</p></div>
+</li>
+<li>
+<p>
+Cache RefControl.isVisible()
+</p>
+<div class="paragraph"><p>For Git repositories with many changes the time for calculating visible
+refs is reduced by 30-50%.</p></div>
+</li>
+<li>
+<p>
+Allow admins to disable magic ref check on upload
+</p>
+<div class="paragraph"><p>Some sites manage to run their repositories in a way that prevents
+users from ever being able to create <tt>refs/for</tt>, <tt>refs/drafts</tt> or
+<tt>refs/publish</tt> names in a repository. Allow admins on those servers
+to disable this (somewhat) expensive check before every upload.</p></div>
+</li>
+<li>
+<p>
+Permit ProjectCacheClock to be completely disabled
+</p>
+<div class="paragraph"><p>Some admins may just want to require all updates to projects to be
+made through the web interface, and avoid the small expense of a
+background thread ticking off changes.</p></div>
+</li>
+<li>
+<p>
+Batch read Change objects during query
+</p>
+</li>
+<li>
+<p>
+Default <tt>core.streamFileThreshold</tt> to a larger value
+</p>
+<div class="paragraph"><p>If this value is not configured by the server administrator
+performance on larger text files suffers considerably and
+Gerrit may grind to a halt and be unable to answer users.</p></div>
+<div class="paragraph"><p>Default to either 25% of the available JVM heap or ~2048m.</p></div>
+</li>
+<li>
+<p>
+Improve performance of ReceiveCommits for repositories with many refs
+</p>
+<div class="paragraph"><p>Avoid adding <tt>refs/changes/</tt> and <tt>refs/tags/</tt> to RevWalk&#8217;s as
+uninteresting since JGit RevWalk doesn&#8217;t perform well when a large
+number of objects is marked as uninteresting.</p></div>
+</li>
+<li>
+<p>
+PatchSet.isRef()-optimizations.
+</p>
+<div class="paragraph"><p>PatchSet.isRef() is used extensively when preparing for a ref
+advertisment and the regular expression used by isRefs() was notably
+costly in these circumstances, especially since it could not be
+pre-compiled.</p></div>
+<div class="paragraph"><p>The regular expression is removed and the check is now directly
+implemented. As result the performance of <tt>git ls-remote</tt> could be
+increased upto 15%.</p></div>
+</li>
+<li>
+<p>
+New config option <tt>receive.checkReferencedObjectsAreReachable</tt>
+</p>
+<div class="paragraph"><p>If set to true, Gerrit will validate that all referenced objects that
+are not included in the received pack are reachable by the user.</p></div>
+<div class="paragraph"><p>Carrying out this check on Git repositories with many refs and commits
+can be a very CPU-heavy operation. For non public Gerrit servers it may
+make sense to disable this check, which is now possible.</p></div>
+</li>
+<li>
+<p>
+Cache config value in LdapAuthBackend
+</p>
+</li>
+<li>
+<p>
+Perform a single /accounts/self/capabilities on page load
+</p>
+<div class="paragraph"><p>This joins up 3 requests into a single call, which should speed up
+initial page load for most users.</p></div>
+</li>
+<li>
+<p>
+Only gzip compress responses that are smaller compressed
+</p>
+</li>
+<li>
+<p>
+Caching of changes
+</p>
+<div class="paragraph"><p>During Ref Advertisments (via VisibleRefFilter), all changes need to
+be fetched from the database to allow Gerrit to figure out which change
+refs are visible and should be advertised to the user. To reduce
+database traffic a cache for changes was introduced. This cache is
+disabled by default since it can mess-up multi-server setups.</p></div>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_misc">Misc</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Add config parameter to make new groups by default visible to all
+</p>
+<div class="paragraph"><p>Add a new <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/config-gerrit.html#groups.newGroupsVisibleToAll">
+Gerrit configuration parameter</a> that controls whether newly
+created groups should be by default visible to all registered users.</p></div>
+</li>
+<li>
+<p>
+Support for OpenID domain filtering
+</p>
+<div class="paragraph"><p>Added the ability to only allow email addresses under specific domains
+to be used for OpenID login.</p></div>
+<div class="paragraph"><p>The allowed domains can be configured by setting
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/config-gerrit.html#auth.openIdDomain">
+auth.openIdDomain</a> in the Gerrit configuration.</p></div>
+</li>
+<li>
+<p>
+Always configure
+  <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/config-gerrit.html#gerrit.canonicalWebUrl">
+  gerrit.canonicalWebUrl</a> on init
+</p>
+<div class="paragraph"><p>Gerrit has been requiring this field for several versions now, but init
+did not configure it. Ensure there is a value set so the server is not
+confused at runtime.</p></div>
+</li>
+<li>
+<p>
+Add submodule subscriptions fetching by projects
+</p>
+<div class="paragraph"><p>While submodule subscriptions can be fetched by branch, some plugins
+(e.g.: delete-project) would rather need to access all submodule
+subscriptions of a project (regardless of the branch). Instead of
+iterating over all branches of a project, and fetching the
+subscription for each branch separately, we allow fetching of
+subscriptions directly by projects.</p></div>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1805">Issue 1805</a>:
+  Make client SSL certificates that contain an email address work
+</p>
+<div class="paragraph"><p>Authentication with CLIENT_SSL_CERT_LDAP didn&#8217;t work if the certificate
+contained email address.</p></div>
+</li>
+<li>
+<p>
+Guess LDAP type of Active Directory LDS as ActiveDirectory
+</p>
+<div class="paragraph"><p>If Gerrit connects to an AD LDS [1] server it will guess its type as
+RCF_2307 instead of ActiveDirectory. The reason is that an AD LDS
+doesn&#8217;t support the "1.2.840.113556.1.4.800" capability.  However,
+AD LDS behaves like ActiveDirectory and Gerrit also needs to guess
+its type as ActiveDirectory to make the default query patterns work
+properly.</p></div>
+<div class="paragraph"><p>Extend the LDAP server type guessing by checking for presence of the
+"1.2.840.113556.1.4.1851" capability which indicates that this LDAP
+server runs ActiveDirectory as AD LDS [2].</p></div>
+<div class="paragraph"><p>Also remove the check for the presence of the "defaultNamingContext"
+attribute as we don&#8217;t use it anywhere and, by default, this attribute is
+not set on an AD LDS [3]</p></div>
+<div class="paragraph"><p>[1] <a href="http://msdn.microsoft.com/en-us/library/aa705886(VS.85).aspx">http://msdn.microsoft.com/en-us/library/aa705886(VS.85).aspx</a><br />
+[2] <a href="http://msdn.microsoft.com/en-us/library/cc223364.aspx">http://msdn.microsoft.com/en-us/library/cc223364.aspx</a><br />
+[3] <a href="http://technet.microsoft.com/en-us/library/cc816929(v=ws.10).aspx">http://technet.microsoft.com/en-us/library/cc816929(v=ws.10).aspx</a></p></div>
+</li>
+<li>
+<p>
+Allow group descriptions to supply email and URL
+</p>
+<div class="paragraph"><p>Some backends have external management interfaces that are not
+embedded into Gerrit Code Review. Allow those backends to supply
+a URL to the web management interface for a group, so a user can
+manage their membership, view current members, or do whatever other
+features the group system might support.</p></div>
+<div class="paragraph"><p>Some backends also have an email address associated with every
+group. Sending email to that address will distribute the message to
+the group&#8217;s members. Permit backends to supply an optional email
+address, and use this in the project level notification system if
+a group is selected as the target for a message.</p></div>
+</li>
+<li>
+<p>
+Allow group backends to guess on relevant UUIDs
+</p>
+<div class="paragraph"><p>Expose all cheaply known group UUIDs from the ProjectCache,
+enumerating groups used by access controls. This allows a backend
+that has a large number of groups to filter its getKnownGroups()
+output to only groups that may be relevant for this Gerrit server.</p></div>
+<div class="paragraph"><p>The best use case to consider is an LDAP server at a large
+organization. A typical user may belong to 50 LDAP groups, but only
+3 are relevant to this Gerrit server. Taking the intersection of
+the two groups limits the output Gerrit displays to users, or uses
+when considering same group visibility.</p></div>
+</li>
+<li>
+<p>
+Add more forbidden characters for project names
+</p>
+<div class="paragraph"><p><tt>?</tt>, <tt>%</tt>, <tt>*</tt>, <tt>:</tt>, <tt>&lt;</tt>, <tt>&gt;</tt>, <tt>|</tt>, <tt>$</tt>, <tt>\r</tt> are now forbidden in
+project names.</p></div>
+</li>
+<li>
+<p>
+Make <tt>gerrit.sh</tt> LSB compliant
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Add LSB headers
+</p>
+</li>
+<li>
+<p>
+Add <em>status</em> as synonym for <em>check</em>
+</p>
+</li>
+<li>
+<p>
+Fix exit status codes according to <a href="http://refspecs.linux-foundation.org/LSB_3.2.0/LSB-Core-generic/LSB-Core-generic/iniscrptact.html">http://refspecs.linux-foundation.org/LSB_3.2.0/LSB-Core-generic/LSB-Core-generic/iniscrptact.html</a>
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Option to start headless Gerrit daemon
+</p>
+<div class="paragraph"><p>Add <tt>--headless</tt> option to the Daemon which will start Gerrit daemon
+without the Web UI front end (headless mode).</p></div>
+<div class="paragraph"><p>This may be useful for running Gerrit server with an alternative (rest
+based) UI or when starting Gerrit server for the purpose of automated
+REST/SSH based testing.</p></div>
+<div class="paragraph"><p>Currently this option is only supported via the <tt>--headless</tt> option of
+the daemon program. We would need to introduce a config option in order
+to support this feature for deployed war mode.</p></div>
+</li>
+<li>
+<p>
+Show path to gerrit.war in command for upgrade schema
 </p>
 </li>
 </ul></div>
@@ -1085,6 +2308,12 @@ asciidoc 8.6.3 is now required to build the documentation.
 prettify is now r225
 </p>
 </li>
+<li>
+<p>
+The used GWT version is now 2.5.0
+</p>
+<div class="paragraph"><p>Fixes some issues with IE9 and IE10.</p></div>
+</li>
 </ul></div>
 </div>
 </div>
@@ -1093,8 +2322,23 @@ prettify is now r225
 <h2 id="_bug_fixes">Bug Fixes</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_web_ui">Web UI</h3>
+<h3 id="_web_ui_2">Web UI</h3>
 <div class="ulist"><ul>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1662">Issue 1662</a>:
+  Don&#8217;t show error on ACL modification if empty permissions are added
+</p>
+<div class="paragraph"><p>This error message was incorrectly displayed if a permission without
+rules was added, although the save was actually successful.</p></div>
+</li>
+<li>
+<p>
+Don&#8217;t show error on ACL modification if a section is added more than once
+</p>
+<div class="paragraph"><p>This error message was incorrectly displayed if multiple sections for
+the same ref were added, although the save was actually successful.</p></div>
+</li>
 <li>
 <p>
 Links to CGit were broken when <tt>remove-suffix</tt> was enabled.
@@ -1106,10 +2350,259 @@ Links to CGit were broken when <tt>remove-suffix</tt> was enabled.
 Internet Explorer versions 9 and 10 are supported.
 </p>
 </li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1664">Issue 1664</a>:
+  Reverting a change did not preserve the change&#8217;s topic
+</p>
+</li>
+<li>
+<p>
+Fix: User could get around restrictions by reverting a commit
+</p>
+<div class="paragraph"><p>The Gerrit server may enforce several restrictions on the commit
+message (change-id required, signed-off-by, etc). A user was able to
+get around these restrictions by reverting a commit using the UI.</p></div>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1518">Issue 1518</a>:
+  Reset <em>Old Version History</em> if dependent change is opened
+</p>
+<div class="paragraph"><p>Following the navigation link in the dependencies table on the
+change screen, the user can directly navigate to dependent changes.
+The value for <em>Old Version History</em> of the current change was
+incorrectly applied to the new change. If the value was invalid for
+the new change the <em>Old Version History</em> field became blank.</p></div>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1736">Issue 1736</a>:
+  Clear <em>Old Version History</em> ListBox before populating it
+</p>
+<div class="paragraph"><p>The ListBox was not always cleared and as result the same entries were
+sometimes added multiple times e.g. after rebasing a change in the
+WebUI.</p></div>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1673">Issue 1673</a>:
+  Fix disappearance of patch headers when compared patches are identical
+</p>
+<div class="paragraph"><p>When two patches were compared that were identical <em>No Differences</em> is
+displayed to the user. In this case the patch headers disappeared and
+as result the user couldn&#8217;t change the patch selection anymore.</p></div>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1759">Issue 1759</a>:
+  Fix ArrayIndexOutOfBoundsException on intraline diff
+</p>
+<div class="paragraph"><p>In some cases displaying the intraline diff failed with an exception like
+this:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>java.lang.ArrayIndexOutOfBoundsException: Array index out of range: 10
+  at com.google.gerrit.prettify.common.SparseFileContent.mapIndexToLine(SparseFileContent.java:149)
+  at com.google.gerrit.prettify.common.PrettyFormatter.format(PrettyFormatter.java:188)
+  at com.google.gerrit.client.patches.AbstractPatchContentTable.getSparseHtmlFileB(AbstractPatchContentTable.java:287)
+  at com.google.gerrit.client.patches.SideBySideTable.render(SideBySideTable.java:113)
+  at com.google.gerrit.client.patches.AbstractPatchContentTable.display(AbstractPatchContentTable.java:238)
+  at com.google.gerrit.client.patches.PatchScreen.onResult(PatchScreen.java:444)
+...</tt></pre>
+</div></div>
+<div class="paragraph"><p>This happened when the old line was:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  foo-old&lt;LF&gt;</tt></pre>
+</div></div>
+<div class="paragraph"><p>and the new line was:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  foo-new&lt;CRLF&gt;</tt></pre>
+</div></div>
+</li>
+<li>
+<p>
+Prevent leading and trailing spaces on user&#8217;s Full Name
+</p>
+<div class="paragraph"><p>Strip off the leading and trailing spaces from the Full Name that the
+user enters on the Contact Information form.</p></div>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1480">Issue 1480</a>:
+  Show proper error message if registering email address fails
+</p>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=816">Issue 816</a>:
+  Due to issues with the diff_intraline cache the file indention in the
+  Side-By-Side diff was sometimes wrong.
+</p>
+</li>
+<li>
+<p>
+Make rebase failed and merge failed messages consistent
+</p>
+</li>
+<li>
+<p>
+Select <em>Projects</em> menu on loading of a project screen
+</p>
+<div class="paragraph"><p>If in the top level menu <em>All</em> is selected and the user navigates to
+a change and then from the change to the project by clicking on the
+project link in the ChangeInfoBlock, the project screen is loaded but
+the <em>Projects</em> menu was not selected.</p></div>
+</li>
+<li>
+<p>
+Fix display issues for inline comments and inline comment editors
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Sometimes a second comment editor was shown instead of using the
+   existing comment editor.
+</p>
+</li>
+<li>
+<p>
+Fix doublicated border line between comments.
+</p>
+</li>
+<li>
+<p>
+Sometimes the parts of the border were missing when a comment was
+   expanded.
+</p>
+</li>
+<li>
+<p>
+Fix displaying the blue line that marks the current line when there
+   are several published comments.
+</p>
+</li>
+<li>
+<p>
+Sometimes on discard of a comment some frames of the comment editor
+   stayed and some border lines of neighbour comments disappeared.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+In diff view don&#8217;t let arrow column accept clicks.
+</p>
+</li>
+<li>
+<p>
+Fix display of commit message
+</p>
+<div class="paragraph"><p>If there are no HTML tags in the text, just break on lines.</p></div>
+</li>
+<li>
+<p>
+Upon selection in AddMemberBox, focus the box&#8217;s text field
+</p>
+<div class="paragraph"><p>In the change screen, after clicking on an element of the <em>Add
+Reviewer</em> suggestion list, users expect to be able to add the reviewer
+by hitting enter. This did not work in Firefox.</p></div>
+</li>
+<li>
+<p>
+Fix enter key detection in project creation screen
+</p>
+<div class="paragraph"><p>The enter key detection was not working in all browsers (e.g. Firefox).</p></div>
+</li>
+<li>
+<p>
+Display a tooltip for all tiny icons and ensure that the cursor is
+  shown as pointer when hovering over them.
+</p>
+</li>
+<li>
+<p>
+Clean query string when switching pages
+</p>
+<div class="paragraph"><p>If we load a page without a query string, such as Projects&#8594;List,
+My&#8594;Changes, or Settings, it might be confusing to show the old query
+string from the previous page. The query string is now cleared out
+when switching pages, leaving the help text visible.</p></div>
+</li>
+<li>
+<p>
+Fix highlighting in search suggestions
+</p>
+<div class="paragraph"><p>The provided suggestions should highlight the part that the user has
+already typed as bold text. This only worked for the first operator.
+For suggestions of any further operator no hightlighting was done.</p></div>
+</li>
+<li>
+<p>
+Fix style of hint text in search box on initial page load
+</p>
+<div class="paragraph"><p>The hint text should be a light gray on the white background,
+but was coming up black on initial page load due to a style setup
+ordering issue between the SearchPanel and the HintTextBox.</p></div>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1661">Issue 1661</a>:
+  Update links to Change-Id and Signed-off-by docu on project info
+  screen
+</p>
+</li>
+<li>
+<p>
+Use href="javascript;" for All {Side-by-Side,Unified} links
+</p>
+<div class="paragraph"><p>These links shouldn&#8217;t have an anchor location. There is nothing for
+the browser to remember or visit if it were opened in a new tab for
+example.</p></div>
+</li>
+<li>
+<p>
+Improve message for unsatisfiable dependencies
+</p>
+<div class="paragraph"><p>If a change cannot be merged due to unsatisfiable dependencies a
+comment is added to the change that lists the missing commits and says
+that a rebase is necessary.</p></div>
+<div class="paragraph"><p>For each missing commit the comment said "Depends on patch set X
+of &#8230;, however the current patch set is Y."</p></div>
+<div class="paragraph"><p>If multiple commits are missing it may be that for some commits the
+dependency is not outdated (X == Y). In this case the message was
+confusing.</p></div>
+<div class="paragraph"><p>", however the current patch set is Y." is now skipped if Y == X.</p></div>
+</li>
 </ul></div>
 </div>
 <div class="sect2">
-<h3 id="_git">Git</h3>
+<h3 id="_rest_api_2">REST API</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Fix returning of <em>Email Reviewers</em> capability via REST
+</p>
+<div class="paragraph"><p>The <tt>/accounts/self/capabilities/</tt> didn&#8217;t return the <em>Email Reviewers</em>
+capability when it was not explicitly assigned, although by default
+everyone has the <em>Email Reviewers</em> capability.</p></div>
+<div class="paragraph"><p>If <em>Email Reviewers</em> capability was allowed or denied,
+<tt>/accounts/self/capabilities/</tt> returned the <em>Email Reviewers</em>
+capability always as true, which was wrong for the DENY case.</p></div>
+</li>
+<li>
+<p>
+Provide a more descriptive error message for unauthenticated REST
+  API access
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_git_2">Git</h3>
 <div class="ulist"><ul>
 <li>
 <p>
@@ -1123,19 +2616,6 @@ Checking if a change is mergeable no longer writes to the repository.
 </li>
 <li>
 <p>
-Improved <tt>git ls-remote</tt> and <tt>git fetch</tt> performance by caching
-  changes, decreasing database queries and traffic.
-</p>
-</li>
-<li>
-<p>
-<a href="https://code.google.com/p/gerrit/issues/detail?id=1608">Issue 1608</a>:
-Commits pushed without a Change-Id now warn with instructions on how
-to download and install the commit-msg hook.
-</p>
-</li>
-<li>
-<p>
 Submitted but unmerged changes are periodically retried. This is
   necessary for a multi-master configuration where the second master
   may need to retry a change not yet merged by the first. Please note
@@ -1144,9 +2624,127 @@ Submitted but unmerged changes are periodically retried. This is
 </li>
 <li>
 <p>
-Added a server-level option to use JGit&#8217;s new, experimental recursive
-  merger.
+Retry merge after LOCK_FAILURE when updating branch
 </p>
+<div class="paragraph"><p>If the project requires fast-forwards, the merge cannot succeed once
+a lock failure occurs, but in other cases, it is safe to retry the
+merge immediately.</p></div>
+</li>
+<li>
+<p>
+Do not automatically add reviewers from footer lines to draft patch sets
+</p>
+<div class="paragraph"><p>Gerrit already avoids adding reviewers from footer lines when a new
+draft change is created. Now the same is done for draft patch sets.</p></div>
+</li>
+<li>
+<p>
+Add users mentioned in commit footer as reviewers on draft publish
+</p>
+</li>
+<li>
+<p>
+Hide any existing magic branches during push
+</p>
+<div class="paragraph"><p>If there is a magic branch visible during push, just hide it from the
+client. Administrators can clear these by accessing the repository
+directly.</p></div>
+</li>
+<li>
+<p>
+Prevent from deleting <tt>refs/changes/</tt>
+</p>
+<div class="paragraph"><p>Everything under <tt>refs/changes/</tt> should be protected by Gerrit, users
+shouldn&#8217;t be able to delete a particular patch set or a whole change
+from the review process.</p></div>
+</li>
+<li>
+<p>
+Update description file in Git
+</p>
+<div class="paragraph"><p>When writing the description to <tt>project.config</tt>, it is also necessary
+to write it to the description file in the repository so the same text
+is visible in CGit or GitWeb.</p></div>
+</li>
+<li>
+<p>
+Write valid reflog for <tt>HEAD</tt> when creating the <tt>All-Projects</tt>
+  project
+</p>
+<div class="paragraph"><p>When the <tt>All-Projects</tt> project is created during the schema
+initialization, <tt>HEAD</tt> is set to point to the <tt>refs/meta/config</tt>
+branch. When <tt>HEAD</tt> is updated an entry into the reflog is written.
+This ref log entry should contain the ID of the initial commit as
+target, but instead the target was the zero ID.</p></div>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1702">Issue 1702</a>:
+  Fix: <em>internal server error</em> when pushing the same commit twice
+</p>
+<div class="paragraph"><p>On the second push of the same commit to <tt>refs/for/&lt;branch name&gt;</tt>, Gerrit
+returns <em>no new changes</em>.</p></div>
+<div class="paragraph"><p>However if the user pushed to <em>refs/changes/&lt;change id&gt;</em>, Gerrit returned
+<em>internal server error</em>.</p></div>
+</li>
+<li>
+<p>
+Match all git fetch/clone/push commands to the command executor
+</p>
+<div class="paragraph"><p>Route not just <tt>/p/</tt> but any Git access to the same thread pool as the
+SSH server is using, allowing all requests to compete fairly for
+resources.</p></div>
+</li>
+<li>
+<p>
+Fix auto closing of changes on direct push
+</p>
+<div class="paragraph"><p>When a commit was directly pushed into a repository (bypassing code
+review) and this commit had a Change-Id in its commit message then the
+corresponding change was not automatically closed if it was open.</p></div>
+</li>
+<li>
+<p>
+Set change state to NEW if merge fails due to non-existing dest branch
+</p>
+<div class="paragraph"><p>If a submitted change failed to merge because the destination branch
+didn&#8217;t exist anymore, it stayed in state <em>Submitted, Merge Pending</em>.
+This meant Gerrit was re-attempting to merge this change (e.g. on
+startup), but this didn&#8217;t make sense. Either the branch did still not
+exist (then there was no need to try merging it) or a new branch with
+the old name was created (then it was questionable if the change should
+still be merged into this branch). This is why it&#8217;s better to set the
+change back to the <em>Review in Progress</em> state and update it with a
+message saying that it couldn&#8217;t be merged because the destination
+branch doesn&#8217;t exist anymore.</p></div>
+<div class="paragraph"><p>In addition Gerrit was writing an error into the error log if a change
+couldn&#8217;t be merged because the destination branch wass missing.
+That was not really a server error and is not logged anymore.</p></div>
+</li>
+<li>
+<p>
+Fix NPE when pushing a patch with an invalid author with
+  <tt>Forge Author</tt> permissions
+</p>
+</li>
+<li>
+<p>
+Fix duplicated GitReferenceUpdated event on project creation.
+</p>
+<div class="paragraph"><p>Creating a new Gerrit project was firing the GitReferenceUpdated event
+for the <tt>refs/meta/config</tt> branch two times.</p></div>
+</li>
+<li>
+<p>
+Fix error log message in ReceiveCommits
+</p>
+<div class="paragraph"><p>When the creation of one or more references failed ReceiveCommits failed
+with <em>internal server error</em> and wrote the following error log:
+"Only X of Y new change refs created in xxx; aborting"
+The printed value for Y could be wrong since it didn&#8217;t include the
+replaceCount. As a result, a confusing message like
+"Only 0 of 0 new change refs created in xxx; aborting"
+could appear in the error log.</p></div>
 </li>
 </ul></div>
 </div>
@@ -1155,18 +2753,13 @@ Added a server-level option to use JGit&#8217;s new, experimental recursive
 <div class="ulist"><ul>
 <li>
 <p>
-<tt>plugin ls</tt> shows status of enabled plugins as "ENABLED".
-</p>
-</li>
-<li>
-<p>
 <tt>review --restore</tt> allows a review score to be added on the restored change.
 </p>
 </li>
 <li>
 <p>
 <a href="https://code.google.com/p/gerrit/issues/detail?id=1721">Issue 1721</a>:
-<tt>review --message</tt> only adds the message once.
+  <tt>review --message</tt> only adds the message once.
 </p>
 </li>
 <li>
@@ -1174,16 +2767,123 @@ Added a server-level option to use JGit&#8217;s new, experimental recursive
 <tt>ls-groups</tt> prints "N/A" if the group&#8217;s name is not set.
 </p>
 </li>
+<li>
+<p>
+<tt>set-project-parent --children-of</tt>: Fix getting parent for level 1 projects
+</p>
+<div class="paragraph"><p>For direct child projects of the <tt>All-Projects</tt> project the name of the
+parent project was incorrectly retrieved if the parent name was not
+explicitly stored as <tt>All-Projects</tt> in the project.config file.</p></div>
+</li>
+<li>
+<p>
+Fix NPE when abandoning change with invalid author
+</p>
+<div class="paragraph"><p>If the author of a change isn&#8217;t known to Gerrit (pushed with
+<tt>Forge Author</tt> permissions), trying to abandon that change over SSH
+failed with an NPE.</p></div>
+</li>
 </ul></div>
 </div>
 <div class="sect2">
-<h3 id="_email_2">EMail</h3>
+<h3 id="_query_2">Query</h3>
 <div class="ulist"><ul>
 <li>
 <p>
-Missing email templates are added to the site initialization.
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1729">Issue 1729</a>:
+  Fix query by <em>label:Verified=0</em>
 </p>
 </li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1772">Issue 1772</a>:
+  Set <tt>_more_changes</tt> if result is limited due to configured query limit
+</p>
+</li>
+<li>
+<p>
+Fix query cost for "status:merged commit:c0ffee"
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_plugins_2">Plugins</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Skip disabled plugins on rescan
+</p>
+<div class="paragraph"><p>In a background thread Gerrit periodically scans for new or changed
+plugins. On every such a rescan disabled plugins were loaded and a new
+copy of their jar files was stored in the review site&#8217;s tmp folder.</p></div>
+</li>
+<li>
+<p>
+Fix cleanup of plugins from tmp folder on graceful Gerrit shutdown
+</p>
+<div class="paragraph"><p>Loaded plugin jars are copied to the review site&#8217;s tmp folder to support
+hot updates of the plugin jars in the plugins folder. On Gerrit shutdown
+these copies of the jar files should be cleaned up. For this purpose a
+CleanupHandle is created, but the CleanupHandle wasn&#8217;t enqueued in the
+cleanupQueue which is why cleanup on Gerrit shutdown didn&#8217;t happen.</p></div>
+</li>
+<li>
+<p>
+Reattempt deletion of plugin jars from tmp folder on JVM termination
+</p>
+<div class="paragraph"><p>Loaded plugin jars are copied to the review site&#8217;s tmp folder to support
+hot updates of the plugin jars in the plugins folder. On Gerrit shutdown
+these copies of the jar files should be cleaned up. For this purpose a
+CleanupHandle is created. The deletion of the tmp file in the
+CleanupHandle can fail although the jar file was closed. In this case
+reattempt the deletion on termination of the virtual machine. This
+normally succeeds.</p></div>
+</li>
+<li>
+<p>
+Fix unloading of plugins
+</p>
+<div class="paragraph"><p>When two plugins, say pluginA, and pluginB had been loaded, and pluginA
+was removed from $sitePath/plugins, pluginA got stopped, and a cleaning
+run was ordered. But this cleaning run cleaned both plugins and both
+plugins had their jars removed. This left pluginB visible to Gerrit
+although it&#8217;s backing jar was gone. Upon calling not yet initialized
+parts of pluginB (e.g.: viewing not yet viewed Documentation pages of
+pluginB), exceptions as following were thrown:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  java.lang.IllegalStateException: zip file closed
+          at java.util.zip.ZipFile.ensureOpen(ZipFile.java:420)
+          at java.util.zip.ZipFile.getEntry(ZipFile.java:165)</tt></pre>
+</div></div>
+</li>
+<li>
+<p>
+Fix double bound exception when loading extensions
+</p>
+<div class="paragraph"><p>ServerInformation class was already bound, therefore it shouldn&#8217;t be
+bound a second time for Gerrit extensions.</p></div>
+</li>
+<li>
+<p>
+Do not call onModuleLoad() second time
+</p>
+<div class="paragraph"><p>onModuleLoad() method is automatically called by GWT framework. Calling
+it once again in PluginGenerator caused double plugin initialization.</p></div>
+</li>
+<li>
+<p>
+Require <tt>Administrate Server</tt> capability to GET /plugins/
+</p>
+<div class="paragraph"><p>Listing plugins requires being an administrator. This was missed in the
+REST API.</p></div>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_email_2">Email</h3>
+<div class="ulist"><ul>
 <li>
 <p>
 Merge failure emails are only sent once per day.
@@ -1201,7 +2901,7 @@ Unnecessary ellipses are no longer applied to email subjects.
 </li>
 <li>
 <p>
-The diff output from an "octopus merge" is made more readable in change notification emails.
+The empty diff output from an "octopus merge" is now explained in change notification emails.
 </p>
 </li>
 <li>
@@ -1216,6 +2916,299 @@ Proper error message is shown when registering an email address fails.
 Review comments are sorted before being added to notification emails.
 </p>
 </li>
+<li>
+<p>
+Fix watching of <em>All Comments</em> on <tt>All-Projects</tt>
+</p>
+<div class="paragraph"><p>If a user is watching <em>All Comments</em> on <tt>All-Projects</tt> this should
+apply to all projects.</p></div>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_misc_2">Misc</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Provide more descriptive message for NoSuchProjectException
+</p>
+</li>
+<li>
+<p>
+On internal error due to receive timeout include the value of
+  <tt>receive.timeout</tt> into the log message
+</p>
+</li>
+<li>
+<p>
+Silence INFO/DEBUG output from apache.http
+</p>
+<div class="paragraph"><p>This spammed the log when using OpenID, for each and every login.</p></div>
+</li>
+<li>
+<p>
+Remove <tt>mysql_nextval</tt> script
+</p>
+<div class="paragraph"><p>This function does not work on binary logging enabled servers,
+as MySQL is unable to execute the function on slaves without
+causing possible corruption. Drop the function since it was only
+created to help administrators, and is unsafe.</p></div>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1312">Issue 1312</a>:
+  Fix relative URL detection in submodules
+</p>
+<div class="paragraph"><p>Relative submodules do not start with <tt>/</tt>. Instead they start with
+<tt>../</tt>.  Fix the Submodule Subscriptions engine to recognize relative
+submodules.</p></div>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1622">Issue 1622</a>:
+  Fix NPE in LDAP Helper class if username is null
+</p>
+</li>
+<li>
+<p>
+Fix commit-msg hook failure with spaces in path
+</p>
+<div class="paragraph"><p>If the project absolute path had any whitespace, the commit
+hook failed to complete because a script variable was not
+enclosed in double quotes.</p></div>
+</li>
+<li>
+<p>
+Drop the trailing ".git" suffix of the name of new project
+</p>
+</li>
+<li>
+<p>
+Prevent possible NPE when running <tt>change-merged</tt> hook
+</p>
+<div class="paragraph"><p>It&#8217;s possible that the submitter is null. Add a check for this
+before invoking the <tt>change-merged</tt> hook with it.</p></div>
+</li>
+<li>
+<p>
+Keep change open if its commit is pushed to another branch.
+</p>
+</li>
+<li>
+<p>
+Fire GitReferenceUpdated event when BanCommit updates the
+  <tt>refs/meta/reject-commits</tt> branch.
+</p>
+</li>
+<li>
+<p>
+Fix GitWeb Caching
+</p>
+<div class="paragraph"><p>GitWeb Caching was not working when its cgi file was executed from
+outside. The same approach will also work with vanilla GitWeb.</p></div>
+</li>
+<li>
+<p>
+Fix infinite loops when walking project hierarchy
+</p>
+</li>
+<li>
+<p>
+Fix resource leak in MarkdownFormatter
+</p>
+</li>
+<li>
+<p>
+Query all external groups for internal group memberships
+</p>
+<div class="paragraph"><p>When asking for the known groups a user belongs to they may belong
+to an internal group by way of membership in a non-internal group,
+such as LDAP. Cache in memory the complete list of any non-internal
+group UUIDs used as members of an internal group. These must get
+checked for membership before completing the known group data from
+the internal backend.</p></div>
+</li>
+<li>
+<p>
+Handle sorting groups with no name to avoid NPE
+</p>
+</li>
+<li>
+<p>
+<tt>gerrit.sh</tt>
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Don&#8217;t suggest site init if schema version is newer than expected
+</p>
+</li>
+<li>
+<p>
+Improve error messages in schema check
+</p>
+</li>
+<li>
+<p>
+Suggest changing <tt>gerrit.config</tt> when JDK not found
+</p>
+</li>
+<li>
+<p>
+Explicitly set a shell
+</p>
+</li>
+<li>
+<p>
+Determine <tt>GERRIT_SITE</tt> from current working directory.
+</p>
+</li>
+<li>
+<p>
+Fix <tt>gerrit.sh restart</tt> for relative paths
+</p>
+</li>
+<li>
+<p>
+Fix site path computation if <em>.</em> occurs in path
+</p>
+</li>
+<li>
+<p>
+Whitespace fixes
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Display the reason of an Init injection failure.
+</p>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1821">Issue 1821</a>:
+  Warn if <tt>cache.web_sessions.maxAge</tt> is to small
+</p>
+<div class="paragraph"><p>Setting <tt>maxAge</tt> to a small value can result in the browser endlessly
+redirecting trying to setup a new valid session. Warn administrators
+that the value is set smaller than 5 minutes.</p></div>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1821">Issue 1821</a>:
+  Support <tt>cache.web_sessions.maxAge</tt> &lt; 1 minute
+</p>
+</li>
+<li>
+<p>
+Use SECONDS as default time unit for <tt>cache.web_sessions.maxAge</tt>
+</p>
+<div class="paragraph"><p>DefaultCacheFactory already uses SECONDS as default time unit for
+<tt>cache.*.maxAge</tt>.</p></div>
+<div class="paragraph"><p>Update the described default time unit for <tt>cache.*.maxAge</tt> in the
+documentation.</p></div>
+<div class="paragraph"><p>Administrators may need to update their configuration to for the new
+default time unit.</p></div>
+</li>
+<li>
+<p>
+Add pylint configuration for contributed Python scripts
+</p>
+</li>
+<li>
+<p>
+Various fixes and improvements of the <tt>contrib/trivial_rebase.py</tt>
+  script
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Adapt options to Gerrit 2.6
+</p>
+</li>
+<li>
+<p>
+Use change-url flag for ChangeId
+</p>
+</li>
+<li>
+<p>
+Prevent exception for empty commit
+</p>
+</li>
+<li>
+<p>
+Fix pylint errors
+</p>
+</li>
+<li>
+<p>
+Use plain python instead of python2.6
+</p>
+<div class="paragraph"><p>Windows installation only has python.exe</p></div>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Correct MIME type of <tt>favicon.ico</tt> reference
+</p>
+<div class="paragraph"><p>This is not a GIF, it is an "MS Windows icon resource".
+Some browsers may skip the image if the type is wrong.</p></div>
+</li>
+<li>
+<p>
+Use <tt>&lt;link rel="shortcut icon"&gt;</tt> for <tt>favicon.ico</tt> reference
+</p>
+<div class="paragraph"><p>IE looks for a two-word "shortcut icon" relationship.  Other browsers
+interpret this as two relationships, one of which is "icon", so they
+can handle this syntax as well.</p></div>
+<div class="paragraph"><p>See:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://msdn.microsoft.com/en-us/library/ms537656(VS.85).aspx">http://msdn.microsoft.com/en-us/library/ms537656(VS.85).aspx</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://jeffcode.blogspot.com/2007/12/why-doesnt-favicon-for-my-site-appear.html">http://jeffcode.blogspot.com/2007/12/why-doesnt-favicon-for-my-site-appear.html</a>
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Remove <tt>servlet-api</tt> from <tt>WAR/lib</tt>
+</p>
+<div class="paragraph"><p>It is wrong to include the servlet API in a WAR&#8217;s <tt>WEB-INF/lib</tt>
+directory. This confuses some servlet containers who refuse to
+load the Gerrit WAR. Instead package the Jetty runtime and the
+servlet API in a new <tt>WEB-INF/pgm-lib</tt> directory.</p></div>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1822">Issue 1822</a>:
+  Verify session matches container authentiation header
+</p>
+<div class="paragraph"><p>If the user alters their identity in the container invalidate
+the Gerrit user session and force a new one to begin.</p></div>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1743">Issue 1743</a>:
+  Move RPC auth token from <tt>Authorization</tt> header to <tt>X-Gerrit-Auth</tt>
+</p>
+<div class="paragraph"><p>Servers that run with auth.type = HTTP or HTTP_LDAP are unable to
+use the web UI because the Authorization code supplied by the UI
+overrides the browser&#8217;s native <tt>Authorization</tt> header and causes the
+request to be blocked at the HTTP reverse proxy, before Gerrit even
+sees the request.</p></div>
+<div class="paragraph"><p>Instead insert a unique token into <tt>X-Gerrit-Auth</tt>, leaving the HTTP
+standard <tt>Authorization</tt> header unspecified and available for use in
+HTTP reverse proxies.</p></div>
+</li>
 </ul></div>
 </div>
 </div>
@@ -1228,12 +3221,45 @@ Review comments are sorted before being added to notification emails.
 <div class="ulist"><ul>
 <li>
 <p>
-Added documentation of how to authenticate uploads over HTTP.
+Split <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/rest-api.html">
+  REST API documentation</a> and have one page per top level resource
 </p>
 </li>
 <li>
 <p>
-Added documentation of the <tt>auth.editFullNameUrl</tt> and <tt>auth.httpPasswordUrl</tt> configuration parameters.
+Add executable examples for GET requests to
+  <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/rest-api.html">
+  REST API documentation</a>
+</p>
+<div class="paragraph"><p>Add examples for GET requests to the REST API documentation on which
+the user can click to fire the requests. This allows users to
+immediately try out the requests and play around with them.</p></div>
+</li>
+<li>
+<p>
+Document the <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/access-control.html#block">
+  BLOCK access rule</a>.
+</p>
+</li>
+<li>
+<p>
+Added documentation of
+  <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/user-upload.html#http">
+  how to authenticate uploads over HTTP</a>.
+</p>
+</li>
+<li>
+<p>
+Added documentation of the
+  <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/config-gerrit.html#auth.editFullNameUrl">auth.editFullNameUrl</a> and
+  <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/config-gerrit.html#auth.httpPasswordUrl">auth.httpPasswordUrl</a>
+  configuration parameters.
+</p>
+</li>
+<li>
+<p>
+Add <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/prolog-cookbook.html">
+  submit_rule examples</a> from Gerrit User Summit 2012.
 </p>
 </li>
 <li>
@@ -1248,27 +3274,31 @@ Improved documentation of error messages related to commit message footer conten
 </li>
 <li>
 <p>
-Added documentation of the "commit already exists" error message.
+Added documentation of the
+  <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/error-commit-already-exists.html">
+  commit already exists</a> error message.
 </p>
 </li>
 <li>
 <p>
-Added documentation of contributor agreements.
+Added missing documentation of the ssh
+  <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/cmd-version.html">
+  version</a> command.
 </p>
 </li>
 <li>
 <p>
-Added missing documentation of JSON attributes.
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1369">Issue 1369</a>:
+  <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/config-gitweb.html">
+  Gitweb Instruction Updates</a>
 </p>
 </li>
 <li>
 <p>
-Added missing documentation of mail templates.
-</p>
-</li>
-<li>
-<p>
-Added missing documentation of the ssh <tt>version</tt> command.
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1594">Issue 1594</a>:
+  Document execute permission for commit-msg in
+  <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/user-changeid.html#creation">
+  Change-Id docs</a>
 </p>
 </li>
 <li>
@@ -1279,7 +3309,94 @@ Corrected references to <tt>refs/changes</tt> in the access control documentatio
 </li>
 <li>
 <p>
+Update documentation of
+  <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/config-gerrit.html#trackingid.name.match">
+  maximal length for tracking ids</a>
+</p>
+</li>
+<li>
+<p>
+Added missing documentation of
+  <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/json.html">JSON attributes</a>.
+</p>
+</li>
+<li>
+<p>
+Rename <tt>custom-dashboards.html</tt> to
+  <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/user-dashboards.html">user-dashboards.html</a>
+</p>
+<div class="paragraph"><p>This document no longer deals exclusively with custom dashboards, it now describes project level dashboards also.</p></div>
+</li>
+<li>
+<p>
+Separate the
+  <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/config-login-register.html">
+  initial user setup instructions</a> to a shared file
+</p>
+</li>
+<li>
+<p>
+Separate the
+  <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/database-setup.html">
+  database setup instructions</a> to a shared file
+</p>
+</li>
+<li>
+<p>
+Improve the <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/database-setup.html">
+  instructions for PgSQL setup</a>
+</p>
+</li>
+<li>
+<p>
+Fix the order of steps in the
+  <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/install-j2ee.html">
+  J2EE Installation document</a>
+</p>
+<div class="paragraph"><p>It is better to first define the JNDI data source in the application
+server and then deploy Gerrit than opposite. This should avoid errors
+like "No DataSource" on the first deployment.</p></div>
+</li>
+<li>
+<p>
+Clarify documentation of
+  <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/config-gerrit.html#ldap.groupName">
+  LDAP group name setting</a>
+</p>
+</li>
+<li>
+<p>
+Adapt documentation to having <em>Projects</em> as top level menu
+</p>
+</li>
+<li>
+<p>
+Added missing documentation of mail templates.
+</p>
+</li>
+<li>
+<p>
+Added documentation of contributor agreements.
+</p>
+</li>
+<li>
+<p>
+Fix <tt>init.d</tt> symbolic link commands.
+</p>
+</li>
+<li>
+<p>
+Remove obsolete diskbuffer setting from example config file.
+</p>
+</li>
+<li>
+<p>
 Various minor grammatical and formatting corrections.
+</p>
+</li>
+<li>
+<p>
+Fix external links in 2.0.21 and 2.0.24 release notes
 </p>
 </li>
 <li>
@@ -1294,12 +3411,47 @@ Manual pages can be optionally created/installed for core gerrit ssh commands.
 <div class="ulist"><ul>
 <li>
 <p>
-Updated the Maven plugin installation instructions for Eclipse 3.7 (Indigo).
+Updated the <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/dev-eclipse.html#maven">
+  Maven plugin installation instructions</a> for Eclipse 3.7 (Indigo).
 </p>
 </li>
 <li>
 <p>
-Improved the release documentation.
+Document <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/dev-contributing.html#commit-message">
+  usage of the past tense in commit messages</a>
+</p>
+</li>
+<li>
+<p>
+Add <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/dev-contributing.html">
+  instructions</a> on how to configure git for pushing to Gerrit&#8217;s Gerrit
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/dev-contributing.html#process">
+  Stable branches process documentation</a>
+</p>
+</li>
+<li>
+<p>
+Improved the
+  <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/dev-release.html">
+  release documentation</a>.
+</p>
+</li>
+<li>
+<p>
+Document that plans for
+  <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/dev-release.html#stable">
+  stable-fix releases</a> should be announced
+</p>
+</li>
+<li>
+<p>
+Document process for
+  <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/dev-release.html#security">
+  security-fix releases</a>
 </p>
 </li>
 <li>
@@ -1315,8 +3467,8 @@ The release notes are now made when a release is created by running the <tt>tool
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.6 (from v2.5.2-1737-g19f6c27)<br />
-Last updated 2013-03-21 10:52:52 PDT
+Version 2.6 (from v2.6-rc0-115-gbb12492)<br />
+Last updated 2013-04-17 07:14:32 PDT
 </div>
 </div>
 </body>
