@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Gerrit Code Review - Plugin Development</h1>
-<span id="revnumber">version 2.6-rc0</span>
+<span id="revnumber">version 2.6 (from v2.6-rc1)</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -1177,9 +1177,12 @@ MyType(@PluginData java.io.File myDir) {
 <tt>/Documentation/*</tt> or <tt>/static/*</tt>, the core Gerrit server will
 automatically export these resources over HTTP from the plugin JAR.</p></div>
 <div class="paragraph"><p>Static resources under <tt>static/</tt> directory in the JAR will be
-available as <tt>/plugins/helloworld/static/resource</tt>.</p></div>
+available as <tt>/plugins/helloworld/static/resource</tt>. This prefix is
+configurable by setting the <tt>Gerrit-HttpStaticPrefix</tt> attribute.</p></div>
 <div class="paragraph"><p>Documentation files under <tt>Documentation/</tt> directory in the JAR
-will be available as <tt>/plugins/helloworld/Documentation/resource</tt>.</p></div>
+will be available as <tt>/plugins/helloworld/Documentation/resource</tt>. This
+prefix is configurable by setting the <tt>Gerrit-HttpDocumentationPrefix</tt>
+attribute.</p></div>
 <div class="paragraph"><p>Documentation may be written in
 <a href="http://daringfireball.net/projects/markdown/">Markdown</a> style
 if the file name ends with <tt>.md</tt>. Gerrit will automatically convert
@@ -1316,8 +1319,8 @@ command can be used.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.6-rc0<br />
-Last updated 2012-12-21 08:08:15 PST
+Version 2.6 (from v2.6-rc1)<br />
+Last updated 2013-04-08 08:38:21 PDT
 </div>
 </div>
 </body>

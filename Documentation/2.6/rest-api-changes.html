@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Gerrit Code Review - /changes/ REST API</h1>
-<span id="revnumber">version 2.6-rc0</span>
+<span id="revnumber">version 2.6 (from v2.6-rc1)</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -2482,8 +2482,10 @@ cellspacing="0" cellpadding="4">
 <tbody>
 <tr>
 <td align="left" valign="top"><p class="table"><tt>value</tt></p></td>
-<td align="center" valign="top"><p class="table"></p></td>
-<td align="left" valign="top"><p class="table">The vote that the user has given for the label.</p></td>
+<td align="center" valign="top"><p class="table">optional</p></td>
+<td align="left" valign="top"><p class="table">The vote that the user has given for the label. If present and zero, the
+user is permitted to vote on the label. If absent, the user is not
+permitted to vote on that label.</p></td>
 </tr>
 </tbody>
 </table>
@@ -3532,8 +3534,8 @@ topic.</p></td>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.6-rc0<br />
-Last updated 2013-03-21 10:52:52 PDT
+Version 2.6 (from v2.6-rc1)<br />
+Last updated 2013-04-19 14:10:15 PDT
 </div>
 </div>
 </body>

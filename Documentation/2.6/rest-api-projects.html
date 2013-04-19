@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Gerrit Code Review - /projects/ REST API</h1>
-<span id="revnumber">version 2.6-rc0</span>
+<span id="revnumber">version 2.6 (from v2.6-rc1)</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -1107,6 +1107,77 @@ request body inside a <a href="#head-input">HeadInput</a> entity.</p></div>
 
   )]}'
   "refs/heads/stable"</tt></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="get-repository-statistics">Get Repository Statistics</h3>
+<div class="verseblock">
+<pre class="content"><em>GET /projects/<a href="#project-name">{project-name}</a>/statistics.git</em></pre>
+<div class="attribution">
+</div></div>
+<div class="paragraph"><p>Return statistics for the repository of a project.</p></div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre><tt>  GET /projects/plugins%2Freplication/statistics.git HTTP/1.0</tt></pre>
+</div></div>
+<div class="paragraph"><p>The repository statistics are returned as a
+<a href="#repository-statistics-info">RepositoryStatisticsInfo</a> entity.</p></div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre><tt>  HTTP/1.1 200 OK
+  Content-Disposition: attachment
+  Content-Type: application/json;charset=UTF-8
+
+  )]}'
+  {
+    "number_of_loose_objects": 127,
+    "number_of_loose_refs": 15,
+    "number_of_pack_files": 15,
+    "number_of_packed_objects": 67,
+    "number_of_packed_refs": 0,
+    "size_of_loose_objects": 29466,
+    "size_of_packed_objects": 9646
+  }</tt></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="run-gc">Run GC</h3>
+<div class="verseblock">
+<pre class="content"><em>POST /projects/<a href="#project-name">{project-name}</a>/gc</em></pre>
+<div class="attribution">
+</div></div>
+<div class="paragraph"><p>Run the Git garbage collection for the repository of a project.</p></div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre><tt>  POST /projects/plugins%2Freplication/gc HTTP/1.0</tt></pre>
+</div></div>
+<div class="paragraph"><p>The response is the streamed output of the garbage collection.</p></div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre><tt>  HTTP/1.1 200 OK
+  Content-Disposition: attachment
+  Content-Type: text/plain;charset=UTF-8
+
+  collecting garbage for "plugins/replication":
+  Pack refs:              100% (21/21)
+  Counting objects:       20
+  Finding sources:        100% (20/20)
+  Getting sizes:          100% (13/13)
+  Compressing objects:     83% (5/6)
+  Writing objects:        100% (20/20)
+  Selecting commits:      100% (7/7)
+  Building bitmaps:       100% (7/7)
+  Finding sources:        100% (41/41)
+  Getting sizes:          100% (25/25)
+  Compressing objects:     52% (12/23)
+  Writing objects:        100% (41/41)
+  Prune loose objects also found in pack files: 100% (36/36)
+  Prune loose, unreferenced objects: 100% (36/36)
+  done.</tt></pre>
 </div></div>
 </div>
 </div>
@@ -1758,6 +1829,56 @@ in the <tt>project.config</tt> file to the <tt>refs/meta/config</tt> branch.</p>
 </table>
 </div>
 </div>
+<div class="sect2">
+<h3 id="repository-statistics-info">RepositoryStatisticsInfo</h3>
+<div class="paragraph"><p>The <tt>RepositoryStatisticsInfo</tt> entity contains information about
+statistics of a Git repository.</p></div>
+<div class="tableblock">
+<table rules="all"
+width="50%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="14%" />
+<col width="85%" />
+<thead>
+<tr>
+<th align="left" valign="top">Field Name                </th>
+<th align="left" valign="top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>number_of_loose_objects</tt></p></td>
+<td align="left" valign="top"><p class="table">Number of loose objects.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>number_of_loose_refs</tt></p></td>
+<td align="left" valign="top"><p class="table">Number of loose refs.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>number_of_pack_files</tt></p></td>
+<td align="left" valign="top"><p class="table">Number of pack files.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>number_of_packed_objects</tt></p></td>
+<td align="left" valign="top"><p class="table">Number of packed objects.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>number_of_packed_refs</tt></p></td>
+<td align="left" valign="top"><p class="table">Number of packed refs.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>size_of_loose_objects</tt></p></td>
+<td align="left" valign="top"><p class="table">Size of loose objects in bytes.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>size_of_packed_objects</tt></p></td>
+<td align="left" valign="top"><p class="table">Size of packed objects in bytes.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <hr style="
@@ -1771,8 +1892,8 @@ in the <tt>project.config</tt> file to the <tt>refs/meta/config</tt> branch.</p>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.6-rc0<br />
-Last updated 2013-03-21 10:52:52 PDT
+Version 2.6 (from v2.6-rc1)<br />
+Last updated 2013-04-19 14:10:15 PDT
 </div>
 </div>
 </body>

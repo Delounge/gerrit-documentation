@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Gerrit Code Review - Dashboards</h1>
-<span id="revnumber">version 2.6-rc0</span>
+<span id="revnumber">version 2.6 (from v2.6-rc1)</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -795,7 +795,7 @@ to changes for the current user:</p></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_project_dashboards">Project Dashboards</h2>
+<h2 id="project-dashboards">Project Dashboards</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>It is possible to share custom dashboards at a project level. To do
 this define the dashboards in a <tt>refs/meta/dashboards/*</tt> branch of the
@@ -823,18 +823,24 @@ like:</p></div>
 overridden by dashboards with the same ref and name.  This makes
 it easy to define common dashboards for every project by simply
 defining project dashboards on the All-Projects project.</p></div>
-<div class="paragraph"><p>Project dashboard queries may contain the special <tt>${project}</tt> token
-which will be replaced with the project name to which the dashboard is
-being applied.  This is useful for defining dashboards designed to be
-inherited.  With this token, it is possible to cause a query in a
-project dashboard to be restricted to only changes for the project in
-which an inherited dashboard is being applied by simply adding
-<tt>project:${project}</tt> to the query in the dashboard.</p></div>
 <div class="sect2">
-<h3 id="_section_dashboard">Section dashboard</h3>
+<h3 id="_token_tt_project_tt">Token <tt>${project}</tt></h3>
+<div class="paragraph"><p>Project dashboard queries may contain the special <tt>${project}</tt> token
+which will be replaced with the name of the project to which the
+dashboard is being applied.  This is useful for defining dashboards
+designed to be inherited.  With this token, it is possible to cause a
+query in a project dashboard to be restricted to only changes for the
+project in which an inherited dashboard is being applied by simply
+adding <tt>project:${project}</tt> to the query in the dashboard.</p></div>
+<div class="paragraph"><p>The <tt>${project}</tt> token can also be used in the <a href="#dashboard.title">
+dashboard title</a> and in the <a href="#dashboard.description">dashboard
+description</a>.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_section_tt_dashboard_tt">Section <tt>dashboard</tt></h3>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-dashboard.title
+<a id="dashboard.title"></a>dashboard.title
 </dt>
 <dd>
 <div class="paragraph"><p>The title of the dashboard.</p></div>
@@ -842,7 +848,7 @@ dashboard.title
 title.</p></div>
 </dd>
 <dt class="hdlist1">
-dashboard.description
+<a id="dashboard.description"></a>dashboard.description
 </dt>
 <dd>
 <div class="paragraph"><p>The description of the dashboard.</p></div>
@@ -864,7 +870,7 @@ the project to which it is applied:</p></div>
 </dl></div>
 </div>
 <div class="sect2">
-<h3 id="_section_section">Section section</h3>
+<h3 id="_section_tt_section_tt">Section <tt>section</tt></h3>
 <div class="dlist"><dl>
 <dt class="hdlist1">
 section.&lt;name&gt;.query
@@ -878,7 +884,7 @@ given name.</p></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_project_default_dashboard">Project Default Dashboard</h2>
+<h2 id="project-default-dashboard">Project Default Dashboard</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>It is possible to define a default dashboard for a project in the
 projects <tt>project.config</tt> file in the <tt>refs/meta/config</tt> branch:</p></div>
@@ -911,8 +917,8 @@ but not inherited to the child projects.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.6-rc0<br />
-Last updated 2012-12-21 08:08:15 PST
+Version 2.6 (from v2.6-rc1)<br />
+Last updated 2013-04-08 08:38:21 PDT
 </div>
 </div>
 </body>

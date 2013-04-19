@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Gerrit Code Review - Review Labels</h1>
-<span id="revnumber">version 2.6-rc0</span>
+<span id="revnumber">version 2.6 (from v2.6-rc1)</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -749,54 +749,8 @@ asciidoc.install(2);
 values for each label configured for the project.  The label values that
 a given user is allowed to set are defined according to the
 <a href="access-control.html#access_labels">access controls</a>.  Gerrit comes
-pre-configured with several default labels that can be granted to groups
+pre-configured with the Code-Review label that can be granted to groups
 within projects, enabling functionality for that group&#8217;s members.</p></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="label_Verified">Label: Verified</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>The verified label is one of two default labels that is configured upon
-the creation of a Gerrit instance. It may have any meaning the project
-desires.  It was originally invented by the Android Open Source Project
-to mean <em>compiles, passes basic unit tests</em>.</p></div>
-<div class="paragraph"><p>The range of values is:</p></div>
-<div class="ulist"><ul>
-<li>
-<p>
--1 Fails
-</p>
-<div class="paragraph"><p>Tried to compile, but got a compile error, or tried to run tests,
-but one or more tests did not pass.</p></div>
-<div class="paragraph"><p><strong>Any -1 blocks submit.</strong></p></div>
-</li>
-<li>
-<p>
-0 No score
-</p>
-<div class="paragraph"><p>Didn&#8217;t try to perform the verification tasks.</p></div>
-</li>
-<li>
-<p>
-+1 Verified
-</p>
-<div class="paragraph"><p>Compiled (and ran tests) successfully.</p></div>
-<div class="paragraph"><p><strong>Any +1 enables submit.</strong></p></div>
-</li>
-</ul></div>
-<div class="paragraph"><p>For a change to be submittable, the change must have a <tt>+1 Verified</tt>
-in this label, and no <tt>-1 Fails</tt>.  Thus, <tt>-1 Fails</tt> can block a submit,
-while <tt>+1 Verified</tt> enables a submit.</p></div>
-<div class="paragraph"><p>If a Gerrit installation does not wish to use this label in any project,
-the <tt>[label "Verified"]</tt> section can be deleted from <tt>project.config</tt> in
-<tt>All-Projects</tt>.</p></div>
-<div class="paragraph"><p>If a Gerrit installation or project wants to modify the description text
-associated with these label values, the text can be updated in the
-<tt>label.Verified.value</tt> fields in <tt>project.config</tt>.</p></div>
-<div class="paragraph"><p>Additional values could also be added to this label, to allow it to
-behave more like <tt>Code-Review</tt> (below).  Add -2 and +2 entries to the
-<tt>label.Verified.value</tt> fields in <tt>project.config</tt> to get the same
-behavior.</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -877,6 +831,58 @@ required to enable submit.</p></div>
 </div>
 </div>
 <div class="sect1">
+<h2 id="label_Verified">Label: Verified</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The Verified label was originally invented by the Android Open Source
+Project to mean <em>compiles, passes basic unit tests</em>.  Some CI tools
+expect to use the Verified label to vote on a change after running.</p></div>
+<div class="paragraph"><p>Administrators can install the Verified label by adding the following
+text to <tt>project.config</tt>:</p></div>
+<div class="exampleblock">
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>[label "Verified"]
+    function = MaxWithBlock
+    value = -1 Fails
+    value =  0 No score
+    value = +1 Verified</tt></pre>
+</div></div>
+</div></div>
+<div class="paragraph"><p>The range of values is:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+-1 Fails
+</p>
+<div class="paragraph"><p>Tried to compile, but got a compile error, or tried to run tests,
+but one or more tests did not pass.</p></div>
+<div class="paragraph"><p><strong>Any -1 blocks submit.</strong></p></div>
+</li>
+<li>
+<p>
+0 No score
+</p>
+<div class="paragraph"><p>Didn&#8217;t try to perform the verification tasks.</p></div>
+</li>
+<li>
+<p>
++1 Verified
+</p>
+<div class="paragraph"><p>Compiled (and ran tests) successfully.</p></div>
+<div class="paragraph"><p><strong>Any +1 enables submit.</strong></p></div>
+</li>
+</ul></div>
+<div class="paragraph"><p>For a change to be submittable, the change must have a <tt>+1 Verified</tt>
+in this label, and no <tt>-1 Fails</tt>.  Thus, <tt>-1 Fails</tt> can block a submit,
+while <tt>+1 Verified</tt> enables a submit.</p></div>
+<div class="paragraph"><p>Additional values could also be added to this label, to allow it to
+behave more like <tt>Code-Review</tt> (below).  Add -2 and +2 entries to the
+<tt>label.Verified.value</tt> fields in <tt>project.config</tt> to get the same
+behavior.</p></div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="label_custom">Your Label Here</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>Site administrators and project owners can also define their own labels.</p></div>
@@ -916,7 +922,7 @@ example on project dashboards. Defaults to all the uppercase characters
 in the label name, e.g. <tt>Label-Name</tt> is abbreviated by default as <tt>LN</tt>.</p></div>
 </div>
 <div class="sect2">
-<h3 id="label_functionName"><tt>label.Label-Name.functionName</tt></h3>
+<h3 id="label_function"><tt>label.Label-Name.function</tt></h3>
 <div class="paragraph"><p>The name of a function for evaluating multiple votes for a label.  This
 function is only applied if the default submit rule is used for a label.
 If you write a <a href="prolog-cookbook.html#HowToWriteSubmitRules">custom
@@ -969,7 +975,7 @@ but has different names/labels:</p></div>
 <div class="literalblock">
 <div class="content">
 <pre><tt>[label "Copyright-Check"]
-    functionName = MaxWithBlock
+    function = MaxWithBlock
     value = -1 Do not have copyright
     value =  0 No score
     value = +1 Copyright clear</tt></pre>
@@ -992,8 +998,8 @@ enable submit.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.6-rc0<br />
-Last updated 2013-03-21 10:52:52 PDT
+Version 2.6 (from v2.6-rc1)<br />
+Last updated 2013-04-19 14:10:15 PDT
 </div>
 </div>
 </body>

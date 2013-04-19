@@ -767,7 +767,7 @@ password, create a database to store the metadata, and grant the user
 full rights on the newly created database:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>  $ createuser --username=postgres -S -R -D -P -E gerrit2
+<pre><tt>  $ createuser --username=postgres -RDIElPS gerrit2
   $ createdb --username=postgres -E UTF-8 -O gerrit2 reviewdb</tt></pre>
 </div></div>
 <div class="paragraph"><p>Visit PostgreSQL&#8217;s <a href="http://www.postgresql.org/docs/9.1/interactive/index.html">documentation</a> for further information regarding
@@ -799,8 +799,8 @@ information regarding using MySQL.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.6-rc0<br />
-Last updated 2013-03-21 10:52:52 PDT
+Version 2.6 (from v2.6-rc1)<br />
+Last updated 2013-04-18 21:32:12 PDT
 </div>
 </div>
 </body>

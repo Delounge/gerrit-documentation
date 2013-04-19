@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.6" />
-<title>change &#8230; not found</title>
+<title>gerrit test-submit type</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
 
@@ -735,22 +735,94 @@ asciidoc.install(2);
 </head>
 <body class="article">
 <div id="header">
-<h1>change &#8230; not found</h1>
-<span id="revnumber">version 2.6-rc0-52-g51ecaf7</span>
+<h1>gerrit test-submit type</h1>
+<span id="revnumber">version 2.6 (from v2.6-rc1)</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
 </div>
 </div>
 <div id="content">
-<div id="preamble">
+<div class="sect1">
+<h2 id="_name">NAME</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>With this error message Gerrit rejects to push a commit to a change
-that cannot be found.</p></div>
-<div class="paragraph"><p>This error message means that the user explicitly pushed a commit to
-a non-existing change by specifying it as target ref. This way of
-adding a new patch set to a change is deprecated as explained <a href="user-upload.html#manual_replacement_mapping">here</a>.
-It is recommended to only rely on Change-IDs for <a href="user-upload.html#push_replace">replacing changes</a>.</p></div>
+<div class="paragraph"><p>gerrit test-submit type - Test prolog submit type with a chosen change.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_synopsis">SYNOPSIS</h2>
+<div class="sectionbody">
+<div class="verseblock">
+<pre class="content"><em>ssh</em> -p &lt;port&gt; &lt;host&gt; <em>gerrit test-submit type</em>
+  [-s]
+  [--no-filters]
+  CHANGE</pre>
+<div class="attribution">
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_description">DESCRIPTION</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Provides a way to test prolog submit type.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_options">OPTIONS</h2>
+<div class="sectionbody">
+<div class="dlist"><dl>
+<dt class="hdlist1">
+-s
+</dt>
+<dd>
+<p>
+        Reads a rules.pl file from stdin instead of rules.pl in refs/meta/config.
+</p>
+</dd>
+<dt class="hdlist1">
+--no-filters
+</dt>
+<dd>
+<p>
+        Don&#8217;t run the submit_type_filter/2 from the parent projects of the specified change.
+</p>
+</dd>
+</dl></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_access">ACCESS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Can be used by anyone that has permission to read the specified change.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_examples">EXAMPLES</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Test submit_type from stdin and return the submit type.</p></div>
+<div class="exampleblock">
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>cat rules.pl | ssh -p 29418 review.example.com gerrit test-submit type -s I78f2c6673db24e4e92ed32f604c960dc952437d9
+"MERGE_IF_NECESSARY"</tt></pre>
+</div></div>
+</div></div>
+<div class="paragraph"><p>Test the active submit_type from the refs/meta/config branch, ignoring filters in the project parents.</p></div>
+<div class="exampleblock">
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>$ ssh -p 29418 review.example.com gerrit test-submit type I78f2c6673db24e4e92ed32f604c960dc952437d9 --no-filters
+"MERGE_IF_NECESSARY"</tt></pre>
+</div></div>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_scripting">SCRIPTING</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Can be used either interactively for testing new prolog submit type, or from a script to check the submit type of a change.</p></div>
 </div>
 </div>
 <hr style="
@@ -759,13 +831,13 @@ It is recommended to only rely on Change-IDs for <a href="user-upload.html#push_
   margin-top: 1.2em;
   margin-bottom: 0.5em;
 ">
-<div class="paragraph"><p>Part of <a href="error-messages.html">Gerrit Error Messages</a></p></div>
+<div class="paragraph"><p>Part of <a href="index.html">Gerrit Code Review</a></p></div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.6-rc0-52-g51ecaf7<br />
-Last updated 2012-12-05 11:09:09 PST
+Version 2.6 (from v2.6-rc1)<br />
+Last updated 2013-04-08 08:38:20 PDT
 </div>
 </div>
 </body>
