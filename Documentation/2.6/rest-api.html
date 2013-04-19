@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Gerrit Code Review - REST API</h1>
-<span id="revnumber">version 2.6-rc0</span>
+<span id="revnumber">version 2.6 (from v2.6-rc1)</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -748,6 +748,45 @@ asciidoc.install(2);
 <div class="paragraph"><p>Gerrit Code Review comes with a REST like API available over HTTP.
 The API is suitable for automated tools to build upon, as well as
 supporting some ad-hoc scripting use cases.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_endpoints">Endpoints</h2>
+<div class="sectionbody">
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<a href="rest-api-accounts.html">/accounts/</a>
+</dt>
+<dd>
+<p>
+  Account related REST endpoints
+</p>
+</dd>
+<dt class="hdlist1">
+<a href="rest-api-changes.html">/changes/</a>
+</dt>
+<dd>
+<p>
+  Change related REST endpoints
+</p>
+</dd>
+<dt class="hdlist1">
+<a href="rest-api-groups.html">/groups/</a>
+</dt>
+<dd>
+<p>
+  Group related REST endpoints
+</p>
+</dd>
+<dt class="hdlist1">
+<a href="rest-api-projects.html">/projects/</a>
+</dt>
+<dd>
+<p>
+  Project related REST endpoints
+</p>
+</dd>
+</dl></div>
 </div>
 </div>
 <div class="sect1">
@@ -810,45 +849,68 @@ nanoseconds.</p></div>
 <div class="paragraph"><p>All IDs that appear in the URL of a REST call (e.g. project name, group name)
 must be URL encoded.</p></div>
 </div>
+<div class="sect2">
+<h3 id="response-codes">Response Codes</h3>
+<div class="paragraph"><p>HTTP status codes are well defined and the Gerrit REST endpoints use
+them as described in the HTTP spec.</p></div>
+<div class="paragraph"><p>Here are examples for some HTTP status codes that show how they are
+used in the context of the Gerrit REST API.</p></div>
+<div class="sect3">
+<h4 id="_400_bad_request">400 Bad Request</h4>
+<div class="paragraph"><p><tt>400 Bad Request</tt> is used if the request is not understood by the
+server due to malformed syntax.</p></div>
+<div class="paragraph"><p>E.g. <tt>400 Bad Request</tt> is returned if JSON input is expected but the
+<em>Content-Type</em> of the request is not <em>application/json</em> or the request
+body doesn&#8217;t contain valid JSON.</p></div>
+<div class="paragraph"><p><tt>400 Bad Request</tt> is also used if required input fields are not set or
+if options are set which cannot be used together.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_403_forbidden">403 Forbidden</h4>
+<div class="paragraph"><p><tt>403 Forbidden</tt> is used if the operation is not allowed because the
+calling user has no sufficient permissions.</p></div>
+<div class="paragraph"><p>E.g. some REST endpoints require that the calling user has certain
+<a href="access-control.html#system_capabilities">global capabilities</a>
+assigned.</p></div>
+<div class="paragraph"><p><tt>403 Forbidden</tt> is also used if <tt>self</tt> is used as account ID and the
+REST call was done without authentication.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_404_not_found">404 Not Found</h4>
+<div class="paragraph"><p><tt>404 Not Found</tt> is returned if the resource that is specified by the
+URL is not found or is not visible to the calling user. A resource
+cannot be found if the URL contains a non-existing ID or view.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_405_method_not_allowed">405 Method Not Allowed</h4>
+<div class="paragraph"><p><tt>405 Method Not Allowed</tt> is used if the resource exists but doesn&#8217;t
+support the operation.</p></div>
+<div class="paragraph"><p>E.g. some of the <tt>/groups/</tt> endpoints are only supported for Gerrit
+internal groups, if they are invoked for an external group the response
+is <tt>405 Method Not Allowed</tt>.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_409_conflict">409 Conflict</h4>
+<div class="paragraph"><p><tt>409 Conflict</tt> is used if the request cannot be completed because the
+current state of the resource doesn&#8217;t allow the operation.</p></div>
+<div class="paragraph"><p>E.g. if you try to submit a change that is abandoned, this fails with
+<tt>409 Conflict</tt> because the state of the change doesn&#8217;t allow the submit
+operation.</p></div>
+<div class="paragraph"><p><tt>409 Conflict</tt> is also used if you try to create a resource but the
+name is already occupied by an existing resource.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_412_precondition_failed">412 Precondition Failed</h4>
+<div class="paragraph"><p><tt>412 Precondition Failed</tt> is used if a precondition from the request
+header fields is not fulfilled as described in the <a href="#preconditions">
+Preconditions</a> section.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_422_unprocessable_entity">422 Unprocessable Entity</h4>
+<div class="paragraph"><p><tt>422 Unprocessable Entity</tt> is returned if the ID of a resource that is
+specified in the request body cannot be resolved.</p></div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_endpoints">Endpoints</h2>
-<div class="sectionbody">
-<div class="dlist"><dl>
-<dt class="hdlist1">
-<a href="rest-api-accounts.html">/accounts/</a>
-</dt>
-<dd>
-<p>
-  Account related REST endpoints
-</p>
-</dd>
-<dt class="hdlist1">
-<a href="rest-api-changes.html">/changes/</a>
-</dt>
-<dd>
-<p>
-  Change related REST endpoints
-</p>
-</dd>
-<dt class="hdlist1">
-<a href="rest-api-groups.html">/groups/</a>
-</dt>
-<dd>
-<p>
-  Group related REST endpoints
-</p>
-</dd>
-<dt class="hdlist1">
-<a href="rest-api-projects.html">/projects/</a>
-</dt>
-<dd>
-<p>
-  Project related REST endpoints
-</p>
-</dd>
-</dl></div>
 </div>
 </div>
 <hr style="
@@ -862,8 +924,8 @@ must be URL encoded.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.6-rc0<br />
-Last updated 2013-03-21 10:52:52 PDT
+Version 2.6 (from v2.6-rc1)<br />
+Last updated 2013-04-08 08:38:21 PDT
 </div>
 </div>
 </body>
