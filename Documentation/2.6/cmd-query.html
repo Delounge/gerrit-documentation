@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>gerrit query</h1>
-<span id="revnumber">version 2.6-rc0-52-g51ecaf7</span>
+<span id="revnumber">version 2.6-rc2</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -776,7 +776,9 @@ asciidoc.install(2);
 <div class="paragraph"><p>Queries the change database and returns results describing changes
 that match the input query.  More recently updated changes appear
 before older changes, which is the same order presented in the
-web interface.</p></div>
+web interface.  For each matching change, the result contains data
+for the change&#8217;s latest patch set, even if the query matched on an
+older patch set (for example an older patch set&#8217;s sha1 revision).</p></div>
 <div class="paragraph"><p>A query may be limited on the number of results it returns with the
 <em>limit:</em> operator.  If no limit is supplied an internal default
 limit is used to prevent explosion of the result set.  To obtain
@@ -786,7 +788,7 @@ the prior result set.</p></div>
 <div class="paragraph"><p>Non-option arguments to this command are joined with spaces and
 then parsed as a query. This simplifies calling conventions over
 SSH by permitting operators to appear in different arguments.</p></div>
-<div class="paragraph"><p>Query operators may quote values using matched curly braches
+<div class="paragraph"><p>Query operators may quote values using matched curly braces
 (e.g. <tt>reviewerin:{Developer Group}</tt>) to sidestep issues with 2
 levels of shell quoting (caller shell invoking SSH, and the SSH
 command line parser in the server).</p></div>
@@ -801,8 +803,9 @@ command line parser in the server).</p></div>
 </dt>
 <dd>
 <p>
-        Formatting method for the results. TEXT is the default,
-        presenting a human readable display. JSON creates one line
+        Formatting method for the results. <tt>TEXT</tt> is the default,
+        presenting a human readable display. <tt>JSON</tt> returns
+        <a href="json.html#change">change attributes</a>, one line
         per matching record, with embedded LFs escaped.
 </p>
 </dd>
@@ -993,8 +996,8 @@ of this JSON stream should deal with that appropriately.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.6-rc0-52-g51ecaf7<br />
-Last updated 2012-12-21 08:08:15 PST
+Version 2.6-rc2<br />
+Last updated 2013-05-06 12:52:49 PDT
 </div>
 </div>
 </body>

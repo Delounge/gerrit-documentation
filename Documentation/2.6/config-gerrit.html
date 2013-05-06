@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Gerrit Code Review - Configuration</h1>
-<span id="revnumber">version 2.6 (from v2.6-rc1)</span>
+<span id="revnumber">version 2.6-rc2</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -1405,12 +1405,12 @@ the first request into the second to ensure it can complete.</p></div>
 cache <tt>"changes"</tt>
 </dt>
 <dd>
-<div class="paragraph"><p>The size determines the number of projects that will have all its changes
-cached. If the cache is set to 1024, this means all changes for up to
-1024 projects can be held in the cache.</p></div>
-<div class="paragraph"><p>Default size is 0 (disabled). It is disabled by default due to the fact
-that change updates are not communicated between Gerrit servers.
-Hence this cache should be disabled in an multi-master/multi-slave setup.</p></div>
+<div class="paragraph"><p>The size of <tt>memoryLimit</tt> determines the number of projects for which
+all changes will be cached. If the cache is set to 1024, this means all
+changes for up to 1024 projects can be held in the cache.</p></div>
+<div class="paragraph"><p>Default value is 0 (disabled). It is disabled by default due to the fact
+that change updates are not communicated between Gerrit servers. Hence
+this cache should be disabled in an multi-master/multi-slave setup.</p></div>
 <div class="paragraph"><p>The cache should be flushed whenever the database changes table is modified
 outside of gerrit.</p></div>
 </dd>
@@ -1570,8 +1570,10 @@ cache.diff_intraline.timeout
 <div class="paragraph"><p>Maximum number of milliseconds to wait for intraline difference data
 before giving up and disabling it for a particular file pair.  This is
 a work around for an infinite loop bug in the intraline difference
-implementation.  If computation takes longer than the timeout the
-worker thread is terminated and no intraline difference is displayed.</p></div>
+implementation.</p></div>
+<div class="paragraph"><p>If computation takes longer than the timeout, the worker thread is
+terminated, an error message is shown, and no intraline difference is
+displayed for the file pair.</p></div>
 <div class="paragraph"><p>Values should use common unit suffixes to express their setting:</p></div>
 <div class="ulist"><ul>
 <li>
@@ -2009,6 +2011,14 @@ isn&#8217;t necessary as it can be constructed from the all of the
 above properties.</p></div>
 </dd>
 <dt class="hdlist1">
+<a id="database.connectionPool"></a>database.connectionPool
+</dt>
+<dd>
+<div class="paragraph"><p>If true, use connection pooling for database connections. Otherwise, a
+new database connection is opened for each request.</p></div>
+<div class="paragraph"><p>Default is false for MySQL, and true for other database backends.</p></div>
+</dd>
+<dt class="hdlist1">
 <a id="database.poolLimit"></a>database.poolLimit
 </dt>
 <dd>
@@ -2020,6 +2030,8 @@ This limit must be several units higher than the total number of
 httpd and sshd threads as some request processing code paths may
 need multiple connections.</p></div>
 <div class="paragraph"><p>Default is 8.</p></div>
+<div class="paragraph"><p>This setting only applies if
+<a href="#database.connectionPool">database.connectionPool</a> is true.</p></div>
 </dd>
 <dt class="hdlist1">
 <a id="database.poolMinIdle"></a>database.poolMinIdle
@@ -2027,6 +2039,8 @@ need multiple connections.</p></div>
 <dd>
 <div class="paragraph"><p>Minimum number of connections to keep idle in the pool.
 Default is 4.</p></div>
+<div class="paragraph"><p>This setting only applies if
+<a href="#database.connectionPool">database.connectionPool</a> is true.</p></div>
 </dd>
 <dt class="hdlist1">
 <a id="database.poolMaxIdle"></a>database.poolMaxIdle
@@ -2036,6 +2050,8 @@ Default is 4.</p></div>
 are more idle connections, connections will be closed instead of
 being returned back to the pool.
 Default is 4.</p></div>
+<div class="paragraph"><p>This setting only applies if
+<a href="#database.connectionPool">database.connectionPool</a> is true.</p></div>
 </dd>
 <dt class="hdlist1">
 <a id="database.poolMaxWait"></a>database.poolMaxWait
@@ -2070,6 +2086,8 @@ h, hr, hour, hours
 </ul></div>
 <div class="paragraph"><p>If a unit suffix is not specified, <tt>milliseconds</tt> is assumed.</p></div>
 <div class="paragraph"><p>Default is <tt>30 seconds</tt>.</p></div>
+<div class="paragraph"><p>This setting only applies if
+<a href="#database.connectionPool">database.connectionPool</a> is true.</p></div>
 </dd>
 </dl></div>
 </div>
@@ -4042,8 +4060,8 @@ good idea.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.6 (from v2.6-rc1)<br />
-Last updated 2013-04-19 14:10:15 PDT
+Version 2.6-rc2<br />
+Last updated 2013-05-06 15:45:44 PDT
 </div>
 </div>
 </body>

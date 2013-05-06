@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>gerrit ls-user-refs</h1>
-<span id="revnumber">version 2.6-rc0-52-g51ecaf7</span>
+<span id="revnumber">version 2.6-rc2</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -753,7 +753,7 @@ asciidoc.install(2);
 <h2 id="_synopsis">SYNOPSIS</h2>
 <div class="sectionbody">
 <div class="verseblock">
-<pre class="content"><em>ssh</em> -p &lt;port&gt; &lt;host&gt; <em>gerrit ls-user-ref</em>
+<pre class="content"><em>ssh</em> -p &lt;port&gt; &lt;host&gt; <em>gerrit ls-user-refs</em>
   [--project PROJECT&gt; | -p &lt;PROJECT&gt;]
   [--user &lt;USER&gt; | -u &lt;USER&gt;]
   [--only-refs-heads]</pre>
@@ -790,7 +790,7 @@ groups.</p></div>
 </dt>
 <dd>
 <p>
-        Name of the project for which the refs should be listed.
+        Required; Name of the project for which the refs should be listed.
 </p>
 </dd>
 <dt class="hdlist1">
@@ -801,7 +801,7 @@ groups.</p></div>
 </dt>
 <dd>
 <p>
-        User for which the visible refs should be listed. Gerrit
+        Required; User for which the visible refs should be listed. Gerrit
         will query the database to find matching users, so the
         full identity/name does not need to be specified.
 </p>
@@ -841,8 +841,8 @@ groups.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.6-rc0-52-g51ecaf7<br />
-Last updated 2012-12-21 08:08:15 PST
+Version 2.6-rc2<br />
+Last updated 2013-05-06 12:52:49 PDT
 </div>
 </div>
 </body>

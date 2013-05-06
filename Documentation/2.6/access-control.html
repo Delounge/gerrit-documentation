@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Gerrit Code Review - Access Controls</h1>
-<span id="revnumber">version 2.6 (from v2.6-rc1)</span>
+<span id="revnumber">version 2.6-rc2</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -2023,9 +2023,9 @@ on <tt>refs/heads/&lt;branch&gt;</tt>.</td>
 </div>
 </div>
 <div class="sect1">
-<h2 id="system_capabilities">System capabilities</h2>
+<h2 id="global_capabilities">Global Capabilities</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>The system capabilities control actions that the administrators of
+<div class="paragraph"><p>The global capabilities control actions that the administrators of
 the server can perform which usually affect the entire
 server in some way.  The administrators may delegate these
 capabilities to trusted groups of users.</p></div>
@@ -2034,6 +2034,8 @@ administrative capabilities without being given complete
 administrative control of the server.  This makes it possible to
 keep fewer users in the administrators group, even while spreading
 much of the server administration burden out to more users.</p></div>
+<div class="paragraph"><p>Global capabilities are assigned to groups in the access rights settings
+of the root project ("<tt>All-Projects</tt>").</p></div>
 <div class="paragraph"><p>Below you find a list of capabilities available:</p></div>
 <div class="sect2">
 <h3 id="capability_administrateServer">Administrate Server</h3>
@@ -2189,8 +2191,8 @@ allows the granted group to
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.6 (from v2.6-rc1)<br />
-Last updated 2013-04-19 14:10:15 PDT
+Version 2.6-rc2<br />
+Last updated 2013-05-06 15:45:44 PDT
 </div>
 </div>
 </body>
