@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Release notes for Gerrit 2.6</h1>
-<span id="revnumber">version 2.6 (from v2.6-rc0-115-gbb12492)</span>
+<span id="revnumber">version 2.6 (from v2.6-rc1-48-g64109d1)</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -841,11 +841,9 @@ Show avatar image in user info popup dialog
 <p>
 Always show <em>Working &#8230;</em> message
 </p>
-<div class="paragraph"><p>The <em>Working &#8230;</em> message is now not anymore sticked to the Gerrit page
-top border so that it is now always displayed, even if the user has
-scrolled down the page and the top border is not visible.</p></div>
-<div class="paragraph"><p>This change make <em>Working &#8230;</em> message relatively positioned to
-browser top border, so that it is always visible for users.</p></div>
+<div class="paragraph"><p>The <em>Working &#8230;</em> message is relatively positioned from the top of
+the browser, so that the message is always visible, even if the user
+has scrolled down the page.</p></div>
 </li>
 <li>
 <p>
@@ -1389,11 +1387,12 @@ character escapes within JSON strings.</p></div>
 </li>
 <li>
 <p>
-Apache reverse proxies need <tt>AllowEncodedSlashes NoDecode</tt>
+Apache reverse proxies must switch to mod_rewrite
 </p>
-<div class="paragraph"><p>When Apache is used as a reverse proxy the NoDecode option
-must be set for AllowEncodedSlashes to prevent Apache from
-mangling Gerrit REST API URLs.</p></div>
+<div class="paragraph"><p>When Apache is used as a reverse proxy the server must be reconfigured
+to use mod_rewrite and AllowEncodedSlashes.  For updated information
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.6/config-reverseproxy.html#_apache_2_configuration">
+review the Apache 2 Configuration documentation</a>.</p></div>
 </li>
 </ul></div>
 </div>
@@ -3144,6 +3143,33 @@ Fix pylint errors
 </li>
 <li>
 <p>
+Call <tt>gerrit review</tt> instead of <tt>gerrit approve</tt>
+</p>
+</li>
+<li>
+<p>
+Make the private key argument optional
+</p>
+</li>
+<li>
+<p>
+Support alternative ssh executable, for example <tt>plink</tt>
+</p>
+</li>
+<li>
+<p>
+Support custom review labels
+</p>
+</li>
+<li>
+<p>
+Correctly handle empty patch ID
+</p>
+<div class="paragraph"><p>If only one of the patch IDs is empty, it should not be considered
+a trivial rebase.</p></div>
+</li>
+<li>
+<p>
 Use plain python instead of python2.6
 </p>
 <div class="paragraph"><p>Windows installation only has python.exe</p></div>
@@ -3467,8 +3493,8 @@ The release notes are now made when a release is created by running the <tt>tool
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.6 (from v2.6-rc0-115-gbb12492)<br />
-Last updated 2013-04-17 07:14:32 PDT
+Version 2.6 (from v2.6-rc1-48-g64109d1)<br />
+Last updated 2013-04-26 09:24:45 PDT
 </div>
 </div>
 </body>
