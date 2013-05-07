@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Gerrit Code Review - Uploading Changes</h1>
-<span id="revnumber">version 2.6-rc2</span>
+<span id="revnumber">version 2.7-rc0</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -1115,6 +1115,39 @@ only at times when a new release is being prepared, and otherwise
 grant nothing at all.  This ensures that accidental pushes don&#8217;t
 make undesired changes to the public repository.</p></div>
 </div>
+<div class="sect2">
+<h3 id="auto_merge">Auto-Merge during Push</h3>
+<div class="paragraph"><p>Changes can be directly submitted on push.  This is primarily useful
+for teams that don&#8217;t want to do code review but want to use Gerrit&#8217;s
+submit strategies to handle contention on busy branches.  Using
+<tt>%submit</tt> creates a change and submits it immediately, if the caller
+has <a href="access-control.html#category_submit">Submit</a> permission on
+<tt>refs/for/&lt;ref&gt;</tt> (e.g. on <tt>refs/for/refs/heads/master</tt>).</p></div>
+<div class="exampleblock">
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>git push ssh://john.doe@git.example.com:29418/kernel/common HEAD:refs/for/master%submit</tt></pre>
+</div></div>
+</div></div>
+<div class="paragraph"><p>On auto-merge of a change neither labels nor submit rules are checked.
+If the merge fails the change stays open, but when pushing a new patch
+set the merge can be reattempted by using <tt>%submit</tt> again.</p></div>
+</div>
+<div class="sect2">
+<h3 id="base">Selecting Merge Base</h3>
+<div class="paragraph"><p>By default new changes are opened only for new unique commits
+that have never before been seen by the Gerrit server. Clients
+may override that behavior and force new changes to be created
+by setting the merge base SHA-1 using the <em>%base</em> argument:</p></div>
+<div class="exampleblock">
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre><tt>git push ssh://john.doe@git.example.com:29418/kernel/common HEAD:refs/for/master%base=$(git rev-parse origin/master)</tt></pre>
+</div></div>
+</div></div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1193,8 +1226,8 @@ supplied under at least one valid agreement.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.6-rc2<br />
-Last updated 2013-05-06 15:45:44 PDT
+Version 2.7-rc0<br />
+Last updated 2013-05-06 16:06:16 PDT
 </div>
 </div>
 </body>

@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Gerrit Code Review - Access Controls</h1>
-<span id="revnumber">version 2.6-rc2</span>
+<span id="revnumber">version 2.7-rc0</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -1470,6 +1470,9 @@ project&#8217;s history.</p></div>
 <div class="paragraph"><p>In order to submit, all labels (such as <tt>Verified</tt> and <tt>Code-Review</tt>,
 above) must enable submit, and also must not block it.  See above for
 details on each label.</p></div>
+<div class="paragraph"><p>To <a href="user-upload.html#auto_merge">immediately submit a change on push</a>
+the caller needs to have the Submit permission on <tt>refs/for/&lt;ref&gt;</tt>
+(e.g. on <tt>refs/for/refs/heads/master</tt>).</p></div>
 </div>
 <div class="sect2">
 <h3 id="category_view_drafts">View Drafts</h3>
@@ -2161,6 +2164,12 @@ all projects.</p></div>
 replication plugin is installed on the server.</p></div>
 </div>
 <div class="sect2">
+<h3 id="capability_streamEvents">Stream Events</h3>
+<div class="paragraph"><p>Allow performing streaming of Gerrit events. This capability
+allows the granted group to
+<a href="cmd-stream-events.html">stream Gerrit events via ssh</a>.</p></div>
+</div>
+<div class="sect2">
 <h3 id="capability_viewCaches">View Caches</h3>
 <div class="paragraph"><p>Allow querying for status of Gerrit&#8217;s internal caches.  This capability allows
 the granted group to
@@ -2191,8 +2200,8 @@ allows the granted group to
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.6-rc2<br />
-Last updated 2013-05-06 15:45:44 PDT
+Version 2.7-rc0<br />
+Last updated 2013-05-06 16:06:16 PDT
 </div>
 </div>
 </body>

@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Making a Gerrit Release</h1>
-<span id="revnumber">version 2.6-rc2</span>
+<span id="revnumber">version 2.7-rc0</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -957,11 +957,6 @@ the <tt>gerrit-security-fixes</tt> project be taken over into the public
 <div class="ulist"><ul>
 <li>
 <p>
-<tt>gwtexpui</tt>
-</p>
-</li>
-<li>
-<p>
 <tt>gwtjsonrpc</tt>
 </p>
 </li>
@@ -1020,22 +1015,9 @@ Build the Gerrit WAR
 <div class="content">
 <div class="literalblock">
 <div class="content">
-<pre><tt>rm -f ~/.m2/settings.xml
-./tools/release.sh</tt></pre>
+<pre><tt>./tools/release.sh</tt></pre>
 </div></div>
 </div></div>
-<div class="admonitionblock">
-<table><tr>
-<td class="icon">
-<div class="title">Warning</div>
-</td>
-<td class="content">
-<div class="paragraph"><p>Make sure you are compiling the release for all browsers. Check in your
-Maven <tt>~/.m2/settings.xml</tt> file that no Maven profile is active that
-limits the compilation to a certain browser.</p></div>
-</td>
-</tr></table>
-</div>
 </li>
 <li>
 <p>
@@ -1414,8 +1396,8 @@ git merge stable</tt></pre>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.6-rc2<br />
-Last updated 2013-05-06 15:45:44 PDT
+Version 2.7-rc0<br />
+Last updated 2013-05-06 16:09:43 PDT
 </div>
 </div>
 </body>

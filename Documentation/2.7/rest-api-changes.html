@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Gerrit Code Review - /changes/ REST API</h1>
-<span id="revnumber">version 2.6-rc2</span>
+<span id="revnumber">version 2.7-rc0</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -1000,6 +1000,16 @@ default. Optional fields are:</p></div>
 </li>
 </ul></div>
 </div></div>
+<div class="openblock" id="messages">
+<div class="content">
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>MESSAGES</tt>: include messages associated with the change.
+</p>
+</li>
+</ul></div>
+</div></div>
 <div class="listingblock">
 <div class="title">Request</div>
 <div class="content">
@@ -1148,7 +1158,8 @@ describes the change.</p></div>
 <div class="attribution">
 </div></div>
 <div class="paragraph"><p>Retrieves a change with <a href="#labels">labels</a>, <a href="#detailed-labels">
-detailed labels</a> and <a href="#detailed-accounts">detailed accounts</a>.</p></div>
+detailed labels</a>, <a href="#detailed-accounts">detailed accounts</a>, and
+<a href="#messages">messages</a>.</p></div>
 <div class="listingblock">
 <div class="title">Request</div>
 <div class="content">
@@ -1263,6 +1274,30 @@ describes the change.</p></div>
         "_account_id": 1000097,
         "name": "Jane Roe",
         "email": "jane.roe@example.com"
+      }
+    ],
+    "messages": [
+      {
+        "id": "YH-egE",
+        "author": {
+          "_account_id": 1000096,
+          "name": "John Doe",
+          "email": "john.doe@example.com"
+        },
+        "updated": "2013-03-23 21:34:02.419000000",
+        "message": "Patch Set 1:\n\nThis is the first message.",
+        "revision_number": 1
+      },
+      {
+        "id": "WEEdhU",
+        "author": {
+          "_account_id": 1000097,
+          "name": "Jane Roe",
+          "email": "jane.roe@example.com"
+        },
+        "updated": "2013-03-23 21:36:52.332000000",
+        "message": "Patch Set 1:\n\nThis is the second message.\n\nWith a line break.",
+        "revision_number": 1
       }
     ]
   }</tt></pre>
@@ -2272,6 +2307,97 @@ describes the draft comment.</p></div>
 </div></div>
 </div>
 <div class="sect2">
+<h3 id="list-comments">List Comments</h3>
+<div class="verseblock">
+<pre class="content"><em>GET /changes/<a href="#change-id">{change-id}</a>/revisions/<a href="#revision-id">{revision-id}</a>/comments/</em></pre>
+<div class="attribution">
+</div></div>
+<div class="paragraph"><p>Lists the published comments of a revision.</p></div>
+<div class="paragraph"><p>As result a map is returned that maps the file path to a list of
+<a href="#comment-info">CommentInfo</a> entries. The entries in the map are
+sorted by file path.</p></div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre><tt>  GET /changes/myProject~master~I8473b95934b5732ac55d26311a706c9c2bde9940/revisions/674ac754f91e64a0efb8087e59a176484bd534d1/comments/ HTTP/1.0</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre><tt>  HTTP/1.1 200 OK
+  Content-Disposition: attachment
+  Content-Type: application/json;charset=UTF-8
+
+  )]}'
+  {
+    "gerrit-server/src/main/java/com/google/gerrit/server/project/RefControl.java": [
+      {
+        "kind": "gerritcodereview#comment",
+        "id": "TvcXrmjM",
+        "line": 23,
+        "message": "[nit] trailing whitespace",
+        "updated": "2013-02-26 15:40:43.986000000",
+        "author": {
+          "_account_id": 1000096,
+          "name": "John Doe",
+          "email": "john.doe@example.com"
+        }
+      },
+      {
+        "kind": "gerritcodereview#comment",
+        "id": "TveXwFiA",
+        "line": 49,
+        "in_reply_to": "TfYX-Iuo",
+        "message": "Done",
+        "updated": "2013-02-26 15:40:45.328000000",
+        "author": {
+          "_account_id": 1000097,
+          "name": "Jane Roe",
+          "email": "jane.roe@example.com"
+        }
+      }
+    ]
+  }</tt></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="get-comment">Get Comment</h3>
+<div class="verseblock">
+<pre class="content"><em>GET /changes/<a href="#change-id">{change-id}</a>/revisions/<a href="#revision-id">{revision-id}</a>/comments/<a href="#comment-id">{comment-id}</a></em></pre>
+<div class="attribution">
+</div></div>
+<div class="paragraph"><p>Retrieves a published comment of a revision.</p></div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre><tt>  GET /changes/myProject~master~I8473b95934b5732ac55d26311a706c9c2bde9940/revisions/674ac754f91e64a0efb8087e59a176484bd534d1/comments/TvcXrmjM HTTP/1.0</tt></pre>
+</div></div>
+<div class="paragraph"><p>As response a <a href="#comment-info">CommentInfo</a> entity is returned that
+describes the published comment.</p></div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre><tt>  HTTP/1.1 200 OK
+  Content-Disposition: attachment
+  Content-Type: application/json;charset=UTF-8
+
+  )]}'
+  {
+    "kind": "gerritcodereview#comment",
+    "id": "TvcXrmjM",
+    "path": "gerrit-server/src/main/java/com/google/gerrit/server/project/RefControl.java",
+    "line": 23,
+    "message": "[nit] trailing whitespace",
+    "updated": "2013-02-26 15:40:43.986000000",
+    "author": {
+      "_account_id": 1000096,
+      "name": "John Doe",
+      "email": "john.doe@example.com"
+    }
+  }</tt></pre>
+</div></div>
+</div>
+<div class="sect2">
 <h3 id="set-reviewed">Set Reviewed</h3>
 <div class="verseblock">
 <pre class="content"><em>PUT /changes/<a href="#change-id">{change-id}</a>/revisions/<a href="#revision-id">{revision-id}</a>/files/<a href="#patch-id">{patch-id}</a>/reviewed</em></pre>
@@ -2344,6 +2470,10 @@ a legacy numeric change ID ("4247")
 </p>
 </li>
 </ul></div>
+</div>
+<div class="sect2">
+<h3 id="comment-id">{comment-id}</h3>
+<div class="paragraph"><p>UUID of a published comment.</p></div>
 </div>
 <div class="sect2">
 <h3 id="draft-id">{draft-id}</h3>
@@ -2621,6 +2751,13 @@ Only set if <a href="#detailed-labels">detailed labels</a> are requested.</p></t
 Only set if <a href="#detailed-labels">detailed labels</a> are requested.</p></td>
 </tr>
 <tr>
+<td align="left" valign="top"><p class="table"><tt>messages</tt></p></td>
+<td align="center" valign="top"><p class="table">optional</p></td>
+<td align="left" valign="top"><p class="table">Messages associated with the change as a list of
+<a href="#change-message-info">ChangeMessageInfo</a> entities.<br />
+Only set if <a href="#messages">messages</a> are requested.</p></td>
+</tr>
+<tr>
 <td align="left" valign="top"><p class="table"><tt>current_revision</tt></p></td>
 <td align="center" valign="top"><p class="table">optional</p></td>
 <td align="left" valign="top"><p class="table">The commit ID of the current patch set of this change.<br />
@@ -2639,6 +2776,57 @@ Only set if <a href="#all-revisions">all revisions</a> are requested.</p></td>
 <td align="center" valign="top"><p class="table">optional, not set if <tt>false</tt></p></td>
 <td align="left" valign="top"><p class="table">Whether the query would deliver more results if not limited.<br />
 Only set on either the last or the first change that is returned.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="change-message-info">ChangeMessageInfo</h3>
+<div class="paragraph"><p>The <tt>ChangeMessageInfo</tt> entity contains information about a message
+attached to a change.</p></div>
+<div class="tableblock">
+<table rules="all"
+width="50%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="14%" />
+<col width="14%" />
+<col width="71%" />
+<thead>
+<tr>
+<th align="left" valign="top">Field Name           </th>
+<th align="center" valign="top"></th>
+<th align="left" valign="top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>id</tt></p></td>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="left" valign="top"><p class="table">The ID of the message.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>author</tt></p></td>
+<td align="center" valign="top"><p class="table">optional</p></td>
+<td align="left" valign="top"><p class="table">Author of the message as an
+<a href="rest-api-accounts.html#account-info">AccountInfo</a> entity.<br />
+Unset if written by the Gerrit system.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>date</tt></p></td>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="left" valign="top"><p class="table">The <a href="rest-api.html#timestamp">timestamp</a> this message was posted.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>message</tt></p></td>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="left" valign="top"><p class="table">The text left by the user.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>_revision_number</tt></p></td>
+<td align="center" valign="top"><p class="table">optional</p></td>
+<td align="left" valign="top"><p class="table">Which patchset (if any) generated this message.</p></td>
 </tr>
 </tbody>
 </table>
@@ -2671,7 +2859,7 @@ cellspacing="0" cellpadding="4">
 <tr>
 <td align="left" valign="top"><p class="table"><tt>id</tt></p></td>
 <td align="center" valign="top"><p class="table"></p></td>
-<td align="left" valign="top"><p class="table">The URL encoded UUID of the draft comment.</p></td>
+<td align="left" valign="top"><p class="table">The URL encoded UUID of the comment.</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table"><tt>path</tt></p></td>
@@ -2707,6 +2895,13 @@ If not set, it&#8217;s a file comment.</p></td>
 <td align="center" valign="top"><p class="table"></p></td>
 <td align="left" valign="top"><p class="table">The <a href="rest-api.html#timestamp">timestamp</a> of when this comment was
 written.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>author</tt></p></td>
+<td align="center" valign="top"><p class="table">optional</p></td>
+<td align="left" valign="top"><p class="table">The author of the message as an<br />
+<a href="rest-api-accounts.html#account-info">AccountInfo</a> entity.<br />
+Unset for draft comments, assumed to be the calling user.</p></td>
 </tr>
 </tbody>
 </table>
@@ -3534,8 +3729,8 @@ topic.</p></td>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.6-rc2<br />
-Last updated 2013-05-06 15:45:44 PDT
+Version 2.7-rc0<br />
+Last updated 2013-05-06 16:06:16 PDT
 </div>
 </div>
 </body>

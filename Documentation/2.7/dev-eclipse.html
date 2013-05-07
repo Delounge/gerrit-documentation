@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Gerrit Code Review - Eclipse Setup</h1>
-<span id="revnumber">version 2.6-rc2</span>
+<span id="revnumber">version 2.7-rc0</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -842,14 +842,9 @@ Change Save as to be Local file.
 </div>
 <div class="sect2">
 <h3 id="hosted-mode">Running Hosted Mode</h3>
-<div class="paragraph"><p>To debug the GWT code executing in the web browser, three additional Git
+<div class="paragraph"><p>To debug the GWT code executing in the web browser, two additional Git
 repositories need to be cloned.</p></div>
 <div class="ulist"><ul>
-<li>
-<p>
-<a href="https://gerrit.googlesource.com/gwtexpui">https://gerrit.googlesource.com/gwtexpui</a>
-</p>
-</li>
 <li>
 <p>
 <a href="https://gerrit.googlesource.com/gwtjsonrpc">https://gerrit.googlesource.com/gwtjsonrpc</a>
@@ -932,6 +927,18 @@ to <tt>DEVELOPMENT_BECOME_ANY_ACCOUNT</tt> to disable OpenID and allow you to
 impersonate whatever account you otherwise would&#8217;ve used.
 </p>
 </li>
+<li>
+<p>
+Gerrit site doesn&#8217;t appear, only directory listing is shown. Web toolkit
+developer browser plugin is missing. If there is no warning, that browser
+plugin is missing with the suggestion to install it, you can install the
+right extension for your browser from the following locations:
+</p>
+<div class="paragraph"><p><a href="https://dl.google.com/dl/gwt/plugins/chrome/gwt-dev-plugin.crx">Chrome</a></p></div>
+<div class="paragraph"><p><a href="https://dl.google.com/dl/gwt/plugins/firefox/gwt-dev-plugin.xpi">Firefox</a></p></div>
+<div class="paragraph"><p><a href="http://dl.google.com/dl/gwt/plugins/ie/1.0.7263.20091208111100/gwt-dev-plugin.msi">IE</a></p></div>
+<div class="paragraph"><p><a href="https://dl.google.com/dl/gwt/plugins/safari/gwt-dev-plugin.dmg">Safari</a></p></div>
+</li>
 </ul></div>
 </div>
 </div>
@@ -946,8 +953,8 @@ impersonate whatever account you otherwise would&#8217;ve used.
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.6-rc2<br />
-Last updated 2013-05-06 15:45:44 PDT
+Version 2.7-rc0<br />
+Last updated 2013-05-06 16:06:16 PDT
 </div>
 </div>
 </body>
