@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Gerrit Code Review - Configuration</h1>
-<span id="revnumber">version 2.6-rc2</span>
+<span id="revnumber">version 2.7-rc0</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -1684,6 +1684,10 @@ how the replacement is displayed to the user.</p></div>
   match = ([Bb]ug:\\s+)(\\d+)
   html = $1&lt;a href=\"http://trak.example.com/$2\"&gt;$2&lt;/a&gt;</tt></pre>
 </div></div>
+<div class="paragraph"><p>Comment links can also be specified in <tt>project.config</tt> and sections in
+children override those in parents. The only restriction is that to
+avoid injecting arbitrary user-supplied HTML in the page, comment links
+defined in <tt>project.config</tt> may only supply <tt>link</tt>, not <tt>html</tt>.</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
 <a id="commentlink.name.match"></a>commentlink.&lt;name&gt;.match
@@ -1720,6 +1724,21 @@ this property overrides the link property above.  Groups in the
 match expression may be accessed as <tt>$'n'</tt>.</p></div>
 <div class="paragraph"><p>The configuration file eats double quotes, so escaping them as
 <tt>\"</tt> is necessary to protect them from the parser.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="commentlink.name.enabled"></a>commentlink.&lt;name&gt;.enabled
+</dt>
+<dd>
+<div class="paragraph"><p>Whether the comment link is enabled. A child project may override a
+section in a parent or the site-wide config that is disabled by
+specifying <tt>enabled = true</tt>.</p></div>
+<div class="paragraph"><p>Disabling sections in <tt>gerrit.config</tt> can be used by site administrators
+to create a library of comment links with <tt>html</tt> set that are not
+user-supplied and thus can be verified to be XSS-free, but are only
+enabled for a subset of projects.</p></div>
+<div class="paragraph"><p>Note that the names and contents of disabled sections are visible even
+to anonymous users via the
+<a href="rest-api-projects.html#get-config">REST API</a>.</p></div>
 </dd>
 </dl></div>
 </div>
@@ -2357,6 +2376,16 @@ configured through the property <a href="http://gitblit.com/properties.html">web
 In Gerrit, the alternative path separator can be configured correspondingly
 using the property <em>gitweb.pathSeparator</em>.</p></div>
 <div class="paragraph"><p>Valid values are the characters <em>*</em>, <em>(</em> and <em>)</em>.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="gitweb.linkDrafts"></a>gitweb.linkDrafts
+</dt>
+<dd>
+<div class="paragraph"><p>Whether or not Gerrit should provide links to gitweb on draft patch sets.</p></div>
+<div class="paragraph"><p>By default, Gerrit will show links to gitweb on all patch sets. If gitweb
+only allows publicly viewable references, set this to false to remove
+the links to draft patch sets from the change review screen.</p></div>
+<div class="paragraph"><p>Valid values are "true" and "false," default is "true."</p></div>
 </dd>
 </dl></div>
 </div>
@@ -3712,6 +3741,34 @@ are enabled in addition to the default MACs, MAC names starting with
 <div class="paragraph"><p>Supported MACs: hmac-md5, hmac-md5-96, hmac-sha1, hmac-sha1-96.</p></div>
 <div class="paragraph"><p>By default, all supported MACs are available.</p></div>
 </dd>
+<dt class="hdlist1">
+<a id="sshd.kerberosKeytab"></a>sshd.kerberosKeytab
+</dt>
+<dd>
+<div class="paragraph"><p>Enable kerberos authentication for SSH connections.  To permit
+kerberos authentication, the server must have a host principal
+(see <tt>sshd.kerberosPrincipal</tt>) which is acquired from a keytab.
+This must be provisioned by the kerberos administrators, and is
+typically installed into <tt>/etc/krb5.keytab</tt> on host machines.</p></div>
+<div class="paragraph"><p>The keytab must contain at least one <tt>host/</tt> principal, typically
+using the host&#8217;s canonical name. If it does not use the
+canonical name, the <tt>sshd.kerberosPrincipal</tt> should be configured
+with the correct name.</p></div>
+<div class="paragraph"><p>By default, not set and so kerberos authentication is not enabled.</p></div>
+</dd>
+<dt class="hdlist1">
+<a id="sshd.kerberosPrincipal"></a>sshd.kerberosPrincipal
+</dt>
+<dd>
+<div class="paragraph"><p>If kerberos authentication is enabled with <tt>sshd.kerberosKeytab</tt>,
+instead use the given principal name instead of the default.
+If the principal does not begin with <tt>host/</tt> a warning message is
+printed and may prevent successful authentication.</p></div>
+<div class="paragraph"><p>This may be useful if the host is behind an IP load balancer or
+other SSH forwarding systems, since the principal name is constructed
+by the client and must match for kerberos authentication to work.</p></div>
+<div class="paragraph"><p>By default, <tt>host/canonical.host.name</tt></p></div>
+</dd>
 </dl></div>
 </div>
 <div class="sect2">
@@ -4040,7 +4097,7 @@ good idea.</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
-<a href="config-headerfooter.html">Site Header/Footer</a>
+<a href="config-themes.html">Themes</a>
 </p>
 </li>
 </ul></div>
@@ -4060,8 +4117,8 @@ good idea.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.6-rc2<br />
-Last updated 2013-05-06 15:45:44 PDT
+Version 2.7-rc0<br />
+Last updated 2013-05-06 16:06:16 PDT
 </div>
 </div>
 </body>

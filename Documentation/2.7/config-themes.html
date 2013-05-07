@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.6" />
-<title>Gerrit Code Review - Site Customization</title>
+<title>Gerrit Code Review - Themes</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
 
@@ -735,8 +735,8 @@ asciidoc.install(2);
 </head>
 <body class="article">
 <div id="header">
-<h1>Gerrit Code Review - Site Customization</h1>
-<span id="revnumber">version 2.6-rc2</span>
+<h1>Gerrit Code Review - Themes</h1>
+<span id="revnumber">version 2.7-rc0</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -748,6 +748,14 @@ asciidoc.install(2);
 <div class="paragraph"><p>Gerrit supports some customization of the HTML it sends to
 the browser, allowing organizations to alter the look and
 feel of the application to fit with their general scheme.</p></div>
+<div class="paragraph"><p>Configuration can either be sitewide or per-project. Projects without a
+specified theme inherit from their parents, or from the sitewide theme
+for <tt>All-Projects</tt>.</p></div>
+<div class="paragraph"><p>Sitewide themes are stored in <tt>'$site_path'/etc</tt>, and per-project
+themes are stored in <tt>'$site_path'/themes/{project-name}</tt>. Files are
+only served from a single theme directory; if you want to modify or
+extend an inherited theme, you must copy it into the appropriate
+per-project directory.</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -758,7 +766,7 @@ uses them to customize the HTML page it sends to clients:</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
-<tt>'$site_path'/etc/GerritSiteHeader.html</tt>
+<tt>&lt;theme-dir&gt;/GerritSiteHeader.html</tt>
 </p>
 <div class="paragraph"><p>HTML is inserted below the menu bar, but above any page content.
 This is a good location for an organizational logo, or links to
@@ -766,7 +774,7 @@ other systems like bug tracking.</p></div>
 </li>
 <li>
 <p>
-<tt>'$site_path'/etc/GerritSiteFooter.html</tt>
+<tt>&lt;theme-dir&gt;/GerritSiteFooter.html</tt>
 </p>
 <div class="paragraph"><p>HTML is inserted at the bottom of the page, below all other content,
 but just above the footer rule and the "Powered by Gerrit Code
@@ -774,7 +782,7 @@ Review (v&#8230;.)" message shown at the extreme bottom.</p></div>
 </li>
 <li>
 <p>
-<tt>'$site_path'/etc/GerritSite.css</tt>
+<tt>&lt;theme-dir&gt;/GerritSite.css</tt>
 </p>
 <div class="paragraph"><p>The CSS rules are inlined into the top of the HTML page, inside
 of a <tt>&lt;style&gt;</tt> tag.  These rules can be used to support styling
@@ -916,8 +924,8 @@ the function and is ready to register the hook callback.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.6-rc2<br />
-Last updated 2013-05-06 15:45:44 PDT
+Version 2.7-rc0<br />
+Last updated 2013-05-06 16:06:16 PDT
 </div>
 </div>
 </body>

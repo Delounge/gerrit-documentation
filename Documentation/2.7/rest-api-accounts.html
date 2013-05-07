@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Gerrit Code Review - /accounts/ REST API</h1>
-<span id="revnumber">version 2.6-rc2</span>
+<span id="revnumber">version 2.7-rc0</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -1013,6 +1013,112 @@ in pixels (height and width).</p></div>
   Location: https://profiles/avatar/john_doe.jpeg?s=20x20</tt></pre>
 </div></div>
 </div>
+<div class="sect2">
+<h3 id="get-avatar-change-url">Get Avatar Change URL</h3>
+<div class="verseblock">
+<pre class="content"><em>GET /accounts/<a href="#account-id">{account-id}</a>/avatar.change.url</em></pre>
+<div class="attribution">
+</div></div>
+<div class="paragraph"><p>Retrieves the URL where the user can change the avatar image.</p></div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre><tt>  GET /a/accounts/self/avatar.change.url HTTP/1.0</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre><tt>  HTTP/1.1 200 OK
+  Content-Disposition: attachment
+  Content-Type: text/plain;charset=UTF-8
+
+  https://profiles/pictures/john.doe</tt></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="get-diff-preferences">Get Diff Preferences</h3>
+<div class="verseblock">
+<pre class="content"><em>GET /accounts/<a href="#account-id">{account-id}</a>/preferences.diff</em></pre>
+<div class="attribution">
+</div></div>
+<div class="paragraph"><p>Retrieves the diff preferences of a user.</p></div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre><tt>  GET /a/accounts/self/preferences.diff HTTP/1.0</tt></pre>
+</div></div>
+<div class="paragraph"><p>As result the diff preferences of the user are returned as a
+<a href="#diff-preferences-info">DiffPreferencesInfo</a> entity.</p></div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre><tt>  HTTP/1.1 200 OK
+  Content-Disposition: attachment
+  Content-Type: application/json;charset=UTF-8
+
+  )]}'
+  {
+    "context": 10,
+    "ignore_whitespace": "IGNORE_ALL_SPACE",
+    "intraline_difference": true,
+    "line_length": 100,
+    "show_tabs": true,
+    "show_whitespace_errors": true,
+    "syntax_highlighting": true,
+    "tab_size": 8
+  }</tt></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="set-diff-preferences">Set Diff Preferences</h3>
+<div class="verseblock">
+<pre class="content"><em>PUT /accounts/<a href="#account-id">{account-id}</a>/preferences.diff</em></pre>
+<div class="attribution">
+</div></div>
+<div class="paragraph"><p>Sets the diff preferences of a user.</p></div>
+<div class="paragraph"><p>The new diff preferences must be provided in the request body as a
+<a href="#diff-preferences-input">DiffPreferencesInput</a> entity.</p></div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre><tt>  GET /a/accounts/self/preferences.diff HTTP/1.0
+  Content-Type: application/json;charset=UTF-8
+
+  {
+    "context": 10,
+    "ignore_whitespace": "IGNORE_ALL_SPACE",
+    "intraline_difference": true,
+    "line_length": 100,
+    "show_line_endings": true,
+    "show_tabs": true,
+    "show_whitespace_errors": true,
+    "syntax_highlighting": true,
+    "tab_size": 8
+  }</tt></pre>
+</div></div>
+<div class="paragraph"><p>As result the new diff preferences of the user are returned as a
+<a href="#diff-preferences-info">DiffPreferencesInfo</a> entity.</p></div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre><tt>  HTTP/1.1 200 OK
+  Content-Disposition: attachment
+  Content-Type: application/json;charset=UTF-8
+
+  )]}'
+  {
+    "context": 10,
+    "ignore_whitespace": "IGNORE_ALL_SPACE",
+    "intraline_difference": true,
+    "line_length": 100,
+    "show_line_endings": true,
+    "show_tabs": true,
+    "show_whitespace_errors": true,
+    "syntax_highlighting": true,
+    "tab_size": 8
+  }</tt></pre>
+</div></div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1217,6 +1323,209 @@ capability.</p></td>
 </div>
 </div>
 <div class="sect2">
+<h3 id="diff-preferences-info">DiffPreferencesInfo</h3>
+<div class="paragraph"><p>The <tt>DiffPreferencesInfo</tt> entity contains information about the diff
+preferences of a user.</p></div>
+<div class="tableblock">
+<table rules="all"
+width="50%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="14%" />
+<col width="14%" />
+<col width="71%" />
+<thead>
+<tr>
+<th align="left" valign="top">Field Name              </th>
+<th align="center" valign="top"></th>
+<th align="left" valign="top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>context</tt></p></td>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="left" valign="top"><p class="table">The number of lines of context when viewing a patch.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>expand_all_comments</tt></p></td>
+<td align="center" valign="top"><p class="table">not set if <tt>false</tt></p></td>
+<td align="left" valign="top"><p class="table">Whether all inline comments should be automatically expanded.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>ignore_whitespace</tt></p></td>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="left" valign="top"><p class="table">Whether whitespace changes should be ignored and if yes, which
+whitespace changes should be ignored.<br />
+Allowed values are <tt>IGNORE_NONE</tt>, <tt>IGNORE_SPACE_AT_EOL</tt>,
+<tt>IGNORE_SPACE_CHANGE</tt>, <tt>IGNORE_ALL_SPACE</tt>.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>intraline_difference</tt></p></td>
+<td align="center" valign="top"><p class="table">not set if <tt>false</tt></p></td>
+<td align="left" valign="top"><p class="table">Whether intraline differences should be highlighted.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>line_length</tt></p></td>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="left" valign="top"><p class="table">Number of characters that should be displayed in one line.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>manual_review</tt></p></td>
+<td align="center" valign="top"><p class="table">not set if <tt>false</tt></p></td>
+<td align="left" valign="top"><p class="table">Whether the <em>Reviewed</em> flag should not be set automatically on a patch
+when it is viewed.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>retain_header</tt></p></td>
+<td align="center" valign="top"><p class="table">not set if <tt>false</tt></p></td>
+<td align="left" valign="top"><p class="table">Whether the header that is displayed above the patch (that either shows
+the commit message, the diff preferences, the patch sets or the files)
+should be retained on file switch.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>show_line_endings</tt></p></td>
+<td align="center" valign="top"><p class="table">not set if <tt>false</tt></p></td>
+<td align="left" valign="top"><p class="table">Whether Windows EOL/Cr-Lf should be displayed as <em>\r</em> in a dotted-line
+box.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>show_tabs</tt></p></td>
+<td align="center" valign="top"><p class="table">not set if <tt>false</tt></p></td>
+<td align="left" valign="top"><p class="table">Whether tabs should be shown.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>show_whitespace_errors</tt></p></td>
+<td align="center" valign="top"><p class="table">not set if <tt>false</tt></p></td>
+<td align="left" valign="top"><p class="table">Whether whitespace errors should be shown.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>skip_deleted</tt></p></td>
+<td align="center" valign="top"><p class="table">not set if <tt>false</tt></p></td>
+<td align="left" valign="top"><p class="table">Whether deleted files should be skipped on file switch.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>skip_uncommented</tt></p></td>
+<td align="center" valign="top"><p class="table">not set if <tt>false</tt></p></td>
+<td align="left" valign="top"><p class="table">Whether uncommented files should be skipped on file switch.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>syntax_highlighting</tt></p></td>
+<td align="center" valign="top"><p class="table">not set if <tt>false</tt></p></td>
+<td align="left" valign="top"><p class="table">Whether syntax highlighting should be enabled.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>tab_size</tt></p></td>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="left" valign="top"><p class="table">Number of spaces that should be used to display one tab.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="diff-preferences-input">DiffPreferencesInput</h3>
+<div class="paragraph"><p>The <tt>DiffPreferencesInput</tt> entity contains information for setting the
+diff preferences of a user. Fields which are not set will not be
+updated.</p></div>
+<div class="tableblock">
+<table rules="all"
+width="50%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="14%" />
+<col width="14%" />
+<col width="71%" />
+<thead>
+<tr>
+<th align="left" valign="top">Field Name              </th>
+<th align="center" valign="top"></th>
+<th align="left" valign="top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>context</tt></p></td>
+<td align="center" valign="top"><p class="table">optional</p></td>
+<td align="left" valign="top"><p class="table">The number of lines of context when viewing a patch.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>expand_all_comments</tt></p></td>
+<td align="center" valign="top"><p class="table">optional</p></td>
+<td align="left" valign="top"><p class="table">Whether all inline comments should be automatically expanded.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>ignore_whitespace</tt></p></td>
+<td align="center" valign="top"><p class="table">optional</p></td>
+<td align="left" valign="top"><p class="table">Whether whitespace changes should be ignored and if yes, which
+whitespace changes should be ignored.<br />
+Allowed values are <tt>IGNORE_NONE</tt>, <tt>IGNORE_SPACE_AT_EOL</tt>,
+<tt>IGNORE_SPACE_CHANGE</tt>, <tt>IGNORE_ALL_SPACE</tt>.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>intraline_difference</tt></p></td>
+<td align="center" valign="top"><p class="table">optional</p></td>
+<td align="left" valign="top"><p class="table">Whether intraline differences should be highlighted.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>line_length</tt></p></td>
+<td align="center" valign="top"><p class="table">optional</p></td>
+<td align="left" valign="top"><p class="table">Number of characters that should be displayed in one line.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>manual_review</tt></p></td>
+<td align="center" valign="top"><p class="table">optional</p></td>
+<td align="left" valign="top"><p class="table">Whether the <em>Reviewed</em> flag should not be set automatically on a patch
+when it is viewed.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>retain_header</tt></p></td>
+<td align="center" valign="top"><p class="table">optional</p></td>
+<td align="left" valign="top"><p class="table">Whether the header that is displayed above the patch (that either shows
+the commit message, the diff preferences, the patch sets or the files)
+should be retained on file switch.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>show_line_endings</tt></p></td>
+<td align="center" valign="top"><p class="table">optional</p></td>
+<td align="left" valign="top"><p class="table">Whether Windows EOL/Cr-Lf should be displayed as <em>\r</em> in a dotted-line
+box.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>show_tabs</tt></p></td>
+<td align="center" valign="top"><p class="table">optional</p></td>
+<td align="left" valign="top"><p class="table">Whether tabs should be shown.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>show_whitespace_errors</tt></p></td>
+<td align="center" valign="top"><p class="table">optional</p></td>
+<td align="left" valign="top"><p class="table">Whether whitespace errors should be shown.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>skip_deleted</tt></p></td>
+<td align="center" valign="top"><p class="table">optional</p></td>
+<td align="left" valign="top"><p class="table">Whether deleted files should be skipped on file switch.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>skip_uncommented</tt></p></td>
+<td align="center" valign="top"><p class="table">optional</p></td>
+<td align="left" valign="top"><p class="table">Whether uncommented files should be skipped on file switch.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>syntax_highlighting</tt></p></td>
+<td align="center" valign="top"><p class="table">optional</p></td>
+<td align="left" valign="top"><p class="table">Whether syntax highlighting should be enabled.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>tab_size</tt></p></td>
+<td align="center" valign="top"><p class="table">optional</p></td>
+<td align="left" valign="top"><p class="table">Number of spaces that should be used to display one tab.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
 <h3 id="query-limit-info">QueryLimitInfo</h3>
 <div class="paragraph"><p>The <tt>QueryLimitInfo</tt> entity contains information about the
 <a href="access-control.html#capability_queryLimit">Query Limit</a> of a user.</p></div>
@@ -1259,8 +1568,8 @@ cellspacing="0" cellpadding="4">
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.6-rc2<br />
-Last updated 2013-05-06 15:45:44 PDT
+Version 2.7-rc0<br />
+Last updated 2013-05-06 16:06:16 PDT
 </div>
 </div>
 </body>

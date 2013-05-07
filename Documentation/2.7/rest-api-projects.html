@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Gerrit Code Review - /projects/ REST API</h1>
-<span id="revnumber">version 2.6-rc2</span>
+<span id="revnumber">version 2.7-rc0</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -1139,6 +1139,41 @@ request body inside a <a href="#head-input">HeadInput</a> entity.</p></div>
     "number_of_packed_refs": 0,
     "size_of_loose_objects": 29466,
     "size_of_packed_objects": 9646
+  }</tt></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="get-config">Get Config</h3>
+<div class="verseblock">
+<pre class="content"><em>GET /projects/<a href="#project-name">{project-name}</a>/config</em></pre>
+<div class="attribution">
+</div></div>
+<div class="paragraph"><p>Gets some configuration information about a project. Note that this
+config info is not simply the contents of <tt>project.config</tt>; it generally
+contains fields that may have been inherited from parent projects.</p></div>
+<div class="listingblock">
+<div class="title">Request</div>
+<div class="content">
+<pre><tt>  GET /projects/myproject/config</tt></pre>
+</div></div>
+<div class="paragraph"><p>A <a href="#config-info">ConfigInfo</a> entity is returned that describes the
+project configuration. Some fields are only visible to users that have
+read access to <tt>refs/meta/config</tt>.</p></div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre><tt>  HTTP/1.1 200 OK
+  Content-Disposition: attachment
+  Content-Type: application/json;charset=UTF-8
+
+  )]}'
+  {
+    "kind": "gerritcodereview#project_config",
+    "use_contributor_agreements": false,
+    "use_content_merge": true,
+    "use_signed_off_by": false,
+    "require_change_id": true,
+    "commentlinks": {}
   }</tt></pre>
 </div></div>
 </div>
@@ -1879,6 +1914,59 @@ cellspacing="0" cellpadding="4">
 </table>
 </div>
 </div>
+<div class="sect2">
+<h3 id="config-info">ConfigInfo</h3>
+<div class="paragraph"><p>The <tt>ConfigInfo</tt> entity contains information about the effective project
+configuration.</p></div>
+<div class="paragraph"><p>Fields marked with * are only visible to users who have read access to
+<tt>refs/meta/config</tt>.</p></div>
+<div class="tableblock">
+<table rules="all"
+width="50%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="14%" />
+<col width="85%" />
+<thead>
+<tr>
+<th align="left" valign="top">Field Name                   </th>
+<th align="left" valign="top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>use_contributor_agreements*</tt></p></td>
+<td align="left" valign="top"><p class="table">If set, authors must complete a contributor agreement on the site
+before pushing any commits or changes to this project.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>use_content_merge*</tt></p></td>
+<td align="left" valign="top"><p class="table">If set, Gerrit will try to perform a 3-way merge of text file content
+when a file has been modified by both the destination branch and the
+change being submitted. This option only takes effect if submit type is
+not FAST_FORWARD_ONLY.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>use_signed_off_by*</tt></p></td>
+<td align="left" valign="top"><p class="table">If set, each change must contain a Signed-off-by line from either the
+author or the uploader in the commit message.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>require_change_id*</tt></p></td>
+<td align="left" valign="top"><p class="table">If set, require a valid <a href="user-changeid.html">Change-Id</a> footer in any
+commit uploaded for review. This does not apply to commits pushed
+directly to a branch or tag.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>commentlinks</tt></p></td>
+<td align="left" valign="top"><p class="table">Comment link configuration for the project. Has the same format as the
+<a href="config-gerrit.html#_a_id_commentlink_a_section_commentlink">commentlink section</a>
+of <tt>gerrit.config</tt>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <hr style="
@@ -1892,8 +1980,8 @@ cellspacing="0" cellpadding="4">
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.6-rc2<br />
-Last updated 2013-05-06 15:45:44 PDT
+Version 2.7-rc0<br />
+Last updated 2013-05-06 16:06:16 PDT
 </div>
 </div>
 </body>
