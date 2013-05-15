@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.6" />
-<title>Release notes for Gerrit 2.5.1</title>
+<title>Release notes for Gerrit 2.5.3</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
 
@@ -735,8 +735,8 @@ asciidoc.install(2);
 </head>
 <body class="article">
 <div id="header">
-<h1>Release notes for Gerrit 2.5.1</h1>
-<span id="revnumber">version 2.5.1 (from v2.5.1-771-g51e6242)</span>
+<h1>Release notes for Gerrit 2.5.3</h1>
+<span id="revnumber">version 2.5.3 (from v2.5.3-1-g5534ada)</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -745,9 +745,9 @@ asciidoc.install(2);
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<div class="paragraph"><p>Gerrit 2.5.1 is now available:</p></div>
-<div class="paragraph"><p><a href="http://code.google.com/p/gerrit/downloads/detail?name=gerrit-full-2.5.1.war">http://code.google.com/p/gerrit/downloads/detail?name=gerrit-full-2.5.1.war</a></p></div>
-<div class="paragraph"><p>There are no schema changes from 2.5, or 2.5.1.</p></div>
+<div class="paragraph"><p>Gerrit 2.5.3 is now available:</p></div>
+<div class="paragraph"><p><a href="http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.5.3.war">http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.5.3.war</a></p></div>
+<div class="paragraph"><p>There are no schema changes from any member of the 2.5.x versions.</p></div>
 <div class="paragraph"><p>However, if upgrading from anything earlier version, follow the upgrade
 procedure in the 2.5 <a href="ReleaseNotes-2.5.html">Release Notes</a>.</p></div>
 </div>
@@ -758,111 +758,23 @@ procedure in the 2.5 <a href="ReleaseNotes-2.5.html">Release Notes</a>.</p></div
 <div class="ulist"><ul>
 <li>
 <p>
-Correctly identify Git-over-HTTP operations
+Patch vulnerabilities in OpenID client library
 </p>
-<div class="paragraph"><p>Git operations over HTTP should be classified as using AccessPath.GIT
-and not WEB_UI. This ensures RefControl will correctly test for Create,
-Push or Delete access on a reference instead of Owner.</p></div>
-<div class="paragraph"><p>E.g. without this fix project owners are able to force push commits
-via HTTP that are already in the history of the target branch, even
-without having any Push access right assigned.</p></div>
-</li>
-<li>
-<p>
-Make sure only Gerrit admins can change the parent of a project
-</p>
-<div class="paragraph"><p>Only Gerrit administrators should be able to change the parent of a
-project because by changing the parent project access rights and BLOCK
-rules which are configured on a parent project can be avoided.</p></div>
-<div class="paragraph"><p>The <tt>set-project-parent</tt> SSH command already verifies that the caller
-is a Gerrit administrator, however project owners can change the parent
-project by modifying the <tt>project.config</tt> file and pushing to the
-<tt>refs/meta/config</tt> branch.</p></div>
-<div class="paragraph"><p>This fix ensures that changes to the <tt>project.config</tt> file that change
-the parent project can only be pushed/submitted by Gerrit
-administrators.</p></div>
-<div class="paragraph"><p>In addition it is now no longer possible to</p></div>
-<div class="ulist"><ul>
-<li>
-<p>
-set a non-existing project as parent (as this would make the project
-  be orphaned)
-</p>
-</li>
-<li>
-<p>
-set a parent project for the <tt>All-Projects</tt> root project (the root
-  project by definition has no parent)
-by pushing changes of the <tt>project.config</tt> file to <tt>refs/meta/config</tt>.
-</p>
+<div class="paragraph"><p>Installations using OpenID for authentication were vulnerable to a
+number of attacks over the network.  The openid4java client library
+was identified as the entry point.  In this release Gerrit updated to
+the latest 0.9.8 release, which patches the known attack vectors.</p></div>
 </li>
 </ul></div>
-</li>
-</ul></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_bug_fixes">Bug Fixes</h2>
-<div class="sectionbody">
-<div class="ulist"><ul>
-<li>
-<p>
-Fix RequestCleanup bug with Git over HTTP
-</p>
-<div class="paragraph"><p>Decide if a continuation is going to be used early, before the filter
-that will attempt to cleanup a RequestCleanup. If so don&#8217;t allow
-entering the RequestCleanup part of the system until the request is
-actually going to be processed.</p></div>
-<div class="paragraph"><p>This fixes the IllegalStateException <tt>Request has already been cleaned
-up</tt> that occurred when running on Jetty and pushing over HTTP for URLs
-where the path starts with <tt>/p/</tt>.</p></div>
-</li>
-<li>
-<p>
-Match all git fetch/clone/push commands to the command executor
-</p>
-<div class="paragraph"><p>Route not just <tt>/p/</tt> but any Git access to the same thread pool as the
-SSH server is using, allowing all requests to compete fairly for
-resources.</p></div>
-</li>
-<li>
-<p>
-Fix auto closing of changes on direct push
-</p>
-<div class="paragraph"><p>When a commit is directly pushed into a repository (bypassing code
-review) and this commit has a Change-Id in its commit message then the
-corresponding change is automatically closed if it is open.</p></div>
-</li>
-<li>
-<p>
-Allow assigning <tt>Push</tt> for <tt>refs/meta/config</tt> on <tt>All-Projects</tt>
-</p>
-<div class="paragraph"><p>The <tt>refs/meta/config</tt> branch of the <tt>All-Projects project</tt> should only
-be modified by Gerrit administrators because being able to do
-modifications on this branch means that the user could assign himself
-administrator permissions.</p></div>
-<div class="paragraph"><p>In addition to being administrator we already require that the
-administrator has the <tt>Push</tt> access right for <tt>refs/meta/config</tt> in
-order to be able to modify it (just as with all other branches
-administrators do not have edit permissions by default).</p></div>
-<div class="paragraph"><p>The problem was that assigning the <tt>Push</tt> access right for
-<tt>refs/meta/config</tt> on the <tt>All-Projects</tt> project was not allowed.</p></div>
-<div class="paragraph"><p>Having the <tt>Push</tt> access right for <tt>refs/meta/config</tt> on the
-<tt>All-Projects</tt> project without being administrator already has no
-effect.</p></div>
-<div class="paragraph"><p>Prohibiting to assign the Push access right for <tt>refs/meta/config</tt> on
-the <tt>All-Project</tt> project was anyway pointless since it was e.g.
-possible to assign the <tt>Push</tt> access right on <tt>refs/meta/*</tt>.</p></div>
-</li>
-</ul></div>
+<div class="paragraph"><p>No other changes since 2.5.2.</p></div>
 </div>
 </div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.5.1 (from v2.5.1-771-g51e6242)<br />
-Last updated 2013-05-14 18:34:30 PDT
+Version 2.5.3 (from v2.5.3-1-g5534ada)<br />
+Last updated 2013-05-14 18:35:20 PDT
 </div>
 </div>
 </body>
