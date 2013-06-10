@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.6" />
-<title>Release notes for Gerrit 2.1.4</title>
+<title>Release notes for Gerrit 2.7</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
 
@@ -735,8 +735,8 @@ asciidoc.install(2);
 </head>
 <body class="article">
 <div id="header">
-<h1>Release notes for Gerrit 2.1.4</h1>
-<span id="revnumber">version 2.1.4</span>
+<h1>Release notes for Gerrit 2.7</h1>
+<span id="revnumber">version 2.7 (from v2.7-rc1-25-gcbea27a)</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -745,255 +745,255 @@ asciidoc.install(2);
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<div class="paragraph"><p>Gerrit 2.1.4 is now available in the usual location:</p></div>
-<div class="paragraph"><p><a href="http://code.google.com/p/gerrit/downloads/list">http://code.google.com/p/gerrit/downloads/list</a></p></div>
+<div class="paragraph"><p>Gerrit 2.7 is now available:</p></div>
+<div class="paragraph"><p><a href="http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.7.war">
+<a href="http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.7.war">http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.7.war</a></a></p></div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_schema_change">Schema Change</h2>
 <div class="sectionbody">
-<div class="paragraph"><p><strong>WARNING</strong> This release contains multiple schema changes.  To upgrade:</p></div>
+<div class="paragraph"><p><strong>WARNING:</strong> This release contains schema changes.  To upgrade:</p></div>
 <div class="listingblock">
 <div class="content">
 <pre><tt>  java -jar gerrit.war init -d site_path</tt></pre>
 </div></div>
+<div class="paragraph"><p><strong>WARNING:</strong> Upgrading to 2.7.x requires the server be first upgraded to 2.1.7 (or
+a later 2.1.x version), and then to 2.7.x.  If you are upgrading from 2.2.x.x or
+newer, you may ignore this warning and upgrade directly to 2.7.x.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_release_highlights">Release Highlights</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+New <tt>copyMaxScore</tt> setting for labels.
+</p>
+</li>
+<li>
+<p>
+Comment links configurable per project.
+</p>
+</li>
+<li>
+<p>
+Themes configurable per project.
+</p>
+</li>
+<li>
+<p>
+Better support for binary files and images in diff screens.
+</p>
+</li>
+<li>
+<p>
+User avatars.
+</p>
+</li>
+<li>
+<p>
+Several new REST APIs.
+</p>
+</li>
+</ul></div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_new_features">New Features</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_change_management">Change Management</h3>
+<h3 id="_general">General</h3>
 <div class="ulist"><ul>
 <li>
 <p>
-issue 504 Implement full query operators
+New <tt>copyMaxScore</tt> setting for labels.
 </p>
-<div class="paragraph"><p>The search box now implments a wide range of operators and boolean
-expressions, permitting complex queries such as <tt>is:open CodeReview&gt;=1
-(has:draft OR is:starred)</tt> to locate open changes that have been code
-reviewed, but still have unpublished drafts or were starred by the
-current user.  The full range of supported operators is documented
-in the user guide.</p></div>
+<div class="paragraph"><p>Labels can be <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.7/config-labels.html#label_copyMaxScore">
+configured</a> to copy approvals forward to the next patch set.</p></div>
 </li>
 <li>
 <p>
-Change lists now use query operators
+Comment links can be <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.7/config-gerrit.html#commentlink">
+defined per project in the project configuration</a>.
 </p>
-<div class="paragraph"><p>All current change lists have been reimplemented using query
-operators, so selecting <em>All open changes</em> actually performs the query
-<em>is:open</em>.  This is to help end-users learn the different operators
-that are supported, and simplifies the internal implementation
-considerably by removing redundant code.</p></div>
 </li>
 <li>
 <p>
-issue 51 Tag changes with topic branches
+Gerrit administrators can define project-specific themes.
 </p>
-<div class="paragraph"><p>Changes can be tagged with a topic name during upload.  To add the tag
-<em>query</em> when pushing to branch <em>master</em>, use <tt>git push URL
-HEAD:refs/for/master/query</tt>.  To add a topic name with <tt>repo upload</tt>
-use the <tt>-t</tt> command line flag.  Topic names are displayed next to the
-branch name in the web UI, and can be searched for with the <tt>topic:</tt>
-query operator.</p></div>
+<div class="paragraph"><p>Themes can be <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.7/config-themes.html">
+configured site-wide or per project</a>.</p></div>
 </li>
 <li>
 <p>
-Filter the list of open changes by watched projects
+New <em>/a/tools</em> URL.
 </p>
-<div class="paragraph"><p>The query operator <tt>is:watched</tt> matches changes matching the user&#8217;s
-watched project list, and a new menu item was added under the My menu
-to select open changes matching these watched projects.</p></div>
+<div class="paragraph"><p>This allows users to download the <tt>commit-msg</tt> hook via the command line if the
+Gerrit server requires authentication globally.</p></div>
+</li>
+<li>
+<p>
+New <em>Stream Events</em> global capability.
+</p>
+<div class="paragraph"><p>The <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.7/access-control.txt#capability_streamEvents">
+Stream Events capability</a> controls access to the <tt>stream-events</tt> ssh command.</p></div>
+<div class="paragraph"><p>Only administrators and users having this capability are allowed to use <tt>stream-events</tt>.</p></div>
+</li>
+<li>
+<p>
+Allow opening new changes on existing commits.
+</p>
+<div class="paragraph"><p>The %base argument can be used with refs/for/ to identify a specific revision the server should
+start to look for new commits at. Any commits in the range $base..$tip will be opened as a new
+change, even if the commit already has another change on a different branch.</p></div>
+</li>
+<li>
+<p>
+New setting <tt>gitweb.linkDrafts</tt> to control if gitweb links are shown on drafts.
+</p>
+<div class="paragraph"><p>By default, Gerrit will show links to gitweb on all patch sets.  If the
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.7/config-gerrit.html#gitweb.linkDrafts">
+gitweb.linkDrafts setting</a> is set to <em>false</em>, links will not be shown on
+draft patch sets.</p></div>
+</li>
+<li>
+<p>
+Allow changes to be automatically submitted on push.
+</p>
+<div class="paragraph"><p>Teams that want to use Gerrit&#8217;s submit strategies to handle contention on busy
+branches can use %submit to create a change and have it
+<a href="link:http://gerrit-documentation.googlecode.com/svn/Documentation/2.7/user-upload.html#auto_merge">
+immediately submitted</a>, if the caller has Submit permission on refs/for/&lt;ref&gt;.</p></div>
 </li>
 </ul></div>
 </div>
 <div class="sect2">
 <h3 id="_web_ui">Web UI</h3>
+<div class="sect3">
+<h4 id="_global">Global</h4>
 <div class="ulist"><ul>
 <li>
 <p>
-issue 579 Remember diff formatting preferences
-</p>
-<div class="paragraph"><p>Formatting options at the top of a side-by-side or unified diff page
-are now remembered by saving the current preferences into the user&#8217;s
-account whenever <em>Update</em> is clicked.</p></div>
-</li>
-<li>
-<p>
-issue 680 Show commit message on the per-file review pages
+The search box no longer automatically resizes.  Its width is fixed at 70 pixels.
 </p>
 </li>
 <li>
 <p>
-issue 498 Improved keyboard navigation
-</p>
-<div class="paragraph"><p>More keyboard bindings have been added, reducing the need to switch to
-the mouse while navigating through a change and performing a review.</p></div>
-</li>
-<li>
-<p>
-issue 395 Open new window/new tab for all files in a change
-</p>
-<div class="paragraph"><p>New buttons permit opening all modified files of a change into
-new windows or tabs.</p></div>
-</li>
-<li>
-<p>
-issue 440 Add copy to clipboard button for change-id
-</p>
-<div class="paragraph"><p>The Change-Id field in the upper left side of a change now support to
-copy "Change-Id: I&#8230;." onto the clipboard, making it easier to paste
-into a commit message.</p></div>
-</li>
-<li>
-<p>
-issue 559 Allow copying user public ssh key to clipboard
-</p>
-</li>
-<li>
-<p>
-issue 509 Make branch columns link to changes on that branch
+User avatars are displayed in several places in the Web UI.  "Diffy" is used as
+avatar for the Gerrit server itself.
 </p>
 </li>
 </ul></div>
 </div>
-<div class="sect2">
-<h3 id="_email_notifications">Email Notifications</h3>
+<div class="sect3">
+<h4 id="_change_screens">Change Screens</h4>
 <div class="ulist"><ul>
 <li>
 <p>
-issue 311 No longer CC a user by default
+<a href="https://code.google.com/p/gerrit/issues/detail?id=667">Issue 667</a>:
+Highlight patch sets that have drafts.
 </p>
-<div class="paragraph"><p>The user who causes a notification to be sent is no longer CC&#8217;d on the
-email when it is sent.  This reduces the number of messages sent to a
-user, but can be re-enabled through a checkbox in the Settings &gt;
-Preferences panel.</p></div>
+<div class="paragraph"><p>Patch sets having unpublished draft comments are higlighted with an icon.</p></div>
 </li>
 <li>
 <p>
-issue 535 Enable watching of all projects
+Option to show relative times in change tables.
 </p>
-<div class="paragraph"><p>Adding the magic <tt>\-- All Projects \--</tt> to the watched project list
-permits the user to be notified of any change occurring in any
-project.  Project specific entries override the notification settings
-for all projects.</p></div>
+<div class="paragraph"><p>A new preference setting allows the user to decide if absolute or relative dates
+should be shown in change tables.</p></div>
 </li>
 <li>
 <p>
-issue 492 Allow watching specific branches or any other search query
+Option to set default visibility of change comments.
 </p>
-<div class="paragraph"><p>In addition to watching a project, users can register a query string
-to match specific changes, reducing notifications to be a smaller
-subset of the changes that occur in a project.</p></div>
-</li>
-<li>
-<p>
-issue 70 Allow file:^regex to match affected files
-</p>
-<div class="paragraph"><p>The file:^path operator can be used in a watch filter to receive
-notifications only when files matching the regular expression are
-modified by the change.</p></div>
-</li>
-<li>
-<p>
-issue 623 Include Gerrit-Owner, Gerrit-Reviewer in email footers
-</p>
-<div class="paragraph"><p>New fields in the email footer provide additional detail, enabling
-better filtering and classification of messages.</p></div>
+<div class="paragraph"><p>A new preference setting allows the user to set the default visibility of
+change comments.</p></div>
 </li>
 </ul></div>
 </div>
-<div class="sect2">
-<h3 id="_access_control">Access Control</h3>
+<div class="sect3">
+<h4 id="_diff_screens">Diff Screens</h4>
 <div class="ulist"><ul>
 <li>
 <p>
-Support regular expressions for ref access rules
+Show images in side-by-side and unified diffs
 </p>
-<div class="paragraph"><p>References in an access rule can now be specified by regular
-expression by prefixing the reference name with ^.</p></div>
 </li>
 <li>
 <p>
-issue 577 Support ${username} in access rules
+Show diffed images above/below each other in unified diffs.
 </p>
-<div class="paragraph"><p>Adding <tt>$\{username\}</tt> into a reference causes the current username to
-be inserted at that position.  When combined with the Push Branch
-permission this creates a per-user branch namespace feature, giving
-each user their own "sandbox" to push changes to.</p></div>
 </li>
 <li>
 <p>
-issue 313 ssh gerrit create-group
+Harmonize unified diff&#8217;s styling of images with that of text
 </p>
-<div class="paragraph"><p>Groups can now be created over SSH by administrators using the
-<tt>gerrit create-group</tt> command.</p></div>
 </li>
 </ul></div>
 </div>
+</div>
 <div class="sect2">
-<h3 id="_authentication">Authentication</h3>
+<h3 id="_rest_api">REST API</h3>
+<div class="paragraph"><p>Several new <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.7/rest-api.html">
+REST API endpoints</a> are added.</p></div>
+<div class="sect3">
+<h4 id="_accounts">Accounts</h4>
 <div class="ulist"><ul>
 <li>
 <p>
-Remove password authentication over SSH
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.7/rest-api-accounts.html#get-diff-preferences">
+Get account diff preferences</a>
 </p>
-<div class="paragraph"><p>Adding password authentication over SSH turned out to be a major
-mistake.  Users primarily use SSH public keys, and the password
-prompt just got in the way or confused them.  Password support has
-been removed from the SSH server.</p></div>
 </li>
 <li>
 <p>
-Username cannot be changed once assigned
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.7/rest-api-accounts.html#set-diff-preferences">
+Set account diff preferences</a>
 </p>
-<div class="paragraph"><p>Once a username has been selected for a user account, it
-cannot be modified by the user.</p></div>
-</li>
-<li>
-<p>
-issue 555 Make LDAP sessions persistent for the session age
-</p>
-<div class="paragraph"><p>Web sessions are now persistent for the cache.web_sessions.maxAge
-setting, rather than expiring when the browser closes.  (Previously
-sessions expired when the browser exited.)</p></div>
 </li>
 </ul></div>
 </div>
-<div class="sect2">
-<h3 id="_misc">Misc.</h3>
+<div class="sect3">
+<h4 id="_changes">Changes</h4>
 <div class="ulist"><ul>
 <li>
 <p>
-Add topic, lastUpdated, sortKey to ChangeAttribute
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1820">Issue 1820</a>:
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.7/rest-api-changes.html#list-comments">
+List comments</a>
 </p>
-<div class="paragraph"><p>Additional change fields are now exported as part of the
-stream-events output.</p></div>
 </li>
 <li>
 <p>
-issue 504 gerrit query SSH command
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.7/rest-api-changes.html#get-comment">
+Get comment</a>
 </p>
-<div class="paragraph"><p>Queries to lookup change information can be executed over SSH through
-the <tt>gerrit query</tt> command, with results output in either human
-readable text or machine readable JSON.  Change queries can also be
-run over HTTP with the <tt>/query?q=&lt;query&gt;&amp;format=JSON</tt> URL.  Both
-interfaces are intended for automated tools.</p></div>
 </li>
+</ul></div>
+</div>
+<div class="sect3">
+<h4 id="_projects">Projects</h4>
+<div class="ulist"><ul>
 <li>
 <p>
-Remove git diff-tree dependency
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.7/rest-api-projects.html#get-config">
+Get project configuration</a>
 </p>
-<div class="paragraph"><p>Gerrit no longer requires <tt>git</tt> in the PATH; differences are now
-constructed in pure Java code.  Remote repository initialization over
-SSH still requires <tt>git</tt> on the remote host&#8217;s PATH.</p></div>
 </li>
+</ul></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ssh">ssh</h3>
+<div class="ulist"><ul>
 <li>
 <p>
-Internal dependencies updated
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1088">Issue 1088</a>:
+Support <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.7/config-gerrit.html#sshd.kerberosKeytab">
+Kerberos authentication for ssh interaction</a>.
 </p>
-<div class="paragraph"><p>Updated JGit to 0.8.4.89-ge2f5716, log4j to 1.2.16, GWT to 2.0.4,
-sfl4j to 1.6.1, easymock to 3.0, JUnit to 4.8.1.</p></div>
 </li>
 </ul></div>
 </div>
@@ -1003,65 +1003,114 @@ sfl4j to 1.6.1, easymock to 3.0, JUnit to 4.8.1.</p></div>
 <h2 id="_bug_fixes">Bug Fixes</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_web_ui_2">Web UI</h3>
+<h3 id="_general_2">General</h3>
 <div class="ulist"><ul>
 <li>
 <p>
-issue 352 Confirm branch deletion in web UI
+Postpone check for first account until adding an account.
 </p>
-<div class="paragraph"><p>Deleting a branch now presents a confirmation dialog to give the user
-a second chance to abort the destructive operation.</p></div>
-</li>
-<li>
-<p>
-Fix some JavaScript errors under Chrome
-</p>
-<div class="paragraph"><p>The GWT compiler started to define symbols in the same namespace as
-the prettify syntax highlighting library.  We moved the prettify
-library into its own iframe so it has a different JavaScript namespace
-in the browser.</p></div>
-</li>
-<li>
-<p>
-Close button on OpenId register / sign-in dialog
-</p>
-<div class="paragraph"><p>There was no obvious way to leave the sign-in dialog. Fixed.</p></div>
-</li>
-<li>
-<p>
-Links in OpenId sign-in dialog not focusable
-</p>
-<div class="paragraph"><p>Keyboard navigation to standard links like <em>Google Accounts</em>
-wasn&#8217;t supported.  Fixed.</p></div>
 </li>
 </ul></div>
 </div>
 <div class="sect2">
-<h3 id="_misc_2">Misc.</h3>
+<h3 id="_web_ui_2">Web UI</h3>
 <div class="ulist"><ul>
 <li>
 <p>
-issue 614 Fix 503 error when Jetty cancels a request
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1848">Issue 1848</a>:
+Don&#8217;t discard inline comments when escape key is pressed.
 </p>
-<div class="paragraph"><p>A bug was introduced in 2.1.3 that caused a server 503 error
-when a fetch/pull/clone or push request timed out.  Fixed.</p></div>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1863">Issue 1863</a>:
+Drop Arial Unicode MS font and request only sans-serif.
+</p>
+<div class="paragraph"><p>Arial Unicode MS does not have a bold version. Selecting this font prevents
+correct display of bold text on Mac OS X. Simplify the selector to sans-serif
+and allow the browser to use the user&#8217;s preferred font in this family.</p></div>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_rest_api_2">REST API</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1819">Issue 1819</a>:
+Include change-level messages to the payload returned from
+the <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.7/rest-api-changes#get-change-detail">
+Get Change Detail REST API endpoint</a>.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_email">Email</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Log failure to access reviewer list for notification emails
+</p>
+</li>
+<li>
+<p>
+Log when appropriate if email delivery is skipped.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_tools">Tools</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+The release build now builds for all browser configurations.
+</p>
 </li>
 </ul></div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_version">Version</h2>
+<h2 id="_upgrades">Upgrades</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>ae59d1bf232bba16d4d03ca924884234c68be0f2</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>gwtexpui</tt> is now built in the gerrit tree rather than linking a separate module.
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_documentation">Documentation</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+Update the access control documentation to clarify how to set
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.7/access-control.html#global_capabilities">
+global capabilities</a>.
+</p>
+</li>
+<li>
+<p>
+Clarify the
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.7/config-gerrit.html#cache_names">
+change cache configuration</a>
+</p>
+</li>
+</ul></div>
 </div>
 </div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.1.4<br />
-Last updated 2013-05-08 07:50:03 PDT
+Version 2.7 (from v2.7-rc1-25-gcbea27a)<br />
+Last updated 2013-06-08 18:54:36 PDT
 </div>
 </div>
 </body>
