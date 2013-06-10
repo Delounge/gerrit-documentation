@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.6" />
-<title>Release notes for Gerrit 2.1.4</title>
+<title>Release notes for Gerrit 2.8</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
 
@@ -735,8 +735,8 @@ asciidoc.install(2);
 </head>
 <body class="article">
 <div id="header">
-<h1>Release notes for Gerrit 2.1.4</h1>
-<span id="revnumber">version 2.1.4</span>
+<h1>Release notes for Gerrit 2.8</h1>
+<span id="revnumber">version 2.8 (from v2.7-rc1-423-g55817ab)</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -745,255 +745,318 @@ asciidoc.install(2);
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<div class="paragraph"><p>Gerrit 2.1.4 is now available in the usual location:</p></div>
-<div class="paragraph"><p><a href="http://code.google.com/p/gerrit/downloads/list">http://code.google.com/p/gerrit/downloads/list</a></p></div>
+<div class="paragraph"><p>Gerrit 2.8 is now available:</p></div>
+<div class="paragraph"><p><a href="http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.8.war">
+<a href="http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.8.war">http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.8.war</a></a></p></div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_schema_change">Schema Change</h2>
 <div class="sectionbody">
-<div class="paragraph"><p><strong>WARNING</strong> This release contains multiple schema changes.  To upgrade:</p></div>
-<div class="listingblock">
-<div class="content">
-<pre><tt>  java -jar gerrit.war init -d site_path</tt></pre>
-</div></div>
+<div class="paragraph"><p>There is no schema change from <a href="ReleaseNotes-2.7.html">Gerrit 2.7</a>.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_release_highlights">Release Highlights</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+Lots of new <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api.html">
+REST API endpoints</a>.
+</p>
+</li>
+<li>
+<p>
+New build system using <a href="http://facebook.github.io/buck/">Facebook Buck</a>.
+</p>
+</li>
+</ul></div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_new_features">New Features</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_change_management">Change Management</h3>
-<div class="ulist"><ul>
-<li>
-<p>
-issue 504 Implement full query operators
-</p>
-<div class="paragraph"><p>The search box now implments a wide range of operators and boolean
-expressions, permitting complex queries such as <tt>is:open CodeReview&gt;=1
-(has:draft OR is:starred)</tt> to locate open changes that have been code
-reviewed, but still have unpublished drafts or were starred by the
-current user.  The full range of supported operators is documented
-in the user guide.</p></div>
-</li>
-<li>
-<p>
-Change lists now use query operators
-</p>
-<div class="paragraph"><p>All current change lists have been reimplemented using query
-operators, so selecting <em>All open changes</em> actually performs the query
-<em>is:open</em>.  This is to help end-users learn the different operators
-that are supported, and simplifies the internal implementation
-considerably by removing redundant code.</p></div>
-</li>
-<li>
-<p>
-issue 51 Tag changes with topic branches
-</p>
-<div class="paragraph"><p>Changes can be tagged with a topic name during upload.  To add the tag
-<em>query</em> when pushing to branch <em>master</em>, use <tt>git push URL
-HEAD:refs/for/master/query</tt>.  To add a topic name with <tt>repo upload</tt>
-use the <tt>-t</tt> command line flag.  Topic names are displayed next to the
-branch name in the web UI, and can be searched for with the <tt>topic:</tt>
-query operator.</p></div>
-</li>
-<li>
-<p>
-Filter the list of open changes by watched projects
-</p>
-<div class="paragraph"><p>The query operator <tt>is:watched</tt> matches changes matching the user&#8217;s
-watched project list, and a new menu item was added under the My menu
-to select open changes matching these watched projects.</p></div>
-</li>
-</ul></div>
-</div>
-<div class="sect2">
 <h3 id="_web_ui">Web UI</h3>
+<div class="sect3">
+<h4 id="_global">Global</h4>
 <div class="ulist"><ul>
 <li>
 <p>
-issue 579 Remember diff formatting preferences
-</p>
-<div class="paragraph"><p>Formatting options at the top of a side-by-side or unified diff page
-are now remembered by saving the current preferences into the user&#8217;s
-account whenever <em>Update</em> is clicked.</p></div>
-</li>
-<li>
-<p>
-issue 680 Show commit message on the per-file review pages
+The change status is shown in a separate column on dashboards and search results.
 </p>
 </li>
+</ul></div>
+</div>
+<div class="sect3">
+<h4 id="_change_screens">Change Screens</h4>
+<div class="ulist"><ul>
 <li>
 <p>
-issue 498 Improved keyboard navigation
-</p>
-<div class="paragraph"><p>More keyboard bindings have been added, reducing the need to switch to
-the mouse while navigating through a change and performing a review.</p></div>
-</li>
-<li>
-<p>
-issue 395 Open new window/new tab for all files in a change
-</p>
-<div class="paragraph"><p>New buttons permit opening all modified files of a change into
-new windows or tabs.</p></div>
-</li>
-<li>
-<p>
-issue 440 Add copy to clipboard button for change-id
-</p>
-<div class="paragraph"><p>The Change-Id field in the upper left side of a change now support to
-copy "Change-Id: I&#8230;." onto the clipboard, making it easier to paste
-into a commit message.</p></div>
-</li>
-<li>
-<p>
-issue 559 Allow copying user public ssh key to clipboard
+New button to cherry-pick the change to another branch.
 </p>
 </li>
 <li>
 <p>
-issue 509 Make branch columns link to changes on that branch
+When issuing a rebase via the Web UI, the committer is now the logged in
+  user, rather than "Gerrit Code Review".
+</p>
+<div class="paragraph"><p>If the user has more than one email address, the preferred email address will
+be used.</p></div>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rest_api">REST API</h3>
+<div class="paragraph"><p>Several new <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api.html">
+REST API endpoints</a> are added.</p></div>
+<div class="sect3">
+<h4 id="_accounts">Accounts</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-accounts.html#create-account">
+Create account</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-accounts.html#get-account-name">
+Get account full name</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-accounts.html#set-account-name">
+Set account full name</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-accounts.html#delete-account-name">
+Delete account full name</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-accounts.html#list-account-emails">
+List account email addresses</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-accounts.html#get-account-email">
+Get account email address</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-accounts.html#set-preferred-email">
+Set account preferred email address</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-accounts.html#create-account-email">
+Create account email</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-accounts.html#delete-account-email">
+Delete account email</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-accounts.html#get-active">
+Get account state</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-accounts.html#set-active">
+Set account state to active</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-accounts.html#delete-active">
+Set account state to inactive</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-accounts.html#get-http-password">
+Get account HTTP password</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-accounts.html#set-http-password">
+Set or generate account HTTP password</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-accounts.html#delete-http-password">
+Delete account HTTP password</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-accounts.html#list-ssh-keys">
+List account SSH keys</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-accounts.html#get-ssh-key">
+Get account SSH key</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-accounts.html#add-ssh-key">
+Add account SSH key</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-accounts.html#delete-ssh-key">
+Delete account SSH key</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-accounts.html#get-username">
+Get account username</a>
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect3">
+<h4 id="_changes">Changes</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-changes.html#rebase-change">
+Rebase change</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-changes.html#cherry-pick">
+Cherry-pick revision</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-changes.html#get-content">
+Get content of a file in a revision</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-changes.html#get-patch">
+Get revision as a formatted patch</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-changes.html#get-diff">
+Get diff of a file in a revision</a>
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect3">
+<h4 id="_projects">Projects</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-projects.html#list-branches">
+List branches</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-projects.html#get-branch">
+Get branch</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-projects.html#create-branch">
+Create branch</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-projects.html#delete-branch">
+Delete branch</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-projects.html#list-child-projects">
+List child projects</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-projects.html#get-child-project">
+Get child project</a>
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_plugins">Plugins</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+The commit message length checker plugin can be configured to reject
+commits whose subject or body length exceeds the limit.
+</p>
+</li>
+<li>
+<p>
+Plugins may now contribute buttons to various parts of the UI.
 </p>
 </li>
 </ul></div>
 </div>
 <div class="sect2">
-<h3 id="_email_notifications">Email Notifications</h3>
+<h3 id="_ssh">ssh</h3>
 <div class="ulist"><ul>
 <li>
 <p>
-issue 311 No longer CC a user by default
+The <tt>commit-msg</tt> hook installation command is now
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/config_gerrit.html#gerrit.installCommitMsgHookCommand">
+configurable</a>.
 </p>
-<div class="paragraph"><p>The user who causes a notification to be sent is no longer CC&#8217;d on the
-email when it is sent.  This reduces the number of messages sent to a
-user, but can be re-enabled through a checkbox in the Settings &gt;
-Preferences panel.</p></div>
 </li>
 <li>
 <p>
-issue 535 Enable watching of all projects
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/cmd-ls-members.html">
+New <tt>ls-members</tt> command</a>.
 </p>
-<div class="paragraph"><p>Adding the magic <tt>\-- All Projects \--</tt> to the watched project list
-permits the user to be notified of any change occurring in any
-project.  Project specific entries override the notification settings
-for all projects.</p></div>
-</li>
-<li>
-<p>
-issue 492 Allow watching specific branches or any other search query
-</p>
-<div class="paragraph"><p>In addition to watching a project, users can register a query string
-to match specific changes, reducing notifications to be a smaller
-subset of the changes that occur in a project.</p></div>
-</li>
-<li>
-<p>
-issue 70 Allow file:^regex to match affected files
-</p>
-<div class="paragraph"><p>The file:^path operator can be used in a watch filter to receive
-notifications only when files matching the regular expression are
-modified by the change.</p></div>
-</li>
-<li>
-<p>
-issue 623 Include Gerrit-Owner, Gerrit-Reviewer in email footers
-</p>
-<div class="paragraph"><p>New fields in the email footer provide additional detail, enabling
-better filtering and classification of messages.</p></div>
 </li>
 </ul></div>
 </div>
 <div class="sect2">
-<h3 id="_access_control">Access Control</h3>
+<h3 id="_daemon">Daemon</h3>
 <div class="ulist"><ul>
 <li>
 <p>
-Support regular expressions for ref access rules
+Add <tt>--init</tt> option to Daemon to initialize site on daemon start.
 </p>
-<div class="paragraph"><p>References in an access rule can now be specified by regular
-expression by prefixing the reference name with ^.</p></div>
-</li>
-<li>
-<p>
-issue 577 Support ${username} in access rules
-</p>
-<div class="paragraph"><p>Adding <tt>$\{username\}</tt> into a reference causes the current username to
-be inserted at that position.  When combined with the Push Branch
-permission this creates a per-user branch namespace feature, giving
-each user their own "sandbox" to push changes to.</p></div>
-</li>
-<li>
-<p>
-issue 313 ssh gerrit create-group
-</p>
-<div class="paragraph"><p>Groups can now be created over SSH by administrators using the
-<tt>gerrit create-group</tt> command.</p></div>
-</li>
-</ul></div>
-</div>
-<div class="sect2">
-<h3 id="_authentication">Authentication</h3>
-<div class="ulist"><ul>
-<li>
-<p>
-Remove password authentication over SSH
-</p>
-<div class="paragraph"><p>Adding password authentication over SSH turned out to be a major
-mistake.  Users primarily use SSH public keys, and the password
-prompt just got in the way or confused them.  Password support has
-been removed from the SSH server.</p></div>
-</li>
-<li>
-<p>
-Username cannot be changed once assigned
-</p>
-<div class="paragraph"><p>Once a username has been selected for a user account, it
-cannot be modified by the user.</p></div>
-</li>
-<li>
-<p>
-issue 555 Make LDAP sessions persistent for the session age
-</p>
-<div class="paragraph"><p>Web sessions are now persistent for the cache.web_sessions.maxAge
-setting, rather than expiring when the browser closes.  (Previously
-sessions expired when the browser exited.)</p></div>
-</li>
-</ul></div>
-</div>
-<div class="sect2">
-<h3 id="_misc">Misc.</h3>
-<div class="ulist"><ul>
-<li>
-<p>
-Add topic, lastUpdated, sortKey to ChangeAttribute
-</p>
-<div class="paragraph"><p>Additional change fields are now exported as part of the
-stream-events output.</p></div>
-</li>
-<li>
-<p>
-issue 504 gerrit query SSH command
-</p>
-<div class="paragraph"><p>Queries to lookup change information can be executed over SSH through
-the <tt>gerrit query</tt> command, with results output in either human
-readable text or machine readable JSON.  Change queries can also be
-run over HTTP with the <tt>/query?q=&lt;query&gt;&amp;format=JSON</tt> URL.  Both
-interfaces are intended for automated tools.</p></div>
-</li>
-<li>
-<p>
-Remove git diff-tree dependency
-</p>
-<div class="paragraph"><p>Gerrit no longer requires <tt>git</tt> in the PATH; differences are now
-constructed in pure Java code.  Remote repository initialization over
-SSH still requires <tt>git</tt> on the remote host&#8217;s PATH.</p></div>
-</li>
-<li>
-<p>
-Internal dependencies updated
-</p>
-<div class="paragraph"><p>Updated JGit to 0.8.4.89-ge2f5716, log4j to 1.2.16, GWT to 2.0.4,
-sfl4j to 1.6.1, easymock to 3.0, JUnit to 4.8.1.</p></div>
+<div class="paragraph"><p>The <tt>--init</tt> option will also upgrade an already existing site and is processed in
+non-interactive (batch) mode.</p></div>
 </li>
 </ul></div>
 </div>
@@ -1007,61 +1070,110 @@ sfl4j to 1.6.1, easymock to 3.0, JUnit to 4.8.1.</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
-issue 352 Confirm branch deletion in web UI
+Default review comment visibility is changed to expand all recent.
 </p>
-<div class="paragraph"><p>Deleting a branch now presents a confirmation dialog to give the user
-a second chance to abort the destructive operation.</p></div>
+<div class="paragraph"><p>By default all comments within the last week are expanded, rather than
+only the most recent.</p></div>
 </li>
 <li>
 <p>
-Fix some JavaScript errors under Chrome
+The preferred email address field is shown as empty if the user has no
+preferred email address.
 </p>
-<div class="paragraph"><p>The GWT compiler started to define symbols in the same namespace as
-the prettify syntax highlighting library.  We moved the prettify
-library into its own iframe so it has a different JavaScript namespace
-in the browser.</p></div>
 </li>
 <li>
 <p>
-Close button on OpenId register / sign-in dialog
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1574">Issue 1574</a>:
+Correctly highlight matches of text in escaped HTML entities in suggestion results.
 </p>
-<div class="paragraph"><p>There was no obvious way to leave the sign-in dialog. Fixed.</p></div>
 </li>
 <li>
 <p>
-Links in OpenId sign-in dialog not focusable
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1814">Issue 1814</a>:
+Sort labels alphabetically by name in the approval table.
 </p>
-<div class="paragraph"><p>Keyboard navigation to standard links like <em>Google Accounts</em>
-wasn&#8217;t supported.  Fixed.</p></div>
 </li>
 </ul></div>
 </div>
 <div class="sect2">
-<h3 id="_misc_2">Misc.</h3>
+<h3 id="_rest_api_2">REST API</h3>
 <div class="ulist"><ul>
 <li>
 <p>
-issue 614 Fix 503 error when Jetty cancels a request
+Support raw input also in POST requests.
 </p>
-<div class="paragraph"><p>A bug was introduced in 2.1.3 that caused a server 503 error
-when a fetch/pull/clone or push request timed out.  Fixed.</p></div>
+</li>
+<li>
+<p>
+Show granted date for labels/all when using <tt>/changes/</tt>.
+</p>
+</li>
+<li>
+<p>
+Return all revisions when <tt>o=ALL_REVISIONS</tt> is set on <tt>/changes/</tt>.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_ssh_2">ssh</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+The <tt>--force-message</tt> option is removed from the <tt>review</tt> command.
+</p>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1908">Issue 1908</a>:
+Provide more informative error messages when rejecting updates.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_tools">Tools</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+git-exproll.sh: return non-zero on errors
+</p>
 </li>
 </ul></div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_version">Version</h2>
+<h2 id="_upgrades">Upgrades</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>ae59d1bf232bba16d4d03ca924884234c68be0f2</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+TODO
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_documentation">Documentation</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+The <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/index.html">
+documentation index page</a> is rewritten in a hierarchical structure.
+</p>
+</li>
+</ul></div>
 </div>
 </div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.1.4<br />
-Last updated 2013-05-08 07:50:03 PDT
+Version 2.8 (from v2.7-rc1-423-g55817ab)<br />
+Last updated 2013-06-08 19:02:08 PDT
 </div>
 </div>
 </body>
