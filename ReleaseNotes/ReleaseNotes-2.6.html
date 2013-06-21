@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Release notes for Gerrit 2.6</h1>
-<span id="revnumber">version 2.6 (from v2.6-rc3-24-g832014f)</span>
+<span id="revnumber">version 2.6 (from v2.6-rc4-9-g7c2a686)</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -885,13 +885,6 @@ Add a link to the REST API documentation in the top menu.
 <div class="sect3">
 <h4 id="_search">Search</h4>
 <div class="ulist"><ul>
-<li>
-<p>
-Animate search bar by expanding &amp; unexpanding
-</p>
-<div class="paragraph"><p>When the search bar is used, expand it to allow for more text to be
-visible. When it is blurred, shrink it back to the original size.</p></div>
-</li>
 <li>
 <p>
 Suggest projects, groups and users in search panel
@@ -2609,7 +2602,7 @@ ordering issue between the SearchPanel and the HintTextBox.</p></div>
 <li>
 <p>
 <a href="https://code.google.com/p/gerrit/issues/detail?id=1661">Issue 1661</a>:
-  Update links to Change-Id and Signed-off-by docu on project info
+  Update links to Change-Id and Signed-off-by documentation on project info
   screen
 </p>
 </li>
@@ -2661,6 +2654,19 @@ Correctly handle paths with URL-escaped characters
 </p>
 <div class="paragraph"><p>URL-unescape the path portion of a change history token to correctly
 handle paths with URL-escapable characters, i.e. <em>+</em>, ' ', etc.</p></div>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1915">Issue 1915</a>:
+Don&#8217;t show non-visible drafts in the diff screens.
+</p>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1801">Issue 1801</a>:
+Correctly keep patch set ordering after a new patch set is added via
+the Web UI.
+</p>
 </li>
 </ul></div>
 </div>
@@ -3635,8 +3641,8 @@ The release notes are now made when a release is created by running the <tt>tool
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.6 (from v2.6-rc3-24-g832014f)<br />
-Last updated 2013-06-08 18:54:36 PDT
+Version 2.6 (from v2.6-rc4-9-g7c2a686)<br />
+Last updated 2013-06-21 10:21:36 PDT
 </div>
 </div>
 </body>
