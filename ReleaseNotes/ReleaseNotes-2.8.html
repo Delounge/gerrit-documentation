@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Release notes for Gerrit 2.8</h1>
-<span id="revnumber">version 2.8 (from v2.7-rc1-423-g55817ab)</span>
+<span id="revnumber">version 2.8 (from v2.7-rc1-535-g621c212)</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -973,6 +973,17 @@ Get diff of a file in a revision</a>
 </ul></div>
 </div>
 <div class="sect3">
+<h4 id="_config">Config</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/rest-api-config.html#get-capabilities">
+Get capabilities</a>
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect3">
 <h4 id="_projects">Projects</h4>
 <div class="ulist"><ul>
 <li>
@@ -1015,6 +1026,31 @@ Get child project</a>
 </div>
 </div>
 <div class="sect2">
+<h3 id="_capabilities">Capabilities</h3>
+<div class="paragraph"><p>New global capabilities are added.</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/access_control.html#capability_generateHttpPassword">
+Generate Http Password</a> Allows non-administrator users to generate HTTP
+passwords for users other than themself.
+</p>
+<div class="paragraph"><p>This capability would typically be assigned to a non-interactive group
+to be able to generate HTTP passwords for users from a tool or web service
+that uses the Gerrit REST API.</p></div>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/access_control.html#capability_runAs">
+Run As</a> Allows users to impersonate other users by setting the <tt>X-Gerrit-RunAs</tt>
+HTTP header on REST API calls.
+</p>
+<div class="paragraph"><p>Site administrators do not inherit this capability;  it must be granted
+explicitly.</p></div>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
 <h3 id="_plugins">Plugins</h3>
 <div class="ulist"><ul>
 <li>
@@ -1045,6 +1081,14 @@ configurable</a>.
 <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/cmd-ls-members.html">
 New <tt>ls-members</tt> command</a>.
 </p>
+</li>
+<li>
+<p>
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.8/cmd-set-members.html">
+New <tt>set-members</tt> command</a>
+</p>
+<div class="paragraph"><p>New command to manipulate group membership. Members can be added or removed
+and groups can be included or excluded in one specific group or number of groups.</p></div>
 </li>
 </ul></div>
 </div>
@@ -1172,8 +1216,8 @@ documentation index page</a> is rewritten in a hierarchical structure.
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.8 (from v2.7-rc1-423-g55817ab)<br />
-Last updated 2013-06-08 19:02:08 PDT
+Version 2.8 (from v2.7-rc1-535-g621c212)<br />
+Last updated 2013-06-21 10:23:55 PDT
 </div>
 </div>
 </body>
