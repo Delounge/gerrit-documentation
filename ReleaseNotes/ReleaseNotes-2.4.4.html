@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.6" />
-<title>Release notes for Gerrit 2.6.1</title>
+<title>Release notes for Gerrit 2.4.4</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
 
@@ -735,8 +735,8 @@ asciidoc.install(2);
 </head>
 <body class="article">
 <div id="header">
-<h1>Release notes for Gerrit 2.6.1</h1>
-<span id="revnumber">version 2.6.1 (from v2.7-rc2-505-g7502a46)</span>
+<h1>Release notes for Gerrit 2.4.4</h1>
+<span id="revnumber">version 2.4.4 (from v2.7-rc2-517-g10ce295)</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -745,8 +745,8 @@ asciidoc.install(2);
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<div class="paragraph"><p>There are no schema changes from <a href="ReleaseNotes-2.6.html">2.6</a>.</p></div>
-<div class="paragraph"><p><a href="https://gerrit-releases.storage.googleapis.com/gerrit-2.6.1.war">https://gerrit-releases.storage.googleapis.com/gerrit-2.6.1.war</a></p></div>
+<div class="paragraph"><p>There are no schema changes from <a href="ReleaseNotes-2.4.4.html">2.4.4</a>.</p></div>
+<div class="paragraph"><p><a href="https://gerrit-releases.storage.googleapis.com/gerrit-2.4.4.war">https://gerrit-releases.storage.googleapis.com/gerrit-2.4.4.war</a></p></div>
 </div>
 </div>
 <div class="sect1">
@@ -755,13 +755,10 @@ asciidoc.install(2);
 <div class="ulist"><ul>
 <li>
 <p>
-Patch JGit security hole
+Fix clone for modern Git clients
 </p>
-<div class="paragraph"><p>The security hole may permit a modified Git client to gain access
-to hidden or deleted branches if the user has read permission on
-at least one branch in the repository. Access requires knowing a
-SHA-1 to request, which may be discovered out-of-band from an issue
-tracker or gitweb instance.</p></div>
+<div class="paragraph"><p>The security fix in 2.4.3 broke clone for recent Git clients,
+throwing an ArrayIndexOutOfBoundsException. Fixed.</p></div>
 </li>
 </ul></div>
 </div>
@@ -770,8 +767,8 @@ tracker or gitweb instance.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.6.1 (from v2.7-rc2-505-g7502a46)<br />
-Last updated 2013-06-24 13:16:56 PDT
+Version 2.4.4 (from v2.7-rc2-517-g10ce295)<br />
+Last updated 2013-06-24 13:37:54 PDT
 </div>
 </div>
 </body>
