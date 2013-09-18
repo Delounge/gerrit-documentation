@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Gerrit Code Review - Prolog Submit Rules Cookbook</h1>
-<span id="revnumber">version 2.7-rc0</span>
+<span id="revnumber">version 2.7</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -1225,13 +1225,13 @@ the result.</p></div>
 <div class="paragraph"><p>The prolog environment running the <tt>submit_rule</tt> is loaded with state describing the
 change that is being evaluated. The easiest way to load this state is to test your
 <tt>submit_rule</tt> against a real change on a running gerrit instance. The command
-<a href="cmd-test-submit-rule.html">test-submit-rule</a> loads a specific change and executes
+<a href="cmd-test-submit-rule.html">test-submit rule</a> loads a specific change and executes
 the <tt>submit_rule</tt>. It optionally reads the rule from from <tt>stdin</tt> to facilitate easy testing.</p></div>
 <div class="exampleblock">
 <div class="content">
 <div class="literalblock">
 <div class="content">
-<pre><tt>cat rules.pl | ssh gerrit_srv gerrit test-submit-rule I45e080b105a50a625cc8e1fb5b357c0bfabe6d68 -s</tt></pre>
+<pre><tt>cat rules.pl | ssh gerrit_srv gerrit test-submit rule I45e080b105a50a625cc8e1fb5b357c0bfabe6d68 -s</tt></pre>
 </div></div>
 </div></div>
 </div>
@@ -2157,8 +2157,8 @@ regular expression.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.7-rc0<br />
-Last updated 2013-04-08 08:38:21 PDT
+Version 2.7<br />
+Last updated 2013-09-18 15:19:55 PDT
 </div>
 </div>
 </body>

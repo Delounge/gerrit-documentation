@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Gerrit Code Review - /projects/ REST API</h1>
-<span id="revnumber">version 2.7-rc0</span>
+<span id="revnumber">version 2.7</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -1169,10 +1169,26 @@ read access to <tt>refs/meta/config</tt>.</p></div>
   )]}'
   {
     "kind": "gerritcodereview#project_config",
-    "use_contributor_agreements": false,
-    "use_content_merge": true,
-    "use_signed_off_by": false,
-    "require_change_id": true,
+    "use_contributor_agreements": {
+      "value": true,
+      "configured_value": "TRUE",
+      "inherited_value": false
+    },
+    "use_content_merge": {
+      "value": true,
+      "configured_value": "INHERIT",
+      "inherited_value": true
+    },
+    "use_signed_off_by": {
+      "value": false,
+      "configured_value": "INHERIT",
+      "inherited_value": false
+    },
+    "require_change_id": {
+      "value": false,
+      "configured_value": "FALSE",
+      "inherited_value": true
+    }
     "commentlinks": {}
   }</tt></pre>
 </div></div>
@@ -1455,6 +1471,63 @@ dashboard of a project.</p></div>
 <h2 id="json-entities">JSON Entities</h2>
 <div class="sectionbody">
 <div class="sect2">
+<h3 id="config-info">ConfigInfo</h3>
+<div class="paragraph"><p>The <tt>ConfigInfo</tt> entity contains information about the effective project
+configuration.</p></div>
+<div class="paragraph"><p>Fields marked with * are only visible to users who have read access to
+<tt>refs/meta/config</tt>.</p></div>
+<div class="tableblock">
+<table rules="all"
+width="50%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="14%" />
+<col width="85%" />
+<thead>
+<tr>
+<th align="left" valign="top">Field Name                   </th>
+<th align="left" valign="top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>use_contributor_agreements*</tt></p></td>
+<td align="left" valign="top"><p class="table"><a href="#inherited-boolean-info">InheritedBooleanInfo</a> that tells whether
+authors must complete a contributor agreement on the site before
+pushing any commits or changes to this project.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>use_content_merge*</tt></p></td>
+<td align="left" valign="top"><p class="table"><a href="#inherited-boolean-info">InheritedBooleanInfo</a> that tells whether
+Gerrit will try to perform a 3-way merge of text file content when a
+file has been modified by both the destination branch and the change
+being submitted. This option only takes effect if submit type is not
+FAST_FORWARD_ONLY.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>use_signed_off_by*</tt></p></td>
+<td align="left" valign="top"><p class="table"><a href="#inherited-boolean-info">InheritedBooleanInfo</a> that tells whether
+each change must contain a Signed-off-by line from either the author or
+the uploader in the commit message.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>require_change_id*</tt></p></td>
+<td align="left" valign="top"><p class="table"><a href="#inherited-boolean-info">InheritedBooleanInfo</a> that tells whether a
+valid <a href="user-changeid.html">Change-Id</a> footer in any commit uploaded
+for review is required. This does not apply to commits pushed directly
+to a branch or tag.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>commentlinks</tt></p></td>
+<td align="left" valign="top"><p class="table">Comment link configuration for the project. Has the same format as the
+<a href="config-gerrit.html#_a_id_commentlink_a_section_commentlink">commentlink section</a>
+of <tt>gerrit.config</tt>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
 <h3 id="dashboard-info">DashboardInfo</h3>
 <div class="paragraph"><p>The <tt>DashboardInfo</tt> entity contains information about a project
 dashboard.</p></div>
@@ -1632,6 +1705,45 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table"><tt>ref</tt></p></td>
 <td align="left" valign="top"><p class="table">The ref to which <tt>HEAD</tt> should be set, the <tt>refs/heads</tt> prefix can be
 omitted.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="inherited-boolean-info">InheritedBooleanInfo</h3>
+<div class="paragraph"><p>A boolean value that can also be inherited.</p></div>
+<div class="tableblock">
+<table rules="all"
+width="50%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="14%" />
+<col width="28%" />
+<col width="57%" />
+<thead>
+<tr>
+<th align="left" valign="top">Field Name         </th>
+<th align="center" valign="top"></th>
+<th align="left" valign="top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>value</tt></p></td>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="left" valign="top"><p class="table">The effective boolean value.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>configured_value</tt></p></td>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="left" valign="top"><p class="table">The configured value, can be <tt>TRUE</tt>, <tt>FALSE</tt> or <tt>INHERITED</tt>.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><tt>inherited_value</tt></p></td>
+<td align="center" valign="top"><p class="table">optional</p></td>
+<td align="left" valign="top"><p class="table">The boolean value inherited from the parent.<br />
+Not set if there is no parent.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1914,59 +2026,6 @@ cellspacing="0" cellpadding="4">
 </table>
 </div>
 </div>
-<div class="sect2">
-<h3 id="config-info">ConfigInfo</h3>
-<div class="paragraph"><p>The <tt>ConfigInfo</tt> entity contains information about the effective project
-configuration.</p></div>
-<div class="paragraph"><p>Fields marked with * are only visible to users who have read access to
-<tt>refs/meta/config</tt>.</p></div>
-<div class="tableblock">
-<table rules="all"
-width="50%"
-frame="border"
-cellspacing="0" cellpadding="4">
-<col width="14%" />
-<col width="85%" />
-<thead>
-<tr>
-<th align="left" valign="top">Field Name                   </th>
-<th align="left" valign="top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left" valign="top"><p class="table"><tt>use_contributor_agreements*</tt></p></td>
-<td align="left" valign="top"><p class="table">If set, authors must complete a contributor agreement on the site
-before pushing any commits or changes to this project.</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table"><tt>use_content_merge*</tt></p></td>
-<td align="left" valign="top"><p class="table">If set, Gerrit will try to perform a 3-way merge of text file content
-when a file has been modified by both the destination branch and the
-change being submitted. This option only takes effect if submit type is
-not FAST_FORWARD_ONLY.</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table"><tt>use_signed_off_by*</tt></p></td>
-<td align="left" valign="top"><p class="table">If set, each change must contain a Signed-off-by line from either the
-author or the uploader in the commit message.</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table"><tt>require_change_id*</tt></p></td>
-<td align="left" valign="top"><p class="table">If set, require a valid <a href="user-changeid.html">Change-Id</a> footer in any
-commit uploaded for review. This does not apply to commits pushed
-directly to a branch or tag.</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table"><tt>commentlinks</tt></p></td>
-<td align="left" valign="top"><p class="table">Comment link configuration for the project. Has the same format as the
-<a href="config-gerrit.html#_a_id_commentlink_a_section_commentlink">commentlink section</a>
-of <tt>gerrit.config</tt>.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
 </div>
 </div>
 <hr style="
@@ -1980,8 +2039,8 @@ of <tt>gerrit.config</tt>.</p></td>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.7-rc0<br />
-Last updated 2013-05-06 16:06:16 PDT
+Version 2.7<br />
+Last updated 2013-09-18 15:19:55 PDT
 </div>
 </div>
 </body>

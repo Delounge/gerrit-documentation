@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Gerrit Code Review - Reverse Proxy</h1>
-<span id="revnumber">version 2.7-rc0</span>
+<span id="revnumber">version 2.7</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -770,34 +770,37 @@ during <em>init</em>.</p></div>
 <div class="sect1">
 <h2 id="_apache_2_configuration">Apache 2 Configuration</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>To run Gerrit behind an Apache server we cannot use <em>mod_proxy</em>
-directly, as Gerrit relies on getting unmodified escaped forward
-slashes. Depending on the setting of <em>AllowEncodedSlashes</em>,
-<em>mod_proxy</em> would either decode encoded slashes, or encode them once
-again. Hence, we resort to using <em>mod_rewrite</em>. To enable the
+<div class="paragraph"><p>To run Gerrit behind an Apache server using <em>mod_proxy</em>, enable the
 necessary Apache2 modules:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>  a2enmod rewrite
+<pre><tt>  a2enmod proxy_http
   a2enmod ssl          ; # optional, needed for HTTPS / SSL</tt></pre>
 </div></div>
-<div class="paragraph"><p>Configure an Apache VirtualHost to proxy to the Gerrit daemon, setting
-the <em>RewriteRule</em> line to use the <em>http://</em> URL configured above.
-Ensure the path of <em>RewriteRule</em> (the part before <em>$1</em>) and
-httpd.listenUrl match, or links will redirect to incorrect locations.</p></div>
-<div class="paragraph"><p>Note that this configuration allows to pass encoded characters to the
-virtual host, which is potentially dangerous. Be sure to read up on
-this topic and that you understand the risks.</p></div>
+<div class="paragraph"><p>Configure an Apache VirtualHost to proxy to the Gerrit daemon,
+setting the <em>ProxyPass</em> line to use the <em>http://</em> URL configured
+above.  Ensure the path of ProxyPass and httpd.listenUrl match,
+or links will redirect to incorrect locations.</p></div>
 <div class="listingblock">
 <div class="content">
 <pre><tt>        &lt;VirtualHost *&gt;
           ServerName review.example.com
 
-          AllowEncodedSlashes NoDecode
-          RewriteEngine On
-          RewriteRule ^/r/(.*) http://localhost:8081/r/$1 [NE,P]
+          ProxyRequests Off
+          ProxyVia Off
+          ProxyPreserveHost On
+
+          &lt;Proxy *&gt;
+            Order deny,allow
+            Allow from all
+          &lt;/Proxy&gt;
+
+          AllowEncodedSlashes On
+          ProxyPass /r/ http://127.0.0.1:8081/r/ nocanon
         &lt;/VirtualHost&gt;</tt></pre>
 </div></div>
+<div class="paragraph"><p>The two options <em>AllowEncodedSlashes On</em> and <em>ProxyPass .. nocanon</em> are required
+since Gerrit 2.6.</p></div>
 <div class="sect2">
 <h3 id="_ssl">SSL</h3>
 <div class="paragraph"><p>To enable Apache to perform the SSL processing, use <em>proxy-https://</em>
@@ -816,6 +819,14 @@ the SSL engine in the Apache VirtualHost block:</p></div>
 <div class="paragraph"><p>See the Apache <em>mod_ssl</em> documentation for more details on how to
 configure SSL within the server, like controlling how strong of an
 encryption algorithm is required.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_troubleshooting">Troubleshooting</h3>
+<div class="paragraph"><p>If you are encountering <em>Page Not Found</em> errors when opening the change
+screen, your Apache proxy is very likely decoding the passed URL.
+Make sure to either use <em>AllowEncodedSlashes On</em> together with
+<em>ProxyPass .. nodecode</em> or alternatively a <em>mod_rewrite</em> configuration with
+<em>AllowEncodedSlashes NoDecode</em> set.</p></div>
 </div>
 </div>
 </div>
@@ -859,6 +870,13 @@ the SSL engine in the Nginx server statement:</p></div>
 how to configure SSL within the server, like controlling how strong
 of an encryption algorithm is required.</p></div>
 </div>
+<div class="sect2">
+<h3 id="_troubleshooting_2">Troubleshooting</h3>
+<div class="paragraph"><p>If you are encountering <em>Page Not Found</em> errors when opening the change
+screen, your Nginx proxy is very likely decoding the passed URL.
+Make sure to use a <em>proxy_pass</em> URL without any path (esp. no trailing
+<em>/</em> after the <em>host:port</em>).</p></div>
+</div>
 </div>
 </div>
 <hr style="
@@ -872,8 +890,8 @@ of an encryption algorithm is required.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.7-rc0<br />
-Last updated 2013-04-18 21:32:09 PDT
+Version 2.7<br />
+Last updated 2013-07-17 11:54:32 PDT
 </div>
 </div>
 </body>

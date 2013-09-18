@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Gerrit Code Review - Searching Changes</h1>
-<span id="revnumber">version 2.7-rc0</span>
+<span id="revnumber">version 2.7</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -1030,7 +1030,10 @@ ones using a bracket expression). For example, to match all XML
 files named like <em>name1.xml</em>, <em>name2.xml</em>, and <em>name3.xml</em> use
 <tt>file:"^name[1-3].xml"</tt>.</p></div>
 <div class="paragraph"><p>Currently this operator is only available on a watched project
-and may not be used in the search bar.</p></div>
+and may not be used in the search bar. The same holds true for web UI
+"My &gt; Watched Changes", i. e. file:regex is used over the is:watched
+expression. It never produces any results, because the error message:
+"operator not permitted here: file:regex" is suppressed.</p></div>
 </dd>
 <dt class="hdlist1">
 has:draft
@@ -1360,8 +1363,8 @@ unpredictable results.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.7-rc0<br />
-Last updated 2013-04-08 08:38:21 PDT
+Version 2.7<br />
+Last updated 2013-09-18 15:19:55 PDT
 </div>
 </div>
 </body>

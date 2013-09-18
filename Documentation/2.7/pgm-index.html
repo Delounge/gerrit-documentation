@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.6" />
-<title>Gerrit Code Review - Server Programs</title>
+<title>Gerrit Code Review - Server Side Administrative Tools</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
 
@@ -735,8 +735,8 @@ asciidoc.install(2);
 </head>
 <body class="article">
 <div id="header">
-<h1>Gerrit Code Review - Server Programs</h1>
-<span id="revnumber">version 2.7-rc0</span>
+<h1>Gerrit Code Review - Server Side Administrative Tools</h1>
+<span id="revnumber">version 2.7</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -745,16 +745,17 @@ asciidoc.install(2);
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<div class="paragraph"><p>Server side programs can be started by executing the WAR file
+<div class="paragraph"><p>Server side tools can be started by executing the WAR file
 through the Java command line.  For example:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>$ java -jar gerrit.war program [options]</tt></pre>
+<pre><tt>$ java -jar gerrit.war &lt;tool&gt; [&lt;options&gt;]</tt></pre>
 </div></div>
+<div class="paragraph"><p>Tool should be one of the following names:</p></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_a_id_programs_a_programs"><a id="programs"></a>Programs</h2>
+<h2 id="_tools">Tools</h2>
 <div class="sectionbody">
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -806,11 +807,8 @@ version
 </p>
 </dd>
 </dl></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_transition_utilities">Transition Utilities</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_transition_utilities">Transition Utilities</h3>
 <div class="dlist"><dl>
 <dt class="hdlist1">
 <a href="pgm-ScanTrackingIds.html">ScanTrackingIds</a>
@@ -831,6 +829,7 @@ version
 </dl></div>
 </div>
 </div>
+</div>
 <hr style="
   height: 2px;
   color: silver;
@@ -842,8 +841,8 @@ version
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.7-rc0<br />
-Last updated 2013-03-21 10:52:52 PDT
+Version 2.7<br />
+Last updated 2013-09-18 15:19:55 PDT
 </div>
 </div>
 </body>
