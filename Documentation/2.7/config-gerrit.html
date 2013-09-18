@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Gerrit Code Review - Configuration</h1>
-<span id="revnumber">version 2.7-rc0</span>
+<span id="revnumber">version 2.7</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -2988,8 +2988,8 @@ such as <tt>${fooBarAttribute}</tt>, are replaced with the value of the
 corresponding attribute (in this case, <tt>fooBarAttribute</tt>) as read
 from the user&#8217;s account object matched under <tt>ldap.accountBase</tt>.
 Attributes such as <tt>${dn}</tt> or <tt>${uidNumber}</tt> may be useful.</p></div>
-<div class="paragraph"><p>Default is <tt>(memberUid=${username})</tt> for RFC 2307,
-and unset (disabled) for Active Directory.</p></div>
+<div class="paragraph"><p>Default is <tt>(|(memberUid=${username})(gidNumber=${gidNumber}))</tt> for
+RFC 2307, and unset (disabled) for Active Directory.</p></div>
 </dd>
 <dt class="hdlist1">
 <a id="ldap.groupName"></a>ldap.groupName
@@ -4117,8 +4117,8 @@ good idea.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.7-rc0<br />
-Last updated 2013-05-06 16:06:16 PDT
+Version 2.7<br />
+Last updated 2013-09-18 15:19:55 PDT
 </div>
 </div>
 </body>

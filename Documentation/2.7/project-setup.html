@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Gerrit Code Review - Project Configuration</h1>
-<span id="revnumber">version 2.7-rc0</span>
+<span id="revnumber">version 2.7</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -869,9 +869,10 @@ fast-forwarded to the change.</p></div>
 </li>
 </ul></div>
 <div class="paragraph"><p>When Gerrit tries to do a merge, by default the merge will only
-succeed if there is no path conflict. By selecting the checkbox
-<tt>Automatically resolve conflicts</tt> Gerrit will try do a content merge
-if a path conflict occurs.</p></div>
+succeed if there is no path conflict.  A path conflict occurs when
+the same file has also been changed on the other side of the merge.</p></div>
+<div class="paragraph"><p>If <tt>Automatically resolve conflicts</tt> is enabled, Gerrit will try
+to do a content merge when a path conflict occurs.</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -901,8 +902,8 @@ to a commit object.  Abbreviated SHA-1s are not supported.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.7-rc0<br />
-Last updated 2013-04-08 08:38:21 PDT
+Version 2.7<br />
+Last updated 2013-07-16 16:19:29 PDT
 </div>
 </div>
 </body>

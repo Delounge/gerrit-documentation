@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Gerrit Code Review - Review Labels</h1>
-<span id="revnumber">version 2.7-rc0</span>
+<span id="revnumber">version 2.7</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -748,9 +748,9 @@ asciidoc.install(2);
 <div class="paragraph"><p>As part of the code review process, reviewers score each change with
 values for each label configured for the project.  The label values that
 a given user is allowed to set are defined according to the
-<a href="access-control.html#access_labels">access controls</a>.  Gerrit comes
-pre-configured with the Code-Review label that can be granted to groups
-within projects, enabling functionality for that group&#8217;s members.</p></div>
+<a href="access-control.html#category_review_labels">access controls</a>.  Gerrit
+comes pre-configured with the Code-Review label that can be granted to
+groups within projects, enabling functionality for that group&#8217;s members.</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -914,15 +914,17 @@ the administrator.</p></div>
 <div class="paragraph"><p>A multi-valued key whose values are of the form <tt>"&lt;#&gt; Value description
 text"</tt>. The <tt>&lt;#&gt;</tt> may be any positive or negative number with an
 optional leading <tt>+</tt>.</p></div>
-</div>
-<div class="sect2">
-<h3 id="label_abbreviatedName"><tt>label.Label-Name.abbreviatedName</tt></h3>
-<div class="paragraph"><p>An abbreviated name for a label shown as a compact column header, for
+<div class="paragraph" id="label_abbreviation"><p><tt>label.Label-Name.abbreviation</tt></p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>An abbreviated name for a label shown as a compact column header, for
 example on project dashboards. Defaults to all the uppercase characters
-in the label name, e.g. <tt>Label-Name</tt> is abbreviated by default as <tt>LN</tt>.</p></div>
-</div>
-<div class="sect2">
-<h3 id="label_function"><tt>label.Label-Name.function</tt></h3>
+in the label name, e.g. `Label-Name` is abbreviated by default as `LN`.
+
+
+[[label_function]]
+`label.Label-Name.function`</tt></pre>
+</div></div>
 <div class="paragraph"><p>The name of a function for evaluating multiple votes for a label.  This
 function is only applied if the default submit rule is used for a label.
 If you write a <a href="prolog-cookbook.html#HowToWriteSubmitRules">custom
@@ -1005,8 +1007,8 @@ enable submit.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.7-rc0<br />
-Last updated 2013-05-06 16:06:16 PDT
+Version 2.7<br />
+Last updated 2013-09-18 15:19:55 PDT
 </div>
 </div>
 </body>

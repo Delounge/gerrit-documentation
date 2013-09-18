@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Gerrit Code Review - Developer Setup</h1>
-<span id="revnumber">version 2.7-rc0</span>
+<span id="revnumber">version 2.7</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -756,9 +756,12 @@ databases, as it requires no external server process.</p></div>
 <div class="paragraph"><p>Create a new client workspace:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>  git clone https://gerrit.googlesource.com/gerrit
+<pre><tt>  git clone --recursive https://gerrit.googlesource.com/gerrit
   cd gerrit</tt></pre>
 </div></div>
+<div class="paragraph"><p>The <tt>--recursive</tt> option is needed on <tt>git clone</tt> to ensure that
+the core plugins, which are included as git submodules, are also
+cloned.</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -775,7 +778,18 @@ configure the workspace with the Maven build scripts.</p></div>
 <div class="paragraph"><p>From the command line:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>  mvn package</tt></pre>
+<pre><tt>  mvn clean package</tt></pre>
+</div></div>
+<div class="paragraph"><p>By default the build will run tests and build the documentation.</p></div>
+<div class="paragraph"><p>To build without tests:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  mvn clean package -DskipTests</tt></pre>
+</div></div>
+<div class="paragraph"><p>To build without documentation:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  mvn clean package -Dgerrit.documentation.skip</tt></pre>
 </div></div>
 <div class="paragraph"><p>Output executable WAR will be placed in:</p></div>
 <div class="listingblock">
@@ -985,8 +999,8 @@ the browser and on the server side.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.7-rc0<br />
-Last updated 2013-04-08 08:38:21 PDT
+Version 2.7<br />
+Last updated 2013-09-18 15:19:55 PDT
 </div>
 </div>
 </body>
