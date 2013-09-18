@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Release notes for Gerrit 2.7</h1>
-<span id="revnumber">version 2.7 (from v2.7-rc2-505-g7502a46)</span>
+<span id="revnumber">version 2.7 (from v2.7-rc3-1-g070b8ac)</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -746,7 +746,12 @@ asciidoc.install(2);
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph"><p>Gerrit 2.7 is now available:</p></div>
-<div class="paragraph"><p><a href="https://gerrit-releases.storage.googleapis.com/gerrit-2.7-rc2.war">https://gerrit-releases.storage.googleapis.com/gerrit-2.7-rc2.war</a></p></div>
+<div class="paragraph"><p><a href="http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.7.war">
+<a href="http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.7.war">http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.7.war</a></a></p></div>
+<div class="paragraph"><p>Gerrit 2.7 includes the bug fixes done with
+<a href="ReleaseNotes-2.6.1.html">Gerrit 2.6.1</a> and
+<a href="ReleaseNotes-2.6.2.html">Gerrit 2.6.2</a>. These bug fixes are <strong>not</strong>
+listed in these release notes.</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -788,7 +793,7 @@ Better support for binary files and images in diff screens.
 </li>
 <li>
 <p>
-User avatars.
+User avatars in more places.
 </p>
 </li>
 <li>
@@ -844,8 +849,8 @@ Stream Events capability</a> controls access to the <tt>stream-events</tt> ssh c
 <p>
 Allow opening new changes on existing commits.
 </p>
-<div class="paragraph"><p>The %base argument can be used with refs/for/ to identify a specific revision the server should
-start to look for new commits at. Any commits in the range $base..$tip will be opened as a new
+<div class="paragraph"><p>The <tt>%base</tt> argument can be used with <tt>refs/for/</tt> to identify a specific revision the server should
+start to look for new commits at. Any commits in the range <tt>$base..$tip</tt> will be opened as a new
 change, even if the commit already has another change on a different branch.</p></div>
 </li>
 <li>
@@ -862,9 +867,14 @@ draft patch sets.</p></div>
 Allow changes to be automatically submitted on push.
 </p>
 <div class="paragraph"><p>Teams that want to use Gerrit&#8217;s submit strategies to handle contention on busy
-branches can use %submit to create a change and have it
+branches can use <tt>%submit</tt> to create a change and have it
 <a href="link:http://gerrit-documentation.googlecode.com/svn/Documentation/2.7/user-upload.html#auto_merge">
-immediately submitted</a>, if the caller has Submit permission on refs/for/&lt;ref&gt;.</p></div>
+immediately submitted</a>, if the caller has Submit permission on <tt>refs/for/&lt;ref&gt;</tt>.</p></div>
+</li>
+<li>
+<p>
+Allow administrators to see all groups.
+</p>
 </li>
 </ul></div>
 </div>
@@ -875,8 +885,18 @@ immediately submitted</a>, if the caller has Submit permission on refs/for/&lt;r
 <div class="ulist"><ul>
 <li>
 <p>
-User avatars are displayed in several places in the Web UI.  "Diffy" is used as
-avatar for the Gerrit server itself.
+User avatars are displayed in more places in the Web UI.
+</p>
+</li>
+<li>
+<p>
+<em>Diffy</em> is used as avatar for the Gerrit server itself.
+</p>
+</li>
+<li>
+<p>
+A popup with user profile information is shown when hovering the
+mouse over avatar images.
 </p>
 </li>
 </ul></div>
@@ -889,7 +909,7 @@ avatar for the Gerrit server itself.
 <a href="https://code.google.com/p/gerrit/issues/detail?id=667">Issue 667</a>:
 Highlight patch sets that have drafts.
 </p>
-<div class="paragraph"><p>Patch sets having unpublished draft comments are higlighted with an icon.</p></div>
+<div class="paragraph"><p>Patch sets having unpublished draft comments are highlighted with an icon.</p></div>
 </li>
 <li>
 <p>
@@ -912,7 +932,7 @@ change comments.</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
-Show images in side-by-side and unified diffs
+Show images in side-by-side and unified diffs.
 </p>
 </li>
 <li>
@@ -922,7 +942,7 @@ Show diffed images above/below each other in unified diffs.
 </li>
 <li>
 <p>
-Harmonize unified diff&#8217;s styling of images with that of text
+Harmonize unified diff&#8217;s styling of images with that of text.
 </p>
 </li>
 </ul></div>
@@ -1004,6 +1024,19 @@ Kerberos authentication for ssh interaction</a>.
 Postpone check for first account until adding an account.
 </p>
 </li>
+<li>
+<p>
+Mark <tt>ALREADY_MERGED</tt> changes as merged in the database.
+</p>
+<div class="paragraph"><p>If a change was marked <tt>ALREADY_MERGED</tt>, likely due to a bug in
+merge code, it does not end up in the list of changes to be submitted
+and never gets marked as merged despite the branch head already
+having advanced.</p></div>
+<div class="paragraph"><p>Works around (but does not fix)
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1985">Issue 1985</a> and
+<a href="https://code.google.com/p/gerrit/issues/detail?id=600">Issue 600</a>
+to allow recovery from certain kind of bad state.</p></div>
+</li>
 </ul></div>
 </div>
 <div class="sect2">
@@ -1037,6 +1070,11 @@ the <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.7/re
 Get Change Detail REST API endpoint</a>.
 </p>
 </li>
+<li>
+<p>
+Correct URL encoding in <em>GroupInfo</em>.
+</p>
+</li>
 </ul></div>
 </div>
 <div class="sect2">
@@ -1044,12 +1082,23 @@ Get Change Detail REST API endpoint</a>.
 <div class="ulist"><ul>
 <li>
 <p>
-Log failure to access reviewer list for notification emails
+Log failure to access reviewer list for notification emails.
 </p>
 </li>
 <li>
 <p>
 Log when appropriate if email delivery is skipped.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_ssh_2">ssh</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=2016">Issue 2016</a>:
+Flush caches after adding or deleting ssh keys via the <tt>set-account</tt> ssh command.
 </p>
 </li>
 </ul></div>
@@ -1093,7 +1142,7 @@ global capabilities</a>.
 <p>
 Clarify the
 <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.7/config-gerrit.html#cache_names">
-change cache configuration</a>
+change cache configuration</a>.
 </p>
 </li>
 </ul></div>
@@ -1103,8 +1152,8 @@ change cache configuration</a>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.7 (from v2.7-rc2-505-g7502a46)<br />
-Last updated 2013-06-24 13:16:56 PDT
+Version 2.7 (from v2.7-rc3-1-g070b8ac)<br />
+Last updated 2013-09-18 15:19:55 PDT
 </div>
 </div>
 </body>
