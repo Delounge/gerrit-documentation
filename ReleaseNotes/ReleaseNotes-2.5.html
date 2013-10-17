@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Release notes for Gerrit 2.5</h1>
-<span id="revnumber">version 2.5 (from v2.5.2-1296-gf502dd0)</span>
+<span id="revnumber">version 2.5 (from v2.7-rc2-530-g4d7ac77)</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -817,7 +817,7 @@ rely on the built-in default of <tt>128m</tt>.</p></div>
 configuration variables are now expressed in bytes of memory used,
 rather than number of entries in the cache. This is a change from
 previous versions of Gerrit and gives administrators more control over
-how memory is partioned within a server. Admins that set this variable
+how memory is partitioned within a server. Admins that set this variable
 must update their configurations, as the old values are too small.
 For example a setting of <tt>memoryLimit = 1024</tt> now means only 1 KiB of
 data (which may not even hold 1 patch set), not 1024 patch sets.  It
@@ -2177,7 +2177,7 @@ execute requests the moment it is supplied by Guice. This fixes a
 startup ordering problem in the GroupCache and the ProjectCache, where
 code wants to use one of these caches during startup to resolve a
 group or project by name.</p></div>
-<div class="paragraph"><p>Tracking the Gauva backend caches with a DynamicMap makes it possible
+<div class="paragraph"><p>Tracking the Guava backend caches with a DynamicMap makes it possible
 for plugins to define their own in-memory caches using CacheModule&#8217;s
 cache() function to declare the cache. It allows the core server to
 make the cache available to administrators over SSH with the gerrit
@@ -2320,7 +2320,7 @@ section is never suggested.</p></div>
 Add change topic in hook arguments
 </p>
 <div class="paragraph"><p>It was not possible for hook scripts to include topic-specific
-behaviour because the topic name was not included in the arguments.</p></div>
+behavior because the topic name was not included in the arguments.</p></div>
 </li>
 <li>
 <p>
@@ -2403,7 +2403,7 @@ Increase the maximum length for tracking ID&#8217;s to 32 characters
 <p>
 Set <tt>GERRIT_SITE</tt> in Gerrit hooks as environment variable
 </p>
-<div class="paragraph"><p>Allows development of hooks parametrised on Gerrit location. This can
+<div class="paragraph"><p>Allows development of hooks parameterized on Gerrit location. This can
 be useful to allow hooks to load the Gerrit configuration when needed
 (from <tt>$GERRIT_SITE</tt>) or even store their additional config files under
 <tt>$GERRIT_SITE/etc</tt> and retrieve them at startup.</p></div>
@@ -2413,7 +2413,7 @@ be useful to allow hooks to load the Gerrit configuration when needed
 Add an exponentially rolling garbage collection script
 </p>
 <div class="paragraph"><p><tt>git-exproll.sh</tt> is a git garbage collection script aimed specifically
-at reducing exccessive garbage collection and particularly large
+at reducing excessive garbage collection and particularly large
 packfile churn for Gerrit installations.</p></div>
 <div class="paragraph"><p>Excessive garbage collection on "dormant" repos is wasteful of both CPU
 and disk IO.  Large packfile churn can lead to heavy RAM and FS usage
@@ -2482,7 +2482,7 @@ Fix performance issues on showing the list of groups in the Gerrit
 group membership database was downloaded to the browser when showing
 just the list of groups.</p></div>
 <div class="paragraph"><p>Now the amount of data that needs to be downloaded to the browser is
-reduced by using the more leightweight <tt>AccountGroup</tt> type instead of
+reduced by using the more lightweight <tt>AccountGroup</tt> type instead of
 the <tt>GroupDetail</tt> type when showing the groups in a list format. As a
 consequence the <tt>Owners</tt> column that showed the name of the owner group
 had been dropped.</p></div>
@@ -2519,9 +2519,9 @@ putting existing <tt>refs/changes/</tt> or <tt>refs/tags/</tt> into the <tt>RevW
 instead use only the <tt>refs/heads</tt> namespace and the name of the branch
 used in the <tt>refs/for/</tt> push line.</p></div>
 <div class="paragraph"><p>Catch existing changes by looking for their exact commit SHA-1, rather
-than complete ancestory. This should have roughly the same outcome for
+than complete ancestry. This should have roughly the same outcome for
 anyone pushing a new commit on top of an existing open change, but
-with lower computional cost at the server.</p></div>
+with lower computational cost at the server.</p></div>
 </li>
 <li>
 <p>
@@ -2658,7 +2658,7 @@ Hide superfluous status text from clippy flash widget
 </li>
 <li>
 <p>
-Fix diappearance of text in CopyableLabel when clicking on it
+Fix disappearance of text in CopyableLabel when clicking on it
 </p>
 </li>
 </ul></div>
@@ -2698,7 +2698,7 @@ the <tt>owner</tt> access rights on <tt>refs/*</tt>
 is assigned) are able to edit the access control list of the projects
 they own. Hence being owner of the <tt>All-Projects</tt> project would allow
 to edit the global capabilities and assign the <tt>administrateServer</tt>
-capabilitiy without being Gerrit administrator.</p></div>
+capability without being Gerrit administrator.</p></div>
 <div class="paragraph"><p>In earlier Gerrit versions (2.1.x) it was already implemented like
 this but the corresponding checks got lost.</p></div>
 </li>
@@ -2777,7 +2777,7 @@ side viewer.</p></div>
 <p>
 Dependencies were lost in the ChangeScreen&#8217;s "Needed By" table
 </p>
-<div class="paragraph"><p>Older patchsets are now iterated for decendents, so that the dependency
+<div class="paragraph"><p>Older patchsets are now iterated for descendants, so that the dependency
 chain does not break on new upstream patchsets.</p></div>
 </li>
 <li>
@@ -3047,7 +3047,7 @@ returned as author.</p></div>
 <p>
 Fix the <tt>export-review-notes</tt> command&#8217;s Guice bindings
 </p>
-<div class="paragraph"><p>The <tt>export-review-notes</tt> command was broken becasue of the CachePool
+<div class="paragraph"><p>The <tt>export-review-notes</tt> command was broken because of the CachePool
 class being bound twice. The startup of the command failed because of
 that.</p></div>
 </li>
@@ -3099,7 +3099,7 @@ still broken) rely on the context path of the application instead.</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
-Fix inconsistent behaviour when replicating <tt>refs/meta/config</tt>
+Fix inconsistent behavior when replicating <tt>refs/meta/config</tt>
 </p>
 <div class="paragraph"><p>In <tt>replication.config</tt>, if <tt>authGroup</tt> is set to be used together with
 <tt>mirror = true</tt>, refs blocked through the <tt>authGroup</tt> are deleted from
@@ -3376,8 +3376,8 @@ Ensure that RevWalk in SubmoduleOp is released
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.5 (from v2.5.2-1296-gf502dd0)<br />
-Last updated 2013-09-18 15:19:55 PDT
+Version 2.5 (from v2.7-rc2-530-g4d7ac77)<br />
+Last updated 2013-10-08 10:02:12 PDT
 </div>
 </div>
 </body>
