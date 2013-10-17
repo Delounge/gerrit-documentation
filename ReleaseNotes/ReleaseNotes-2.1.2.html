@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Release notes for Gerrit 2.1.2</h1>
-<span id="revnumber">version 2.1.2 (from v2.1.2-rc3-1-g2b4eef5)</span>
+<span id="revnumber">version 2.1.2 (from v2.7-rc2-530-g4d7ac77)</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -1031,7 +1031,7 @@ with SSH requests.</p></div>
 issue 392 Make hooks/commit-msg available over HTTP
 </p>
 <div class="paragraph"><p>The scp filesystem holding client side tools and hooks is now
-avaliable over <tt>http://review.example.com/tools/'$name'</tt>.  User
+available over <tt>http://review.example.com/tools/'$name'</tt>.  User
 documentation is updated with example URLs.</p></div>
 </li>
 <li>
@@ -1104,7 +1104,7 @@ Allow $site_path/etc/peer_keys to authenticate peer daemons
 </p>
 <div class="paragraph"><p>Additional public keys for the magical <em>Gerrit Code Review</em> user may
 be specified in an OpenSSH authorized_keys style file and are
-functionally equivilent to authenticating with the daemon&#8217;s host key.
+functionally equivalent to authenticating with the daemon&#8217;s host key.
 The keys are primarily intended to be other daemons, most likely
 slaves, that share the same set of repositories and database.</p></div>
 </li>
@@ -1353,7 +1353,7 @@ closed changes.</p></div>
 issue 466 Reject pushing to invalid reference names
 </p>
 <div class="paragraph"><p>Gerrit allowed the invalid <tt>HEAD:/refs/for/master</tt> push refspec
-to actaully create the branch <tt>refs/heads/refs/for/master</tt>, which
+to actually create the branch <tt>refs/heads/refs/for/master</tt>, which
 confused any other client trying to push.  Fixed.</p></div>
 </li>
 <li>
@@ -1398,7 +1398,7 @@ handlers are now installed to trap and log any uncaught errors.</p></div>
 <p>
 issue 451 gerrit.sh: Wait until the daemon is serving requests
 </p>
-<div class="paragraph"><p>The gerrit.sh script now waits until the deamon is actually running
+<div class="paragraph"><p>The gerrit.sh script now waits until the daemon is actually running
 and able to serve requests before returning to the caller with a
 successful exit status code.  This makes it easier to then start up
 dependent tasks that need the server to be ready before they can run.</p></div>
@@ -2209,8 +2209,8 @@ issue 483 Remove reliance on afterExecute from WorkQueue
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.1.2 (from v2.1.2-rc3-1-g2b4eef5)<br />
-Last updated 2013-09-18 15:19:55 PDT
+Version 2.1.2 (from v2.7-rc2-530-g4d7ac77)<br />
+Last updated 2013-10-08 10:02:12 PDT
 </div>
 </div>
 </body>

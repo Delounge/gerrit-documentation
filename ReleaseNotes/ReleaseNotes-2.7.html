@@ -736,7 +736,7 @@ asciidoc.install(2);
 <body class="article">
 <div id="header">
 <h1>Release notes for Gerrit 2.7</h1>
-<span id="revnumber">version 2.7 (from v2.7-rc3-1-g070b8ac)</span>
+<span id="revnumber">version 2.7 (from v2.7-1519-gfc445a7)</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -746,12 +746,10 @@ asciidoc.install(2);
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph"><p>Gerrit 2.7 is now available:</p></div>
-<div class="paragraph"><p><a href="http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.7.war">
-<a href="http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.7.war">http://code.google.com/p/gerrit/downloads/detail?name=gerrit-2.7.war</a></a></p></div>
-<div class="paragraph"><p>Gerrit 2.7 includes the bug fixes done with
-<a href="ReleaseNotes-2.6.1.html">Gerrit 2.6.1</a> and
-<a href="ReleaseNotes-2.6.2.html">Gerrit 2.6.2</a>. These bug fixes are <strong>not</strong>
-listed in these release notes.</p></div>
+<div class="paragraph"><p><a href="https://gerrit-releases.storage.googleapis.com/gerrit-2.7.war">
+<a href="https://gerrit-releases.storage.googleapis.com/gerrit-2.7.war">https://gerrit-releases.storage.googleapis.com/gerrit-2.7.war</a></a></p></div>
+<div class="paragraph"><p>Gerrit 2.7 includes the bug fixes done with <a href="ReleaseNotes-2.6.1.html">Gerrit 2.6.1</a>.
+These bug fixes are <strong>not</strong> listed in these release notes.</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -765,6 +763,14 @@ listed in these release notes.</p></div>
 <div class="paragraph"><p><strong>WARNING:</strong> Upgrading to 2.7.x requires the server be first upgraded to 2.1.7 (or
 a later 2.1.x version), and then to 2.7.x.  If you are upgrading from 2.2.x.x or
 newer, you may ignore this warning and upgrade directly to 2.7.x.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_gerrit_trigger_plugin_in_jenkins">Gerrit Trigger Plugin in Jenkins</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><strong>WARNING:</strong> Upgrading to 2.7 may cause the Gerrit Trigger Plugin in Jenkins to
+stop working.  Please see the "New <em>Stream Events</em> global capability" section
+below.</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -844,6 +850,9 @@ New <em>Stream Events</em> global capability.
 <div class="paragraph"><p>The <a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.7/access-control.txt#capability_streamEvents">
 Stream Events capability</a> controls access to the <tt>stream-events</tt> ssh command.</p></div>
 <div class="paragraph"><p>Only administrators and users having this capability are allowed to use <tt>stream-events</tt>.</p></div>
+<div class="paragraph"><p>If you are using the Gerrit Trigger Plugin in Jenkins, you must make sure that the
+<em>Non-Interactive Users</em> group, or whichever group the Jenkins user belongs to, is
+given the <em>Stream Events</em> capability.</p></div>
 </li>
 <li>
 <p>
@@ -868,7 +877,7 @@ Allow changes to be automatically submitted on push.
 </p>
 <div class="paragraph"><p>Teams that want to use Gerrit&#8217;s submit strategies to handle contention on busy
 branches can use <tt>%submit</tt> to create a change and have it
-<a href="link:http://gerrit-documentation.googlecode.com/svn/Documentation/2.7/user-upload.html#auto_merge">
+<a href="http://gerrit-documentation.googlecode.com/svn/Documentation/2.7/user-upload.html#auto_merge">
 immediately submitted</a>, if the caller has Submit permission on <tt>refs/for/&lt;ref&gt;</tt>.</p></div>
 </li>
 <li>
@@ -1026,22 +1035,70 @@ Postpone check for first account until adding an account.
 </li>
 <li>
 <p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1848">Issue 1848</a>:
 Mark <tt>ALREADY_MERGED</tt> changes as merged in the database.
 </p>
 <div class="paragraph"><p>If a change was marked <tt>ALREADY_MERGED</tt>, likely due to a bug in
 merge code, it does not end up in the list of changes to be submitted
 and never gets marked as merged despite the branch head already
 having advanced.</p></div>
-<div class="paragraph"><p>Works around (but does not fix)
-<a href="https://code.google.com/p/gerrit/issues/detail?id=1985">Issue 1985</a> and
-<a href="https://code.google.com/p/gerrit/issues/detail?id=600">Issue 600</a>
-to allow recovery from certain kind of bad state.</p></div>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=600">Issue 600</a>:
+Fix change stuck in SUBMITTED state but actually merged.
+</p>
+<div class="paragraph"><p>When submitting a commit that has a tag, it could not be merged.</p></div>
+</li>
+<li>
+<p>
+Fix null-pointer exception when dashboard title is not specified.
+</p>
+<div class="paragraph"><p>If the title is not specified, the path of the dashboard config file
+is used as title.</p></div>
+</li>
+<li>
+<p>
+Allow label values to be configured with no text.
+</p>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1966">Issue 1966</a>:
+Fix Gerrit plugins under Tomcat by avoiding Guice static filter.
+</p>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=2054">Issue 2054</a>:
+Expand capabilities of <tt>ldap.groupMemberPattern</tt>.
+</p>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=2098">Issue 2098</a>:
+Fix re-enabling of disabled plugins.
+</p>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=2128">Issue 2128</a>:
+Fix null-pointer exception when deleting draft patch set when previous
+draft was already deleted.
+</p>
 </li>
 </ul></div>
 </div>
 <div class="sect2">
 <h3 id="_web_ui_2">Web UI</h3>
 <div class="ulist"><ul>
+<li>
+<p>
+Properly handle double-click on external group in GroupTable.
+</p>
+<div class="paragraph"><p>Double-clicking on an external group opens the group&#8217;s URL (if it
+is provided).</p></div>
+</li>
 <li>
 <p>
 <a href="https://code.google.com/p/gerrit/issues/detail?id=1848">Issue 1848</a>:
@@ -1056,6 +1113,49 @@ Drop Arial Unicode MS font and request only sans-serif.
 <div class="paragraph"><p>Arial Unicode MS does not have a bold version. Selecting this font prevents
 correct display of bold text on Mac OS X. Simplify the selector to sans-serif
 and allow the browser to use the user&#8217;s preferred font in this family.</p></div>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1872">Issue 1872</a>:
+Fix tab expansion in diff screens when syntax coloring is on.
+</p>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=1904">Issue 1904</a>:
+Fix diff screens for files with CRLF line endings.
+</p>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=2056">Issue 2056</a>:
+Display custom NoOp label score for open changes.
+</p>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=2093">Issue 2093</a>:
+Fix incorrect title of "repo download" link on change screen.
+</p>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=2127">Issue 2127</a>:
+Remove hard-coded documentation links from the admin page.
+</p>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=2010">Issue 2010</a>:
+Fix null-pointer exception when searching for changes with the query
+<tt>owner:self</tt>.
+</p>
+</li>
+<li>
+<p>
+<a href="https://code.google.com/p/gerrit/issues/detail?id=2039">Issue 2039</a>:
+Fix browser null-pointer exception when ChangeCache is incomplete.
+</p>
 </li>
 </ul></div>
 </div>
@@ -1152,8 +1252,8 @@ change cache configuration</a>.
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version 2.7 (from v2.7-rc3-1-g070b8ac)<br />
-Last updated 2013-09-18 15:19:55 PDT
+Version 2.7 (from v2.7-1519-gfc445a7)<br />
+Last updated 2013-10-08 10:02:12 PDT
 </div>
 </div>
 </body>
